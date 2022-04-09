@@ -5,6 +5,7 @@ import {Navbar} from "./ui/Navbar/Navbar";
 import {Profile} from "./ui/Profile/Profile";
 import {Dialogs} from "./ui/Dialogs/Dialogs";
 import {Route, Routes} from "react-router-dom";
+import {NotFound404} from "./ui/NotFound404/NotFound404";
 
 export const App = () => {
     return (
@@ -16,7 +17,7 @@ export const App = () => {
                     <Route path="/" element={<Profile/>}/>
                     <Route path="/profile" element={<Profile/>}/>
                     <Route path="/dialogs" element={<Dialogs/>}/>
-                    <Route path="/*" element={<div>404 error</div>}/>
+                    <Route path="/*" element={<NotFound404/>}/>
                 </Routes>
             </div>
         </div>
