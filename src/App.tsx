@@ -1,13 +1,15 @@
 import React from 'react';
 import './App.css';
 import {Header} from "./ui/Header/Header";
-import {Footer} from "./ui/Footer/Footer";
+import {Navbar} from "./ui/Navbar/Navbar";
+import {Content} from "./ui/Content/Content";
 
 export const App = () => {
     return (
-        <div>
+        <div className={'app-wrapper'}>
             <Header/>
-            <Footer/>
+            <Navbar/>
+            <Content/>
         </div>
     );
 }

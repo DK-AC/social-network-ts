@@ -1,16 +1,13 @@
 import React from 'react';
+import styles from './header.module.css'
 
 export const Header = () => {
     return (
-        <div>
-            <ul>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Dialogs</a></li>
-                <li><a href="#">Music</a></li>
-                <li><a href="#">News</a></li>
-                <li><a href="#">Settings</a></li>
-            </ul>
-        </div>
+        <header className={styles.header}>
+            <img className={styles.logo}
+                src="https://lh3.googleusercontent.com/a-/AOh14Ggy8_OSY8VRciCDIW_ZvzviDGM26X33SG0K0TrlqQ=s600-k-no-rp-mo"
+                alt="logo"/>
+        </header>
     );
 };
 
