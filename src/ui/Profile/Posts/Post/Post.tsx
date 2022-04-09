@@ -15,7 +15,7 @@ export const Post = ({message, likesCount}: PropsType) => {
                     alt="avatar"/>
                 {message}
             </div>
-            <span>{likesCount}</span>
+            <span> like {likesCount}</span>
         </div>
     )
 }

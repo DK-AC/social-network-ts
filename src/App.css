@@ -11,3 +11,8 @@
     grid-template-columns: 2fr 10fr;
 }
 
+.app-wrapper-content {
+    grid-area: content;
+    background-color: floralwhite;
+}
+
