@@ -1,10 +1,11 @@
 import React from 'react';
-import styles from './content.module.css'
+import styles from './profile.module.css'
+import {Posts} from "./Posts/Posts";
 
 
-export const Content = () => {
+export const Profile = () => {
     return (
-        <div className={styles.content}>
+        <div className={styles.profile}>
             <div>
                 <img src="https://www.gettyimages.pt/gi-resources/images/Homepage/Hero/PT/PT_hero_42_153645159.jpg"
                      alt="img"/>
@@ -12,14 +13,7 @@ export const Content = () => {
             <div>
                 ava + description
             </div>
-            <div>
-                My posts
-                <div>New post</div>
-                <div>Post 1</div>
-                <div>Post 2</div>
-                <div>Post 3</div>
-            </div>
-
+            <Posts/>
         </div>
     );
 };
