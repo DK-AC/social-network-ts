@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './dialogs.module.css'
 import {DialogsItem} from "./DialogsItem/DialogsItem";
+import {MessagesItem} from "./MessagesItem/MessagesItem";
 
 export const Dialogs = () => {
 
@@ -11,6 +12,13 @@ export const Dialogs = () => {
         {id: 4, name: 'Rita'},
     ]
 
+    const messagesData = [
+        {id: 1, message: 'Hello'},
+        {id: 2, message: 'How are you?'},
+        {id: 3, message: 'let\'s go'},
+        {id: 4, message: 'Stop'},
+    ]
+
     return (
         <div className={styles.dialogs}>
             <div className={styles.dialogsItem}>
@@ -19,10 +27,9 @@ export const Dialogs = () => {
                 })}
             </div>
             <div className={styles.messages}>
-                <div className={styles.message}>Hello</div>
-                <div className={styles.message}>How are you?</div>
-                <div className={styles.message}>let's go</div>
-                <div className={styles.message}>Stop</div>
+                {dialogsItems.map(m => {
+                    return <MessagesItem key={m.id} id={m.id} message={m.message}/>
+                })}
             </div>
         </div>
     );
