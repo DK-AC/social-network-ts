@@ -1,0 +1,9 @@
+.dialog {
+    color: white;
+    text-decoration: none;
+}
+
+.dialog:focus {
+    color: gold;
+    font-weight: bold;
+}
