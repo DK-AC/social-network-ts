@@ -27,7 +27,7 @@ export const Dialogs = () => {
                 })}
             </div>
             <div className={styles.messages}>
-                {dialogsItems.map(m => {
+                {messagesData.map(m => {
                     return <MessagesItem key={m.id} id={m.id} message={m.message}/>
                 })}
             </div>
