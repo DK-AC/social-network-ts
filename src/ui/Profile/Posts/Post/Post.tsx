@@ -2,11 +2,12 @@ import React from "react";
 import styles from './post.module.css'
 
 type PropsType = {
+    id: number
     message: string
     likesCount: number
 }
 
-export const Post = ({message, likesCount}: PropsType) => {
+export const Post = ({id, message, likesCount}: PropsType) => {
     return (
         <div className={styles.post}>
             <div className={`${styles.item}`}>
