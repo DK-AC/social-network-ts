@@ -1,3 +1,11 @@
 .profileDescription {
     padding: 10px;
 }
+
+.profileImage {
+    padding: 10px;
+}
+
+.avatar {
+    width: 300px;
+}

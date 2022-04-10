@@ -4,11 +4,16 @@ import styles from './profileInfo.module.css'
 export const ProfileInfo = () => {
     return (
         <>
-            <div>
+            <div className={styles.profileImage}>
                 <img src="https://www.gettyimages.pt/gi-resources/images/Homepage/Hero/PT/PT_hero_42_153645159.jpg"
                      alt="img"/>
             </div>
-            <div className={styles.profileDescription}>ava + description</div>
+            <div className={styles.profileDescription}>
+                <div>
+                    <img className={styles.avatar} src="https://www.blast.hk/attachments/64804/" alt="avatar"/>
+                </div>
+                ava + description
+            </div>
         </>
     )
 }
