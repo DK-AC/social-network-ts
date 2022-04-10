@@ -3,13 +3,20 @@ import styles from './dialogs.module.css'
 import {DialogsItem} from "./DialogsItem/DialogsItem";
 
 export const Dialogs = () => {
+
+    const dialogsItems = [
+        {id: 1, name: 'Jenya'},
+        {id: 2, name: 'Sasha'},
+        {id: 3, name: 'Dima'},
+        {id: 4, name: 'Rita'},
+    ]
+
     return (
         <div className={styles.dialogs}>
             <div className={styles.dialogsItem}>
-                <DialogsItem name={'Jenya'} id={1}/>
-                <DialogsItem name={'Sasha'} id={2}/>
-                <DialogsItem name={'Dima'} id={3}/>
-                <DialogsItem name={'Rita'} id={4}/>
+                {dialogsItems.map(d => {
+                    return <DialogsItem key={d.id} id={d.id} name={d.name}/>
+                })}
             </div>
             <div className={styles.messages}>
                 <div className={styles.message}>Hello</div>
