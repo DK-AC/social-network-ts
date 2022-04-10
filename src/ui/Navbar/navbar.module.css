@@ -1,6 +1,7 @@
 .nav {
     grid-area: nav;
     background-color: cornflowerblue;
+    padding: 20px;
 }
 
 .item {
@@ -8,6 +9,7 @@
     text-decoration: none;
 }
 
-.item.active {
+.item:focus {
     color: gold;
+    font-weight: bold;
 }
