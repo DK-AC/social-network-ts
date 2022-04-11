@@ -1,6 +1,7 @@
 export type PostsDataType = { id: number, message: string, likesCount: number }
 export type DialogsDataType = { id: number, name: string }
 export type MessagesDataType = { id: number, message: string }
+export type FriendsDataType = { id: number, name: string }
 export type ProfilePageType = {
     posts: PostsDataType[]
 }
@@ -8,9 +9,13 @@ export type DialogsPageType = {
     dialogs: DialogsDataType[]
     messages: MessagesDataType[]
 }
+export type SideBarPageType = {
+    friends: FriendsDataType[]
+}
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
+    sideBarPage: SideBarPageType
 }
 
 export const state: StateType = {
@@ -33,6 +38,13 @@ export const state: StateType = {
             {id: 2, message: 'How are you?'},
             {id: 3, message: 'let\'s go'},
             {id: 4, message: 'Stop'},
+        ]
+    },
+    sideBarPage: {
+        friends: [
+            {id: 1, name: 'Artiom'},
+            {id: 2, name: 'Dima'},
+            {id: 3, name: 'Ivan'},
         ]
     }
 }

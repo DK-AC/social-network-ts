@@ -30,7 +30,7 @@ export const App = ({state}: PropsType) => {
                     <Route path="/news" element={<News/>}/>
                     <Route path="/music" element={<Music/>}/>
                     <Route path="/settings" element={<Settings/>}/>
-                    <Route path="/friends" element={<Friends/>}/>
+                    <Route path="/friends" element={<Friends friends={state.sideBarPage.friends}/>}/>
                     <Route path="/*" element={<NotFound404/>}/>
                 </Routes>
             </div>
