@@ -20,6 +20,9 @@ export const Navbar = () => {
             <div>
                 <NavLink to={'/settings'} className={`${styles.item}`}>Settings</NavLink>
             </div>
+            <div>
+                <NavLink to={'/friends'} className={`${styles.item}`}>Friends</NavLink>
+            </div>
         </nav>
     );
 };

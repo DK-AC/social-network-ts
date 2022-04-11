@@ -10,6 +10,7 @@ import {News} from "./ui/News/News";
 import {Music} from "./ui/Music/Music";
 import {Settings} from "./ui/Settings/Settings";
 import {StateType} from "./redux/state";
+import {Friends} from "./ui/Friends/Friends";
 
 type PropsType = {
     state: StateType
@@ -22,12 +23,14 @@ export const App = ({state}: PropsType) => {
             <Navbar/>
             <div className={'app-wrapper-content'}>
                 <Routes>
-                    <Route path="/" element={<Profile posts={state.posts}/>}/>
-                    <Route path="/profile" element={<Profile posts={state.posts}/>}/>
-                    <Route path="/dialogs/*" element={<Dialogs dialogs={state.dialogs} messages={state.messages}/>}/>
+                    <Route path="/" element={<Profile posts={state.profilePage.posts}/>}/>
+                    <Route path="/profile" element={<Profile posts={state.profilePage.posts}/>}/>
+                    <Route path="/dialogs/*" element={<Dialogs dialogs={state.dialogsPage.dialogs}
+                                                               messages={state.dialogsPage.messages}/>}/>
                     <Route path="/news" element={<News/>}/>
                     <Route path="/music" element={<Music/>}/>
                     <Route path="/settings" element={<Settings/>}/>
+                    <Route path="/friends" element={<Friends/>}/>
                     <Route path="/*" element={<NotFound404/>}/>
                 </Routes>
             </div>
