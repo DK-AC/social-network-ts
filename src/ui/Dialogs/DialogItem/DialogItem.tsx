@@ -6,7 +6,12 @@ type PropsType = { id: number, name: string }
 
 export const DialogItem = ({id, name}: PropsType) => {
     return (
-        <div className={styles.dialogsItem}>
+        <div>
+            <span className={styles.dialogItem}>
+            <img
+                src="https://w7.pngwing.com/pngs/81/570/png-transparent-profile-logo-computer-icons-user-user-blue-heroes-logo-thumbnail.png"
+                alt="userDialogs"/>
+                </span>
             <NavLink to={`/dialogs/${id}`} className={`${styles.dialog}`}>{name}</NavLink>
         </div>
     )

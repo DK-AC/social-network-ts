@@ -1,9 +1,19 @@
 .dialog {
     color: white;
     text-decoration: none;
+    padding: 5px;
 }
 
 .dialog:focus {
     color: gold;
     font-weight: bold;
 }
+
+.dialogItem img {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    padding: 5px 0;
+}
+

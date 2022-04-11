@@ -5,8 +5,15 @@ type PropsType = { id: number, message: string }
 
 export const MessageItem = ({id, message}: PropsType) => {
     return (
-        <div className={styles.message}>
-            <div className={`${styles.dialog}`}>{message}</div>
-        </div>
+            <div>
+                <span className={styles.messageItem}>
+                                    {message}
+
+                    <img
+                    src="https://www.seekpng.com/png/full/245-2454602_tanni-chand-default-user-image-png.png"
+                    alt={'userMessage'}/>
+            </span>
+            </div>
     )
 }
+
