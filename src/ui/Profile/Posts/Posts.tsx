@@ -10,6 +10,10 @@ export const Posts = () => {
         {id: 3, message: '3 post', likesCount: 55},
     ]
 
+    const post = postsData.map(p => {
+        return <Post key={p.id} id={p.id} message={p.message} likesCount={p.likesCount}/>
+    })
+
     return (
         <div className={styles.posts}>
             <h3>My posts</h3>
@@ -19,9 +23,7 @@ export const Posts = () => {
                     <button>Add post</button>
                 </div>
             </div>
-            {postsData.map(p => {
-                return <Post key={p.id} id={p.id} message={p.message} likesCount={p.likesCount}/>
-            })}
+            {post}
         </div>
     );
 };

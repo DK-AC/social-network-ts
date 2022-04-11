@@ -12,6 +12,10 @@ export const Dialogs = () => {
         {id: 4, name: 'Rita'},
     ]
 
+    const dialog = dialogsItems.map(d => {
+        return <DialogsItem key={d.id} id={d.id} name={d.name}/>
+    })
+
     const messagesData = [
         {id: 1, message: 'Hello'},
         {id: 2, message: 'How are you?'},
@@ -19,17 +23,17 @@ export const Dialogs = () => {
         {id: 4, message: 'Stop'},
     ]
 
+    const message = messagesData.map(m => {
+        return <MessagesItem key={m.id} id={m.id} message={m.message}/>
+    })
+
     return (
         <div className={styles.dialogs}>
             <div className={styles.dialogsItem}>
-                {dialogsItems.map(d => {
-                    return <DialogsItem key={d.id} id={d.id} name={d.name}/>
-                })}
+                {dialog}
             </div>
             <div className={styles.messages}>
-                {messagesData.map(m => {
-                    return <MessagesItem key={m.id} id={m.id} message={m.message}/>
-                })}
+                {message}
             </div>
         </div>
     );
