@@ -9,16 +9,19 @@ import {NotFound404} from "./ui/NotFound404/NotFound404";
 import {News} from "./ui/News/News";
 import {Music} from "./ui/Music/Music";
 import {Settings} from "./ui/Settings/Settings";
+import {PostDataType} from "./index";
 
-export const App = () => {
+type PropsType = { posts: PostDataType[] }
+
+export const App = ({posts}: PropsType) => {
     return (
         <div className={'app-wrapper'}>
             <Header/>
             <Navbar/>
             <div className={'app-wrapper-content'}>
                 <Routes>
-                    <Route path="/" element={<Profile/>}/>
-                    <Route path="/profile" element={<Profile/>}/>
+                    <Route path="/" element={<Profile posts={posts}/>}/>
+                    <Route path="/profile" element={<Profile posts={posts}/>}/>
                     <Route path="/dialogs/*" element={<Dialogs/>}/>
                     <Route path="/news" element={<News/>}/>
                     <Route path="/music" element={<Music/>}/>

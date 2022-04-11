@@ -1,16 +1,13 @@
 import React from 'react';
 import {Post} from "./Post/Post";
 import styles from "./posts.module.css";
+import {PostDataType} from "../../../index";
 
-export const Posts = () => {
+type PropsType = { posts: PostDataType[] }
 
-    const postsData = [
-        {id: 1, message: '1 post', likesCount: 20},
-        {id: 2, message: '2 post', likesCount: 1},
-        {id: 3, message: '3 post', likesCount: 55},
-    ]
+export const Posts = ({posts}: PropsType) => {
 
-    const post = postsData.map(p => {
+    const post = posts.map(p => {
         return <Post key={p.id} id={p.id} message={p.message} likesCount={p.likesCount}/>
     })
 
