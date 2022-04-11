@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './dialogs.module.css'
-import {DialogsItem} from "./DialogsItem/DialogsItem";
-import {MessagesItem} from "./MessagesItem/MessagesItem";
+import {DialogItem} from "./DialogItem/DialogItem";
+import {MessageItem} from "./MessageItem/MessageItem";
 
 export const Dialogs = () => {
 
@@ -13,7 +13,7 @@ export const Dialogs = () => {
     ]
 
     const dialog = dialogsItems.map(d => {
-        return <DialogsItem key={d.id} id={d.id} name={d.name}/>
+        return <DialogItem key={d.id} id={d.id} name={d.name}/>
     })
 
     const messagesData = [
@@ -24,7 +24,7 @@ export const Dialogs = () => {
     ]
 
     const message = messagesData.map(m => {
-        return <MessagesItem key={m.id} id={m.id} message={m.message}/>
+        return <MessageItem key={m.id} id={m.id} message={m.message}/>
     })
 
     return (
