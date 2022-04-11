@@ -1,9 +1,9 @@
 import React from 'react';
 import {Post} from "./Post/Post";
 import styles from "./posts.module.css";
-import {PostDataType} from "../../../index";
+import {PostsDataType} from "../../../index";
 
-type PropsType = { posts: PostDataType[] }
+type PropsType = { posts: PostsDataType[] }
 
 export const Posts = ({posts}: PropsType) => {
 

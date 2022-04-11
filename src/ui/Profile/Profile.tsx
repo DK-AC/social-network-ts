@@ -1,9 +1,9 @@
 import React from 'react';
 import {Posts} from "./Posts/Posts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {PostDataType} from "../../index";
+import {PostsDataType} from "../../index";
 
-type PropsType = { posts: PostDataType[] }
+type PropsType = { posts: PostsDataType[] }
 
 export const Profile = ({posts}: PropsType) => {
     return (
