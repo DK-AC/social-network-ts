@@ -9,7 +9,7 @@ import {NotFound404} from "./ui/NotFound404/NotFound404";
 import {News} from "./ui/News/News";
 import {Music} from "./ui/Music/Music";
 import {Settings} from "./ui/Settings/Settings";
-import {DialogsDataType, MessagesDataType, PostsDataType} from "./index";
+import {DialogsDataType, MessagesDataType, PostsDataType} from "./redux/state";
 
 type PropsType = {
     posts: PostsDataType[]
