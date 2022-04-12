@@ -54,7 +54,7 @@ export const state: StateType = {
 }
 
 export const addPost = () => {
-    state.profilePage.posts.push({id: 32, message: state.profilePage.postText, likesCount: 3})
+    state.profilePage.posts.push({id: new Date().getTime(), message: state.profilePage.postText, likesCount: 3})
     state.profilePage.postText = ''
     rerenderEntireTree(state)
 }
