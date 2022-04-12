@@ -3,9 +3,12 @@ import {Post} from "./Post/Post";
 import styles from "./posts.module.css";
 import {PostsDataType} from "../../../redux/state";
 
-type PropsType = { posts: PostsDataType[] }
+type PropsType = {
+    posts: PostsDataType[]
+    addPost: (message: string) => void
+}
 
-export const Posts = ({posts}: PropsType) => {
+export const Posts = ({posts, addPost}: PropsType) => {
 
     const inputEl = useRef<HTMLInputElement>(null)
 
@@ -14,7 +17,7 @@ export const Posts = ({posts}: PropsType) => {
     })
     const addPostHandle = () => {
         if (inputEl && inputEl.current) {
-            alert(inputEl.current.value)
+            addPost(inputEl.current.value)
         }
     }
 
