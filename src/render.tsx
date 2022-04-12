@@ -1,4 +1,4 @@
-import {addPost, StateType} from "./redux/state";
+import {addPost, StateType, updatePostText} from "./redux/state";
 import {BrowserRouter} from "react-router-dom";
 import {App} from "./App";
 import React from "react";
@@ -9,7 +9,7 @@ export const rerenderEntireTree = (state: StateType) => {
         ReactDOM.render(
             <React.StrictMode>
                 <BrowserRouter>
-                    <App state={state} addPost={addPost}/>
+                    <App state={state} addPost={addPost} updatePostText={updatePostText}/>
                 </BrowserRouter>
             </React.StrictMode>,
             document.getElementById('root')

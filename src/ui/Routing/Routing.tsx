@@ -7,11 +7,12 @@ import {Settings} from "../Settings/Settings";
 import {Friends} from "../Friends/Friends";
 import {NotFound404} from "../NotFound404/NotFound404";
 import React from "react";
-import {addPost, StateType} from "../../redux/state";
+import {StateType} from "../../redux/state";
 
 type PropsType = {
     state: StateType
     addPost: (message: string) => void
+    updatePostText: (postText: string) => void
 }
 
 export const PATH = {
@@ -26,12 +27,20 @@ export const PATH = {
 }
 
 
-export const Routing = ({state}: PropsType) => {
+export const Routing = ({state, updatePostText, addPost}: PropsType) => {
     return (
         <>
             <Routes>
-                <Route path={PATH.START_PAGE} element={<Profile posts={state.profilePage.posts} addPost={addPost}/>}/>
-                <Route path={PATH.PROFILE_PAGE} element={<Profile posts={state.profilePage.posts} addPost={addPost}/>}/>
+                <Route path={PATH.START_PAGE}
+                       element={<Profile posts={state.profilePage.posts}
+                                         addPost={addPost}
+                                         updatePostText={updatePostText}/>
+                       }/>
+                <Route path={PATH.PROFILE_PAGE}
+                       element={<Profile posts={state.profilePage.posts}
+                                         addPost={addPost}
+                                         updatePostText={updatePostText}/>
+                       }/>
                 <Route path={`${PATH.DIALOGS_PAGE}/*`}
                        element={<Dialogs dialogs={state.dialogsPage.dialogs}
                                          messages={state.dialogsPage.messages}/>

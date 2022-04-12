@@ -6,9 +6,10 @@ import {PostsDataType} from "../../../redux/state";
 type PropsType = {
     posts: PostsDataType[]
     addPost: (message: string) => void
+    updatePostText: (postText: string) => void
 }
 
-export const Posts = ({posts, addPost}: PropsType) => {
+export const Posts = ({posts, addPost, updatePostText}: PropsType) => {
 
     const inputEl = useRef<HTMLInputElement>(null)
 
@@ -21,13 +22,16 @@ export const Posts = ({posts, addPost}: PropsType) => {
             inputEl.current.value = ''
         }
     }
+    const updatePostTextHandle = () => {
+        updatePostText('')
+    }
 
     return (
         <div className={styles.posts}>
             <h3>My posts</h3>
             <div>
                 <div>
-                    <input ref={inputEl} placeholder={'post'}/>
+                    <input value={''} onChange={updatePostTextHandle} ref={inputEl} placeholder={'post'}/>
                     <button onClick={addPostHandle}>Add post</button>
                 </div>
             </div>

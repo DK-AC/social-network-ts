@@ -8,15 +8,16 @@ import {Routing} from "./ui/Routing/Routing";
 type PropsType = {
     state: StateType
     addPost: (message: string) => void
+    updatePostText: (postText: string) => void
 }
 
-export const App = ({state, addPost}: PropsType) => {
+export const App = ({state, addPost,updatePostText}: PropsType) => {
     return (
         <div className={'app-wrapper'}>
             <Header/>
             <Navbar friends={state.sideBarPage.friends}/>
             <div className={'app-wrapper-content'}>
-                <Routing state={state} addPost={addPost}/>
+                <Routing state={state} addPost={addPost} updatePostText={updatePostText}/>
             </div>
         </div>
     );
