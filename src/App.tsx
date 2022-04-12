@@ -20,7 +20,7 @@ export const App = ({state}: PropsType) => {
     return (
         <div className={'app-wrapper'}>
             <Header/>
-            <Navbar/>
+            <Navbar friends={state.sideBarPage.friends}/>
             <div className={'app-wrapper-content'}>
                 <Routes>
                     <Route path="/" element={<Profile posts={state.profilePage.posts}/>}/>
@@ -30,9 +30,12 @@ export const App = ({state}: PropsType) => {
                     <Route path="/news" element={<News/>}/>
                     <Route path="/music" element={<Music/>}/>
                     <Route path="/settings" element={<Settings/>}/>
+
                     <Route path="/friends" element={<Friends friends={state.sideBarPage.friends}/>}/>
+
                     <Route path="/*" element={<NotFound404/>}/>
                 </Routes>
+
             </div>
         </div>
     );

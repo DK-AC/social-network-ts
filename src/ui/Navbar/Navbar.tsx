@@ -1,8 +1,11 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
+import {FriendsDataType} from '../../redux/state';
 import styles from './navbar.module.css'
 
-export const Navbar = () => {
+type PropsType = { friends: FriendsDataType[] }
+
+export const Navbar = ({friends}: PropsType) => {
     return (
         <nav className={styles.nav}>
             <div>
@@ -20,8 +23,20 @@ export const Navbar = () => {
             <div>
                 <NavLink to={'/settings'} className={`${styles.item}`}>Settings</NavLink>
             </div>
-            <div>
+            <div className={`${styles.friends}`}>
                 <NavLink to={'/friends'} className={`${styles.item}`}>Friends</NavLink>
+            </div>
+            <div className={styles.friendsPage}>
+                {friends.map(f => {
+                    return (<div key={f.id}>
+                        <img
+                            src="https://st4.depositphotos.com/1001248/29463/v/600/depositphotos_294631336-stock-illustration-user-sign-flat-related-vector.jpg"
+                            alt="friends"/>
+                    </div>)
+                })}
+            </div>
+            <div>
+
             </div>
         </nav>
     );
