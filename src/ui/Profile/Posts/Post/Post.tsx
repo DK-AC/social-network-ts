@@ -7,7 +7,7 @@ type PropsType = {
     likesCount: number
 }
 
-export const Post = ({id, message, likesCount}: PropsType) => {
+export const Post: React.FC<PropsType> = ({id, message, likesCount}) => {
     return (
         <div className={styles.post}>
             <div className={`${styles.item}`}>

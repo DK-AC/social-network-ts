@@ -5,7 +5,7 @@ import styles from "./friends.module.css";
 
 type PropsType = { friends: FriendsDataType[] }
 
-export const Friends = ({friends}: PropsType) => {
+export const Friends: React.FC<PropsType> = ({friends}) => {
 
     const friendsData = friends.map(f => {
         return <FriendItem key={f.id} id={f.id} name={f.name}/>

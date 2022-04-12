@@ -27,7 +27,7 @@ export const PATH = {
 }
 
 
-export const Routing = ({state, updatePostText, addPost}: PropsType) => {
+export const Routing: React.FC<PropsType> = ({state, updatePostText, addPost}) => {
     return (
         <>
             <Routes>

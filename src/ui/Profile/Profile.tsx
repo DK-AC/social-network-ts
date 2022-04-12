@@ -9,7 +9,7 @@ type PropsType = {
     updatePostText: (postText: string) => void
 }
 
-export const Profile = ({profilePage, addPost, updatePostText}: PropsType) => {
+export const Profile: React.FC<PropsType> = ({profilePage, addPost, updatePostText}) => {
     return (
         <div>
             <ProfileInfo/>

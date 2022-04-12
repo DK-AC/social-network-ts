@@ -4,7 +4,7 @@ import React from "react";
 
 type PropsType = { id: number, name: string }
 
-export const DialogItem = ({id, name}: PropsType) => {
+export const DialogItem: React.FC<PropsType> = ({id, name}) => {
     return (
         <div>
             <span className={styles.dialogItem}>

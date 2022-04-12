@@ -9,7 +9,7 @@ type PropsType = {
     messages: MessagesDataType[]
 }
 
-export const Dialogs = ({dialogs, messages}: PropsType) => {
+export const Dialogs: React.FC<PropsType> = ({dialogs, messages}) => {
 
     const inputEl = useRef<HTMLInputElement>(null)
 

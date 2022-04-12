@@ -3,7 +3,7 @@ import React from "react";
 
 type PropsType = { id: number, name: string }
 
-export const FriendItem = ({id, name}: PropsType) => {
+export const FriendItem: React.FC<PropsType> = ({id, name}) => {
     return (
         <div>
             <span className={styles.friendItem}>

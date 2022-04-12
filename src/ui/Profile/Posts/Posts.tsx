@@ -9,7 +9,7 @@ type PropsType = {
     updatePostText: (postText: string) => void
 }
 
-export const Posts = ({profilePage, addPost, updatePostText}: PropsType) => {
+export const Posts: React.FC<PropsType> = ({addPost, updatePostText, profilePage}) => {
 
     const inputEl = useRef<HTMLInputElement>(null)
 
@@ -17,7 +17,7 @@ export const Posts = ({profilePage, addPost, updatePostText}: PropsType) => {
         return <Post key={p.id} id={p.id} message={p.message} likesCount={p.likesCount}/>
     })
     const addPostHandle = () => {
-            addPost()
+        addPost()
     }
     const updatePostTextHandle = (e: ChangeEvent<HTMLInputElement>) => {
         updatePostText(e.currentTarget.value)

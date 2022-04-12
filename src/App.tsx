@@ -11,7 +11,7 @@ type PropsType = {
     updatePostText: (postText: string) => void
 }
 
-export const App = ({state, addPost,updatePostText}: PropsType) => {
+export const App: React.FC<PropsType> = ({state, addPost, updatePostText}) => {
     return (
         <div className={'app-wrapper'}>
             <Header/>

@@ -3,17 +3,17 @@ import React from "react";
 
 type PropsType = { id: number, message: string }
 
-export const MessageItem = ({id, message}: PropsType) => {
+export const MessageItem: React.FC<PropsType> = ({id, message}) => {
     return (
-            <div>
+        <div>
                 <span className={styles.messageItem}>
                                     {message}
 
                     <img
-                    src="https://www.seekpng.com/png/full/245-2454602_tanni-chand-default-user-image-png.png"
-                    alt={'userMessage'}/>
+                        src="https://www.seekpng.com/png/full/245-2454602_tanni-chand-default-user-image-png.png"
+                        alt={'userMessage'}/>
             </span>
-            </div>
+        </div>
     )
 }
 
