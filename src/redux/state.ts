@@ -19,55 +19,69 @@ export type StateType = {
     sideBarPage: SideBarPageType
 }
 
-export const state: StateType = {
-    profilePage: {
-        posts: [
-            {id: 1, message: '1 post', likesCount: 20},
-            {id: 2, message: '2 post', likesCount: 1},
-            {id: 3, message: '3 post', likesCount: 55},
-        ],
-        postText: ''
+export type RootStoreType = {
+    _state: StateType
+    getState: () => StateType
+    _subscriber: () => void
+    subscribe: (observer: () => void) => void
+    addPost: () => void
+    updatePostText: (postText: string) => void
+}
+
+export const store: RootStoreType = {
+    _state: {
+        profilePage: {
+            posts: [
+                {id: 1, message: '1 post', likesCount: 20},
+                {id: 2, message: '2 post', likesCount: 1},
+                {id: 3, message: '3 post', likesCount: 55},
+            ],
+            postText: ''
+        },
+        dialogsPage: {
+            dialogs: [
+                {id: 1, name: 'Jenya'},
+                {id: 2, name: 'Sasha'},
+                {id: 3, name: 'Dima'},
+                {id: 4, name: 'Rita'},
+            ],
+            messages: [
+                {id: 1, message: 'Hello'},
+                {id: 2, message: 'How are you?'},
+                {id: 3, message: 'let\'s go'},
+                {id: 4, message: 'Stop'},
+            ]
+        },
+        sideBarPage: {
+            friends: [
+                {id: 1, name: 'Artiom'},
+                {id: 2, name: 'Dima'},
+                {id: 3, name: 'Ivan'},
+            ]
+        }
     },
-    dialogsPage: {
-        dialogs: [
-            {id: 1, name: 'Jenya'},
-            {id: 2, name: 'Sasha'},
-            {id: 3, name: 'Dima'},
-            {id: 4, name: 'Rita'},
-        ],
-        messages: [
-            {id: 1, message: 'Hello'},
-            {id: 2, message: 'How are you?'},
-            {id: 3, message: 'let\'s go'},
-            {id: 4, message: 'Stop'},
-        ]
+    getState() {
+        return this._state
     },
-    sideBarPage: {
-        friends: [
-            {id: 1, name: 'Artiom'},
-            {id: 2, name: 'Dima'},
-            {id: 3, name: 'Ivan'},
-        ]
+    _subscriber() {
+        console.log('State changed')
+    },
+    subscribe(observer) {
+        this._subscriber = observer
+    },
+    addPost() {
+        this._state.profilePage.posts.push({
+            id: new Date().getTime(),
+            message: this._state.profilePage.postText,
+            likesCount: 0
+        })
+        this._state.profilePage.postText = ''
+        this._subscriber()
+    },
+    updatePostText(postText) {
+        this._state.profilePage.postText = postText
+        this._subscriber()
     }
-}
-
-let rerenderEntireTree = (state: StateType) => {
-    console.log('State changed')
-}
-
-export const addPost = () => {
-    state.profilePage.posts.push({id: new Date().getTime(), message: state.profilePage.postText, likesCount: 3})
-    state.profilePage.postText = ''
-    rerenderEntireTree(state)
-}
-
-export const updatePostText = (postText: string) => {
-    state.profilePage.postText = postText
-    rerenderEntireTree(state)
-}
-
-export const subscribe = (observer: () => void) => {
-    rerenderEntireTree = observer
 }
 
 

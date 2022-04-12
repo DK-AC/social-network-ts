@@ -7,12 +7,10 @@ import {Settings} from "../Settings/Settings";
 import {Friends} from "../Friends/Friends";
 import {NotFound404} from "../NotFound404/NotFound404";
 import React from "react";
-import {StateType} from "../../redux/state";
+import {RootStoreType} from "../../redux/state";
 
 type PropsType = {
-    state: StateType
-    addPost: () => void
-    updatePostText: (postText: string) => void
+    store: RootStoreType
 }
 
 export const PATH = {
@@ -27,28 +25,28 @@ export const PATH = {
 }
 
 
-export const Routing: React.FC<PropsType> = ({state, updatePostText, addPost}) => {
+export const Routing: React.FC<PropsType> = ({store}) => {
     return (
         <>
             <Routes>
                 <Route path={PATH.START_PAGE}
-                       element={<Profile profilePage={state.profilePage}
-                                         addPost={addPost}
-                                         updatePostText={updatePostText}/>
+                       element={<Profile profilePage={store.getState().profilePage}
+                                         addPost={store.addPost}
+                                         updatePostText={store.updatePostText}/>
                        }/>
                 <Route path={PATH.PROFILE_PAGE}
-                       element={<Profile profilePage={state.profilePage}
-                                         addPost={addPost}
-                                         updatePostText={updatePostText}/>
+                       element={<Profile profilePage={store._state.profilePage}
+                                         addPost={store.addPost}
+                                         updatePostText={store.updatePostText}/>
                        }/>
                 <Route path={`${PATH.DIALOGS_PAGE}/*`}
-                       element={<Dialogs dialogs={state.dialogsPage.dialogs}
-                                         messages={state.dialogsPage.messages}/>
+                       element={<Dialogs dialogs={store._state.dialogsPage.dialogs}
+                                         messages={store._state.dialogsPage.messages}/>
                        }/>
                 <Route path={PATH.NEWS_PAGE} element={<News/>}/>
                 <Route path={PATH.MUSIC_PAGE} element={<Music/>}/>
                 <Route path={PATH.SETTINGS_PAGE} element={<Settings/>}/>
-                <Route path={PATH.FRIENDS_PAGE} element={<Friends friends={state.sideBarPage.friends}/>}/>
+                <Route path={PATH.FRIENDS_PAGE} element={<Friends friends={store._state.sideBarPage.friends}/>}/>
                 <Route path={PATH.NOT_FOUND_PAGE} element={<NotFound404/>}/>
             </Routes>
         </>

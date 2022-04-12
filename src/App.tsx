@@ -2,22 +2,20 @@ import React from 'react';
 import './App.css';
 import {Header} from "./ui/Header/Header";
 import {Navbar} from "./ui/Navbar/Navbar";
-import {StateType} from "./redux/state";
+import {RootStoreType} from "./redux/state";
 import {Routing} from "./ui/Routing/Routing";
 
 type PropsType = {
-    state: StateType
-    addPost: () => void
-    updatePostText: (postText: string) => void
+    store: RootStoreType
 }
 
-export const App: React.FC<PropsType> = ({state, addPost, updatePostText}) => {
+export const App: React.FC<PropsType> = ({store}) => {
     return (
         <div className={'app-wrapper'}>
             <Header/>
-            <Navbar friends={state.sideBarPage.friends}/>
+            <Navbar friends={store._state.sideBarPage.friends}/>
             <div className={'app-wrapper-content'}>
-                <Routing state={state} addPost={addPost} updatePostText={updatePostText}/>
+                <Routing store={store}/>
             </div>
         </div>
     );
