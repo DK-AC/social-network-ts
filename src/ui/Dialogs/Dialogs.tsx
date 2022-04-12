@@ -2,11 +2,11 @@ import React, {useRef} from 'react';
 import styles from './dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {MessageItem} from "./MessageItem/MessageItem";
-import {DialogsDataType, MessagesDataType} from "../../redux/state";
+import {DialogType, MessageType} from "../../redux/state";
 
 type PropsType = {
-    dialogs: DialogsDataType[]
-    messages: MessagesDataType[]
+    dialogs: DialogType[]
+    messages: MessageType[]
 }
 
 export const Dialogs: React.FC<PropsType> = ({dialogs, messages}) => {

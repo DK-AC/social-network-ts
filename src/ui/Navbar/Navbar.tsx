@@ -1,9 +1,9 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
-import {FriendsDataType} from '../../redux/state';
+import {FriendDataType} from '../../redux/state';
 import styles from './navbar.module.css'
 
-type PropsType = { friends: FriendsDataType[] }
+type PropsType = { friends: FriendDataType[] }
 
 export const Navbar = ({friends}: PropsType) => {
     return (
