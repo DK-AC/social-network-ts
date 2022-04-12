@@ -7,7 +7,7 @@ import {Routing} from "./ui/Routing/Routing";
 
 type PropsType = {
     state: StateType
-    addPost: (message: string) => void
+    addPost: () => void
     updatePostText: (postText: string) => void
 }
 

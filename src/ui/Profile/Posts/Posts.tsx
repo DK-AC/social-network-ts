@@ -5,7 +5,7 @@ import {ProfilePageType} from "../../../redux/state";
 
 type PropsType = {
     profilePage: ProfilePageType
-    addPost: (message: string) => void
+    addPost: () => void
     updatePostText: (postText: string) => void
 }
 
@@ -17,11 +17,7 @@ export const Posts = ({profilePage, addPost, updatePostText}: PropsType) => {
         return <Post key={p.id} id={p.id} message={p.message} likesCount={p.likesCount}/>
     })
     const addPostHandle = () => {
-        if (inputEl && inputEl.current) {
-            addPost(inputEl.current.value)
-            profilePage.postText = ''
-
-        }
+            addPost()
     }
     const updatePostTextHandle = (e: ChangeEvent<HTMLInputElement>) => {
         updatePostText(e.currentTarget.value)

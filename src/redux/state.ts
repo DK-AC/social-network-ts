@@ -53,8 +53,9 @@ export const state: StateType = {
     }
 }
 
-export const addPost = (message: string) => {
-    state.profilePage.posts.push({id: 32, message, likesCount: 3})
+export const addPost = () => {
+    state.profilePage.posts.push({id: 32, message: state.profilePage.postText, likesCount: 3})
+    state.profilePage.postText = ''
     rerenderEntireTree(state)
 }
 

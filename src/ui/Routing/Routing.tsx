@@ -11,7 +11,7 @@ import {StateType} from "../../redux/state";
 
 type PropsType = {
     state: StateType
-    addPost: (message: string) => void
+    addPost: () => void
     updatePostText: (postText: string) => void
 }
 
