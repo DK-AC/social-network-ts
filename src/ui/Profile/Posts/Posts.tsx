@@ -18,6 +18,7 @@ export const Posts = ({posts, addPost}: PropsType) => {
     const addPostHandle = () => {
         if (inputEl && inputEl.current) {
             addPost(inputEl.current.value)
+            inputEl.current.value = ''
         }
     }
 
