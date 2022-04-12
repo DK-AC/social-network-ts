@@ -32,12 +32,12 @@ export const Routing = ({state, updatePostText, addPost}: PropsType) => {
         <>
             <Routes>
                 <Route path={PATH.START_PAGE}
-                       element={<Profile posts={state.profilePage.posts}
+                       element={<Profile profilePage={state.profilePage}
                                          addPost={addPost}
                                          updatePostText={updatePostText}/>
                        }/>
                 <Route path={PATH.PROFILE_PAGE}
-                       element={<Profile posts={state.profilePage.posts}
+                       element={<Profile profilePage={state.profilePage}
                                          addPost={addPost}
                                          updatePostText={updatePostText}/>
                        }/>

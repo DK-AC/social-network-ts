@@ -1,29 +1,30 @@
-import React, {useRef} from 'react';
+import React, {ChangeEvent, useRef} from 'react';
 import {Post} from "./Post/Post";
 import styles from "./posts.module.css";
-import {PostsDataType} from "../../../redux/state";
+import {ProfilePageType} from "../../../redux/state";
 
 type PropsType = {
-    posts: PostsDataType[]
+    profilePage: ProfilePageType
     addPost: (message: string) => void
     updatePostText: (postText: string) => void
 }
 
-export const Posts = ({posts, addPost, updatePostText}: PropsType) => {
+export const Posts = ({profilePage, addPost, updatePostText}: PropsType) => {
 
     const inputEl = useRef<HTMLInputElement>(null)
 
-    const post = posts.map(p => {
+    const post = profilePage.posts.map(p => {
         return <Post key={p.id} id={p.id} message={p.message} likesCount={p.likesCount}/>
     })
     const addPostHandle = () => {
         if (inputEl && inputEl.current) {
             addPost(inputEl.current.value)
-            inputEl.current.value = ''
+            profilePage.postText = ''
+
         }
     }
-    const updatePostTextHandle = () => {
-        updatePostText('')
+    const updatePostTextHandle = (e: ChangeEvent<HTMLInputElement>) => {
+        updatePostText(e.currentTarget.value)
     }
 
     return (
@@ -31,7 +32,8 @@ export const Posts = ({posts, addPost, updatePostText}: PropsType) => {
             <h3>My posts</h3>
             <div>
                 <div>
-                    <input value={''} onChange={updatePostTextHandle} ref={inputEl} placeholder={'post'}/>
+                    <input value={profilePage.postText} onChange={updatePostTextHandle} ref={inputEl}
+                           placeholder={'post'}/>
                     <button onClick={addPostHandle}>Add post</button>
                 </div>
             </div>
