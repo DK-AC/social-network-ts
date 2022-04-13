@@ -1,5 +1,21 @@
 import {ActionsType} from "../store";
 
+const initialState = {
+    dialogs: [
+        {id: 1, name: 'Jenya'},
+        {id: 2, name: 'Sasha'},
+        {id: 3, name: 'Dima'},
+        {id: 4, name: 'Rita'},
+    ],
+    messages: [
+        {id: 1, message: 'Hello'},
+        {id: 2, message: 'How are you?'},
+        {id: 3, message: 'let\'s go'},
+        {id: 4, message: 'Stop'},
+    ],
+    newMessageText: ''
+}
+
 export type DialogType = { id: number, name: string }
 export type MessageType = { id: number, message: string }
 export type DialogsPageType = {
@@ -7,7 +23,7 @@ export type DialogsPageType = {
     messages: MessageType[],
     newMessageText: string
 }
-export const dialogReducer = (state: DialogsPageType, action: ActionsType) => {
+export const dialogReducer = (state = initialState, action: ActionsType) => {
     switch (action.type) {
         case "SEND_MESSAGE":
             return {

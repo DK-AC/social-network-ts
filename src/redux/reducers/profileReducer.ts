@@ -1,11 +1,16 @@
 import {ActionsType} from "../store";
 
-export type PostType = { id: number, message: string, likesCount: number }
-export type ProfilePageType = {
-    posts: PostType[]
-    newPostText: string
+
+const initialState = {
+    posts: [
+        {id: 1, message: '1 post', likesCount: 20},
+        {id: 2, message: '2 post', likesCount: 1},
+        {id: 3, message: '3 post', likesCount: 55},
+    ],
+    newPostText: ''
 }
-export const profileReducer = (state: ProfilePageType, action: ActionsType) => {
+
+export const profileReducer = (state = initialState, action: ActionsType) => {
     switch (action.type) {
         case "ADD_POST":
             return {
@@ -28,3 +33,9 @@ export const addPostAC = (postText: string) => ({type: 'ADD_POST', postText} as 
 export const updateNewPostTextAC = (newPostText: string) => (
     {type: 'UPDATE_NEW_POST_TEXT', newPostText} as const
 )
+
+export type PostType = { id: number, message: string, likesCount: number }
+export type ProfilePageType = {
+    posts: PostType[]
+    newPostText: string
+}
