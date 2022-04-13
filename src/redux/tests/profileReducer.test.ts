@@ -1,5 +1,4 @@
-import {addPostAC, ProfilePageType} from "../state";
-import {profileReducer} from "../reducers/profileReducer";
+import {addPostAC, ProfilePageType, profileReducer} from "../reducers/profileReducer";
 
 let fakeState: ProfilePageType
 

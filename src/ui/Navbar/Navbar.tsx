@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
-import {FriendDataType} from '../../redux/state';
 import styles from './navbar.module.css'
+import {FriendDataType} from "../../redux/reducers/sideBarReducer";
 
 type PropsType = { friends: FriendDataType[] }
 

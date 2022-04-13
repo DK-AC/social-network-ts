@@ -1,7 +1,7 @@
 import React from 'react';
-import {FriendDataType} from "../../redux/state";
 import {FriendItem} from "./FriendItem/FriendItem";
 import styles from "./friends.module.css";
+import {FriendDataType} from "../../redux/reducers/sideBarReducer";
 
 type PropsType = { friends: FriendDataType[] }
 

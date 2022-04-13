@@ -7,7 +7,7 @@ import {Settings} from "../Settings/Settings";
 import {Friends} from "../Friends/Friends";
 import {NotFound404} from "../NotFound404/NotFound404";
 import React from "react";
-import {RootStoreType, StateType} from "../../redux/state";
+import {RootStoreType, StateType} from "../../redux/store";
 
 type PropsType = {
     store: RootStoreType

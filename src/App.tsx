@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import {Header} from "./ui/Header/Header";
 import {Navbar} from "./ui/Navbar/Navbar";
-import {RootStoreType, StateType} from "./redux/state";
+import {RootStoreType, StateType} from "./redux/store";
 import {Routing} from "./ui/Routing/Routing";
 
 type PropsType = {

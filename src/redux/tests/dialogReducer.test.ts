@@ -1,6 +1,5 @@
-import {profileReducer} from "../reducers/profileReducer";
-import {addPostAC, DialogsPageType, sendMessageAC} from "../state";
-import {dialogReducer} from "../reducers/dialogReducer";
+import {addPostAC, profileReducer} from "../reducers/profileReducer";
+import {dialogReducer, DialogsPageType, sendMessageAC} from "../reducers/dialogReducer";
 
 let fakeState: DialogsPageType
 
