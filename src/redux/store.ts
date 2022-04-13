@@ -1,8 +1,16 @@
 import {profileReducer} from "./reducers/profileReducer";
 import {dialogsReducer} from "./reducers/dialogsReducer";
 import {sideBarReducer} from "./reducers/sideBarReducer";
-import {combineReducers, createStore} from "redux";
+import {combineReducers, compose, createStore} from "redux";
 import {TypedUseSelectorHook, useSelector} from "react-redux";
+
+declare global {
+    interface Window {
+        __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+    }
+}
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export const rootReducers = combineReducers({
     profile: profileReducer,
@@ -12,7 +20,7 @@ export const rootReducers = combineReducers({
 
 export type RootStateType = ReturnType<typeof rootReducers>
 
-export const store = createStore(rootReducers)
+export const store = createStore(rootReducers, composeEnhancers())
 export const useAppSelector: TypedUseSelectorHook<RootStateType> = useSelector
 
 

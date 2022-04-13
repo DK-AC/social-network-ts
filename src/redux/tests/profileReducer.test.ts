@@ -1,5 +1,4 @@
 import {addPostAC, ProfilePageType, profileReducer, updateNewPostTextAC} from "../reducers/profileReducer";
-import {dialogsReducer, updateNewMessageAC} from "../reducers/dialogsReducer";
 
 let fakeState: ProfilePageType
 
