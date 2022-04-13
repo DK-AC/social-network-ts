@@ -1,24 +1,23 @@
 import React, {ChangeEvent} from 'react';
 import {Post} from "./Post/Post";
 import styles from "./posts.module.css";
-import {ProfilePageType} from "../../../redux/state";
+import {ActionsType, addPostAC, ProfilePageType, updateNewPostTextAC} from "../../../redux/state";
 
 type PropsType = {
     profilePage: ProfilePageType
-    addPost: () => void
-    updatePostText: (postText: string) => void
+    dispatch: (action: ActionsType) => void
 }
 
-export const Posts: React.FC<PropsType> = ({addPost, updatePostText, profilePage}) => {
+export const Posts: React.FC<PropsType> = ({profilePage, dispatch}) => {
 
     const post = profilePage.posts.map(p => {
         return <Post key={p.id} id={p.id} message={p.message} likesCount={p.likesCount}/>
     })
     const addPostHandle = () => {
-        addPost()
+        dispatch(addPostAC())
     }
     const updatePostTextHandle = (e: ChangeEvent<HTMLInputElement>) => {
-        updatePostText(e.currentTarget.value)
+        dispatch(updateNewPostTextAC(e.currentTarget.value))
     }
 
     return (
@@ -26,7 +25,7 @@ export const Posts: React.FC<PropsType> = ({addPost, updatePostText, profilePage
             <h3>My posts</h3>
             <div>
                 <div>
-                    <input value={profilePage.postText}
+                    <input value={profilePage.newPostText}
                            onChange={updatePostTextHandle}
                            placeholder={'post'}
                     />

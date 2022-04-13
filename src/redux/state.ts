@@ -4,7 +4,7 @@ export type MessageType = { id: number, message: string }
 export type FriendDataType = { id: number, name: string }
 export type ProfilePageType = {
     posts: PostType[]
-    postText: string
+    newPostText: string
 }
 export type DialogsPageType = {
     dialogs: DialogType[]
@@ -24,9 +24,17 @@ export type RootStoreType = {
     getState: () => StateType
     _subscriber: (state: StateType) => void
     subscribe: (observer: (state: StateType) => void) => void
-    addPost: () => void
-    updatePostText: (postText: string) => void
+    dispatch: (action: ActionsType) => void
 }
+
+export type ActionsType = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC>
+
+export const addPostAC = () => (
+    {type: 'ADD_POST'} as const
+)
+export const updateNewPostTextAC = (newPostText: string) => (
+    {type: 'UPDATE_NEW_POST_TEXT', newPostText} as const
+)
 
 export const store: RootStoreType = {
     _state: {
@@ -36,7 +44,7 @@ export const store: RootStoreType = {
                 {id: 2, message: '2 post', likesCount: 1},
                 {id: 3, message: '3 post', likesCount: 55},
             ],
-            postText: ''
+            newPostText: ''
         },
         dialogsPage: {
             dialogs: [
@@ -69,19 +77,23 @@ export const store: RootStoreType = {
     subscribe(observer) {
         this._subscriber = observer
     },
-    addPost() {
-        this._state.profilePage.posts.push({
-            id: new Date().getTime(),
-            message: this._state.profilePage.postText,
-            likesCount: 0
-        })
-        this._state.profilePage.postText = ''
-        this._subscriber(this._state)
+    dispatch(action) {
+        switch (action.type) {
+            case 'ADD_POST':
+                this._state.profilePage.posts.push({
+                    id: new Date().getTime(),
+                    message: this._state.profilePage.newPostText,
+                    likesCount: 0
+                })
+                this._state.profilePage.newPostText = ''
+                return this._subscriber(this._state)
+            case 'UPDATE_NEW_POST_TEXT':
+                this._state.profilePage.newPostText = action.newPostText
+                return this._subscriber(this._state)
+            default:
+                return this._state
+        }
     },
-    updatePostText(postText) {
-        this._state.profilePage.postText = postText
-        this._subscriber(this._state)
-    }
 }
 
 
