@@ -31,16 +31,16 @@ export type RootStoreType = {
 export type ActionsType =
     ReturnType<typeof addPostAC>
     | ReturnType<typeof updateNewPostTextAC>
-    | ReturnType<typeof addMessageAC>
-    | ReturnType<typeof updateNewMessageDialogAC>
+    | ReturnType<typeof sendMessageAC>
+    | ReturnType<typeof updateNewMessageAC>
 
-export const addPostAC = () => ({type: 'ADD_POST'} as const)
+export const addPostAC = (postText:string) => ({type: 'ADD_POST',postText} as const)
 export const updateNewPostTextAC = (newPostText: string) => (
     {type: 'UPDATE_NEW_POST_TEXT', newPostText} as const
 )
-export const addMessageAC = () => ({type: 'ADD_MESSAGE'} as const)
-export const updateNewMessageDialogAC = (newMessageText: string) => (
-    {type: 'UPDATE_NEW_MESSAGE_DIALOG', newMessageText} as const
+export const sendMessageAC = () => ({type: 'SEND_MESSAGE'} as const)
+export const updateNewMessageAC = (newMessageText: string) => (
+    {type: 'UPDATE_NEW_MESSAGE_TEXT', newMessageText} as const
 )
 
 export const store: RootStoreType = {
@@ -98,7 +98,7 @@ export const store: RootStoreType = {
             case 'UPDATE_NEW_POST_TEXT':
                 this._state.profilePage.newPostText = action.newPostText
                 return this._subscriber(this._state)
-            case "ADD_MESSAGE":
+            case "SEND_MESSAGE":
                 this._state.dialogsPage.messages.push({
                     id: new Date().getTime(),
                     message: this._state.dialogsPage.newMessageText
@@ -109,7 +109,7 @@ export const store: RootStoreType = {
                 })
                 this._state.dialogsPage.newMessageText = ''
                 return this._subscriber(this._state)
-            case "UPDATE_NEW_MESSAGE_DIALOG":
+            case "UPDATE_NEW_MESSAGE_TEXT":
                 this._state.dialogsPage.newMessageText = action.newMessageText
                 return this._subscriber(this._state)
             default:
