@@ -8,7 +8,8 @@ export type ProfilePageType = {
 }
 export type DialogsPageType = {
     dialogs: DialogType[]
-    messages: MessageType[]
+    messages: MessageType[],
+    newMessageText: string
 }
 export type SideBarPageType = {
     friends: FriendDataType[]
@@ -27,13 +28,19 @@ export type RootStoreType = {
     dispatch: (action: ActionsType) => void
 }
 
-export type ActionsType = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC>
+export type ActionsType =
+    ReturnType<typeof addPostAC>
+    | ReturnType<typeof updateNewPostTextAC>
+    | ReturnType<typeof addMessageAC>
+    | ReturnType<typeof updateNewMessageDialogAC>
 
-export const addPostAC = () => (
-    {type: 'ADD_POST'} as const
-)
+export const addPostAC = () => ({type: 'ADD_POST'} as const)
 export const updateNewPostTextAC = (newPostText: string) => (
     {type: 'UPDATE_NEW_POST_TEXT', newPostText} as const
+)
+export const addMessageAC = () => ({type: 'ADD_MESSAGE'} as const)
+export const updateNewMessageDialogAC = (newMessageText: string) => (
+    {type: 'UPDATE_NEW_MESSAGE_DIALOG', newMessageText} as const
 )
 
 export const store: RootStoreType = {
@@ -58,7 +65,8 @@ export const store: RootStoreType = {
                 {id: 2, message: 'How are you?'},
                 {id: 3, message: 'let\'s go'},
                 {id: 4, message: 'Stop'},
-            ]
+            ],
+            newMessageText: ''
         },
         sideBarPage: {
             friends: [
@@ -89,6 +97,20 @@ export const store: RootStoreType = {
                 return this._subscriber(this._state)
             case 'UPDATE_NEW_POST_TEXT':
                 this._state.profilePage.newPostText = action.newPostText
+                return this._subscriber(this._state)
+            case "ADD_MESSAGE":
+                this._state.dialogsPage.messages.push({
+                    id: new Date().getTime(),
+                    message: this._state.dialogsPage.newMessageText
+                })
+                this._state.dialogsPage.dialogs.push({
+                    id: new Date().getTime(),
+                    name: 'New User'
+                })
+                this._state.dialogsPage.newMessageText = ''
+                return this._subscriber(this._state)
+            case "UPDATE_NEW_MESSAGE_DIALOG":
+                this._state.dialogsPage.newMessageText = action.newMessageText
                 return this._subscriber(this._state)
             default:
                 return this._state

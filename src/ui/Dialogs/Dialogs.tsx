@@ -1,30 +1,29 @@
-import React, {useRef} from 'react';
+import React, {ChangeEvent} from 'react';
 import styles from './dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {MessageItem} from "./MessageItem/MessageItem";
-import {DialogType, MessageType} from "../../redux/state";
+import {ActionsType, addMessageAC, DialogsPageType, updateNewMessageDialogAC} from "../../redux/state";
 
 type PropsType = {
-    dialogs: DialogType[]
-    messages: MessageType[]
+    dialogsPage: DialogsPageType
+    dispatch: (action: ActionsType) => void
 }
 
-export const Dialogs: React.FC<PropsType> = ({dialogs, messages}) => {
+export const Dialogs: React.FC<PropsType> = ({dialogsPage, dispatch}) => {
 
-    const inputEl = useRef<HTMLInputElement>(null)
-
-    const dialog = dialogs.map(d => {
+    const dialog = dialogsPage.dialogs.map(d => {
         return <DialogItem key={d.id} id={d.id} name={d.name}/>
     })
 
-    const message = messages.map(m => {
+    const message = dialogsPage.messages.map(m => {
         return <MessageItem key={m.id} id={m.id} message={m.message}/>
     })
 
     const addMessageHandle = () => {
-        if (inputEl && inputEl.current) {
-            alert(inputEl.current.value)
-        }
+        dispatch(addMessageAC())
+    }
+    const updateNewMessageDialogHandle = (e: ChangeEvent<HTMLInputElement>) => {
+        dispatch(updateNewMessageDialogAC(e.currentTarget.value))
     }
 
     return (
@@ -35,7 +34,7 @@ export const Dialogs: React.FC<PropsType> = ({dialogs, messages}) => {
                 </div>
                 <div className={styles.messages}>
                     {message}
-                    <input type="text" ref={inputEl}/>
+                    <input type="text" value={dialogsPage.newMessageText} onChange={updateNewMessageDialogHandle}/>
                     <button onClick={addMessageHandle}>add message</button>
                 </div>
             </div>

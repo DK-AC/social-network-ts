@@ -26,7 +26,7 @@ export const PATH = {
 }
 
 
-export const Routing: React.FC<PropsType> = ({store,state}) => {
+export const Routing: React.FC<PropsType> = ({store, state}) => {
     return (
         <>
             <Routes>
@@ -39,8 +39,8 @@ export const Routing: React.FC<PropsType> = ({store,state}) => {
                                          dispatch={store.dispatch.bind(store)}/>
                        }/>
                 <Route path={`${PATH.DIALOGS_PAGE}/*`}
-                       element={<Dialogs dialogs={state.dialogsPage.dialogs}
-                                         messages={state.dialogsPage.messages}/>
+                       element={<Dialogs dialogsPage={state.dialogsPage}
+                                         dispatch={store.dispatch.bind(store)}/>
                        }/>
                 <Route path={PATH.NEWS_PAGE} element={<News/>}/>
                 <Route path={PATH.MUSIC_PAGE} element={<Music/>}/>
