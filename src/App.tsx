@@ -13,7 +13,7 @@ export const App: React.FC<PropsType> = ({store}) => {
     return (
         <div className={'app-wrapper'}>
             <Header/>
-            <Navbar friends={store._state.sideBarPage.friends}/>
+            <Navbar friends={store.getState().sideBarPage.friends}/>
             <div className={'app-wrapper-content'}>
                 <Routing store={store}/>
             </div>

@@ -31,22 +31,22 @@ export const Routing: React.FC<PropsType> = ({store}) => {
             <Routes>
                 <Route path={PATH.START_PAGE}
                        element={<Profile profilePage={store.getState().profilePage}
-                                         addPost={store.addPost}
-                                         updatePostText={store.updatePostText}/>
+                                         addPost={store.addPost.bind(store)}
+                                         updatePostText={store.updatePostText.bind(store)}/>
                        }/>
                 <Route path={PATH.PROFILE_PAGE}
-                       element={<Profile profilePage={store._state.profilePage}
-                                         addPost={store.addPost}
-                                         updatePostText={store.updatePostText}/>
+                       element={<Profile profilePage={store.getState().profilePage}
+                                         addPost={store.addPost.bind(store)}
+                                         updatePostText={store.updatePostText.bind(store)}/>
                        }/>
                 <Route path={`${PATH.DIALOGS_PAGE}/*`}
-                       element={<Dialogs dialogs={store._state.dialogsPage.dialogs}
-                                         messages={store._state.dialogsPage.messages}/>
+                       element={<Dialogs dialogs={store.getState().dialogsPage.dialogs}
+                                         messages={store.getState().dialogsPage.messages}/>
                        }/>
                 <Route path={PATH.NEWS_PAGE} element={<News/>}/>
                 <Route path={PATH.MUSIC_PAGE} element={<Music/>}/>
                 <Route path={PATH.SETTINGS_PAGE} element={<Settings/>}/>
-                <Route path={PATH.FRIENDS_PAGE} element={<Friends friends={store._state.sideBarPage.friends}/>}/>
+                <Route path={PATH.FRIENDS_PAGE} element={<Friends friends={store.getState().sideBarPage.friends}/>}/>
                 <Route path={PATH.NOT_FOUND_PAGE} element={<NotFound404/>}/>
             </Routes>
         </>

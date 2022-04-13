@@ -1,6 +1,6 @@
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import {store} from './redux/state';
+import {StateType, store} from './redux/state';
 import {createRoot} from "react-dom/client";
 import React from "react";
 import {BrowserRouter} from "react-router-dom";
@@ -9,7 +9,7 @@ import {App} from "./App";
 const container = document.getElementById('root')
 export const root = createRoot(container as Element)
 
-let rerenderEntireTree = () => {
+let rerenderEntireTree = (state: StateType) => {
     return (
         root.render(
             <React.StrictMode>
@@ -21,7 +21,7 @@ let rerenderEntireTree = () => {
     )
 }
 
-rerenderEntireTree()
+rerenderEntireTree(store.getState())
 
 store.subscribe(rerenderEntireTree)
 

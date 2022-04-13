@@ -22,8 +22,8 @@ export type StateType = {
 export type RootStoreType = {
     _state: StateType
     getState: () => StateType
-    _subscriber: () => void
-    subscribe: (observer: () => void) => void
+    _subscriber: (state: StateType) => void
+    subscribe: (observer: (state: StateType) => void) => void
     addPost: () => void
     updatePostText: (postText: string) => void
 }
@@ -76,11 +76,11 @@ export const store: RootStoreType = {
             likesCount: 0
         })
         this._state.profilePage.postText = ''
-        this._subscriber()
+        this._subscriber(this._state)
     },
     updatePostText(postText) {
         this._state.profilePage.postText = postText
-        this._subscriber()
+        this._subscriber(this._state)
     }
 }
 
