@@ -1,4 +1,5 @@
-import {addPostAC, ProfilePageType, profileReducer} from "../reducers/profileReducer";
+import {addPostAC, ProfilePageType, profileReducer, updateNewPostTextAC} from "../reducers/profileReducer";
+import {dialogsReducer, updateNewMessageAC} from "../reducers/dialogsReducer";
 
 let fakeState: ProfilePageType
 
@@ -22,4 +23,11 @@ test('post should be added', () => {
     expect(endState.posts[3]).toBeDefined()
     expect(fakeState.posts[2].message).toBe('3 post')
     expect(endState.posts[3].message).toBe('New Post Text')
+})
+
+test('new post text should be changed', () => {
+    let endState = profileReducer(fakeState, updateNewPostTextAC('New Post Text'))
+
+    expect(fakeState.newPostText).toBe('')
+    expect(endState.newPostText).toBe('New Post Text')
 })

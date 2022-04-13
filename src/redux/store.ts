@@ -1,12 +1,12 @@
 import {profileReducer} from "./reducers/profileReducer";
-import {dialogReducer} from "./reducers/dialogReducer";
+import {dialogsReducer} from "./reducers/dialogsReducer";
 import {sideBarReducer} from "./reducers/sideBarReducer";
 import {combineReducers, createStore} from "redux";
 import {TypedUseSelectorHook, useSelector} from "react-redux";
 
 export const rootReducers = combineReducers({
     profile: profileReducer,
-    dialogs: dialogReducer,
+    dialogs: dialogsReducer,
     sideBar: sideBarReducer
 })
 

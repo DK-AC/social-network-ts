@@ -17,6 +17,7 @@ export const Posts: React.FC = () => {
     })
     const addPostHandle = () => {
         dispatch(addPostAC(newPostText))
+        dispatch(updateNewPostTextAC(''))
     }
     const updatePostTextHandle = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch(updateNewPostTextAC(e.currentTarget.value))

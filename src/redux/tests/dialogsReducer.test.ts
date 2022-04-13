@@ -1,5 +1,4 @@
-import {addPostAC, profileReducer} from "../reducers/profileReducer";
-import {dialogReducer, DialogsPageType, sendMessageAC} from "../reducers/dialogReducer";
+import {DialogsPageType, dialogsReducer, sendMessageAC, updateNewMessageAC} from "../reducers/dialogsReducer";
 
 let fakeState: DialogsPageType
 
@@ -22,7 +21,7 @@ beforeEach(() => {
 })
 
 test('post should be added', () => {
-    let endState = dialogReducer(fakeState, sendMessageAC('New Message Text'))
+    let endState = dialogsReducer(fakeState, sendMessageAC('New Message Text'))
 
     expect(fakeState.messages.length).toBe(4)
     expect(endState.messages.length).toBe(5)
@@ -30,4 +29,11 @@ test('post should be added', () => {
     expect(endState.messages[4]).toBeDefined()
     expect(fakeState.messages[3].message).toBe('Stop')
     expect(endState.messages[4].message).toBe('New Message Text')
+})
+
+test('new message text should be changed', () => {
+    let endState = dialogsReducer(fakeState, updateNewMessageAC('New Message Text'))
+
+    expect(fakeState.newMessageText).toBe('')
+    expect(endState.newMessageText).toBe('New Message Text')
 })

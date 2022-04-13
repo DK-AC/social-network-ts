@@ -6,8 +6,6 @@ const initialState = {
     ]
 }
 
-type initialStateType = typeof initialState
-
 export const sideBarReducer = (state: initialStateType = initialState, action: SideBarActionsType): initialStateType => {
     switch (action) {
         default :
@@ -15,8 +13,7 @@ export const sideBarReducer = (state: initialStateType = initialState, action: S
     }
 }
 
+type initialStateType = typeof initialState
 export type FriendDataType = { id: number, name: string }
-export type SideBarPageType = {
-    friends: FriendDataType[]
-}
+export type SideBarPageType = { friends: FriendDataType[] }
 export type SideBarActionsType = {}
