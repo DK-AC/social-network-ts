@@ -7,12 +7,6 @@ import {Settings} from "../Settings/Settings";
 import {Friends} from "../Friends/Friends";
 import {NotFound404} from "../NotFound404/NotFound404";
 import React from "react";
-import {RootStoreType, StateType} from "../../redux/store";
-
-type PropsType = {
-    store: RootStoreType
-    state: StateType
-}
 
 export const PATH = {
     START_PAGE: '/',
@@ -26,26 +20,23 @@ export const PATH = {
 }
 
 
-export const Routing: React.FC<PropsType> = ({store, state}) => {
+export const Routing: React.FC = () => {
     return (
         <>
             <Routes>
                 <Route path={PATH.START_PAGE}
-                       element={<Profile profilePage={state.profilePage}
-                                         dispatch={store.dispatch.bind(store)}/>
+                       element={<Profile/>
                        }/>
                 <Route path={PATH.PROFILE_PAGE}
-                       element={<Profile profilePage={state.profilePage}
-                                         dispatch={store.dispatch.bind(store)}/>
+                       element={<Profile/>
                        }/>
                 <Route path={`${PATH.DIALOGS_PAGE}/*`}
-                       element={<Dialogs dialogsPage={state.dialogsPage}
-                                         dispatch={store.dispatch.bind(store)}/>
+                       element={<Dialogs/>
                        }/>
                 <Route path={PATH.NEWS_PAGE} element={<News/>}/>
                 <Route path={PATH.MUSIC_PAGE} element={<Music/>}/>
                 <Route path={PATH.SETTINGS_PAGE} element={<Settings/>}/>
-                <Route path={PATH.FRIENDS_PAGE} element={<Friends friends={state.sideBarPage.friends}/>}/>
+                <Route path={PATH.FRIENDS_PAGE} element={<Friends/>}/>
                 <Route path={PATH.NOT_FOUND_PAGE} element={<NotFound404/>}/>
             </Routes>
         </>

@@ -1,11 +1,13 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import styles from './navbar.module.css'
-import {FriendDataType} from "../../redux/reducers/sideBarReducer";
+import {useAppSelector} from "../../redux/store";
 
-type PropsType = { friends: FriendDataType[] }
 
-export const Navbar = ({friends}: PropsType) => {
+export const Navbar: React.FC = () => {
+
+    const friends = useAppSelector(state => state.sideBar.friends)
+
     return (
         <nav className={styles.nav}>
             <div>

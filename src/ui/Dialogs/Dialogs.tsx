@@ -2,26 +2,29 @@ import React, {ChangeEvent, useState} from 'react';
 import styles from './dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {MessageItem} from "./MessageItem/MessageItem";
-import {ActionsType} from "../../redux/store";
-import {DialogsPageType, sendMessageAC, updateNewMessageAC} from "../../redux/reducers/dialogReducer";
+import {sendMessageAC, updateNewMessageAC} from "../../redux/reducers/dialogReducer";
+import {useDispatch} from "react-redux";
+import {useAppSelector} from "../../redux/store";
 
-type PropsType = {
-    dialogsPage: DialogsPageType
-    dispatch: (action: ActionsType) => void
-}
 
-export const Dialogs: React.FC<PropsType> = ({dialogsPage, dispatch}) => {
+export const Dialogs: React.FC = () => {
 
-    const dialog = dialogsPage.dialogs.map(d => {
+    const dispatch = useDispatch()
+
+    const dialogs = useAppSelector(state => state.dialogs.dialogs)
+    const messages = useAppSelector(state => state.dialogs.messages)
+    const newMessageText = useAppSelector(state => state.dialogs.newMessageText)
+
+    const dialog = dialogs.map(d => {
         return <DialogItem key={d.id} id={d.id} name={d.name}/>
     })
 
-    const message = dialogsPage.messages.map(m => {
+    const message = messages.map(m => {
         return <MessageItem key={m.id} id={m.id} message={m.message}/>
     })
 
     const sendMessageHandle = () => {
-        dispatch(sendMessageAC(dialogsPage.newMessageText))
+        dispatch(sendMessageAC(newMessageText))
     }
     const updateNewMessageTextHandle = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch(updateNewMessageAC(e.currentTarget.value))
@@ -35,7 +38,7 @@ export const Dialogs: React.FC<PropsType> = ({dialogsPage, dispatch}) => {
                 </div>
                 <div className={styles.messages}>
                     {message}
-                    <input type="text" value={dialogsPage.newMessageText} onChange={updateNewMessageTextHandle}/>
+                    <input type="text" value={newMessageText} onChange={updateNewMessageTextHandle}/>
                     <button onClick={sendMessageHandle}>add message</button>
                 </div>
             </div>
