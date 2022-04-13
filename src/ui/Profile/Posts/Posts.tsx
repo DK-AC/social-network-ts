@@ -1,8 +1,7 @@
-import React, {ChangeEvent, useReducer, useState} from 'react';
+import React, {ChangeEvent} from 'react';
 import {Post} from "./Post/Post";
 import styles from "./posts.module.css";
 import {ActionsType, addPostAC, ProfilePageType, updateNewPostTextAC} from "../../../redux/state";
-import {profilePageReducer} from "../../../redux/reducers/profilePage-reducer";
 
 type PropsType = {
     profilePage: ProfilePageType
@@ -11,15 +10,13 @@ type PropsType = {
 
 export const Posts: React.FC<PropsType> = ({profilePage, dispatch}) => {
 
-    const [state, dispatchRed] = useReducer(profilePageReducer, profilePage)
-
-    const [text, setText] = useState(profilePage.newPostText)
+    // const [state, dispatchRed] = useReducer(profileReducer, profilePage)
 
     const post = profilePage.posts.map(p => {
         return <Post key={p.id} id={p.id} message={p.message} likesCount={p.likesCount}/>
     })
     const addPostHandle = () => {
-        dispatch(addPostAC(text))
+        dispatch(addPostAC(profilePage.newPostText))
     }
     const updatePostTextHandle = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch(updateNewPostTextAC(e.currentTarget.value))

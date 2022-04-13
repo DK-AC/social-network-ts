@@ -34,11 +34,11 @@ export type ActionsType =
     | ReturnType<typeof sendMessageAC>
     | ReturnType<typeof updateNewMessageAC>
 
-export const addPostAC = (postText:string) => ({type: 'ADD_POST',postText} as const)
+export const addPostAC = (postText: string) => ({type: 'ADD_POST', postText} as const)
 export const updateNewPostTextAC = (newPostText: string) => (
     {type: 'UPDATE_NEW_POST_TEXT', newPostText} as const
 )
-export const sendMessageAC = () => ({type: 'SEND_MESSAGE'} as const)
+export const sendMessageAC = (messageText: string) => ({type: 'SEND_MESSAGE', messageText} as const)
 export const updateNewMessageAC = (newMessageText: string) => (
     {type: 'UPDATE_NEW_MESSAGE_TEXT', newMessageText} as const
 )

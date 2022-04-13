@@ -1,5 +1,5 @@
-import {profilePageReducer} from "../reducers/profilePage-reducer";
 import {addPostAC, ProfilePageType} from "../state";
+import {profileReducer} from "../reducers/profileReducer";
 
 let fakeState: ProfilePageType
 
@@ -15,7 +15,7 @@ beforeEach(() => {
 })
 
 test('post should be added', () => {
-    let endState = profilePageReducer(fakeState, addPostAC('New Post Text'))
+    let endState = profileReducer(fakeState, addPostAC('New Post Text'))
 
     expect(fakeState.posts.length).toBe(3)
     expect(endState.posts.length).toBe(4)

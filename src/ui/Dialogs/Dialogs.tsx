@@ -1,8 +1,8 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import styles from './dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {MessageItem} from "./MessageItem/MessageItem";
-import {ActionsType, sendMessageAC, DialogsPageType, updateNewMessageAC} from "../../redux/state";
+import {ActionsType, DialogsPageType, sendMessageAC, updateNewMessageAC} from "../../redux/state";
 
 type PropsType = {
     dialogsPage: DialogsPageType
@@ -20,7 +20,7 @@ export const Dialogs: React.FC<PropsType> = ({dialogsPage, dispatch}) => {
     })
 
     const sendMessageHandle = () => {
-        dispatch(sendMessageAC())
+        dispatch(sendMessageAC(dialogsPage.newMessageText))
     }
     const updateNewMessageTextHandle = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch(updateNewMessageAC(e.currentTarget.value))
