@@ -25,9 +25,6 @@ export const Dialogs: React.FC = () => {
 
     const sendMessageHandle = () => {
         dispatch(sendMessageAC(newMessageText))
-        dispatch(updateNewMessageAC(''))
-
-
     }
     const updateNewMessageTextHandle = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch(updateNewMessageAC(e.currentTarget.value))

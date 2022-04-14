@@ -29,6 +29,7 @@ test('post should be added', () => {
     expect(endState.messages[4]).toBeDefined()
     expect(fakeState.messages[3].message).toBe('Stop')
     expect(endState.messages[4].message).toBe('New Message Text')
+    expect(endState.newMessageText).toBe('')
 })
 
 test('new message text should be changed', () => {

@@ -21,8 +21,8 @@ export const dialogsReducer = (state: initialStateType = initialState, action: D
     switch (action.type) {
         case SEND_MESSAGE:
             return {
-                ...state,
-                messages: [...state.messages, {id: new Date().getTime(), message: action.messageText}]
+                ...state, messages: [...state.messages, {id: new Date().getTime(), message: action.messageText}],
+                newMessageText: ''
             }
         case UPDATE_NEW_MESSAGE_TEXT:
             return {...state, newMessageText: action.newMessageText}
