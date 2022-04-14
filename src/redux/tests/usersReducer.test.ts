@@ -1,4 +1,4 @@
-import {followUserAC, unfollowUserAC, UsersPageType, usersReducer} from "../reducers/usersReducer";
+import {followUserAC, setUsersAC, unfollowUserAC, UsersPageType, usersReducer} from "../reducers/usersReducer";
 
 let startState: UsersPageType
 
@@ -40,4 +40,34 @@ test('followed user should be changed on false', () => {
 
     expect(startState.users[0].followed).toBeTruthy()
     expect(endState.users[0].followed).toBeFalsy()
+})
+
+test('users should be sets', () => {
+
+    let fakeState: UsersPageType = {users: []}
+
+    let endState = usersReducer(fakeState, setUsersAC(startState.users))
+
+    expect(fakeState).toEqual({users: []})
+    expect(fakeState.users.length).toBe(0)
+    expect(endState).toEqual({
+        users: [
+            {
+                id: 1,
+                name: "Denis",
+                uniqueUrlName: '',
+                photos: {small: '', large: ''},
+                status: '',
+                followed: true
+            },
+            {
+                id: 2,
+                name: "Jenya",
+                uniqueUrlName: '',
+                photos: {small: '', large: ''},
+                status: '',
+                followed: false
+            },]
+    })
+    expect(endState.users.length).toBe(2)
 })
