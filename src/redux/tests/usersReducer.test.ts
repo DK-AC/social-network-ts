@@ -1,4 +1,12 @@
-import {followUserAC, setUsersAC, unfollowUserAC, UsersPageType, usersReducer} from "../reducers/usersReducer";
+import {
+    changeCurrentPageAC,
+    followUserAC,
+    setTotalUserCountAC,
+    setUsersAC,
+    unfollowUserAC,
+    UsersPageType,
+    usersReducer
+} from "../reducers/usersReducer";
 
 let startState: UsersPageType
 
@@ -51,7 +59,7 @@ test('users should be sets', () => {
 
     let endState = usersReducer(fakeState, setUsersAC(startState.users))
 
-    expect(fakeState).toEqual({users: []})
+    expect(fakeState).toEqual({users: [], totalCount: 1, currentPage: 1, pageSize: 5})
     expect(fakeState.users.length).toBe(0)
     expect(endState).toEqual({
         users: [
@@ -70,7 +78,25 @@ test('users should be sets', () => {
                 photos: {small: '', large: ''},
                 status: '',
                 followed: false
-            },]
-    })
+            },
+        ],
+        totalCount: 1,
+        pageSize: 5,
+        currentPage: 1
+    },)
     expect(endState.users.length).toBe(2)
+})
+
+test('total user count should be set', () => {
+    let endState = usersReducer(startState, setTotalUserCountAC(4000))
+
+    expect(startState.totalCount).toBe(100)
+    expect(endState.totalCount).toBe(4000)
+})
+
+test('page should be changed', () => {
+    let endState = usersReducer(startState, changeCurrentPageAC(10))
+
+    expect(startState.currentPage).toBe(3)
+    expect(endState.currentPage).toBe(10)
 })
