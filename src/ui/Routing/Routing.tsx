@@ -12,7 +12,7 @@ import {Users} from "../Users/Users";
 export const PATH = {
     START_PAGE: '/',
     PROFILE_PAGE: '/profile',
-    USERS_PAGE: '/users/:page',
+    USERS_PAGE: '/users/*',
     DIALOGS_PAGE: '/dialogs/*',
     NEWS_PAGE: '/news',
     MUSIC_PAGE: '/music',
@@ -29,7 +29,7 @@ export const Routing: React.FC = () => {
                 <Route path={PATH.START_PAGE} element={<Profile/>}/>
                 <Route path={PATH.PROFILE_PAGE} element={<Profile/>}/>
                 <Route path={PATH.USERS_PAGE} element={<Users/>}/>
-                <Route path={`${PATH.DIALOGS_PAGE}`} element={<Dialogs/>}/>
+                <Route path={PATH.DIALOGS_PAGE} element={<Dialogs/>}/>
                 <Route path={PATH.NEWS_PAGE} element={<News/>}/>
                 <Route path={PATH.MUSIC_PAGE} element={<Music/>}/>
                 <Route path={PATH.SETTINGS_PAGE} element={<Settings/>}/>

@@ -25,12 +25,16 @@ export const Users: React.FC = () => {
 
     let pages = []
     for (let i = 1; i <= pagesCount; i++) {
+        if (i === 50) break;
         pages.push(i)
+
     }
+
+    const changeCurrentPageHandle = (page: number) => dispatch(changeCurrentPageAC(page))
 
     useEffect(() => {
         dispatch(setUsersTC(params))
-    }, [pageSize, currentPage])
+    }, [currentPage])
 
     return (
         <div className={styles.userItems}>
@@ -39,7 +43,7 @@ export const Users: React.FC = () => {
                     return (
                         <span key={index}
                               className={currentPage === p ? styles.currentPage : '' + styles.pageItems}
-                              onClick={() => dispatch(changeCurrentPageAC(p))}
+                              onClick={() => changeCurrentPageHandle(p)}
                         >
                         {p}</span>)
                 })}
