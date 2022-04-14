@@ -1,6 +1,7 @@
 import React from "react";
-import {UserType} from "../../../redux/reducers/usersReducer";
+import {followUserAC, unfollowUserAC, UserType} from "../../../redux/reducers/usersReducer";
 import styles from './user.module.css'
+import {useDispatch} from "react-redux";
 
 type PropsType = {
     user: UserType
@@ -8,7 +9,16 @@ type PropsType = {
 
 export const User: React.FC<PropsType> = ({user}) => {
 
+    const dispatch = useDispatch()
+
     const {id, name, photos, followed, status} = user
+
+    const followButton = () => {
+        dispatch(followUserAC(id, !followed))
+    }
+    const unFollowButton = () => {
+        dispatch(unfollowUserAC(id, !followed))
+    }
 
     return (
         <div className={styles.item}>
@@ -28,10 +38,8 @@ export const User: React.FC<PropsType> = ({user}) => {
 
                 <div>
                     {followed
-                        ? <button onClick={() => {
-                        }}>Unfollow</button>
-                        : <button onClick={() => {
-                        }}>Follow</button>
+                        ? <button onClick={followButton}>Unfollow</button>
+                        : <button onClick={unFollowButton}>Follow</button>
                     }
                 </div>
             </div>

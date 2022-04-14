@@ -1,5 +1,5 @@
-const FOLLOWED = 'FOLLOWED'
-const UNFOLLOWED = 'UNFOLLOWED'
+const FOLLOWED_USER = 'FOLLOWED_USER'
+const UNFOLLOWED_USER = 'UNFOLLOWED_USER'
 
 const initialState = {
     users: [
@@ -16,7 +16,7 @@ const initialState = {
             name: "Jenya",
             uniqueUrlName: '',
             photos: {small: '', large: ''},
-            status: 'Have a good nigth',
+            status: 'Have a good night',
             followed: false
         },
     ]
@@ -25,18 +25,18 @@ const initialState = {
 
 export const usersReducer = (state: initialStateType = initialState, action: UsersActionsType): initialStateType => {
     switch (action.type) {
-        case FOLLOWED:
+        case FOLLOWED_USER:
             return {
                 ...state,
                 users: state.users.map(user => user.id === action.userId
-                    ? {...user, followed: action.followed}
+                    ? {...user, followed: action.follow}
                     : user)
             }
-        case UNFOLLOWED:
+        case UNFOLLOWED_USER:
             return {
                 ...state,
                 users: state.users.map(user => user.id === action.userId
-                    ? {...user, followed: action.unfollowed}
+                    ? {...user, followed: action.unfollow}
                     : user)
             }
         default:
@@ -44,12 +44,16 @@ export const usersReducer = (state: initialStateType = initialState, action: Use
     }
 }
 //actions
-export const followed = (userId: number, followed: boolean) => ({type: FOLLOWED, userId, followed}) as const
-export const unfollowed = (userId: number, unfollowed: boolean) => ({type: UNFOLLOWED, userId, unfollowed}) as const
+export const followUserAC = (userId: number, follow: boolean) => ({type: FOLLOWED_USER, userId, follow}) as const
+export const unfollowUserAC = (userId: number, unfollow: boolean) => ({
+    type: UNFOLLOWED_USER,
+    userId,
+    unfollow
+}) as const
 
 
 //types
-export type UsersActionsType = ReturnType<typeof followed> | ReturnType<typeof unfollowed>
+export type UsersActionsType = ReturnType<typeof followUserAC> | ReturnType<typeof unfollowUserAC>
 type initialStateType = typeof initialState
 
 export type UserType = {

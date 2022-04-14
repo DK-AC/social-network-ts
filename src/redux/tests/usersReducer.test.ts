@@ -1,4 +1,4 @@
-import {followed, unfollowed, UsersPageType, usersReducer} from "../reducers/usersReducer";
+import {followUserAC, unfollowUserAC, UsersPageType, usersReducer} from "../reducers/usersReducer";
 
 let startState: UsersPageType
 
@@ -28,7 +28,7 @@ beforeEach(() => {
 
 test('unfollowed user should be followed', () => {
 
-    let endState = usersReducer(startState, followed(2, true))
+    let endState = usersReducer(startState, followUserAC(2, true))
 
     expect(startState.users[1].followed).toBeFalsy()
     expect(endState.users[1].followed).toBeTruthy()
@@ -36,7 +36,7 @@ test('unfollowed user should be followed', () => {
 
 test('followed user should be unfollowed', () => {
 
-    let endState = usersReducer(startState, unfollowed(1, false))
+    let endState = usersReducer(startState, unfollowUserAC(1, false))
 
     expect(startState.users[0].followed).toBeTruthy()
     expect(endState.users[0].followed).toBeFalsy()
