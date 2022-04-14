@@ -1,9 +1,10 @@
 import {profileReducer} from "./reducers/profileReducer";
 import {dialogsReducer} from "./reducers/dialogsReducer";
 import {sideBarReducer} from "./reducers/sideBarReducer";
-import {combineReducers, compose, createStore} from "redux";
+import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import {TypedUseSelectorHook, useSelector} from "react-redux";
 import {usersReducer} from "./reducers/usersReducer";
+import thunk from "redux-thunk";
 
 declare global {
     interface Window {
@@ -22,7 +23,7 @@ export const rootReducers = combineReducers({
 
 export type RootStateType = ReturnType<typeof rootReducers>
 
-export const store = createStore(rootReducers, composeEnhancers())
+export const store = createStore(rootReducers, composeEnhancers(applyMiddleware(thunk)))
 export const useAppSelector: TypedUseSelectorHook<RootStateType> = useSelector
 
 

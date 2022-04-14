@@ -1,26 +1,12 @@
+import {userAPI} from "../../api/userAPI";
+import {Dispatch} from "redux";
+
 const FOLLOW_USER = 'FOLLOW_USER'
 const UNFOLLOW_USER = 'UNFOLLOW_USER'
 const SET_USERS = 'SET_USERS'
 
 const initialState = {
-    users: [
-        {
-            id: 1,
-            name: "Denis",
-            uniqueUrlName: '',
-            photos: {small: '', large: ''},
-            status: 'Have a good day',
-            followed: true
-        },
-        {
-            id: 2,
-            name: "Jenya",
-            uniqueUrlName: '',
-            photos: {small: '', large: ''},
-            status: 'Have a good night',
-            followed: false
-        },
-    ]
+    users: [] as UserType[]
 };
 
 
@@ -55,6 +41,14 @@ export const unfollowUserAC = (userId: number) => ({type: UNFOLLOW_USER, userId}
 export const setUsersAC = (users: UserType[]) => ({type: SET_USERS, users}) as const
 
 
+//thunks
+export const setUsersTC = () => (dispatch: Dispatch) => {
+    return userAPI.getUsers()
+        .then(data => {
+            dispatch(setUsersAC(data.items))
+        })
+}
+
 //types
 export type UsersActionsType =
     ReturnType<typeof followUserAC>
@@ -78,3 +72,4 @@ export type UserType = {
 export type UsersPageType = {
     users: UserType[]
 }
+
