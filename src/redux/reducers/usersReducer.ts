@@ -4,9 +4,13 @@ import {Dispatch} from "redux";
 const FOLLOW_USER = 'FOLLOW_USER'
 const UNFOLLOW_USER = 'UNFOLLOW_USER'
 const SET_USERS = 'SET_USERS'
+const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT'
 
 const initialState = {
-    users: [] as UserType[]
+    users: [] as UserType[],
+    totalCount: 100,
+    pageSize: 5,
+    currentPage: 3
 };
 
 
@@ -29,7 +33,12 @@ export const usersReducer = (state: initialStateType = initialState, action: Use
         case SET_USERS:
             return {
                 ...state,
-                users: [...state.users,...action.users]
+                users: [...state.users, ...action.users]
+            }
+        case "SET_TOTAL_COUNT":
+            return {
+                ...state,
+                totalCount: action.totalUserCount
             }
         default:
             return state
@@ -39,6 +48,7 @@ export const usersReducer = (state: initialStateType = initialState, action: Use
 export const followUserAC = (userId: number) => ({type: FOLLOW_USER, userId}) as const
 export const unfollowUserAC = (userId: number) => ({type: UNFOLLOW_USER, userId}) as const
 export const setUsersAC = (users: UserType[]) => ({type: SET_USERS, users}) as const
+export const setTotalUserCount = (totalUserCount: number) => ({type: SET_TOTAL_COUNT, totalUserCount}) as const
 
 
 //thunks
@@ -49,11 +59,19 @@ export const setUsersTC = () => (dispatch: Dispatch) => {
         })
 }
 
+export const setTotalCountTC = () => (dispatch: Dispatch) => {
+    return userAPI.getUsers()
+        .then(data => {
+            dispatch(setTotalUserCount(data.totalCount))
+        })
+}
+
 //types
 export type UsersActionsType =
     ReturnType<typeof followUserAC>
     | ReturnType<typeof unfollowUserAC>
     | ReturnType<typeof setUsersAC>
+    | ReturnType<typeof setTotalUserCount>
 
 type initialStateType = typeof initialState
 
@@ -71,5 +89,8 @@ export type UserType = {
 
 export type UsersPageType = {
     users: UserType[]
+    totalCount: number
+    pageSize: number
+    currentPage: number
 }
 

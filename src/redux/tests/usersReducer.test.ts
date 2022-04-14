@@ -21,7 +21,10 @@ beforeEach(() => {
                     status: '',
                     followed: false
                 },
-            ]
+            ],
+            totalCount: 100,
+            pageSize: 5,
+            currentPage: 3
         }
     }
 )
@@ -44,7 +47,7 @@ test('followed user should be changed on false', () => {
 
 test('users should be sets', () => {
 
-    let fakeState: UsersPageType = {users: []}
+    let fakeState: UsersPageType = {users: [], totalCount: 1, currentPage: 1, pageSize: 5}
 
     let endState = usersReducer(fakeState, setUsersAC(startState.users))
 

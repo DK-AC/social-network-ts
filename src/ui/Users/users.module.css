@@ -1,3 +1,7 @@
-.userItems{
+.userItems {
     padding: 10px;
+}
+
+.currentPage {
+    font-weight: bold;
 }
