@@ -1,5 +1,6 @@
 import React from "react";
 import styles from './post.module.css'
+import postPhoto from './../../../../assets/img/postPhoto.jpg'
 
 type PropsType = {
     id: number
@@ -12,8 +13,8 @@ export const Post: React.FC<PropsType> = ({id, message, likesCount}) => {
         <div className={styles.post}>
             <div className={`${styles.item}`}>
                 <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpyQ3Ez7fGNDmuULcJxaGc3CxZ5ohwAoFeGQ&usqp=CAU"
-                    alt="avatar"/>
+                    src={postPhoto}
+                    alt="postPhoto"/>
                 {message}
             </div>
             <span> like {likesCount}</span>

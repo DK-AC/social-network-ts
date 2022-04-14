@@ -2,6 +2,7 @@ import React from "react";
 import {followUserAC, unfollowUserAC, UserType} from "../../../redux/reducers/usersReducer";
 import styles from './user.module.css'
 import {useDispatch} from "react-redux";
+import avaImg from './../../../assets/img/client-2-512.webp'
 
 type PropsType = {
     user: UserType
@@ -24,7 +25,7 @@ export const User: React.FC<PropsType> = ({user}) => {
             <div>
                 <div>
                     <img
-                        src={photos.small ? photos.small : 'https://cdn3.iconfinder.com/data/icons/business-finance-line-5/32/client-2-512.png'}
+                        src={photos.small ? photos.small : avaImg}
                         alt="ava"
                         className={styles.ava}
                     />

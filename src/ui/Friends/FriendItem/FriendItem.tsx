@@ -1,5 +1,6 @@
 import styles from "./friendItem.module.css";
 import React from "react";
+import friendsPhoto from './../../../assets/img/friendsPhoto.jpg'
 
 type PropsType = { id: number, name: string }
 
@@ -8,8 +9,8 @@ export const FriendItem: React.FC<PropsType> = ({id, name}) => {
         <div>
             <span className={styles.friendItem}>
                 <img
-                    src="https://st4.depositphotos.com/1001248/29463/v/600/depositphotos_294631336-stock-illustration-user-sign-flat-related-vector.jpg"
-                    alt="friend"/>
+                    src={friendsPhoto}
+                    alt="friendsPhoto"/>
                 {name}
             </span>
         </div>

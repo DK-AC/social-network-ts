@@ -1,5 +1,6 @@
 import styles from "./messageItem.module.css";
 import React from "react";
+import messagePhoto from './../../../assets/img/messagePhoto.png'
 
 type PropsType = { id: number, message: string }
 
@@ -10,8 +11,8 @@ export const MessageItem: React.FC<PropsType> = ({id, message}) => {
                                     {message}
 
                     <img
-                        src="https://www.seekpng.com/png/full/245-2454602_tanni-chand-default-user-image-png.png"
-                        alt={'userMessage'}/>
+                        src={messagePhoto}
+                        alt={'messagePhoto'}/>
             </span>
         </div>
     )

@@ -1,6 +1,7 @@
 import {NavLink} from "react-router-dom";
 import styles from "./dialogItem.module.css";
 import React from "react";
+import dialogPhoto from './../../../assets/img/dialogPhoto1.png'
 
 type PropsType = { id: number, name: string }
 
@@ -9,8 +10,8 @@ export const DialogItem: React.FC<PropsType> = ({id, name}) => {
         <div>
             <span className={styles.dialogItem}>
             <img
-                src="https://w7.pngwing.com/pngs/81/570/png-transparent-profile-logo-computer-icons-user-user-blue-heroes-logo-thumbnail.png"
-                alt="userDialogs"/>
+                src={dialogPhoto}
+                alt="dialogPhoto"/>
                 </span>
             <NavLink to={`/dialogs/${id}`} className={`${styles.dialog}`}>{name}</NavLink>
         </div>
