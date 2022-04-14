@@ -1,0 +1,11 @@
+.ava {
+    width: 80px;
+    height: 80px;
+}
+
+.item {
+    width: 100px;
+    height: 100%;
+    border: 1px solid gold;
+    padding: 10px;
+}

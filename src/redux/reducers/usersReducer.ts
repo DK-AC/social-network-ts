@@ -8,7 +8,7 @@ const initialState = {
             name: "Denis",
             uniqueUrlName: '',
             photos: {small: '', large: ''},
-            status: '',
+            status: 'Have a good day',
             followed: true
         },
         {
@@ -16,7 +16,7 @@ const initialState = {
             name: "Jenya",
             uniqueUrlName: '',
             photos: {small: '', large: ''},
-            status: '',
+            status: 'Have a good nigth',
             followed: false
         },
     ]

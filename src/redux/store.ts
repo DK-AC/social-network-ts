@@ -3,6 +3,7 @@ import {dialogsReducer} from "./reducers/dialogsReducer";
 import {sideBarReducer} from "./reducers/sideBarReducer";
 import {combineReducers, compose, createStore} from "redux";
 import {TypedUseSelectorHook, useSelector} from "react-redux";
+import {usersReducer} from "./reducers/usersReducer";
 
 declare global {
     interface Window {
@@ -15,7 +16,8 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 export const rootReducers = combineReducers({
     profile: profileReducer,
     dialogs: dialogsReducer,
-    sideBar: sideBarReducer
+    sideBar: sideBarReducer,
+    users: usersReducer,
 })
 
 export type RootStateType = ReturnType<typeof rootReducers>
