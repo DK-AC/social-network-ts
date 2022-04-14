@@ -1,5 +1,5 @@
-const FOLLOW = 'FOLLOW'
-const UNFOLLOW = 'UNFOLLOW'
+const FOLLOWED = 'FOLLOWED'
+const UNFOLLOWED = 'UNFOLLOWED'
 
 const initialState = {
     users: [
@@ -23,19 +23,33 @@ const initialState = {
 };
 
 
-export const usersReducer = (state: initialStateType = initialState, action: UsersActionsType) => {
+export const usersReducer = (state: initialStateType = initialState, action: UsersActionsType): initialStateType => {
     switch (action.type) {
+        case FOLLOWED:
+            return {
+                ...state,
+                users: state.users.map(user => user.id === action.userId
+                    ? {...user, followed: action.followed}
+                    : user)
+            }
+        case UNFOLLOWED:
+            return {
+                ...state,
+                users: state.users.map(user => user.id === action.userId
+                    ? {...user, followed: action.unfollowed}
+                    : user)
+            }
         default:
             return state
     }
 }
 //actions
-export const follow = (follow: boolean) => ({type: FOLLOW, follow}) as const
-export const unfollow = (unfollow: boolean) => ({type: UNFOLLOW, unfollow}) as const
+export const followed = (userId: number, followed: boolean) => ({type: FOLLOWED, userId, followed}) as const
+export const unfollowed = (userId: number, unfollowed: boolean) => ({type: UNFOLLOWED, userId, unfollowed}) as const
 
 
 //types
-export type UsersActionsType = ReturnType<typeof follow> | ReturnType<typeof unfollow>
+export type UsersActionsType = ReturnType<typeof followed> | ReturnType<typeof unfollowed>
 type initialStateType = typeof initialState
 
 export type UserType = {
@@ -48,4 +62,8 @@ export type UserType = {
     },
     status: string,
     followed: boolean
+}
+
+export type UsersPageType = {
+    users: UserType[]
 }
