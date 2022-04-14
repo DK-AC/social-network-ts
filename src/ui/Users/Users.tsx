@@ -17,7 +17,7 @@ export const Users: React.FC = () => {
 
     useEffect(() => {
         dispatch(setUsersTC())
-    }, [dispatch])
+    }, [])
 
     return (
         <div className={styles.userItems}>
