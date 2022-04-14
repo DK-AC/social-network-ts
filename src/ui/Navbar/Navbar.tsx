@@ -14,7 +14,7 @@ export const Navbar: React.FC = () => {
                 <NavLink to={'/profile'} className={`${styles.item} ${styles.active}`}>Profile</NavLink>
             </div>
             <div>
-                <NavLink to={'/users'} className={`${styles.item}`}>Users</NavLink>
+                <NavLink to={'/users/*'} className={`${styles.item}`}>Users</NavLink>
             </div>
             <div>
                 <NavLink to={'/dialogs'} className={`${styles.item}`}>Dialogs</NavLink>

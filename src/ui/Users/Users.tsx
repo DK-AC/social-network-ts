@@ -3,13 +3,19 @@ import {useAppSelector} from "../../redux/store";
 import {User} from './User/User';
 import styles from './users.module.css'
 import {useDispatch} from "react-redux";
-import {setUsersTC} from "../../redux/reducers/usersReducer";
+import {changeCurrentPageAC, setUsersTC} from "../../redux/reducers/usersReducer";
+import {ParamsUserPageType} from "../../api/userAPI";
 
 export const Users: React.FC = () => {
 
     const dispatch = useDispatch()
 
     const {users, pageSize, currentPage, totalCount} = useAppSelector(state => state.users)
+
+    const params: ParamsUserPageType = {
+        pageSize,
+        currentPage
+    }
 
     const user = users.map(u => {
         return <User key={u.id} user={u}/>
@@ -23,14 +29,21 @@ export const Users: React.FC = () => {
     }
 
     useEffect(() => {
-        dispatch(setUsersTC())
-    }, [])
+        dispatch(setUsersTC(params))
+    }, [pageSize, currentPage])
 
     return (
         <div className={styles.userItems}>
-            {pages.map(p => {
-                return <span className={currentPage === p ? styles.currentPage : ''}>{p} </span>
-            })}
+            <div>
+                {pages.map((p, index) => {
+                    return (
+                        <span key={index}
+                              className={currentPage === p ? styles.currentPage : '' + styles.pageItems}
+                              onClick={() => dispatch(changeCurrentPageAC(p))}
+                        >
+                        {p}</span>)
+                })}
+            </div>
             {user}
         </div>
     );

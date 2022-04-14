@@ -10,8 +10,8 @@ const instance = axios.create({
 })
 
 export const userAPI = {
-    getUsers() {
-        return instance.get<any, AxiosResponse<ResponseUserType<UserType[]>>, UserType[]>('/users')
+    getUsers(params: ParamsUserPageType) {
+        return instance.get<any, AxiosResponse<ResponseUserType<UserType[]>>, UserType[]>(`/users?page=${params.currentPage}&count=${params.pageSize}`)
             .then(res => res.data)
     }
 }
@@ -20,4 +20,9 @@ export type ResponseUserType<U = {}> = {
     items: U
     totalCount: number
     error: string
+}
+
+export type ParamsUserPageType = {
+    currentPage: number
+    pageSize: number
 }

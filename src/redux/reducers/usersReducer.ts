@@ -1,16 +1,17 @@
-import {userAPI} from "../../api/userAPI";
+import {ParamsUserPageType, userAPI} from "../../api/userAPI";
 import {Dispatch} from "redux";
 
 const FOLLOW_USER = 'FOLLOW_USER'
 const UNFOLLOW_USER = 'UNFOLLOW_USER'
 const SET_USERS = 'SET_USERS'
 const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT'
+const CHANGE_CURRENT_PAGE = 'CHANGE_CURRENT_PAGE'
 
 const initialState = {
     users: [] as UserType[],
-    totalCount: 100,
-    pageSize: 5,
-    currentPage: 3
+    totalCount: 0,
+    pageSize: 10,
+    currentPage: 1
 };
 
 
@@ -38,7 +39,12 @@ export const usersReducer = (state: initialStateType = initialState, action: Use
         case "SET_TOTAL_COUNT":
             return {
                 ...state,
-                totalCount: action.totalUserCount
+                totalCount: action.totalCount
+            }
+        case "CHANGE_CURRENT_PAGE":
+            return {
+                ...state,
+                currentPage: action.currentPage
             }
         default:
             return state
@@ -48,21 +54,16 @@ export const usersReducer = (state: initialStateType = initialState, action: Use
 export const followUserAC = (userId: number) => ({type: FOLLOW_USER, userId}) as const
 export const unfollowUserAC = (userId: number) => ({type: UNFOLLOW_USER, userId}) as const
 export const setUsersAC = (users: UserType[]) => ({type: SET_USERS, users}) as const
-export const setTotalUserCount = (totalUserCount: number) => ({type: SET_TOTAL_COUNT, totalUserCount}) as const
+export const setTotalUserCountAC = (totalCount: number) => ({type: SET_TOTAL_COUNT, totalCount}) as const
+export const changeCurrentPageAC = (currentPage: number) => ({type: CHANGE_CURRENT_PAGE, currentPage}) as const
 
 
 //thunks
-export const setUsersTC = () => (dispatch: Dispatch) => {
-    return userAPI.getUsers()
+export const setUsersTC = (params: ParamsUserPageType) => (dispatch: Dispatch) => {
+    return userAPI.getUsers(params)
         .then(data => {
             dispatch(setUsersAC(data.items))
-        })
-}
-
-export const setTotalCountTC = () => (dispatch: Dispatch) => {
-    return userAPI.getUsers()
-        .then(data => {
-            dispatch(setTotalUserCount(data.totalCount))
+            dispatch(setTotalUserCountAC(data.totalCount))
         })
 }
 
@@ -71,7 +72,8 @@ export type UsersActionsType =
     ReturnType<typeof followUserAC>
     | ReturnType<typeof unfollowUserAC>
     | ReturnType<typeof setUsersAC>
-    | ReturnType<typeof setTotalUserCount>
+    | ReturnType<typeof setTotalUserCountAC>
+    | ReturnType<typeof changeCurrentPageAC>
 
 type initialStateType = typeof initialState
 
