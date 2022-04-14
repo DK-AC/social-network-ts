@@ -1,5 +1,5 @@
-const FOLLOWED_USER = 'FOLLOWED_USER'
-const UNFOLLOWED_USER = 'UNFOLLOWED_USER'
+const FOLLOW_USER = 'FOLLOW_USER'
+const UNFOLLOW_USER = 'UNFOLLOW_USER'
 
 const initialState = {
     users: [
@@ -25,18 +25,18 @@ const initialState = {
 
 export const usersReducer = (state: initialStateType = initialState, action: UsersActionsType): initialStateType => {
     switch (action.type) {
-        case FOLLOWED_USER:
+        case FOLLOW_USER:
             return {
                 ...state,
                 users: state.users.map(user => user.id === action.userId
-                    ? {...user, followed: action.follow}
+                    ? {...user, followed: true}
                     : user)
             }
-        case UNFOLLOWED_USER:
+        case UNFOLLOW_USER:
             return {
                 ...state,
                 users: state.users.map(user => user.id === action.userId
-                    ? {...user, followed: action.unfollow}
+                    ? {...user, followed: false}
                     : user)
             }
         default:
@@ -44,12 +44,8 @@ export const usersReducer = (state: initialStateType = initialState, action: Use
     }
 }
 //actions
-export const followUserAC = (userId: number, follow: boolean) => ({type: FOLLOWED_USER, userId, follow}) as const
-export const unfollowUserAC = (userId: number, unfollow: boolean) => ({
-    type: UNFOLLOWED_USER,
-    userId,
-    unfollow
-}) as const
+export const followUserAC = (userId: number) => ({type: FOLLOW_USER, userId}) as const
+export const unfollowUserAC = (userId: number) => ({type: UNFOLLOW_USER, userId}) as const
 
 
 //types

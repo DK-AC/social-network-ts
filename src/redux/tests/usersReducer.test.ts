@@ -26,17 +26,17 @@ beforeEach(() => {
     }
 )
 
-test('unfollowed user should be followed', () => {
+test('unfollowed user should be changed on true', () => {
 
-    let endState = usersReducer(startState, followUserAC(2, true))
+    let endState = usersReducer(startState, followUserAC(2))
 
     expect(startState.users[1].followed).toBeFalsy()
     expect(endState.users[1].followed).toBeTruthy()
 })
 
-test('followed user should be unfollowed', () => {
+test('followed user should be changed on false', () => {
 
-    let endState = usersReducer(startState, unfollowUserAC(1, false))
+    let endState = usersReducer(startState, unfollowUserAC(1))
 
     expect(startState.users[0].followed).toBeTruthy()
     expect(endState.users[0].followed).toBeFalsy()

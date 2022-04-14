@@ -13,12 +13,8 @@ export const User: React.FC<PropsType> = ({user}) => {
 
     const {id, name, photos, followed, status} = user
 
-    const followButton = () => {
-        dispatch(followUserAC(id, !followed))
-    }
-    const unFollowButton = () => {
-        dispatch(unfollowUserAC(id, !followed))
-    }
+    const followButton = () => dispatch(followUserAC(id))
+    const unFollowButton = () => dispatch(unfollowUserAC(id))
 
     return (
         <div className={styles.item}>
@@ -38,8 +34,8 @@ export const User: React.FC<PropsType> = ({user}) => {
 
                 <div>
                     {followed
-                        ? <button onClick={followButton}>Unfollow</button>
-                        : <button onClick={unFollowButton}>Follow</button>
+                        ? <button onClick={unFollowButton}>Unfollow</button>
+                        : <button onClick={followButton}>Follow</button>
                     }
                 </div>
             </div>
