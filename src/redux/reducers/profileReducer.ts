@@ -13,7 +13,7 @@ const initialState = {
         {id: 3, message: '3 post', likesCount: 55},
     ],
     newPostText: '',
-    profile: {} as ProfileUserType
+    profile: null as ProfileUserType | null
 }
 
 export const profileReducer = (state: initialStateType = initialState, action: ProfileActionsType): initialStateType => {
