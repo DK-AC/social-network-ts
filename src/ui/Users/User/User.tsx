@@ -3,6 +3,7 @@ import {followUserAC, unfollowUserAC, UserType} from "../../../redux/reducers/us
 import styles from './user.module.css'
 import {useDispatch} from "react-redux";
 import avaImg from './../../../assets/img/client-2-512.webp'
+import {NavLink} from "react-router-dom";
 
 type PropsType = {
     user: UserType
@@ -24,11 +25,14 @@ export const User: React.FC<PropsType> = ({user}) => {
             </div>
             <div>
                 <div>
-                    <img
-                        src={photos.small ? photos.small : avaImg}
-                        alt="ava"
-                        className={styles.ava}
-                    />
+                    <NavLink to={'/profile/' + id}>
+                        <img
+                            src={photos.small ? photos.small : avaImg}
+                            alt="ava"
+                            className={styles.ava}
+                        />
+                    </NavLink>
+
                 </div>
                 <div>{status}</div>
 

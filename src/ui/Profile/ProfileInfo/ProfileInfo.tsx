@@ -1,7 +1,19 @@
 import React from "react";
 import styles from './profileInfo.module.css'
+import {ProfileUserType} from "../../../api/profileAPI";
+import {Preloader} from "../../Preloader/Preloader";
 
-export const ProfileInfo = () => {
+type PropsType = {
+    user: ProfileUserType
+}
+
+
+export const ProfileInfo: React.FC<PropsType> = ({user}) => {
+
+    if (!user) {
+        return <Preloader/>
+    }
+
     return (
         <>
             <div className={styles.profileImage}>
@@ -10,7 +22,7 @@ export const ProfileInfo = () => {
             </div>
             <div className={styles.profileDescription}>
                 <div>
-                    <img className={styles.avatar} src="https://www.blast.hk/attachments/64804/" alt="avatar"/>
+                    <img className={styles.avatar} src={"user.photos.small ? user.photos.small : avaImg"} alt="avatar"/>
                 </div>
                 ava + description
             </div>

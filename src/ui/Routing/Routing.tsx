@@ -11,7 +11,7 @@ import {Users} from "../Users/Users";
 
 export const PATH = {
     START_PAGE: '/',
-    PROFILE_PAGE: '/profile',
+    PROFILE_PAGE: '/profile/:userId',
     USERS_PAGE: '/users/*',
     DIALOGS_PAGE: '/dialogs/*',
     NEWS_PAGE: '/news',
