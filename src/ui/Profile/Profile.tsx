@@ -11,11 +11,13 @@ export const Profile: React.FC = () => {
     const dispatch = useDispatch()
     const params = useParams<'userId'>()
 
+    console.log(params)
+
     const user = useAppSelector(state => state.profile.profile)
 
     useEffect(() => {
         dispatch(setProfileUserTC(Number(params.userId)))
-    }, [])
+    }, [params])
 
 
     return (

@@ -2,11 +2,11 @@ import React from "react";
 import styles from './profileInfo.module.css'
 import {ProfileUserType} from "../../../api/profileAPI";
 import {Preloader} from "../../Preloader/Preloader";
+import select from '../../../assets/img/select.png'
 
 type PropsType = {
     user: ProfileUserType
 }
-
 
 export const ProfileInfo: React.FC<PropsType> = ({user}) => {
 
@@ -22,9 +22,26 @@ export const ProfileInfo: React.FC<PropsType> = ({user}) => {
             </div>
             <div className={styles.profileDescription}>
                 <div>
-                    <img className={styles.avatar} src={"user.photos.small ? user.photos.small : avaImg"} alt="avatar"/>
+                    <img className={styles.avatar} src={'user.photos.small'}
+                         alt="avatar"/>
                 </div>
-                ava + description
+                <h2>
+                    {user ? user.fullName : ''}
+                </h2>
+                <div>
+                    {user ? user.aboutMe : ''}
+                </div>
+                <div>
+                    {user.lookingForAJob
+                        ? <div>
+                            <b>lookingForAJob? </b>
+                            <img className={styles.select} src={select} alt=""/>
+                        </div>
+                        : ''}
+                </div>
+                <div>
+                    {user.lookingForAJobDescription}
+                </div>
             </div>
         </>
     )
