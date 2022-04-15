@@ -1,14 +1,14 @@
 const SET_IS_LOADING = 'SET_IS_LOADING'
 
 const initialAppState = {
-    loading: 'idle' as LoadingType
+    isLoading: 'idle' as LoadingType
 }
 
 export const appReducer = (state = initialAppState, action: AppActionsType): InitialAppStateType => {
     switch (action.type) {
         case SET_IS_LOADING:
             return {
-                ...state, loading: action.loading
+                ...state, isLoading: action.isLoading
             }
         default:
             return state
@@ -16,7 +16,7 @@ export const appReducer = (state = initialAppState, action: AppActionsType): Ini
 }
 
 //actions
-export const setIsLoadingAC = (loading: LoadingType) => ({type: SET_IS_LOADING, loading}) as const
+export const setIsLoadingAC = (isLoading: LoadingType) => ({type: SET_IS_LOADING, isLoading}) as const
 
 //types
 export type InitialAppStateType = typeof initialAppState

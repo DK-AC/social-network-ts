@@ -12,7 +12,7 @@ export const Users: React.FC = () => {
     const dispatch = useDispatch()
 
     const {users, pageSize, currentPage, totalCount} = useAppSelector(state => state.users)
-    const loading = useAppSelector(state => state.app.loading)
+    const isLoading = useAppSelector(state => state.app.isLoading)
 
     const params: ParamsUserPageType = {
         pageSize,
@@ -40,7 +40,7 @@ export const Users: React.FC = () => {
 
     return (
         <div className={styles.userItems}>
-            {loading === 'loading' ? <Preloader/>
+            {isLoading === 'loading' ? <Preloader/>
                 : <div>
                     {pages.map((p, index) => {
                         return (
