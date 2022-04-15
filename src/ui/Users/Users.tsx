@@ -12,6 +12,7 @@ export const Users: React.FC = () => {
     const dispatch = useDispatch()
 
     const {users, pageSize, currentPage, totalCount} = useAppSelector(state => state.users)
+    const loading = useAppSelector(state => state.app.loading)
 
     const params: ParamsUserPageType = {
         pageSize,
@@ -39,18 +40,18 @@ export const Users: React.FC = () => {
 
     return (
         <div className={styles.userItems}>
-            <Preloader/>
-            <div>
-                {pages.map((p, index) => {
-                    return (
-                        <span key={index}
-                              className={currentPage === p ? styles.currentPage : '' + styles.pageItems}
-                              onClick={() => changeCurrentPageHandle(p)}
-                        >
+            {loading === 'loading' ? <Preloader/>
+                : <div>
+                    {pages.map((p, index) => {
+                        return (
+                            <span key={index}
+                                  className={currentPage === p ? styles.currentPage : '' + styles.pageItems}
+                                  onClick={() => changeCurrentPageHandle(p)}
+                            >
                         {p}</span>)
-                })}
-            </div>
-            {user}
+                    })}
+                    {user}
+                </div>}
         </div>
     );
 };

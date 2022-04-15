@@ -1,5 +1,6 @@
 import {ParamsUserPageType, userAPI} from "../../api/userAPI";
 import {Dispatch} from "redux";
+import {setIsLoadingAC} from "./appReducer";
 
 const FOLLOW_USER = 'FOLLOW_USER'
 const UNFOLLOW_USER = 'UNFOLLOW_USER'
@@ -60,10 +61,12 @@ export const changeCurrentPageAC = (currentPage: number) => ({type: CHANGE_CURRE
 
 //thunks
 export const setUsersTC = (params: ParamsUserPageType) => (dispatch: Dispatch) => {
+    dispatch(setIsLoadingAC('loading'))
     return userAPI.getUsers(params)
         .then(data => {
             dispatch(setUsersAC(data.items))
             dispatch(setTotalUserCountAC(data.totalCount))
+            dispatch(setIsLoadingAC('successful'))
         })
 }
 

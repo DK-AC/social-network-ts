@@ -5,6 +5,7 @@ import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import {TypedUseSelectorHook, useSelector} from "react-redux";
 import {usersReducer} from "./reducers/usersReducer";
 import thunk from "redux-thunk";
+import {appReducer} from "./reducers/appReducer";
 
 declare global {
     interface Window {
@@ -19,6 +20,7 @@ export const rootReducers = combineReducers({
     dialogs: dialogsReducer,
     sideBar: sideBarReducer,
     users: usersReducer,
+    app: appReducer
 })
 
 export type RootStateType = ReturnType<typeof rootReducers>
