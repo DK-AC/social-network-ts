@@ -9,6 +9,12 @@
     text-decoration: none;
 }
 
+
+.active{
+    color: gold;
+    font-weight: bold;
+}
+
 .item:focus {
     color: gold;
     font-weight: bold;

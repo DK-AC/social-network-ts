@@ -6,30 +6,42 @@ import {useAppSelector} from "../../redux/store";
 
 export const Navbar: React.FC = () => {
 
+    let activeStyle = {
+        color: 'gold',
+        fontWeight: 'bold',
+        textDecoration: 'none'
+    }
+    let defaultStyle = {
+        color: 'white',
+        textDecoration: 'none'
+    }
+
     const friends = useAppSelector(state => state.sideBar.friends)
 
     return (
         <nav className={styles.nav}>
             <div>
-                <NavLink to={'/profile'} className={`${styles.item} ${styles.active}`}>Profile</NavLink>
+                <NavLink to={'/profile'} style={({isActive}) => isActive ? activeStyle : defaultStyle}>
+                    Profile</NavLink>
             </div>
             <div>
-                <NavLink to={'/users/*'} className={`${styles.item}`}>Users</NavLink>
+                <NavLink to={'/users/*'} style={({isActive}) => isActive ? activeStyle : defaultStyle}>Users</NavLink>
             </div>
             <div>
-                <NavLink to={'/dialogs'} className={`${styles.item}`}>Dialogs</NavLink>
+                <NavLink to={'/dialogs'} style={({isActive}) => isActive ? activeStyle : defaultStyle}>Dialogs</NavLink>
             </div>
             <div>
-                <NavLink to={'/news'} className={`${styles.item}`}>News</NavLink>
+                <NavLink to={'/news'} style={({isActive}) => isActive ? activeStyle : defaultStyle}>News</NavLink>
             </div>
             <div>
-                <NavLink to={'/music'} className={`${styles.item}`}>Music</NavLink>
+                <NavLink to={'/music'} style={({isActive}) => isActive ? activeStyle : defaultStyle}>Music</NavLink>
             </div>
             <div>
-                <NavLink to={'/settings'} className={`${styles.item}`}>Settings</NavLink>
+                <NavLink to={'/settings'}
+                         style={({isActive}) => isActive ? activeStyle : defaultStyle}>Settings</NavLink>
             </div>
             <div className={`${styles.friends}`}>
-                <NavLink to={'/friends'} className={`${styles.item}`}>Friends</NavLink>
+                <NavLink to={'/friends'} style={({isActive}) => isActive ? activeStyle : defaultStyle}>Friends</NavLink>
             </div>
             <div className={styles.friendsPage}>
                 {friends.map(f => {
