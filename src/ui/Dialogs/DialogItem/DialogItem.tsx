@@ -6,6 +6,7 @@ import dialogPhoto from './../../../assets/img/dialogPhoto1.png'
 type PropsType = { id: number, name: string }
 
 export const DialogItem: React.FC<PropsType> = ({id, name}) => {
+    console.log('learn react-router-dom v6')
 
     let activeStyle = {
         color: 'gold',
