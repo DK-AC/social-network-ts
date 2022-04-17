@@ -7,6 +7,7 @@ type PropsType = { id: number, name: string }
 
 export const DialogItem: React.FC<PropsType> = ({id, name}) => {
     console.log('learn react-router-dom v6')
+    console.log('learn react redux thunk')
 
     let activeStyle = {
         color: 'gold',
