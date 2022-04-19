@@ -49,10 +49,16 @@ export const authMeTC = () => (dispatch: Dispatch) => {
 }
 
 export const loginTC = (data: LoginUserType) => (dispatch: Dispatch) => {
+    dispatch(setIsLoadingAC("loading"))
     return authAPI.login(data)
         .then(res => {
             dispatch(setIsLoggedInAC(res.data.data))
-            console.log(res)
+            dispatch(setIsLoadingAC("successful"))
+            if (res.data.resultCode === 0) {
+                dispatch(setIsInitializedAC(true))
+            } else {
+                dispatch(setIsInitializedAC(false))
+            }
         })
 }
 
