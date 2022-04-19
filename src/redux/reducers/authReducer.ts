@@ -1,11 +1,14 @@
 import {Dispatch} from "redux";
-import {authAPI} from "../../api/authAPI";
+import {authAPI, LoginUserType} from "../../api/authAPI";
 import {setIsLoadingAC} from "./appReducer";
 
 const SET_IS_INITIALIZED = 'SET_IS_INITIALIZED'
+const SET_IS_LOGGED_IN = 'SET_IS_LOGGED_IN'
 
 const initialAuthState = {
-    isInitialized: false
+    isInitialized: false,
+    email: '',
+    password: ''
 }
 
 export const authReducer = (state = initialAuthState, action: AppActionsType): InitialAuthStateType => {
@@ -13,6 +16,12 @@ export const authReducer = (state = initialAuthState, action: AppActionsType): I
         case SET_IS_INITIALIZED:
             return {
                 ...state, isInitialized: action.isInitialized
+            }
+        case SET_IS_LOGGED_IN:
+            return {
+                ...state,
+                email: action.data.email,
+                password: action.data.password,
             }
         default:
             return state
@@ -22,6 +31,7 @@ export const authReducer = (state = initialAuthState, action: AppActionsType): I
 
 //actions
 export const setIsInitializedAC = (isInitialized: boolean) => ({type: SET_IS_INITIALIZED, isInitialized}) as const
+export const setIsLoggedInAC = (data: LoginUserType) => ({type: SET_IS_LOGGED_IN, data}) as const
 
 //thunks
 export const authMeTC = () => (dispatch: Dispatch) => {
@@ -41,4 +51,4 @@ export const authMeTC = () => (dispatch: Dispatch) => {
 //types
 export type InitialAuthStateType = typeof initialAuthState
 
-export type AppActionsType = ReturnType<typeof setIsLoadingAC> | ReturnType<typeof setIsInitializedAC>
+export type AppActionsType = ReturnType<typeof setIsLoggedInAC> | ReturnType<typeof setIsInitializedAC>
