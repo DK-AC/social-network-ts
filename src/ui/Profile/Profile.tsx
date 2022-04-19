@@ -9,17 +9,15 @@ import {useParams} from "react-router-dom";
 export const Profile: React.FC = () => {
 
     const dispatch = useDispatch()
-    const params = useParams<'userId'>()
+    const params = useParams<'profileUserId'>()
 
     let userId: number;
 
-    if (params.userId) {
-        userId = +params.userId
+    if (params.profileUserId) {
+        userId = +params.profileUserId
     } else {
         userId = 19179
     }
-
-    console.log(params)
 
     const user = useAppSelector(state => state.profile.profile)
 

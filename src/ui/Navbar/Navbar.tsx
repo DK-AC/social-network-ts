@@ -21,27 +21,53 @@ export const Navbar: React.FC = () => {
     return (
         <nav className={styles.nav}>
             <div>
-                <NavLink to={'/profile'} style={({isActive}) => isActive ? activeStyle : defaultStyle}>
-                    Profile</NavLink>
+                <NavLink to={'/profile'}
+                         style={({isActive}) => isActive ? activeStyle : defaultStyle}
+                >
+                    Profile
+                </NavLink>
             </div>
             <div>
-                <NavLink to={'/users/*'} style={({isActive}) => isActive ? activeStyle : defaultStyle}>Users</NavLink>
+                <NavLink to={'/users/*'}
+                         style={({isActive}) => isActive ? activeStyle : defaultStyle}
+                >
+                    Users
+                </NavLink>
             </div>
             <div>
-                <NavLink to={'/dialogs'} style={({isActive}) => isActive ? activeStyle : defaultStyle}>Dialogs</NavLink>
+                <NavLink to={'/dialogs'}
+                         style={({isActive}) => isActive ? activeStyle : defaultStyle}
+                >
+                    Dialogs
+                </NavLink>
             </div>
             <div>
-                <NavLink to={'/news'} style={({isActive}) => isActive ? activeStyle : defaultStyle}>News</NavLink>
+                <NavLink to={'/news'}
+                         style={({isActive}) => isActive ? activeStyle : defaultStyle}
+                >
+                    News
+                </NavLink>
             </div>
             <div>
-                <NavLink to={'/music'} style={({isActive}) => isActive ? activeStyle : defaultStyle}>Music</NavLink>
+                <NavLink to={'/music'}
+                         style={({isActive}) => isActive ? activeStyle : defaultStyle}
+                >
+                    Music
+                </NavLink>
             </div>
             <div>
                 <NavLink to={'/settings'}
-                         style={({isActive}) => isActive ? activeStyle : defaultStyle}>Settings</NavLink>
+                         style={({isActive}) => isActive ? activeStyle : defaultStyle}
+                >
+                    Settings
+                </NavLink>
             </div>
             <div className={`${styles.friends}`}>
-                <NavLink to={'/friends'} style={({isActive}) => isActive ? activeStyle : defaultStyle}>Friends</NavLink>
+                <NavLink to={'/friends'}
+                         style={({isActive}) => isActive ? activeStyle : defaultStyle}
+                >
+                    Friends
+                </NavLink>
             </div>
             <div className={styles.friendsPage}>
                 {friends.map(f => {

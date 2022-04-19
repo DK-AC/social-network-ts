@@ -23,12 +23,11 @@ export const DialogItem: React.FC<PropsType> = ({id, name}) => {
     return (
         <div>
             <span className={styles.dialogItem}>
-            <img
-                src={dialogPhoto}
-                alt="dialogPhoto"/>
+            <img src={dialogPhoto} alt="dialogPhoto"/>
                 </span>
             <NavLink to={`/dialogs/${id}`}
-                     style={({isActive}) => isActive ? activeStyle : defaultStyle}>
+                     style={({isActive}) => isActive ? activeStyle : defaultStyle}
+            >
                 {name}
             </NavLink>
         </div>

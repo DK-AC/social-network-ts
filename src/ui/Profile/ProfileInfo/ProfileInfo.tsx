@@ -15,8 +15,6 @@ export const ProfileInfo: React.FC<PropsType> = ({user}) => {
         return <Preloader/>
     }
 
-    console.log(user)
-
     return (
         <>
             <div className={styles.profileImage}>
@@ -25,20 +23,18 @@ export const ProfileInfo: React.FC<PropsType> = ({user}) => {
             </div>
             <div className={styles.profileDescription}>
                 <div>
-                    <img className={styles.avatar} src={user.photos.small ? user.photos.small : ava}
-                         alt="avatar"/>
+                    <img className={styles.avatar}
+                         src={user.photos.small ? user.photos.small : ava}
+                         alt="avatar"
+                    />
                 </div>
-                <h2>
-                    {user ? user.fullName : ''}
-                </h2>
-                <div>
-                    {user ? user.aboutMe : ''}
-                </div>
+                <h2>{user ? user.fullName : ''}</h2>
+                <div>{user ? user.aboutMe : ''}</div>
                 <div>
                     {user.lookingForAJob
                         ? <div>
                             <b>lookingForAJob? </b>
-                            <img className={styles.select} src={select} alt=""/>
+                            <img className={styles.select} src={select} alt="select"/>
                         </div>
                         : ''}
                 </div>
