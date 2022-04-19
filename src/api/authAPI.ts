@@ -24,7 +24,7 @@ type ResponseType<T = {}> = {
     resultCode: number
 }
 
-type AuthUserType = {
+export type AuthUserType = {
     id: number
     login: string
     email: string
