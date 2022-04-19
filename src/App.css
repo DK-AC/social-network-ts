@@ -16,3 +16,9 @@
     background-color: darkgrey;
 }
 
+
+.center {
+    text-align: center;
+    font-weight: bold;
+    font-size: 40px;
+}

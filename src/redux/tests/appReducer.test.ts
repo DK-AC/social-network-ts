@@ -4,7 +4,8 @@ let startState: InitialAppStateType
 
 beforeEach(() => {
     startState = {
-        isLoading: 'idle'
+        isLoading: 'idle',
+        isInitialized: true
     }
 })
 

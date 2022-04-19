@@ -11,6 +11,9 @@ export const Profile: React.FC = () => {
     const dispatch = useDispatch()
     const params = useParams<'profileUserId'>()
 
+    const user = useAppSelector(state => state.profile.profile)
+
+
     let userId: number;
 
     if (params.profileUserId) {
@@ -18,8 +21,6 @@ export const Profile: React.FC = () => {
     } else {
         userId = 19179
     }
-
-    const user = useAppSelector(state => state.profile.profile)
 
     useEffect(() => {
         dispatch(setProfileUserTC(userId))
