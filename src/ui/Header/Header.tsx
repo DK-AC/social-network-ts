@@ -1,10 +1,22 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from './header.module.css'
 import {useAppSelector} from "../../redux/store";
+import {useDispatch} from "react-redux";
+import {authMeTC, loginTC} from "../../redux/reducers/authReducer";
 
 export const Header = () => {
 
+    const dispatch = useDispatch()
+
     const isInitialized = useAppSelector<boolean>(state => state.auth.isInitialized)
+
+    useEffect(() => {
+    }, [])
+
+
+    const loggedInHandle = () => {
+      dispatch(loginTC({email:'denkacaj@gmail.com',password:'zxcnbvasdqwe123'}))
+    }
 
     return (
         <header className={styles.header}>
@@ -16,7 +28,7 @@ export const Header = () => {
                      src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
                      alt="initializedUser"
                 />
-                : <button className={styles.initializedUser}>sign in</button>}
+                : <button className={styles.initializedUser} onClick={loggedInHandle}>sign in</button>}
 
         </header>
     );

@@ -51,6 +51,7 @@ export const authMeTC = () => (dispatch: Dispatch) => {
 export const loginTC = (data: LoginUserType) => (dispatch: Dispatch) => {
     return authAPI.login(data)
         .then(res => {
+            dispatch(setIsLoggedInAC(res.data.data))
             console.log(res)
         })
 }
