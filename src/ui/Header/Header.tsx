@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import styles from './header.module.css'
 import {useAppSelector} from "../../redux/store";
 import {useDispatch} from "react-redux";
-import {authMeTC, loginTC} from "../../redux/reducers/authReducer";
+import {loginTC} from "../../redux/reducers/authReducer";
 
 export const Header = () => {
 
@@ -10,13 +10,12 @@ export const Header = () => {
 
     const isInitialized = useAppSelector<boolean>(state => state.auth.isInitialized)
 
+    const loggedInHandle = () => {
+        dispatch(loginTC({email: 'denkacaj@gmail.com', password: 'zxcnbvasdqwe123'}))
+    }
+
     useEffect(() => {
     }, [])
-
-
-    const loggedInHandle = () => {
-      dispatch(loginTC({email:'denkacaj@gmail.com',password:'zxcnbvasdqwe123'}))
-    }
 
     return (
         <header className={styles.header}>

@@ -8,7 +8,7 @@ const SET_IS_LOGGED_IN = 'SET_IS_LOGGED_IN'
 
 const initialAuthState = {
     isInitialized: false,
-    id: 2,
+    id: 19179,
     login: '',
     email: '',
     password: ''

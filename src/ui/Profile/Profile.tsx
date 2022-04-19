@@ -12,18 +12,19 @@ export const Profile: React.FC = () => {
     const params = useParams<'profileUserId'>()
 
     const user = useAppSelector(state => state.profile.profile)
+    const userId = useAppSelector(state => state.auth.id)
 
 
-    let userId: number;
+    let profileUserId: number;
 
     if (params.profileUserId) {
-        userId = +params.profileUserId
+        profileUserId = +params.profileUserId
     } else {
-        userId = 19179
+        profileUserId = userId
     }
 
     useEffect(() => {
-        dispatch(setProfileUserTC(userId))
+        dispatch(setProfileUserTC(profileUserId))
     }, [params])
 
 
