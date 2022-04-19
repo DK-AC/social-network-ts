@@ -48,6 +48,13 @@ export const authMeTC = () => (dispatch: Dispatch) => {
         })
 }
 
+export const loginTC = (data: LoginUserType) => (dispatch: Dispatch) => {
+    return authAPI.login(data)
+        .then(res => {
+            console.log(res)
+        })
+}
+
 //types
 export type InitialAuthStateType = typeof initialAuthState
 
