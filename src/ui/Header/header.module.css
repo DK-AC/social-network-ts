@@ -1,8 +1,16 @@
-.header{
+.header {
     grid-area: header;
     background-color: darkcyan;
+    position: relative;
 }
 
-.logo{
+.logo {
     width: 50px;
+}
+
+.initializedUser {
+    width: 50px;
+    position: absolute;
+    top: 0;
+    left: 1370px;
 }
