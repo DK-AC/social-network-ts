@@ -1,7 +1,6 @@
 .header {
     grid-area: header;
     background-color: darkcyan;
-    position: relative;
 }
 
 .logo {

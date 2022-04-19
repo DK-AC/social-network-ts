@@ -8,7 +8,7 @@ const instance = axios.create({
     }
 })
 
-export const appAPI = {
+export const authAPI = {
     me() {
         return instance.get<any, AxiosResponse<ResponseType<LoginUserType>>, LoginUserType>('/auth/me')
     }

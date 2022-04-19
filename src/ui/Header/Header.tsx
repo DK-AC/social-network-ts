@@ -4,7 +4,7 @@ import {useAppSelector} from "../../redux/store";
 
 export const Header = () => {
 
-    const isInitialized = useAppSelector<boolean>(state => state.app.isInitialized)
+    const isInitialized = useAppSelector<boolean>(state => state.auth.isInitialized)
 
     return (
         <header className={styles.header}>
