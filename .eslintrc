@@ -15,7 +15,7 @@
       "prefer-double"
     ],
     "max-len": [
-      "error",
+      "warn",
       {
         "code": 120
       }
