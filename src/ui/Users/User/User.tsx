@@ -1,9 +1,12 @@
 import React from 'react';
-import {followUserAC, unfollowUserAC, UserType} from '../../../redux/reducers/usersReducer';
-import styles from './user.module.css'
 import {useDispatch} from 'react-redux';
-import avaImg from './../../../assets/img/client-2-512.webp'
 import {NavLink} from 'react-router-dom';
+
+import {followUserAC, unfollowUserAC, UserType} from '../../../redux/reducers/usersReducer';
+
+import styles from './user.module.css';
+import avaImg from './../../../assets/img/client-2-512.webp';
+
 
 type PropsType = {
     user: UserType
@@ -11,12 +14,12 @@ type PropsType = {
 
 export const User: React.FC<PropsType> = ({user}) => {
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
-    const {id, name, photos, followed, status} = user
+    const {id, name, photos, followed, status} = user;
 
-    const followUserHandle = () => dispatch(followUserAC(id))
-    const unFollowUserHandle = () => dispatch(unfollowUserAC(id))
+    const followUserHandle = () => dispatch(followUserAC(id));
+    const unFollowUserHandle = () => dispatch(unfollowUserAC(id));
 
     return (
         <div className={styles.item}>
@@ -45,5 +48,5 @@ export const User: React.FC<PropsType> = ({user}) => {
             </div>
 
         </div>
-    )
-}
+    );
+};

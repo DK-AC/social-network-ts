@@ -1,19 +1,22 @@
+// eslint-disable-next-line import/order
 import React, {useEffect} from 'react';
+
 import './App.css';
+import {useDispatch} from 'react-redux';
+
 import {Header} from './ui/Header/Header';
 import {Navbar} from './ui/Navbar/Navbar';
 import {Routing} from './ui/Routing/Routing';
-import {useDispatch} from 'react-redux';
 import {authMeTC} from './redux/reducers/authReducer';
 
 
 export const App: React.FC = () => {
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(authMeTC())
-    }, [])
+        dispatch(authMeTC());
+    }, []);
 
     return (
         <div className={'app-wrapper'}><Header/>
@@ -22,6 +25,6 @@ export const App: React.FC = () => {
                 <Routing/>
             </div>
         </div>
-    )
-}
+    );
+};
 

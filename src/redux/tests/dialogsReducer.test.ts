@@ -1,6 +1,6 @@
-import {DialogsPageType, dialogsReducer, sendMessageAC, updateNewMessageAC} from "../reducers/dialogsReducer";
+import {DialogsPageType, dialogsReducer, sendMessageAC, updateNewMessageAC} from '../reducers/dialogsReducer';
 
-let fakeState: DialogsPageType
+let fakeState: DialogsPageType;
 
 beforeEach(() => {
     fakeState = {
@@ -16,25 +16,25 @@ beforeEach(() => {
             {id: 3, message: 'let\'s go'},
             {id: 4, message: 'Stop'},
         ],
-        newMessageText: ''
-    }
-})
+        newMessageText: '',
+    };
+});
 
 test('post should be added', () => {
-    let endState = dialogsReducer(fakeState, sendMessageAC('New Message Text'))
+    const endState = dialogsReducer(fakeState, sendMessageAC('New Message Text'));
 
-    expect(fakeState.messages.length).toBe(4)
-    expect(endState.messages.length).toBe(5)
-    expect(fakeState.messages[4]).toBeUndefined()
-    expect(endState.messages[4]).toBeDefined()
-    expect(fakeState.messages[3].message).toBe('Stop')
-    expect(endState.messages[4].message).toBe('New Message Text')
-    expect(endState.newMessageText).toBe('')
-})
+    expect(fakeState.messages.length).toBe(4);
+    expect(endState.messages.length).toBe(5);
+    expect(fakeState.messages[4]).toBeUndefined();
+    expect(endState.messages[4]).toBeDefined();
+    expect(fakeState.messages[3].message).toBe('Stop');
+    expect(endState.messages[4].message).toBe('New Message Text');
+    expect(endState.newMessageText).toBe('');
+});
 
 test('new message text should be changed', () => {
-    let endState = dialogsReducer(fakeState, updateNewMessageAC('New Message Text'))
+    const endState = dialogsReducer(fakeState, updateNewMessageAC('New Message Text'));
 
-    expect(fakeState.newMessageText).toBe('')
-    expect(endState.newMessageText).toBe('New Message Text')
-})
+    expect(fakeState.newMessageText).toBe('');
+    expect(endState.newMessageText).toBe('New Message Text');
+});

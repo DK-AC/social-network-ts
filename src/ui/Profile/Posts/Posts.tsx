@@ -1,26 +1,29 @@
 import React, {ChangeEvent} from 'react';
-import {Post} from './Post/Post';
-import styles from './posts.module.css';
+import {useDispatch} from 'react-redux';
+
 import {addPostAC, updateNewPostTextAC} from '../../../redux/reducers/profileReducer';
 import {useAppSelector} from '../../../redux/store';
-import {useDispatch} from 'react-redux';
+
+import {Post} from './Post/Post';
+import styles from './posts.module.css';
+
 
 export const Posts: React.FC = () => {
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
-    const posts = useAppSelector(state => state.profile.posts)
-    const newPostText = useAppSelector(state => state.profile.newPostText)
+    const posts = useAppSelector(state => state.profile.posts);
+    const newPostText = useAppSelector(state => state.profile.newPostText);
 
     const post = posts.map(p => {
-        return <Post key={p.id} id={p.id} message={p.message} likesCount={p.likesCount}/>
-    })
+        return <Post key={p.id} id={p.id} message={p.message} likesCount={p.likesCount}/>;
+    });
     const addPostHandle = () => {
-        dispatch(addPostAC(newPostText))
-    }
+        dispatch(addPostAC(newPostText));
+    };
     const updatePostTextHandle = (e: ChangeEvent<HTMLInputElement>) => {
-        dispatch(updateNewPostTextAC(e.currentTarget.value))
-    }
+        dispatch(updateNewPostTextAC(e.currentTarget.value));
+    };
 
     return (
         <div className={styles.posts}>

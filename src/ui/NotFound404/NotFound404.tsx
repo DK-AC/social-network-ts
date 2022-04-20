@@ -1,5 +1,6 @@
 import React from 'react';
-import styles from './notFound404.module.css'
+
+import styles from './notFound404.module.css';
 
 export const NotFound404 = () => {
     return (

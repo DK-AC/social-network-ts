@@ -1,21 +1,22 @@
-import {NavLink} from "react-router-dom";
-import styles from "./dialogItem.module.css";
-import React from "react";
-import dialogPhoto from './../../../assets/img/dialogPhoto1.png'
+import {NavLink} from 'react-router-dom';
+import React from 'react';
+
+import styles from './dialogItem.module.css';
+import dialogPhoto from './../../../assets/img/dialogPhoto1.png';
 
 type PropsType = { id: number, name: string }
 
 export const DialogItem: React.FC<PropsType> = ({id, name}) => {
 
-    let activeStyle = {
+    const activeStyle = {
         color: 'gold',
         fontWeight: 'bold',
-        textDecoration: 'none'
-    }
-    let defaultStyle = {
+        textDecoration: 'none',
+    };
+    const defaultStyle = {
         color: 'white',
-        textDecoration: 'none'
-    }
+        textDecoration: 'none',
+    };
 
     return (
         <div>
@@ -28,5 +29,5 @@ export const DialogItem: React.FC<PropsType> = ({id, name}) => {
                 {name}
             </NavLink>
         </div>
-    )
-}
+    );
+};

@@ -1,6 +1,7 @@
-import styles from './messageItem.module.css';
 import React from 'react';
-import messagePhoto from './../../../assets/img/messagePhoto.png'
+
+import styles from './messageItem.module.css';
+import messagePhoto from './../../../assets/img/messagePhoto.png';
 
 type PropsType = { id: number, message: string }
 
@@ -15,6 +16,6 @@ export const MessageItem: React.FC<PropsType> = ({id, message}) => {
                         alt={'messagePhoto'}/>
             </span>
         </div>
-    )
-}
+    );
+};
 

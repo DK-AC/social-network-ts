@@ -1,34 +1,37 @@
 import React, {ChangeEvent} from 'react';
-import styles from './dialogs.module.css'
+import {useDispatch} from 'react-redux';
+
+import {sendMessageAC, updateNewMessageAC} from '../../redux/reducers/dialogsReducer';
+import {useAppSelector} from '../../redux/store';
+
+import styles from './dialogs.module.css';
 import {DialogItem} from './DialogItem/DialogItem';
 import {MessageItem} from './MessageItem/MessageItem';
-import {sendMessageAC, updateNewMessageAC} from '../../redux/reducers/dialogsReducer';
-import {useDispatch} from 'react-redux';
-import {useAppSelector} from '../../redux/store';
+
 
 
 export const Dialogs: React.FC = () => {
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
-    const dialogs = useAppSelector(state => state.dialogs.dialogs)
-    const messages = useAppSelector(state => state.dialogs.messages)
-    const newMessageText = useAppSelector(state => state.dialogs.newMessageText)
+    const dialogs = useAppSelector(state => state.dialogs.dialogs);
+    const messages = useAppSelector(state => state.dialogs.messages);
+    const newMessageText = useAppSelector(state => state.dialogs.newMessageText);
 
     const dialog = dialogs.map(d => {
-        return <DialogItem key={d.id} id={d.id} name={d.name}/>
-    })
+        return <DialogItem key={d.id} id={d.id} name={d.name}/>;
+    });
 
     const message = messages.map(m => {
-        return <MessageItem key={m.id} id={m.id} message={m.message}/>
-    })
+        return <MessageItem key={m.id} id={m.id} message={m.message}/>;
+    });
 
     const sendMessageHandle = () => {
-        dispatch(sendMessageAC(newMessageText))
-    }
+        dispatch(sendMessageAC(newMessageText));
+    };
     const updateNewMessageTextHandle = (e: ChangeEvent<HTMLInputElement>) => {
-        dispatch(updateNewMessageAC(e.currentTarget.value))
-    }
+        dispatch(updateNewMessageAC(e.currentTarget.value));
+    };
 
     return (
         <>

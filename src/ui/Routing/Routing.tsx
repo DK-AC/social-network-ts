@@ -1,4 +1,6 @@
 import {Route, Routes} from 'react-router-dom';
+import React from 'react';
+
 import {Profile} from '../Profile/Profile';
 import {Dialogs} from '../Dialogs/Dialogs';
 import {News} from '../News/News';
@@ -6,7 +8,6 @@ import {Music} from '../Music/Music';
 import {Settings} from '../Settings/Settings';
 import {Friends} from '../Friends/Friends';
 import {NotFound404} from '../NotFound404/NotFound404';
-import React from 'react';
 import {Users} from '../Users/Users';
 
 export const PATH = {
@@ -18,8 +19,8 @@ export const PATH = {
     MUSIC_PAGE: '/music',
     SETTINGS_PAGE: '/settings',
     FRIENDS_PAGE: '/friends',
-    NOT_FOUND_PAGE: '/*'
-}
+    NOT_FOUND_PAGE: '/*',
+};
 
 
 export const Routing: React.FC = () => {
@@ -37,5 +38,5 @@ export const Routing: React.FC = () => {
                 <Route path={PATH.NOT_FOUND_PAGE} element={<NotFound404/>}/>
             </Routes>
         </>
-    )
-}
+    );
+};

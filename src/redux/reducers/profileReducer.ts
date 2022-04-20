@@ -1,5 +1,7 @@
-import {profileAPI, ProfileUserType} from '../../api/profileAPI';
 import {Dispatch} from 'redux';
+
+import {profileAPI, ProfileUserType} from '../../api/profileAPI';
+
 import {setIsLoadingAC} from './appReducer';
 
 const ADD_POST = 'ADD_POST';
@@ -13,8 +15,8 @@ const initialState = {
         {id: 3, message: '3 post', likesCount: 55},
     ],
     newPostText: '',
-    profile: null as ProfileUserType | null
-}
+    profile: null as ProfileUserType | null,
+};
 
 export const profileReducer = (state: initialStateType = initialState, action: ProfileActionsType): initialStateType => {
     switch (action.type) {
@@ -22,37 +24,37 @@ export const profileReducer = (state: initialStateType = initialState, action: P
             return {
                 ...state,
                 posts: [...state.posts, {id: new Date().getTime(), message: action.postText, likesCount: 0}],
-                newPostText: ''
-            }
+                newPostText: '',
+            };
         case UPDATE_NEW_POST_TEXT:
-            return {...state, newPostText: action.newPostText}
+            return {...state, newPostText: action.newPostText};
         case SET_PROFILE_USER:
             return {
                 ...state,
-                profile: action.profile
-            }
+                profile: action.profile,
+            };
         default:
-            return state
+            return state;
     }
-}
+};
 
 //actions
-export const addPostAC = (postText: string) => ({type: ADD_POST, postText} as const)
+export const addPostAC = (postText: string) => ({type: ADD_POST, postText} as const);
 export const updateNewPostTextAC = (newPostText: string) => (
     {type: UPDATE_NEW_POST_TEXT, newPostText} as const
-)
-export const setProfileUserAC = (profile: ProfileUserType) => ({type: SET_PROFILE_USER, profile} as const)
+);
+export const setProfileUserAC = (profile: ProfileUserType) => ({type: SET_PROFILE_USER, profile} as const);
 
 
 //thunks
 export const setProfileUserTC = (userId: number) => (dispatch: Dispatch) => {
-    dispatch(setIsLoadingAC('loading'))
+    dispatch(setIsLoadingAC('loading'));
     return profileAPI.getProfileUserId(userId)
         .then(res => {
-            dispatch(setProfileUserAC(res.data))
-            dispatch(setIsLoadingAC('successful'))
-        })
-}
+            dispatch(setProfileUserAC(res.data));
+            dispatch(setIsLoadingAC('successful'));
+        });
+};
 
 //types
 type initialStateType = typeof initialState

@@ -1,6 +1,7 @@
-import React from "react";
-import styles from './post.module.css'
-import postPhoto from './../../../../assets/img/postPhoto.jpg'
+import React from 'react';
+
+import styles from './post.module.css';
+import postPhoto from './../../../../assets/img/postPhoto.jpg';
 
 type PropsType = {
     id: number
@@ -19,5 +20,5 @@ export const Post: React.FC<PropsType> = ({id, message, likesCount}) => {
             </div>
             <span> like {likesCount}</span>
         </div>
-    )
-}
+    );
+};

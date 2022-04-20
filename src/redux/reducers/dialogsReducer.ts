@@ -14,27 +14,27 @@ const initialState = {
         {id: 3, message: 'let\'s go'},
         {id: 4, message: 'Stop'},
     ],
-    newMessageText: ''
-}
+    newMessageText: '',
+};
 
 export const dialogsReducer = (state: initialStateType = initialState, action: DialogsActionsType): initialStateType => {
     switch (action.type) {
         case SEND_MESSAGE:
             return {
                 ...state, messages: [...state.messages, {id: new Date().getTime(), message: action.messageText}],
-                newMessageText: ''
-            }
+                newMessageText: '',
+            };
         case UPDATE_NEW_MESSAGE_TEXT:
-            return {...state, newMessageText: action.newMessageText}
+            return {...state, newMessageText: action.newMessageText};
         default:
-            return state
+            return state;
     }
-}
+};
 
-export const sendMessageAC = (messageText: string) => ({type: SEND_MESSAGE, messageText} as const)
+export const sendMessageAC = (messageText: string) => ({type: SEND_MESSAGE, messageText} as const);
 export const updateNewMessageAC = (newMessageText: string) => (
     {type: UPDATE_NEW_MESSAGE_TEXT, newMessageText} as const
-)
+);
 type initialStateType = typeof initialState
 export type DialogType = { id: number, name: string }
 export type MessageType = { id: number, message: string }

@@ -1,21 +1,23 @@
 import React, {useEffect} from 'react';
-import styles from './header.module.css'
-import {useAppSelector} from '../../redux/store';
 import {useDispatch} from 'react-redux';
+
+import {useAppSelector} from '../../redux/store';
 import {loginTC} from '../../redux/reducers/authReducer';
+
+import styles from './header.module.css';
 
 export const Header = () => {
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
-    const isInitialized = useAppSelector<boolean>(state => state.auth.isInitialized)
+    const isInitialized = useAppSelector<boolean>(state => state.auth.isInitialized);
 
     const loggedInHandle = () => {
-        dispatch(loginTC({email: 'denkacaj@gmail.com', password: 'zxcnbvasdqwe123'}))
-    }
+        dispatch(loginTC({email: 'denkacaj@gmail.com', password: 'zxcnbvasdqwe123'}));
+    };
 
     useEffect(() => {
-    }, [])
+    }, []);
 
     return (
         <header className={styles.header}>

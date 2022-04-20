@@ -1,9 +1,11 @@
-import React from "react";
-import styles from './profileInfo.module.css'
-import {ProfileUserType} from "../../../api/profileAPI";
-import {Preloader} from "../../Preloader/Preloader";
-import select from '../../../assets/img/select.png'
-import ava from '../../../assets/img/client-2-512.webp'
+import React from 'react';
+
+import {ProfileUserType} from '../../../api/profileAPI';
+import {Preloader} from '../../Preloader/Preloader';
+import select from '../../../assets/img/select.png';
+import ava from '../../../assets/img/client-2-512.webp';
+
+import styles from './profileInfo.module.css';
 
 type PropsType = {
     user: ProfileUserType | null
@@ -12,9 +14,8 @@ type PropsType = {
 export const ProfileInfo: React.FC<PropsType> = ({user}) => {
 
     if (!user) {
-        return <Preloader/>
+        return <Preloader/>;
     }
-
     return (
         <>
             <div className={styles.profileImage}>
@@ -43,5 +44,5 @@ export const ProfileInfo: React.FC<PropsType> = ({user}) => {
                 </div>
             </div>
         </>
-    )
-}
+    );
+};

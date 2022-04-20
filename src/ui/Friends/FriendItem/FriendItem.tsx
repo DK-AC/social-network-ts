@@ -1,6 +1,7 @@
-import styles from "./friendItem.module.css";
-import React from "react";
-import friendsPhoto from './../../../assets/img/friendsPhoto.jpg'
+import React from 'react';
+
+import styles from './friendItem.module.css';
+import friendsPhoto from './../../../assets/img/friendsPhoto.jpg';
 
 type PropsType = { id: number, name: string }
 
@@ -14,5 +15,5 @@ export const FriendItem: React.FC<PropsType> = ({id, name}) => {
                 {name}
             </span>
         </div>
-    )
-}
+    );
+};
