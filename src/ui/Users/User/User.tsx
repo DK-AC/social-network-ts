@@ -1,9 +1,9 @@
-import React from "react";
-import {followUserAC, unfollowUserAC, UserType} from "../../../redux/reducers/usersReducer";
+import React from 'react';
+import {followUserAC, unfollowUserAC, UserType} from '../../../redux/reducers/usersReducer';
 import styles from './user.module.css'
-import {useDispatch} from "react-redux";
+import {useDispatch} from 'react-redux';
 import avaImg from './../../../assets/img/client-2-512.webp'
-import {NavLink} from "react-router-dom";
+import {NavLink} from 'react-router-dom';
 
 type PropsType = {
     user: UserType

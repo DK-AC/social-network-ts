@@ -1,8 +1,8 @@
-import {profileAPI, ProfileUserType} from "../../api/profileAPI";
-import {Dispatch} from "redux";
-import {setIsLoadingAC} from "./appReducer";
+import {profileAPI, ProfileUserType} from '../../api/profileAPI';
+import {Dispatch} from 'redux';
+import {setIsLoadingAC} from './appReducer';
 
-const ADD_POST = "ADD_POST";
+const ADD_POST = 'ADD_POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 const SET_PROFILE_USER = 'SET_PROFILE_USER';
 

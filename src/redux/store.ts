@@ -1,12 +1,12 @@
-import {profileReducer} from "./reducers/profileReducer";
-import {dialogsReducer} from "./reducers/dialogsReducer";
-import {sideBarReducer} from "./reducers/sideBarReducer";
-import {applyMiddleware, combineReducers, compose, createStore} from "redux";
-import {TypedUseSelectorHook, useSelector} from "react-redux";
-import {usersReducer} from "./reducers/usersReducer";
-import thunk from "redux-thunk";
-import {appReducer} from "./reducers/appReducer";
-import {authReducer} from "./reducers/authReducer";
+import {profileReducer} from './reducers/profileReducer';
+import {dialogsReducer} from './reducers/dialogsReducer';
+import {sideBarReducer} from './reducers/sideBarReducer';
+import {applyMiddleware, combineReducers, compose, createStore} from 'redux';
+import {TypedUseSelectorHook, useSelector} from 'react-redux';
+import {usersReducer} from './reducers/usersReducer';
+import thunk from 'redux-thunk';
+import {appReducer} from './reducers/appReducer';
+import {authReducer} from './reducers/authReducer';
 
 declare global {
     interface Window {

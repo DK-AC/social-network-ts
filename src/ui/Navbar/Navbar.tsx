@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import styles from './navbar.module.css'
-import {useAppSelector} from "../../redux/store";
+import {useAppSelector} from '../../redux/store';
 
 
 export const Navbar: React.FC = () => {

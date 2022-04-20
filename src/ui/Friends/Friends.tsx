@@ -1,7 +1,7 @@
 import React from 'react';
-import {FriendItem} from "./FriendItem/FriendItem";
-import styles from "./friends.module.css";
-import {useAppSelector} from "../../redux/store";
+import {FriendItem} from './FriendItem/FriendItem';
+import styles from './friends.module.css';
+import {useAppSelector} from '../../redux/store';
 
 
 export const Friends: React.FC = () => {

@@ -1,9 +1,9 @@
 import React, {ChangeEvent} from 'react';
-import {Post} from "./Post/Post";
-import styles from "./posts.module.css";
-import {addPostAC, updateNewPostTextAC} from "../../../redux/reducers/profileReducer";
-import {useAppSelector} from "../../../redux/store";
-import {useDispatch} from "react-redux";
+import {Post} from './Post/Post';
+import styles from './posts.module.css';
+import {addPostAC, updateNewPostTextAC} from '../../../redux/reducers/profileReducer';
+import {useAppSelector} from '../../../redux/store';
+import {useDispatch} from 'react-redux';
 
 export const Posts: React.FC = () => {
 

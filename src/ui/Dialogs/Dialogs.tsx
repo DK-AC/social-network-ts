@@ -1,10 +1,10 @@
 import React, {ChangeEvent} from 'react';
 import styles from './dialogs.module.css'
-import {DialogItem} from "./DialogItem/DialogItem";
-import {MessageItem} from "./MessageItem/MessageItem";
-import {sendMessageAC, updateNewMessageAC} from "../../redux/reducers/dialogsReducer";
-import {useDispatch} from "react-redux";
-import {useAppSelector} from "../../redux/store";
+import {DialogItem} from './DialogItem/DialogItem';
+import {MessageItem} from './MessageItem/MessageItem';
+import {sendMessageAC, updateNewMessageAC} from '../../redux/reducers/dialogsReducer';
+import {useDispatch} from 'react-redux';
+import {useAppSelector} from '../../redux/store';
 
 
 export const Dialogs: React.FC = () => {

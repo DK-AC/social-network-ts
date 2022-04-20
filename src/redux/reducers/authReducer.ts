@@ -1,6 +1,6 @@
-import {Dispatch} from "redux";
-import {authAPI, AuthUserType, LoginUserType} from "../../api/authAPI";
-import {setIsLoadingAC} from "./appReducer";
+import {Dispatch} from 'redux';
+import {authAPI, AuthUserType, LoginUserType} from '../../api/authAPI';
+import {setIsLoadingAC} from './appReducer';
 
 const SET_IS_INITIALIZED = 'SET_IS_INITIALIZED'
 const SET_IS_AUTH_USER = 'SET_IS_AUTH_USER'
@@ -46,25 +46,25 @@ export const setIsLoggedInAC = (data: LoginUserType) => ({type: SET_IS_LOGGED_IN
 //thunks
 export const authMeTC = () => (dispatch: Dispatch) => {
     dispatch(setIsInitializedAC(false))
-    dispatch(setIsLoadingAC("loading"))
+    dispatch(setIsLoadingAC('loading'))
     return authAPI.me()
         .then(res => {
             if (res.data.resultCode === 0) {
                 dispatch(setIsAuthUser(res.data.data))
                 dispatch(setIsInitializedAC(true))
-                dispatch(setIsLoadingAC("successful"))
+                dispatch(setIsLoadingAC('successful'))
             } else {
-                dispatch(setIsLoadingAC("failed"))
+                dispatch(setIsLoadingAC('failed'))
             }
         })
 }
 
 export const loginTC = (data: LoginUserType) => (dispatch: Dispatch) => {
-    dispatch(setIsLoadingAC("loading"))
+    dispatch(setIsLoadingAC('loading'))
     return authAPI.login(data)
         .then(res => {
             dispatch(setIsLoggedInAC(res.data.data))
-            dispatch(setIsLoadingAC("successful"))
+            dispatch(setIsLoadingAC('successful'))
             if (res.data.resultCode === 0) {
                 dispatch(setIsInitializedAC(true))
             } else {

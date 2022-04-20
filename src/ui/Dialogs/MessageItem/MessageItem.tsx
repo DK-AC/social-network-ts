@@ -1,5 +1,5 @@
-import styles from "./messageItem.module.css";
-import React from "react";
+import styles from './messageItem.module.css';
+import React from 'react';
 import messagePhoto from './../../../assets/img/messagePhoto.png'
 
 type PropsType = { id: number, message: string }

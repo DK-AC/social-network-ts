@@ -1,6 +1,6 @@
-import {ParamsUserPageType, userAPI} from "../../api/userAPI";
-import {Dispatch} from "redux";
-import {setIsLoadingAC} from "./appReducer";
+import {ParamsUserPageType, userAPI} from '../../api/userAPI';
+import {Dispatch} from 'redux';
+import {setIsLoadingAC} from './appReducer';
 
 const FOLLOW_USER = 'FOLLOW_USER'
 const UNFOLLOW_USER = 'UNFOLLOW_USER'

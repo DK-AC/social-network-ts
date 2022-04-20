@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
 import styles from './header.module.css'
-import {useAppSelector} from "../../redux/store";
-import {useDispatch} from "react-redux";
-import {loginTC} from "../../redux/reducers/authReducer";
+import {useAppSelector} from '../../redux/store';
+import {useDispatch} from 'react-redux';
+import {loginTC} from '../../redux/reducers/authReducer';
 
 export const Header = () => {
 

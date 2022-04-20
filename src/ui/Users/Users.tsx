@@ -1,11 +1,11 @@
 import React, {useEffect} from 'react';
-import {useAppSelector} from "../../redux/store";
+import {useAppSelector} from '../../redux/store';
 import {User} from './User/User';
 import styles from './users.module.css'
-import {useDispatch} from "react-redux";
-import {changeCurrentPageAC, setUsersTC} from "../../redux/reducers/usersReducer";
-import {ParamsUserPageType} from "../../api/userAPI";
-import {Preloader} from "../Preloader/Preloader";
+import {useDispatch} from 'react-redux';
+import {changeCurrentPageAC, setUsersTC} from '../../redux/reducers/usersReducer';
+import {ParamsUserPageType} from '../../api/userAPI';
+import {Preloader} from '../Preloader/Preloader';
 
 export const Users: React.FC = () => {
 
