@@ -8,7 +8,7 @@ import styles from './header.module.css';
 import logoDK from './../../assets/img/logoDK.svg';
 
 export const Header = () => {
-
+    console.log(`операция`)
     const dispatch = useDispatch();
 
     const isInitialized = useAppSelector<boolean>(state => state.auth.isInitialized);
