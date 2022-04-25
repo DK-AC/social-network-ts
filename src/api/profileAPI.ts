@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import {ResponseType} from './authAPI';
+
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0',
     withCredentials: true,
@@ -9,8 +11,8 @@ const instance = axios.create({
 });
 
 export const profileAPI = {
-    getProfileUserId(userId: number ) {
-        return instance.get<ProfileUserType>(`/profile/${userId}`);
+    getProfileUserId(userId: number) {
+        return instance.get<any, ResponseType<ProfileUserType>, ProfileUserType>(`/profile/${userId}`)
     },
 };
 
