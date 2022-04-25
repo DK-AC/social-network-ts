@@ -17,7 +17,7 @@ export const User: React.FC<PropsType> = ({user}) => {
 
     const dispatch = useDispatch();
 
-    const followingInProgress = useAppSelector(state => state.app.followingInProgress)
+    const followingInProgress = useAppSelector(state => state.users.followingInProgress)
 
     const {id, name, photos, followed, status} = user;
 
@@ -44,12 +44,13 @@ export const User: React.FC<PropsType> = ({user}) => {
 
                 <div>
                     {followed
-                        ? <button disabled={followingInProgress} onClick={unFollowUserHandle}>Unfollow</button>
-                        : <button disabled={followingInProgress} onClick={followUserHandle}>Follow</button>
+                        ? <button disabled={followingInProgress.some(userId => userId === id)}
+                                  onClick={unFollowUserHandle}>Unfollow</button>
+                        : <button disabled={followingInProgress.some(userId => userId === id)}
+                                  onClick={followUserHandle}>Follow</button>
                     }
                 </div>
             </div>
-
         </div>
     );
 };

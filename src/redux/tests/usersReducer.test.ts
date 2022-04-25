@@ -33,6 +33,7 @@ beforeEach(() => {
             totalCount: 100,
             pageSize: 5,
             currentPage: 3,
+            followingInProgress: [],
         };
     },
 );
@@ -55,7 +56,7 @@ test('followed user should be changed on false', () => {
 
 test('users should be sets', () => {
 
-    const fakeState: UsersPageType = {users: [], totalCount: 1, currentPage: 1, pageSize: 5};
+    const fakeState: UsersPageType = {users: [], totalCount: 1, currentPage: 1, pageSize: 5, followingInProgress: []};
 
     const endState = usersReducer(fakeState, setUsersAC(startState.users));
 
