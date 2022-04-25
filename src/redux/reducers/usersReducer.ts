@@ -95,15 +95,20 @@ export const followUserTC = (userId: number) => (dispatch: Dispatch) => {
             } else {
                 dispatch(setIsLoadingAC('failed'));
             }
-
         })
 }
 export const unfollowUserTC = (userId: number) => (dispatch: Dispatch) => {
     dispatch(followingInProgressAC(true, userId));
+    dispatch(setIsLoadingAC('loading'));
     return userAPI.unfollowUser(userId)
         .then(data => {
-            dispatch(unfollowUserAC(userId));
-            dispatch(followingInProgressAC(false, userId));
+            if (data.resultCode === 0) {
+                dispatch(unfollowUserAC(userId));
+                dispatch(followingInProgressAC(false, userId));
+                dispatch(setIsLoadingAC('successful'));
+            } else {
+                dispatch(setIsLoadingAC('failed'));
+            }
         })
 }
 
