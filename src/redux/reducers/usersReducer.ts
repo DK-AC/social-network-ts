@@ -75,19 +75,26 @@ export const followUserTC = (userId: number) => (dispatch: Dispatch) => {
     dispatch(setIsLoadingAC('loading'));
     return userAPI.followUser(userId)
         .then(data => {
-            dispatch(followUserAC(userId));
-            dispatch(setIsLoadingAC('successful'));
+            if (data.resultCode === 0) {
+                dispatch(followUserAC(userId));
+                dispatch(setIsLoadingAC('successful'));
+            } else {
+                dispatch(setIsLoadingAC('failed'));
+            }
         })
 }
 export const unfollowUserTC = (userId: number) => (dispatch: Dispatch) => {
     dispatch(setIsLoadingAC('loading'));
     return userAPI.unfollowUser(userId)
         .then(data => {
-            dispatch(unfollowUserAC(userId));
-            dispatch(setIsLoadingAC('successful'));
+            if (data.resultCode === 0) {
+                dispatch(unfollowUserAC(userId));
+                dispatch(setIsLoadingAC('successful'));
+            } else {
+                dispatch(setIsLoadingAC('failed'));
+            }
         })
 }
-
 
 
 //types
