@@ -2,7 +2,8 @@ import React from 'react';
 import {useDispatch} from 'react-redux';
 import {NavLink} from 'react-router-dom';
 
-import {followUserAC, followUserTC, unfollowUserAC, unfollowUserTC, UserType} from '../../../redux/reducers/usersReducer';
+import {followUserTC, unfollowUserTC, UserType} from '../../../redux/reducers/usersReducer';
+import {useAppSelector} from '../../../redux/store';
 
 import styles from './user.module.css';
 import avaImg from './../../../assets/img/client-2-512.webp';
@@ -15,6 +16,8 @@ type PropsType = {
 export const User: React.FC<PropsType> = ({user}) => {
 
     const dispatch = useDispatch();
+
+    const followingInProgress = useAppSelector(state => state.app.followingInProgress)
 
     const {id, name, photos, followed, status} = user;
 
@@ -41,8 +44,8 @@ export const User: React.FC<PropsType> = ({user}) => {
 
                 <div>
                     {followed
-                        ? <button onClick={unFollowUserHandle}>Unfollow</button>
-                        : <button onClick={followUserHandle}>Follow</button>
+                        ? <button disabled={followingInProgress} onClick={unFollowUserHandle}>Unfollow</button>
+                        : <button disabled={followingInProgress} onClick={followUserHandle}>Follow</button>
                     }
                 </div>
             </div>

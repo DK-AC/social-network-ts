@@ -2,7 +2,7 @@ import {Dispatch} from 'redux';
 
 import {ParamsUserPageType, userAPI} from '../../api/userAPI';
 
-import {setIsLoadingAC} from './appReducer';
+import {followingInProgressAC, setIsLoadingAC} from './appReducer';
 
 const FOLLOW_USER = 'FOLLOW_USER';
 const UNFOLLOW_USER = 'UNFOLLOW_USER';
@@ -72,24 +72,24 @@ export const setUsersTC = (params: ParamsUserPageType) => (dispatch: Dispatch) =
         });
 };
 export const followUserTC = (userId: number) => (dispatch: Dispatch) => {
-    dispatch(setIsLoadingAC('loading'));
+    dispatch(followingInProgressAC(true));
     return userAPI.followUser(userId)
         .then(data => {
             if (data.resultCode === 0) {
                 dispatch(followUserAC(userId));
-                dispatch(setIsLoadingAC('successful'));
+                dispatch(followingInProgressAC(false));
             } else {
                 dispatch(setIsLoadingAC('failed'));
             }
         })
 }
 export const unfollowUserTC = (userId: number) => (dispatch: Dispatch) => {
-    dispatch(setIsLoadingAC('loading'));
+    dispatch(followingInProgressAC(true));
     return userAPI.unfollowUser(userId)
         .then(data => {
             if (data.resultCode === 0) {
                 dispatch(unfollowUserAC(userId));
-                dispatch(setIsLoadingAC('successful'));
+                dispatch(followingInProgressAC(false));
             } else {
                 dispatch(setIsLoadingAC('failed'));
             }
