@@ -54,8 +54,9 @@ export const usersReducer = (state: initialStateType = initialState, action: Use
             };
         case FOLLOW_IN_PROGRESS:
             return {
-                ...state, followingInProgress: action.followingInProgress
-                    ? [...action.followingInProgress, action.userId]
+                ...state,
+                followingInProgress: action.isFetching
+                    ? [...state.followingInProgress, action.userId]
                     : state.followingInProgress.filter(id => id !== action.userId),
             }
         default:
@@ -68,8 +69,8 @@ export const unfollowUserAC = (userId: number) => ({type: UNFOLLOW_USER, userId}
 export const setUsersAC = (users: UserType[]) => ({type: SET_USERS, users}) as const;
 export const setTotalUserCountAC = (totalCount: number) => ({type: SET_TOTAL_COUNT, totalCount}) as const;
 export const changeCurrentPageAC = (currentPage: number) => ({type: CHANGE_CURRENT_PAGE, currentPage}) as const;
-export const followingInProgressAC = (followingInProgress: number[], userId: number) => (
-    {type: FOLLOW_IN_PROGRESS, followingInProgress: followingInProgress, userId}) as const;
+export const followingInProgressAC = (isFetching: boolean, userId: number) => (
+    {type: FOLLOW_IN_PROGRESS, isFetching, userId}) as const;
 
 
 //thunks
@@ -83,25 +84,19 @@ export const setUsersTC = (params: ParamsUserPageType) => (dispatch: Dispatch) =
         });
 };
 export const followUserTC = (userId: number) => (dispatch: Dispatch) => {
+    dispatch(followingInProgressAC(true, userId));
     return userAPI.followUser(userId)
         .then(data => {
-            if (data.resultCode === 0) {
-                dispatch(followUserAC(userId));
-                dispatch(followingInProgressAC([], userId));
-            } else {
-                dispatch(setIsLoadingAC('failed'));
-            }
+            dispatch(followUserAC(userId));
+            dispatch(followingInProgressAC(false, userId));
         })
 }
 export const unfollowUserTC = (userId: number) => (dispatch: Dispatch) => {
+    dispatch(followingInProgressAC(true, userId));
     return userAPI.unfollowUser(userId)
         .then(data => {
-            if (data.resultCode === 0) {
-                dispatch(unfollowUserAC(userId));
-                dispatch(followingInProgressAC([], userId));
-            } else {
-                dispatch(setIsLoadingAC('failed'));
-            }
+            dispatch(unfollowUserAC(userId));
+            dispatch(followingInProgressAC(false, userId));
         })
 }
 
