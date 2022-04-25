@@ -2,6 +2,8 @@ import axios, {AxiosResponse} from 'axios';
 
 import {UserType} from '../redux/reducers/usersReducer';
 
+import {ResponseType} from './authAPI';
+
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0',
     withCredentials: true,
@@ -15,6 +17,10 @@ export const userAPI = {
         return instance.get<any, AxiosResponse<ResponseUserType<UserType[]>>, UserType[]>
         (`/users?page=${params.currentPage}&count=${params.pageSize}`)
             .then(res => res.data);
+    },
+    followUser(userId: number) {
+        return instance.post<any, AxiosResponse<ResponseType>, ResponseType>(`/follow/${userId}`)
+            .then(res => res.data)
     },
 };
 

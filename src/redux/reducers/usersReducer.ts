@@ -71,6 +71,15 @@ export const setUsersTC = (params: ParamsUserPageType) => (dispatch: Dispatch) =
             dispatch(setIsLoadingAC('successful'));
         });
 };
+export const followUserTC = (userId: number) => (dispatch: Dispatch) => {
+    dispatch(setIsLoadingAC('loading'));
+    return userAPI.followUser(userId)
+        .then(data => {
+            dispatch(followUserAC(userId));
+            dispatch(setIsLoadingAC('successful'));
+        })
+}
+
 
 //types
 export type UsersActionsType =

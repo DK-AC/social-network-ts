@@ -25,7 +25,7 @@
       "always-multiline"
     ],
     "semi": [
-      "warn",
+      0,
       "always"
     ],
     "import/order": [
