@@ -2,7 +2,7 @@ import React from 'react';
 import {useDispatch} from 'react-redux';
 import {NavLink} from 'react-router-dom';
 
-import {followUserAC, followUserTC, unfollowUserAC, UserType} from '../../../redux/reducers/usersReducer';
+import {followUserAC, followUserTC, unfollowUserAC, unfollowUserTC, UserType} from '../../../redux/reducers/usersReducer';
 
 import styles from './user.module.css';
 import avaImg from './../../../assets/img/client-2-512.webp';
@@ -19,7 +19,7 @@ export const User: React.FC<PropsType> = ({user}) => {
     const {id, name, photos, followed, status} = user;
 
     const followUserHandle = () => dispatch(followUserTC(id));
-    const unFollowUserHandle = () => dispatch(unfollowUserAC(id));
+    const unFollowUserHandle = () => dispatch(unfollowUserTC(id));
 
     return (
         <div className={styles.item}>

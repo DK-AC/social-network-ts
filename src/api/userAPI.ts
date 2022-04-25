@@ -22,6 +22,10 @@ export const userAPI = {
         return instance.post<any, AxiosResponse<ResponseType>, ResponseType>(`/follow/${userId}`)
             .then(res => res.data)
     },
+    unfollowUser(userId: number) {
+        return instance.delete<any, AxiosResponse<ResponseType>, ResponseType>(`/follow/${userId}`)
+            .then(res => res.data)
+    },
 };
 
 export type ResponseUserType<U = {}> = {

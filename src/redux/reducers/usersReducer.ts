@@ -79,6 +79,15 @@ export const followUserTC = (userId: number) => (dispatch: Dispatch) => {
             dispatch(setIsLoadingAC('successful'));
         })
 }
+export const unfollowUserTC = (userId: number) => (dispatch: Dispatch) => {
+    dispatch(setIsLoadingAC('loading'));
+    return userAPI.unfollowUser(userId)
+        .then(data => {
+            dispatch(unfollowUserAC(userId));
+            dispatch(setIsLoadingAC('successful'));
+        })
+}
+
 
 
 //types
