@@ -6,6 +6,7 @@ import select from '../../../assets/img/select.png';
 import ava from '../../../assets/img/client-2-512.webp';
 
 import styles from './profileInfo.module.css';
+import {ProfileStatus} from './ProfileStatus/ProfileStatus';
 
 type PropsType = {
     user: ProfileUserType | null
@@ -30,7 +31,7 @@ export const ProfileInfo: React.FC<PropsType> = ({user}) => {
                     />
                 </div>
                 <h2>{user ? user.fullName : ''}</h2>
-                <div>{user ? user.aboutMe : ''}</div>
+                <ProfileStatus aboutMe={user.aboutMe}/>
                 <div>
                     {user.lookingForAJob
                         ? <div>
