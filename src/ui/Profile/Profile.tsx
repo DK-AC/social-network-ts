@@ -1,9 +1,10 @@
 import React, {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
-import {useParams} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 
 import {useAppSelector} from '../../redux/store';
 import {setProfileUserTC} from '../../redux/reducers/profileReducer';
+import {PATH} from '../Routing/Routing';
 
 import {Posts} from './Posts/Posts';
 import {ProfileInfo} from './ProfileInfo/ProfileInfo';
@@ -13,9 +14,11 @@ export const Profile: React.FC = () => {
 
     const dispatch = useDispatch();
     const params = useParams<'profileUserId'>();
+    const navigate = useNavigate()
 
     const user = useAppSelector(state => state.profile.profile);
     const userId = useAppSelector(state => state.auth.id);
+    const isInitialized = useAppSelector(state => state.auth.isInitialized);
 
 
     let profileUserId: number;
@@ -27,8 +30,11 @@ export const Profile: React.FC = () => {
     }
 
     useEffect(() => {
+        if (!isInitialized) {
+            navigate(PATH.LOGIN_PAGE)
+        }
         dispatch(setProfileUserTC(profileUserId));
-    }, [params]);
+    }, [params, isInitialized]);
 
 
     return (

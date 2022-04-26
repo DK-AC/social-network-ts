@@ -1,10 +1,12 @@
 import React, {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
+import {useNavigate} from 'react-router-dom';
 
 import {useAppSelector} from '../../redux/store';
 import {changeCurrentPageAC, setUsersTC} from '../../redux/reducers/usersReducer';
 import {ParamsUserPageType} from '../../api/userAPI';
 import {Preloader} from '../Preloader/Preloader';
+import {PATH} from '../Routing/Routing';
 
 import styles from './users.module.css';
 import {User} from './User/User';
@@ -12,9 +14,11 @@ import {User} from './User/User';
 export const Users: React.FC = () => {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate()
 
     const {users, pageSize, currentPage, totalCount} = useAppSelector(state => state.users);
     const isLoading = useAppSelector(state => state.app.isLoading);
+    const isInitialized = useAppSelector(state => state.auth.isInitialized);
 
     const params: ParamsUserPageType = {
         pageSize,
@@ -37,8 +41,11 @@ export const Users: React.FC = () => {
     const changeCurrentPageHandle = (page: number) => dispatch(changeCurrentPageAC(page));
 
     useEffect(() => {
+        if (!isInitialized) {
+            navigate(PATH.LOGIN_PAGE)
+        }
         dispatch(setUsersTC(params));
-    }, [currentPage]);
+    }, [currentPage, isInitialized]);
 
     return (
         <div className={styles.userItems}>
