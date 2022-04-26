@@ -16,9 +16,7 @@ export const Dialogs: React.FC = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate()
 
-    const dialogs = useAppSelector(state => state.dialogs.dialogs);
-    const messages = useAppSelector(state => state.dialogs.messages);
-    const newMessageText = useAppSelector(state => state.dialogs.newMessageText);
+    const {dialogs, messages, newMessageText} = useAppSelector(state => state.dialogs);
     const isInitialized = useAppSelector(state => state.auth.isInitialized);
 
     const dialog = dialogs.map(d => {
