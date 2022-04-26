@@ -25,7 +25,11 @@ export const ProfileStatus: React.FC<PropsType> = ({aboutMe}) => {
     return (
         <>
             {editMode
-                ? <input value={value} onBlur={changeOnViewModeHandle} onChange={onChangeValueHandle}/>
+                ? <input value={value}
+                         onBlur={changeOnViewModeHandle}
+                         onChange={onChangeValueHandle}
+                         autoFocus
+                />
                 : <span onDoubleClick={changeOnEditModeHandle}>{value}</span>
             }
         </>
