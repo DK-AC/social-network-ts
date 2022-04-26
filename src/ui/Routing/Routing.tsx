@@ -9,6 +9,7 @@ import {Settings} from '../Settings/Settings';
 import {Friends} from '../Friends/Friends';
 import {NotFound404} from '../NotFound404/NotFound404';
 import {Users} from '../Users/Users';
+import {Login} from '../Login/Login';
 
 export const PATH = {
     START_PAGE: '/profile',
@@ -19,6 +20,7 @@ export const PATH = {
     MUSIC_PAGE: '/music',
     SETTINGS_PAGE: '/settings',
     FRIENDS_PAGE: '/friends',
+    LOGIN_PAGE: '/login',
     NOT_FOUND_PAGE: '/*',
 };
 
@@ -35,6 +37,7 @@ export const Routing: React.FC = () => {
                 <Route path={PATH.MUSIC_PAGE} element={<Music/>}/>
                 <Route path={PATH.SETTINGS_PAGE} element={<Settings/>}/>
                 <Route path={PATH.FRIENDS_PAGE} element={<Friends/>}/>
+                <Route path={PATH.LOGIN_PAGE} element={<Login/>}/>
                 <Route path={PATH.NOT_FOUND_PAGE} element={<NotFound404/>}/>
             </Routes>
         </>
