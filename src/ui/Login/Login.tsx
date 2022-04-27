@@ -1,9 +1,13 @@
 import 'react-app-polyfill/ie11';
 import * as React from 'react';
+import {useEffect} from 'react';
 import {Field, Form, Formik} from 'formik';
 import {useDispatch} from 'react-redux';
+import {useNavigate} from 'react-router-dom';
 
 import {loginTC} from '../../redux/reducers/authReducer';
+import {useAppSelector} from '../../redux/store';
+import {PATH} from '../Routing/Routing';
 
 type Values = {
     email: string;
@@ -14,6 +18,16 @@ type Values = {
 export const Login = () => {
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    const isInitialized = useAppSelector(state => state.auth.isInitialized)
+
+    useEffect(() => {
+        if (isInitialized) {
+            navigate(PATH.PROFILE_PAGE)
+        }
+        return
+    }, [isInitialized])
 
     return (
         <div style={{width: '200px', margin: '0 auto'}}>
