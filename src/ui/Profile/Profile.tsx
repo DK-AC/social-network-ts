@@ -3,7 +3,7 @@ import {useDispatch} from 'react-redux';
 import {useNavigate, useParams} from 'react-router-dom';
 
 import {useAppSelector} from '../../redux/store';
-import {getProfileUserStatusTC, setProfileUserTC, updateProfileUserStatusTC} from '../../redux/reducers/profileReducer';
+import {getProfileUserStatusTC, setProfileUserTC} from '../../redux/reducers/profileReducer';
 import {PATH} from '../Routing/Routing';
 
 import {Posts} from './Posts/Posts';
@@ -19,7 +19,6 @@ export const Profile: React.FC = () => {
     const user = useAppSelector(state => state.profile.profile);
     const userId = useAppSelector(state => state.auth.id);
     const isInitialized = useAppSelector(state => state.auth.isInitialized);
-    const status = useAppSelector(state => state.profile.status)
 
 
     let profileUserId: number;
@@ -30,9 +29,6 @@ export const Profile: React.FC = () => {
         profileUserId = userId;
     }
 
-    const updateStatus = (status: string) => {
-        dispatch(updateProfileUserStatusTC(status))
-    }
 
     useEffect(() => {
         if (!isInitialized) {
@@ -45,7 +41,7 @@ export const Profile: React.FC = () => {
 
     return (
         <div>
-            <ProfileInfo user={user} status={status} updateStatus={updateStatus}/>
+            <ProfileInfo user={user}/>
             <Posts/>
         </div>
     );

@@ -10,11 +10,9 @@ import {ProfileStatus} from './ProfileStatus/ProfileStatus';
 
 type PropsType = {
     user: ProfileUserType | null
-    status: string
-    updateStatus: (status: string) => void
 }
 
-export const ProfileInfo: React.FC<PropsType> = ({user, status, updateStatus}) => {
+export const ProfileInfo: React.FC<PropsType> = ({user}) => {
 
     if (!user) {
         return <Preloader/>;
@@ -35,7 +33,7 @@ export const ProfileInfo: React.FC<PropsType> = ({user, status, updateStatus}) =
                 </div>
                 <h2>{user ? user.fullName : ''}</h2>
                 <div>{user ? user.aboutMe : ''}</div>
-                <ProfileStatus status={status} updateStatus={updateStatus}/>
+                <ProfileStatus/>
                 <div>
                     {user.lookingForAJob
                         ? <div>
