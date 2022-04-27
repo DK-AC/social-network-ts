@@ -6,9 +6,10 @@ import {getProfileUserStatusTC} from '../../../../redux/reducers/profileReducer'
 
 type PropsType = {
     userId: number,
+    updateStatusHandle: (status: string) => void
 }
 
-export const ProfileStatus: React.FC<PropsType> = ({userId}) => {
+export const ProfileStatus: React.FC<PropsType> = ({userId, updateStatusHandle}) => {
 
     const dispatch = useDispatch()
 
@@ -18,11 +19,11 @@ export const ProfileStatus: React.FC<PropsType> = ({userId}) => {
     const [value, setValue] = useState<string>(status)
 
     const changeOnEditModeHandle = () => {
-        setValue(value)
+        updateStatusHandle(value)
         setEditMode(true)
     }
     const changeOnViewModeHandle = () => {
-        setValue(value)
+        updateStatusHandle(value)
         setEditMode(false)
     }
     const onChangeValueHandle = (e: ChangeEvent<HTMLInputElement>) => {

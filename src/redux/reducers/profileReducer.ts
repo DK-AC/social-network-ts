@@ -8,6 +8,7 @@ const ADD_POST = 'ADD_POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 const SET_PROFILE_USER = 'SET_PROFILE_USER';
 const GET_PROFILE_USER_STATUS = 'GET_PROFILE_USER_STATUS';
+const UPDATE_PROFILE_USER_STATUS = 'UPDATE_PROFILE_USER_STATUS';
 
 const initialState = {
     posts: [
@@ -40,6 +41,11 @@ export const profileReducer = (state: initialStateType = initialState, action: P
                 ...state,
                 status: action.status,
             }
+        case UPDATE_PROFILE_USER_STATUS:
+            return {
+                ...state,
+                status: action.status,
+            }
         default:
             return state;
     }
@@ -52,6 +58,7 @@ export const updateNewPostTextAC = (newPostText: string) => (
 );
 export const setProfileUserAC = (profile: ProfileUserType) => ({type: SET_PROFILE_USER, profile} as const);
 export const getProfileUserStatusAC = (status: string) => ({type: GET_PROFILE_USER_STATUS, status}) as const
+export const updateProfileUserStatusAC = (status: string) => ({type: UPDATE_PROFILE_USER_STATUS, status}) as const
 
 
 //thunks
@@ -67,6 +74,12 @@ export const getProfileUserStatusTC = (userId: number) => (dispatch: Dispatch) =
     return profileAPI.getProfileUserStatus(userId)
         .then(res => {
             dispatch(getProfileUserStatusAC(res.data))
+        })
+}
+export const updateProfileUserStatusTC = (status: string) => (dispatch: Dispatch) => {
+    return profileAPI.updateProfileUserStatus({status})
+        .then(res => {
+            dispatch(updateProfileUserStatusAC(res.data.data))
         })
 }
 
@@ -86,4 +99,5 @@ export type ProfileActionsType =
     | ReturnType<typeof updateNewPostTextAC>
     | ReturnType<typeof setProfileUserAC>
     | ReturnType<typeof getProfileUserStatusAC>
+    | ReturnType<typeof updateProfileUserStatusAC>
 
