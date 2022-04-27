@@ -1,11 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 
 import {ProfileUserType} from '../../../api/profileAPI';
 import {Preloader} from '../../Preloader/Preloader';
 import select from '../../../assets/img/select.png';
 import ava from '../../../assets/img/client-2-512.webp';
-import {updateProfileUserStatusTC} from '../../../redux/reducers/profileReducer';
+import {getProfileUserStatusTC, updateProfileUserStatusTC} from '../../../redux/reducers/profileReducer';
+import {useAppSelector} from '../../../redux/store';
 
 import styles from './profileInfo.module.css';
 import {ProfileStatus} from './ProfileStatus/ProfileStatus';
@@ -18,13 +19,22 @@ export const ProfileInfo: React.FC<PropsType> = ({user}) => {
 
     const dispatch = useDispatch()
 
-    const updateStatusHandle = (status: string) => {
+    const status = useAppSelector(state => state.profile.status)
+
+    const updateStatus = (status: string) => {
         dispatch(updateProfileUserStatusTC(status))
     }
+
+    useEffect(() => {
+        if (user) {
+            dispatch(getProfileUserStatusTC(user.userId))
+        }
+    }, [])
 
     if (!user) {
         return <Preloader/>;
     }
+
     return (
         <>
             <div className={styles.profileImage}>
@@ -40,7 +50,7 @@ export const ProfileInfo: React.FC<PropsType> = ({user}) => {
                 </div>
                 <h2>{user ? user.fullName : ''}</h2>
                 <div>{user ? user.aboutMe : ''}</div>
-                <ProfileStatus userId={user.userId} updateStatusHandle={updateStatusHandle}/>
+                {status && <ProfileStatus status={status} updateStatus={updateStatus}/>}
                 <div>
                     {user.lookingForAJob
                         ? <div>

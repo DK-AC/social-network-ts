@@ -79,7 +79,7 @@ export const getProfileUserStatusTC = (userId: number) => (dispatch: Dispatch) =
 export const updateProfileUserStatusTC = (status: string) => (dispatch: Dispatch) => {
     return profileAPI.updateProfileUserStatus({status})
         .then(res => {
-            dispatch(updateProfileUserStatusAC(res.data.data))
+            dispatch(updateProfileUserStatusAC(status))
         })
 }
 
