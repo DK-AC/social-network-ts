@@ -12,6 +12,7 @@ export const ProfileStatus: React.FC<PropsType> = ({status, updateStatus}) => {
 
     const changeOnEditModeHandle = () => {
         setEditMode(true)
+        setValue(value)
     }
     const changeOnViewModeHandle = () => {
         setEditMode(false)
@@ -30,7 +31,7 @@ export const ProfileStatus: React.FC<PropsType> = ({status, updateStatus}) => {
                          onChange={onChangeValueHandle}
                          autoFocus
                 />
-                : <span onDoubleClick={changeOnEditModeHandle}>{value || '----'}</span>
+                : <span onDoubleClick={changeOnEditModeHandle}>{status || '----'}</span>
             }
         </>
     );
