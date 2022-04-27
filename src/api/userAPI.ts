@@ -1,29 +1,22 @@
-import axios, {AxiosResponse} from 'axios';
+import {AxiosResponse} from 'axios';
 
 import {UserType} from '../redux/reducers/usersReducer';
 
 import {ResponseType} from './authAPI';
-
-const instance = axios.create({
-    baseURL: 'https://social-network.samuraijs.com/api/1.0',
-    withCredentials: true,
-    headers: {
-        'API-KEY': 'a32b35ae-c578-47f3-b8a9-0885cd248a9d',
-    },
-});
+import {instanceAPI} from './instanceAPI';
 
 export const userAPI = {
     getUsers(params: ParamsUserPageType) {
-        return instance.get<any, AxiosResponse<ResponseUserType<UserType[]>>, UserType[]>
+        return instanceAPI.get<any, AxiosResponse<ResponseUserType<UserType[]>>, UserType[]>
         (`/users?page=${params.currentPage}&count=${params.pageSize}`)
             .then(res => res.data);
     },
     followUser(userId: number) {
-        return instance.post<any, AxiosResponse<ResponseType>, ResponseType>(`/follow/${userId}`)
+        return instanceAPI.post<any, AxiosResponse<ResponseType>, ResponseType>(`/follow/${userId}`)
             .then(res => res.data)
     },
     unfollowUser(userId: number) {
-        return instance.delete<any, AxiosResponse<ResponseType>, ResponseType>(`/follow/${userId}`)
+        return instanceAPI.delete<any, AxiosResponse<ResponseType>, ResponseType>(`/follow/${userId}`)
             .then(res => res.data)
     },
 };

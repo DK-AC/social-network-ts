@@ -1,24 +1,15 @@
-import axios from 'axios';
-
 import {ResponseType} from './authAPI';
-
-const instance = axios.create({
-    baseURL: 'https://social-network.samuraijs.com/api/1.0',
-    withCredentials: true,
-    headers: {
-        'API-KEY': 'a32b35ae-c578-47f3-b8a9-0885cd248a9d',
-    },
-});
+import {instanceAPI} from './instanceAPI';
 
 export const profileAPI = {
     getProfileUserId(userId: number) {
-        return instance.get<any, ResponseType<ProfileUserType>, ProfileUserType>(`/profile/${userId}`)
+        return instanceAPI.get<any, ResponseType<ProfileUserType>, ProfileUserType>(`/profile/${userId}`)
     },
     getProfileUserStatus(userId: number) {
-        return instance.get(`/profile/status/${userId}`)
+        return instanceAPI.get(`/profile/status/${userId}`)
     },
     updateProfileUserStatus(params: { status: string }) {
-        return instance.put('/profile/status', params)
+        return instanceAPI.put('/profile/status', params)
     },
 };
 
