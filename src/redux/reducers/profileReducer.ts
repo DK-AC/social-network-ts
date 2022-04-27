@@ -57,9 +57,12 @@ export const updateNewPostTextAC = (newPostText: string) => (
     {type: UPDATE_NEW_POST_TEXT, newPostText} as const
 );
 export const setProfileUserAC = (profile: ProfileUserType) => ({type: SET_PROFILE_USER, profile} as const);
-export const getProfileUserStatusAC = (status: string) => ({type: GET_PROFILE_USER_STATUS, status}) as const
-export const updateProfileUserStatusAC = (status: string) => ({type: UPDATE_PROFILE_USER_STATUS, status}) as const
-
+export const getProfileUserStatusAC = (status: string) => {
+    return ({type: GET_PROFILE_USER_STATUS, status}) as const
+}
+export const updateProfileUserStatusAC = (status: string) => {
+    return ({type: UPDATE_PROFILE_USER_STATUS, status}) as const
+}
 
 //thunks
 export const setProfileUserTC = (userId: number) => (dispatch: Dispatch) => {
@@ -72,14 +75,14 @@ export const setProfileUserTC = (userId: number) => (dispatch: Dispatch) => {
 };
 export const getProfileUserStatusTC = (userId: number) => (dispatch: Dispatch) => {
     return profileAPI.getProfileUserStatus(userId)
-        .then(data => {
-            dispatch(getProfileUserStatusAC(data.data))
+        .then(res => {
+            dispatch(getProfileUserStatusAC(res.data))
         })
 }
 export const updateProfileUserStatusTC = (status: string) => (dispatch: Dispatch) => {
     return profileAPI.updateProfileUserStatus({status})
-        .then(data => {
-            if (data.resultCode === 0) {
+        .then(res => {
+            if (res.data.resultCode === 0) {
                 dispatch(updateProfileUserStatusAC(status))
             }
         })

@@ -1,3 +1,5 @@
+import {AxiosResponse} from 'axios';
+
 import {ResponseType} from './authAPI';
 import {instanceAPI} from './instanceAPI';
 
@@ -6,10 +8,10 @@ export const profileAPI = {
         return instanceAPI.get<any, ResponseType<ProfileUserType>, ProfileUserType>(`/profile/${userId}`)
     },
     getProfileUserStatus(userId: number) {
-        return instanceAPI.get<any, ResponseType<string>, string>(`/profile/status/${userId}`)
+        return instanceAPI.get<string>(`/profile/status/${userId}`)
     },
     updateProfileUserStatus(params: { status: string }) {
-        return instanceAPI.put<any, ResponseType<{ status: string }>>('/profile/status', params)
+        return instanceAPI.put<any, AxiosResponse<ResponseType<{ status: string }>>>('/profile/status', params)
     },
 };
 
