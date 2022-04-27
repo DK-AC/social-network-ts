@@ -72,14 +72,16 @@ export const setProfileUserTC = (userId: number) => (dispatch: Dispatch) => {
 };
 export const getProfileUserStatusTC = (userId: number) => (dispatch: Dispatch) => {
     return profileAPI.getProfileUserStatus(userId)
-        .then(res => {
-            dispatch(getProfileUserStatusAC(res.data))
+        .then(data => {
+            dispatch(getProfileUserStatusAC(data.data))
         })
 }
 export const updateProfileUserStatusTC = (status: string) => (dispatch: Dispatch) => {
     return profileAPI.updateProfileUserStatus({status})
-        .then(res => {
-            dispatch(updateProfileUserStatusAC(status))
+        .then(data => {
+            if (data.resultCode === 0) {
+                dispatch(updateProfileUserStatusAC(status))
+            }
         })
 }
 
