@@ -31,7 +31,8 @@ export const ProfileInfo: React.FC<PropsType> = ({user}) => {
                     />
                 </div>
                 <h2>{user ? user.fullName : ''}</h2>
-                <ProfileStatus aboutMe={user.aboutMe}/>
+                <div>{user ? user.aboutMe : ''}</div>
+                <ProfileStatus userId={user.userId}/>
                 <div>
                     {user.lookingForAJob
                         ? <div>

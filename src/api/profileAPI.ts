@@ -14,6 +14,9 @@ export const profileAPI = {
     getProfileUserId(userId: number) {
         return instance.get<any, ResponseType<ProfileUserType>, ProfileUserType>(`/profile/${userId}`)
     },
+    getProfileUserStatus(userId: number) {
+        return instance.get(`/profile/status/${userId}`)
+    },
 };
 
 export type ProfileUserType = {

@@ -31,6 +31,7 @@ beforeEach(() => {
                 large: '',
             },
         },
+        status: '',
     };
 });
 
