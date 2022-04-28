@@ -6,17 +6,11 @@ import {useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import * as Yup from 'yup';
 
-
 import {loginTC} from '../../redux/reducers/authReducer';
 import {useAppSelector} from '../../redux/store';
 import {PATH} from '../Routing/Routing';
 
-
-type Values = {
-    email: string;
-    password: string;
-    rememberMe: boolean;
-}
+type Values = { email: string, password: string, rememberMe: boolean }
 
 export const Login = () => {
 
@@ -24,7 +18,6 @@ export const Login = () => {
     const navigate = useNavigate()
 
     const isInitialized = useAppSelector(state => state.auth.isInitialized)
-
 
     useEffect(() => {
         if (isInitialized) {

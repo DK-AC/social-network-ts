@@ -17,16 +17,14 @@ export const Profile: React.FC = () => {
     const navigate = useNavigate()
 
     const user = useAppSelector(state => state.profile.profile);
-    const userId = useAppSelector(state => state.auth.id);
-    const isInitialized = useAppSelector(state => state.auth.isInitialized);
-
+    const {id, isInitialized} = useAppSelector(state => state.auth);
 
     let profileUserId: number;
 
     if (params.profileUserId) {
         profileUserId = +params.profileUserId;
     } else {
-        profileUserId = userId;
+        profileUserId = id;
     }
 
 

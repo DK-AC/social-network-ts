@@ -1,4 +1,4 @@
-import {DialogsPageType, dialogsReducer, sendMessageAC, updateNewMessageAC} from '../reducers/dialogsReducer';
+import {DialogsPageType, dialogsReducer, sendMessageAC} from '../reducers/dialogsReducer';
 
 let fakeState: DialogsPageType;
 
@@ -16,7 +16,6 @@ beforeEach(() => {
             {id: 3, message: 'let\'s go'},
             {id: 4, message: 'Stop'},
         ],
-        newMessageText: '',
     };
 });
 
@@ -29,12 +28,5 @@ test('post should be added', () => {
     expect(endState.messages[4]).toBeDefined();
     expect(fakeState.messages[3].message).toBe('Stop');
     expect(endState.messages[4].message).toBe('New Message Text');
-    expect(endState.newMessageText).toBe('');
 });
 
-test('new message text should be changed', () => {
-    const endState = dialogsReducer(fakeState, updateNewMessageAC('New Message Text'));
-
-    expect(fakeState.newMessageText).toBe('');
-    expect(endState.newMessageText).toBe('New Message Text');
-});
