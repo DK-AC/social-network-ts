@@ -2,12 +2,12 @@ import React, {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import * as Yup from 'yup';
-import {FormikValues} from 'formik';
+import {FormikHelpers, FormikValues} from 'formik';
 
 import {sendMessageAC} from '../../redux/reducers/dialogsReducer';
 import {useAppSelector} from '../../redux/store';
 import {PATH} from '../Routing/Routing';
-import {ReusableFormik} from '../../ReusableComponent/ReusableFormik';
+import {ReusableFormik} from '../../ReusableComponent/Formik/ReusableFormik';
 
 import styles from './dialogs.module.css';
 import {DialogItem} from './DialogItem/DialogItem';
@@ -28,8 +28,9 @@ export const Dialogs: React.FC = () => {
     const message = messages.map(m => {
         return <MessageItem key={m.id} id={m.id} message={m.message}/>;
     });
-    const addDialogMessage = (message: FormikValues) => {
+    const addDialogMessage = (message: FormikValues, action: FormikHelpers<FormikValues>) => {
         dispatch(sendMessageAC(message.dialogMessage.toString()))
+        action.resetForm({values: {dialogMessage: ''}})
     }
     const validationDialogMessageField = {
         dialogMessage: Yup.string()
@@ -54,8 +55,8 @@ export const Dialogs: React.FC = () => {
                     <ReusableFormik initialValues={{dialogMessage: ''}}
                                     onSubmit={addDialogMessage}
                                     nameButton={'add message'}
-                                    nameField={'dialogMessage'}
-                                    typeField={'text'}
+                                    name={'dialogMessage'}
+                                    type={'text'}
                                     validationSchema={validationDialogMessageField}
                     />
                 </div>

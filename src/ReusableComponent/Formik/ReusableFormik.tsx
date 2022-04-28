@@ -1,13 +1,13 @@
 import React from 'react';
-import {Field, Form, Formik, FormikValues} from 'formik';
+import {Field, Form, Formik, FormikHelpers, FormikValues} from 'formik';
 import * as Yup from 'yup';
 import {ObjectShape} from 'yup/lib/object';
 
 type PropsType = {
-    nameField: string
+    name: string
     initialValues: FormikValues
-    onSubmit: (values: FormikValues) => void
-    typeField: string
+    onSubmit: (values: FormikValues, action: FormikHelpers<FormikValues>) => void
+    type: string
     nameButton: string
     validationSchema: ObjectShape
 }
@@ -15,7 +15,7 @@ type PropsType = {
 
 export const ReusableFormik: React.FC<PropsType> = (props) => {
 
-    const {initialValues, nameButton, nameField, typeField, validationSchema, onSubmit} = props
+    const {initialValues, nameButton, name, type, validationSchema, onSubmit} = props
 
     return (
         <>
@@ -25,7 +25,7 @@ export const ReusableFormik: React.FC<PropsType> = (props) => {
                 onSubmit={onSubmit}
             >
                 <Form>
-                    <Field name={nameField} type={typeField}/>
+                    <Field name={name} type={type}/>
                     <button type="submit">{nameButton}</button>
                 </Form>
             </Formik>

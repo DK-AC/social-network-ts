@@ -1,11 +1,11 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
 import * as Yup from 'yup';
-import {FormikValues} from 'formik';
+import {FormikHelpers, FormikValues} from 'formik';
 
 import {addPostAC} from '../../../redux/reducers/profileReducer';
 import {useAppSelector} from '../../../redux/store';
-import {ReusableFormik} from '../../../ReusableComponent/ReusableFormik';
+import {ReusableFormik} from '../../../ReusableComponent/Formik/ReusableFormik';
 
 import {Post} from './Post/Post';
 import styles from './posts.module.css';
@@ -19,8 +19,9 @@ export const Posts: React.FC = () => {
     const post = posts.map(p => {
         return <Post key={p.id} id={p.id} message={p.message} likesCount={p.likesCount}/>;
     });
-    const addPostMessage = (message: FormikValues) => {
+    const addPostMessage = (message: FormikValues,action: FormikHelpers<FormikValues>) => {
         dispatch(addPostAC(message.postMessage.toString()))
+        action.resetForm({values: {postMessage: ''}})
     }
     const validationPostMessageField = {
         postMessage: Yup.string()
@@ -35,8 +36,8 @@ export const Posts: React.FC = () => {
                 <ReusableFormik initialValues={{postMessage: ''}}
                                 onSubmit={addPostMessage}
                                 nameButton={'add post'}
-                                nameField={'postMessage'}
-                                typeField={'text'}
+                                name={'postMessage'}
+                                type={'text'}
                                 validationSchema={validationPostMessageField}
                 />
             </div>

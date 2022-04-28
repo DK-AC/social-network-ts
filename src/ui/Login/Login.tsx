@@ -9,8 +9,10 @@ import * as Yup from 'yup';
 import {loginTC} from '../../redux/reducers/authReducer';
 import {useAppSelector} from '../../redux/store';
 import {PATH} from '../Routing/Routing';
+import {FieldFormik} from '../../ReusableComponent/Formik/FieldFormik';
 
 type Values = { email: string, password: string, rememberMe: boolean }
+
 
 export const Login = () => {
 
@@ -37,25 +39,14 @@ export const Login = () => {
                         .min(3, 'password is short')
                         .required('Required'),
                 })}
-                onSubmit={(values: Values) => {
+                onSubmit={(values: Values, actions) => {
                     dispatch(loginTC(values))
                 }}
             >
                 <Form>
-                    <div>
-                        <label htmlFor="email">Email</label>
-                        <Field name="email" placeholder="john@acme.com" type="email"/>
-                        <ErrorMessage name="email"/>
-                    </div>
-                    <div>
-                        <label htmlFor="password">Password</label>
-                        <Field name="password" placeholder="password" type="password"/>
-                        <ErrorMessage name="password"/>
-                    </div>
-                    <div>
-                        <label htmlFor="rememberMe">Remember me?</label>
-                        <Field name="rememberMe" type="checkbox"/>
-                    </div>
+                    <FieldFormik type={'email'} name={'email'}/>
+                    <FieldFormik type={'password'} name={'password'}/>
+                    <FieldFormik type={'checkbox'} name={'rememberMe'}/>
                     <button type="submit">Sign Up</button>
                 </Form>
             </Formik>
