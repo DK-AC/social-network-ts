@@ -1,7 +1,7 @@
 import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import {useEffect} from 'react';
-import {Field, Form, Formik} from 'formik';
+import {useFormik} from 'formik';
 import {useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 
@@ -22,6 +22,17 @@ export const Login = () => {
 
     const isInitialized = useAppSelector(state => state.auth.isInitialized)
 
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            password: '',
+            rememberMe: false,
+        },
+        onSubmit: (values: Values) => {
+            dispatch(loginTC(values))
+        },
+    });
+
     useEffect(() => {
         if (isInitialized) {
             navigate(PATH.PROFILE_PAGE)
@@ -32,46 +43,41 @@ export const Login = () => {
     return (
         <div style={{width: '200px', margin: '0 auto'}}>
             <h1>Sign up</h1>
-            <Formik
-                initialValues={{
-                    email: '',
-                    password: '',
-                    rememberMe: false,
-                }}
-                onSubmit={(values: Values) => {
-                    dispatch(loginTC(values))
-                }}
-            >
-                <Form>
-                    <div>
-                        <label htmlFor="email">Email</label>
-                        <Field
-                            id="email"
-                            name="email"
-                            placeholder="john@acme.com"
-                            type="email"
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="password">Password</label>
-                        <Field
-                            id="password"
-                            name="password"
-                            placeholder="password"
-                            type="password"
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="rememberMe">Remember me?</label>
-                        <Field
-                            id="rememberMe"
-                            name="rememberMe"
-                            type="checkbox"
-                        />
-                    </div>
-                    <button type="submit">Sign Up</button>
-                </Form>
-            </Formik>
+            <form onSubmit={formik.handleSubmit}>
+                <div>
+                    <label htmlFor="email">Email</label>
+                    <input
+                        id="email"
+                        name="email"
+                        placeholder="john@acme.com"
+                        type="email"
+                        onChange={formik.handleChange}
+                        value={formik.values.email}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="password">Password</label>
+                    <input
+                        id="password"
+                        name="password"
+                        placeholder="password"
+                        type="password"
+                        onChange={formik.handleChange}
+                        value={formik.values.password}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="rememberMe">Remember me?</label>
+                    <input
+                        id="rememberMe"
+                        name="rememberMe"
+                        type="checkbox"
+                        onChange={formik.handleChange}
+                        checked={formik.values.rememberMe}
+                    />
+                </div>
+                <button type="submit">Sign Up</button>
+            </form>
         </div>
     );
 };
