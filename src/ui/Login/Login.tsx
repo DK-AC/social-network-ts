@@ -4,10 +4,12 @@ import {useEffect} from 'react';
 import {useFormik} from 'formik';
 import {useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
+import * as Yup from 'yup';
 
 import {loginTC} from '../../redux/reducers/authReducer';
 import {useAppSelector} from '../../redux/store';
 import {PATH} from '../Routing/Routing';
+
 
 type Values = {
     email: string;
@@ -28,6 +30,12 @@ export const Login = () => {
             password: '',
             rememberMe: false,
         },
+        validationSchema: Yup.object({
+            email: Yup.string().email('Invalid email address').required('Required'),
+            password: Yup.string()
+                .min(3, 'Must be 3 characters or more')
+                .required('Required'),
+        }),
         onSubmit: (values: Values) => {
             dispatch(loginTC(values))
         },
@@ -48,32 +56,32 @@ export const Login = () => {
                     <label htmlFor="email">Email</label>
                     <input
                         id="email"
-                        name="email"
                         placeholder="john@acme.com"
                         type="email"
-                        onChange={formik.handleChange}
-                        value={formik.values.email}
+                        {...formik.getFieldProps('email')}
                     />
+                    {formik.touched.email && formik.errors.email ? (
+                        <div>{formik.errors.email}</div>
+                    ) : null}
                 </div>
                 <div>
                     <label htmlFor="password">Password</label>
                     <input
                         id="password"
-                        name="password"
                         placeholder="password"
                         type="password"
-                        onChange={formik.handleChange}
-                        value={formik.values.password}
+                        {...formik.getFieldProps('password')}
                     />
+                    {formik.touched.password && formik.errors.password ? (
+                        <div>{formik.errors.password}</div>
+                    ) : null}
                 </div>
                 <div>
                     <label htmlFor="rememberMe">Remember me?</label>
                     <input
                         id="rememberMe"
-                        name="rememberMe"
                         type="checkbox"
-                        onChange={formik.handleChange}
-                        checked={formik.values.rememberMe}
+                        {...formik.getFieldProps('rememberMe')}
                     />
                 </div>
                 <button type="submit">Sign Up</button>
