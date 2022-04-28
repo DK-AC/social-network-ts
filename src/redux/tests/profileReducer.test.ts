@@ -1,4 +1,4 @@
-import {addPostAC, ProfilePageType, profileReducer, updateNewPostTextAC} from '../reducers/profileReducer';
+import {addPostAC, ProfilePageType, profileReducer} from '../reducers/profileReducer';
 
 let fakeState: ProfilePageType;
 
@@ -9,7 +9,6 @@ beforeEach(() => {
             {id: 2, message: '2 post', likesCount: 1},
             {id: 3, message: '3 post', likesCount: 55},
         ],
-        newPostText: '',
         profile: {
             aboutMe: '',
             contacts: {
@@ -44,12 +43,5 @@ test('post should be added', () => {
     expect(endState.posts[3]).toBeDefined();
     expect(fakeState.posts[2].message).toBe('3 post');
     expect(endState.posts[3].message).toBe('New Post Text');
-    expect(endState.newPostText).toBe('');
-});
 
-test('new post text should be changed', () => {
-    const endState = profileReducer(fakeState, updateNewPostTextAC('New Post Text'));
-
-    expect(fakeState.newPostText).toBe('');
-    expect(endState.newPostText).toBe('New Post Text');
 });
