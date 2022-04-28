@@ -30,7 +30,7 @@ export const Navbar: React.FC = () => {
                 </NavLink>
             </div>
             <div>
-                <NavLink to={'/users/*'}
+                <NavLink to={'/users'}
                          style={({isActive}) => isActive ? activeStyle : defaultStyle}
                 >
                     Users

@@ -21,7 +21,7 @@ export const Login = () => {
 
     useEffect(() => {
         if (isInitialized) {
-            navigate(PATH.PROFILE_PAGE)
+            navigate(PATH.START_PAGE)
         }
         return
     }, [isInitialized])
