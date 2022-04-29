@@ -5,6 +5,7 @@ let startState: InitialAppStateType;
 beforeEach(() => {
     startState = {
         isLoading: 'idle',
+        error:'',
     };
 });
 

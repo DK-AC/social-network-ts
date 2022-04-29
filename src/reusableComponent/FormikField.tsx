@@ -1,4 +1,4 @@
-import {ErrorMessage, Field} from 'formik';
+import {Field} from 'formik';
 import * as React from 'react';
 
 type PropsType = {
@@ -6,12 +6,13 @@ type PropsType = {
     type: string
     isShowError: boolean
     isShowLabel: boolean
+    error: string
 }
 
-export const FormikField: React.FC<PropsType> = ({isShowError, name, type, isShowLabel}) => {
+export const FormikField: React.FC<PropsType> = ({isShowError, name, type, isShowLabel, error}) => {
     return <>
         {isShowLabel && <label htmlFor={name}>{name}</label>}
         <Field name={name} type={type}/>
-        {isShowError && <div style={{color: 'red'}}><ErrorMessage name={name}/></div>}
+        {isShowError && <div style={{color: 'red'}}>{error}</div>}
     </>;
 }

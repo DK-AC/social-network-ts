@@ -20,6 +20,7 @@ export const Login = () => {
     const navigate = useNavigate()
 
     const isInitialized = useAppSelector(state => state.auth.isInitialized)
+    const error = useAppSelector(state => state.app.error)
 
     const initialValues = {email: '', password: '', rememberMe: false}
     const validationSchema = {
@@ -49,20 +50,25 @@ export const Login = () => {
                     <Form>
                         <FormikField type={'email'}
                                      name={'email'}
-                                     isShowError={true}
+                                     isShowError={false}
                                      isShowLabel={true}
+                                     error={error}
                         />
                         <FormikField type={'password'}
                                      name={'password'}
                                      isShowError={true}
                                      isShowLabel={true}
+                                     error={error}
                         />
                         <FormikField type={'checkbox'}
                                      name={'rememberMe'}
                                      isShowError={false}
                                      isShowLabel={true}
+                                     error={error}
                         />
-                        <button disabled={!formik.isValid} type="submit">Sign Up</button>
+                        <div>
+                            <button disabled={!formik.isValid} type="submit">Sign Up</button>
+                        </div>
                     </Form>
                 )}
             </Formik>

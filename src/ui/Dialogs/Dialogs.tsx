@@ -20,6 +20,7 @@ export const Dialogs: React.FC = () => {
 
     const {dialogs, messages} = useAppSelector(state => state.dialogs);
     const isInitialized = useAppSelector(state => state.auth.isInitialized);
+    const error = useAppSelector(state => state.app.error)
 
     const dialog = dialogs.map(d => {
         return <DialogItem key={d.id} id={d.id} name={d.name}/>;
@@ -62,6 +63,7 @@ export const Dialogs: React.FC = () => {
                                              type={'text'}
                                              isShowError={true}
                                              isShowLabel={false}
+                                             error={error}
                                 />
                                 <button disabled={!!formik.errors.dialogMessage} type="submit">
                                     add message

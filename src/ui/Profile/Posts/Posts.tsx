@@ -15,6 +15,7 @@ export const Posts: React.FC = () => {
     const dispatch = useDispatch();
 
     const posts = useAppSelector(state => state.profile.posts);
+    const error = useAppSelector(state => state.app.error)
 
     const post = posts.map(p => {
         return <Post key={p.id} id={p.id} message={p.message} likesCount={p.likesCount}/>;
@@ -43,6 +44,7 @@ export const Posts: React.FC = () => {
                                          type={'text'}
                                          isShowError={true}
                                          isShowLabel={false}
+                                         error={error}
                             />
                             <button disabled={!!formik.errors.postMessage} type="submit">add post</button>
                         </Form>
