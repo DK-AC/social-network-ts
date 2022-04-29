@@ -21,7 +21,7 @@ export const authReducer = (state = initialAuthState, action: AuthActionsType): 
     switch (action.type) {
         case SET_IS_INITIALIZED:
             return {
-                ...state, isAuth: action.isAuth,
+                ...state, isAuth: true,
             }
         case SET_IS_AUTH_USER: {
             return {
@@ -50,20 +50,19 @@ export const authReducer = (state = initialAuthState, action: AuthActionsType): 
 
 
 //actions
-export const setIsInitializedAC = (isAuth: boolean) => ({type: SET_IS_INITIALIZED, isAuth}) as const;
+export const setIsInitializedAC = () => ({type: SET_IS_INITIALIZED}) as const;
 export const setIsAuthUser = (data: AuthUserType) => ({type: SET_IS_AUTH_USER, data}) as const;
 export const setIsLoggedInAC = (data: LoginUserType) => ({type: SET_IS_LOGGED_IN, data}) as const;
 export const clearAuthStateAC = () => ({type: CLEAR_AUTH_STATE}) as const
 
 //thunks
 export const authMeTC = () => (dispatch: Dispatch) => {
-    dispatch(setIsInitializedAC(false));
     dispatch(setIsLoadingAC('loading'));
     return authAPI.me()
         .then(res => {
             if (res.data.resultCode === 0) {
                 dispatch(setIsAuthUser(res.data.data));
-                dispatch(setIsInitializedAC(true));
+                dispatch(setIsInitializedAC());
                 dispatch(setIsLoadingAC('successful'));
             } else {
                 dispatch(setIsLoadingAC('failed'));
@@ -76,12 +75,10 @@ export const loginTC = (data: LoginUserType) => (dispatch: Dispatch<any>) => {
     return authAPI.login(data)
         .then(res => {
             if (res.data.resultCode === 0) {
-                dispatch(setIsInitializedAC(true));
                 dispatch(setIsLoggedInAC(res.data.data));
                 dispatch(authMeTC())
                 dispatch(setIsLoadingAC('successful'));
             } else {
-                dispatch(setIsInitializedAC(false));
                 dispatch(setAppErrorAC(res.data.messages[0]))
                 dispatch(setIsLoadingAC('failed'));
             }
@@ -92,11 +89,9 @@ export const logoutTC = () => (dispatch: Dispatch) => {
     return authAPI.logout()
         .then(res => {
             if (res.data.resultCode === 0) {
-                dispatch(setIsInitializedAC(false));
                 dispatch(clearAuthStateAC());
                 dispatch(setIsLoadingAC('successful'));
             } else {
-                dispatch(setIsInitializedAC(true));
                 dispatch(setIsLoadingAC('failed'));
             }
         });
