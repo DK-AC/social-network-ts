@@ -1,7 +1,7 @@
 import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import {useEffect} from 'react';
-import {ErrorMessage, Field, Form, Formik} from 'formik';
+import {Form, Formik} from 'formik';
 import {useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import * as Yup from 'yup';
@@ -9,6 +9,7 @@ import * as Yup from 'yup';
 import {loginTC} from '../../redux/reducers/authReducer';
 import {useAppSelector} from '../../redux/store';
 import {PATH} from '../Routing/Routing';
+import {FormikField} from '../../ReusableComponent/FormikField';
 
 type Values = { email: string, password: string, rememberMe: boolean }
 
@@ -46,20 +47,9 @@ export const Login = () => {
             >
                 {formik => (
                     <Form>
-                        <div>
-                            <label htmlFor={'email'}>email</label>
-                            <Field name={'email'} type={'email'}/>
-                            <ErrorMessage name={'email'}/>
-                        </div>
-                        <div>
-                            <label htmlFor={'password'}>password</label>
-                            <Field name={'password'} type={'password'}/>
-                            <ErrorMessage name={'password'}/>
-                        </div>
-                        <div>
-                            <label htmlFor={'rememberMe'}>remember me?</label>
-                            <Field name={'rememberMe'} type={'checkbox'}/>
-                        </div>
+                        <FormikField type={'email'} name={'email'} isShow={true}/>
+                        <FormikField type={'password'} name={'password'} isShow={true}/>
+                        <FormikField type={'checkbox'} name={'rememberMe'} isShow={false}/>
                         <button disabled={!formik.isValid} type="submit">Sign Up</button>
                     </Form>
                 )}
