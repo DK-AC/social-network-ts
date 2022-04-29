@@ -19,14 +19,13 @@ export const Posts: React.FC = () => {
     const post = posts.map(p => {
         return <Post key={p.id} id={p.id} message={p.message} likesCount={p.likesCount}/>;
     });
-    const addPostMessage = (message: FormikValues,action: FormikHelpers<FormikValues>) => {
+    const addPostMessage = (message: FormikValues, action: FormikHelpers<FormikValues>) => {
         dispatch(addPostAC(message.postMessage.toString()))
         action.resetForm({values: {postMessage: ''}})
     }
     const validationPostMessageField = {
         postMessage: Yup.string()
-            .min(1, 'message should not empty')
-            .required('Required'),
+            .max(30, `Max length is ${30} symbols`),
     }
 
     return (
