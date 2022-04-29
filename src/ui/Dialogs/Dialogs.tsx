@@ -63,7 +63,9 @@ export const Dialogs: React.FC = () => {
                                         <ErrorMessage name={'dialogMessage'}/>
                                     </div>
                                 </div>
-                                <button type="submit">add message</button>
+                                <button disabled={!!formik.errors.dialogMessage} type="submit">
+                                    add message
+                                </button>
                             </Form>
                         )}
                     </Formik>
