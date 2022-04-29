@@ -2,7 +2,7 @@ import {Dispatch} from 'redux';
 
 import {authAPI, AuthUserType, LoginUserType} from '../../api/authAPI';
 
-import {setAppErrorAC, setIsLoadingAC} from './appReducer';
+import {initializeApp, setAppErrorAC, setIsLoadingAC} from './appReducer';
 
 const SET_IS_INITIALIZED = 'SET_IS_INITIALIZED';
 const SET_IS_AUTH_USER = 'SET_IS_AUTH_USER';
@@ -63,11 +63,15 @@ export const authMeTC = () => (dispatch: Dispatch) => {
             if (res.data.resultCode === 0) {
                 dispatch(setIsAuthUser(res.data.data));
                 dispatch(setIsInitializedAC());
+
                 dispatch(setIsLoadingAC('successful'));
             } else {
                 dispatch(setIsLoadingAC('failed'));
             }
-        });
+        })
+        .finally(() => {
+            dispatch(initializeApp(true))
+        })
 };
 
 export const loginTC = (data: LoginUserType) => (dispatch: Dispatch<any>) => {

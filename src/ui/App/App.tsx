@@ -7,6 +7,7 @@ import {Navbar} from '../Navbar/Navbar';
 import {PATH, Routing} from '../Routing/Routing';
 import {authMeTC} from '../../redux/reducers/authReducer';
 import {useAppSelector} from '../../redux/store';
+import {Preloader} from '../Preloader/Preloader';
 
 import styles from './App.module.css';
 
@@ -16,16 +17,23 @@ export const App: React.FC = () => {
     const navigate = useNavigate()
 
     const isAuth = useAppSelector(state => state.auth.isAuth)
+    const isInitialized = useAppSelector(state => state.app.isInitialized)
 
     useEffect(() => {
-        if (!isAuth) {
-            dispatch(authMeTC());
+        dispatch(authMeTC());
+    }, [])
+    
+
+    useEffect(() => {
+        if (isInitialized && !isAuth) {
             navigate(PATH.LOGIN_PAGE)
         }
         return
     }, [isAuth]);
 
-    return (
+   return  !isInitialized ? <Preloader/>:
+
+     (
         <div className={styles.appWrapper}>
             <Header/>
             <Navbar/>

@@ -38,11 +38,12 @@ export const Dialogs: React.FC = () => {
             .max(30, `Max length is ${30} symbols`),
     }
 
-    useEffect(() => {
-        if (!isAuth) {
-            navigate(PATH.LOGIN_PAGE)
-        }
-    }, [isAuth])
+    // useEffect(() => {
+    //     console.log('Dialogs', isAuth)
+    //     if (!isAuth) {
+    //         navigate(PATH.LOGIN_PAGE)
+    //     }
+    // }, [isAuth])
 
     return (
         <>
