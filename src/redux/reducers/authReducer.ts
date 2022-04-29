@@ -10,7 +10,7 @@ const SET_IS_LOGGED_IN = 'SET_IS_LOGGED_IN';
 const CLEAR_AUTH_STATE = 'CLEAR_AUTH_STATE';
 
 const initialAuthState = {
-    isInitialized: false,
+    isAuth: false,
     id: 19179,
     login: '',
     email: '',
@@ -21,7 +21,7 @@ export const authReducer = (state = initialAuthState, action: AuthActionsType): 
     switch (action.type) {
         case SET_IS_INITIALIZED:
             return {
-                ...state, isInitialized: action.isInitialized,
+                ...state, isAuth: action.isAuth,
             }
         case SET_IS_AUTH_USER: {
             return {
@@ -41,7 +41,7 @@ export const authReducer = (state = initialAuthState, action: AuthActionsType): 
                 email: '',
                 id: 19179,
                 password: '',
-                isInitialized: false,
+                isAuth: false,
             }
         default:
             return state;
@@ -50,7 +50,7 @@ export const authReducer = (state = initialAuthState, action: AuthActionsType): 
 
 
 //actions
-export const setIsInitializedAC = (isInitialized: boolean) => ({type: SET_IS_INITIALIZED, isInitialized}) as const;
+export const setIsInitializedAC = (isAuth: boolean) => ({type: SET_IS_INITIALIZED, isAuth}) as const;
 export const setIsAuthUser = (data: AuthUserType) => ({type: SET_IS_AUTH_USER, data}) as const;
 export const setIsLoggedInAC = (data: LoginUserType) => ({type: SET_IS_LOGGED_IN, data}) as const;
 export const clearAuthStateAC = () => ({type: CLEAR_AUTH_STATE}) as const

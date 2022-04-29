@@ -19,7 +19,7 @@ export const Login = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const isInitialized = useAppSelector(state => state.auth.isInitialized)
+    const isAuth = useAppSelector(state => state.auth.isAuth)
     const error = useAppSelector(state => state.app.error)
 
     const initialValues = {email: '', password: '', rememberMe: false}
@@ -32,11 +32,11 @@ export const Login = () => {
     }
 
     useEffect(() => {
-        if (isInitialized) {
+        if (isAuth) {
             navigate(PATH.START_PAGE)
         }
         return
-    }, [isInitialized])
+    }, [isAuth])
 
     return (
         <div style={{width: '200px', margin: '0 auto'}}>

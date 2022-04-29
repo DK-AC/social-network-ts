@@ -15,18 +15,19 @@ export const App: React.FC = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const isInitialized = useAppSelector(state => state.auth.isInitialized)
+    const isAuth = useAppSelector(state => state.auth.isAuth)
 
     useEffect(() => {
-        if (!isInitialized) {
+        if (!isAuth) {
             dispatch(authMeTC());
             navigate(PATH.LOGIN_PAGE)
         }
         return
-    }, [isInitialized]);
+    }, [isAuth]);
 
     return (
-        <div className={styles.appWrapper}><Header/>
+        <div className={styles.appWrapper}>
+            <Header/>
             <Navbar/>
             <div className={styles.appWrapperContent}>
                 <Routing/>

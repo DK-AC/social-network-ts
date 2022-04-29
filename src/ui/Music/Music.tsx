@@ -8,13 +8,13 @@ export const Music = () => {
 
     const navigate = useNavigate()
 
-    const isInitialized = useAppSelector(state => state.auth.isInitialized);
+    const isAuth = useAppSelector(state => state.auth.isAuth);
 
     useEffect(() => {
-        if (!isInitialized) {
+        if (!isAuth) {
             navigate(PATH.LOGIN_PAGE)
         }
-    }, [isInitialized])
+    }, [isAuth])
 
     return (
         <div>Music</div>

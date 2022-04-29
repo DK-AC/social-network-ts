@@ -17,7 +17,7 @@ declare global {
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export const rootReducers = combineReducers({
+export const rootReducer = combineReducers({
     profile: profileReducer,
     dialogs: dialogsReducer,
     sideBar: sideBarReducer,
@@ -26,9 +26,9 @@ export const rootReducers = combineReducers({
     auth: authReducer,
 });
 
-export type RootStateType = ReturnType<typeof rootReducers>
+export type RootStateType = ReturnType<typeof rootReducer>
 
-export const store = createStore(rootReducers, composeEnhancers(applyMiddleware(thunk)));
+export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 export const useAppSelector: TypedUseSelectorHook<RootStateType> = useSelector;
 
 

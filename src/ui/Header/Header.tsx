@@ -11,7 +11,7 @@ export const Header = () => {
 
     const dispatch = useDispatch()
 
-    const isInitialized = useAppSelector<boolean>(state => state.auth.isInitialized);
+    const isAuth = useAppSelector<boolean>(state => state.auth.isAuth);
 
     const logoutHandle = () => {
         dispatch(logoutTC())
@@ -22,7 +22,7 @@ export const Header = () => {
             <img className={styles.logo}
                  src={logoDK}
                  alt="logo"/>
-            {isInitialized && <span>
+            {isAuth && <span>
                 <img className={styles.initializedUser}
                      src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
                      alt="initializedUser"

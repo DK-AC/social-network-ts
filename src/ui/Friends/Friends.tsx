@@ -13,17 +13,17 @@ export const Friends: React.FC = () => {
     const navigate = useNavigate()
 
     const friends = useAppSelector(state => state.sideBar.friends);
-    const isInitialized = useAppSelector(state => state.auth.isInitialized);
+    const isAuth = useAppSelector(state => state.auth.isAuth);
 
     const friendsData = friends.map(f => {
         return <FriendItem key={f.id} id={f.id} name={f.name}/>;
     });
 
     useEffect(() => {
-        if (!isInitialized) {
+        if (!isAuth) {
             navigate(PATH.LOGIN_PAGE)
         }
-    }, [isInitialized])
+    }, [isAuth])
 
     return (
         <div className={styles.friends}>

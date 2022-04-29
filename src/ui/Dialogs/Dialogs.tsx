@@ -19,7 +19,7 @@ export const Dialogs: React.FC = () => {
     const navigate = useNavigate()
 
     const {dialogs, messages} = useAppSelector(state => state.dialogs);
-    const isInitialized = useAppSelector(state => state.auth.isInitialized);
+    const isAuth = useAppSelector(state => state.auth.isAuth);
     const error = useAppSelector(state => state.app.error)
 
     const dialog = dialogs.map(d => {
@@ -39,10 +39,10 @@ export const Dialogs: React.FC = () => {
     }
 
     useEffect(() => {
-        if (!isInitialized) {
+        if (!isAuth) {
             navigate(PATH.LOGIN_PAGE)
         }
-    }, [isInitialized])
+    }, [isAuth])
 
     return (
         <>

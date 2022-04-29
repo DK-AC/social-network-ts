@@ -17,7 +17,7 @@ export const Profile: React.FC = () => {
     const navigate = useNavigate()
 
     const user = useAppSelector(state => state.profile.profile);
-    const {id, isInitialized} = useAppSelector(state => state.auth);
+    const {id, isAuth} = useAppSelector(state => state.auth);
 
     let profileUserId: number;
 
@@ -29,7 +29,7 @@ export const Profile: React.FC = () => {
 
 
     useEffect(() => {
-        if (!isInitialized) {
+        if (!isAuth) {
             navigate(PATH.LOGIN_PAGE)
         }
         dispatch(getProfileUserStatusTC(profileUserId))

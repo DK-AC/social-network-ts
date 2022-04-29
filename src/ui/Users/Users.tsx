@@ -18,7 +18,7 @@ export const Users: React.FC = () => {
 
     const {users, pageSize, currentPage, totalCount} = useAppSelector(state => state.users);
     const isLoading = useAppSelector(state => state.app.isLoading);
-    const isInitialized = useAppSelector(state => state.auth.isInitialized);
+    const isAuth = useAppSelector(state => state.auth.isAuth);
 
     const params: ParamsUserPageType = {
         pageSize,
@@ -41,11 +41,11 @@ export const Users: React.FC = () => {
     const changeCurrentPageHandle = (page: number) => dispatch(changeCurrentPageAC(page));
 
     useEffect(() => {
-        if (!isInitialized) {
+        if (!isAuth) {
             navigate(PATH.LOGIN_PAGE)
         }
         dispatch(setUsersTC(params));
-    }, [currentPage, isInitialized]);
+    }, [currentPage, isAuth]);
 
     return (
         <div className={styles.userItems}>
