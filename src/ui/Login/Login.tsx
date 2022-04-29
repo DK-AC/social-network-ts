@@ -9,7 +9,7 @@ import * as Yup from 'yup';
 import {loginTC} from '../../redux/reducers/authReducer';
 import {useAppSelector} from '../../redux/store';
 import {PATH} from '../Routing/Routing';
-import {FormikField} from '../../ReusableComponent/FormikField';
+import {FormikField} from '../../reusableComponent/FormikField';
 
 type Values = { email: string, password: string, rememberMe: boolean }
 
@@ -47,9 +47,21 @@ export const Login = () => {
             >
                 {formik => (
                     <Form>
-                        <FormikField type={'email'} name={'email'} isShow={true}/>
-                        <FormikField type={'password'} name={'password'} isShow={true}/>
-                        <FormikField type={'checkbox'} name={'rememberMe'} isShow={false}/>
+                        <FormikField type={'email'}
+                                     name={'email'}
+                                     isShowError={true}
+                                     isShowLabel={true}
+                        />
+                        <FormikField type={'password'}
+                                     name={'password'}
+                                     isShowError={true}
+                                     isShowLabel={true}
+                        />
+                        <FormikField type={'checkbox'}
+                                     name={'rememberMe'}
+                                     isShowError={false}
+                                     isShowLabel={true}
+                        />
                         <button disabled={!formik.isValid} type="submit">Sign Up</button>
                     </Form>
                 )}

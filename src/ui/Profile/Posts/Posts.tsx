@@ -1,10 +1,11 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
 import * as Yup from 'yup';
-import {ErrorMessage, Field, Form, Formik, FormikHelpers, FormikValues} from 'formik';
+import {Form, Formik, FormikHelpers, FormikValues} from 'formik';
 
 import {addPostAC} from '../../../redux/reducers/profileReducer';
 import {useAppSelector} from '../../../redux/store';
+import {FormikField} from '../../../reusableComponent/FormikField';
 
 import {Post} from './Post/Post';
 import styles from './posts.module.css';
@@ -38,12 +39,11 @@ export const Posts: React.FC = () => {
                 >
                     {formik => (
                         <Form>
-                            <div style={{color: 'red'}}>
-                                <Field name={'postMessage'} type={'text'}/>
-                                <div>
-                                    <ErrorMessage name={'postMessage'}/>
-                                </div>
-                            </div>
+                            <FormikField name={'postMessage'}
+                                         type={'text'}
+                                         isShowError={true}
+                                         isShowLabel={false}
+                            />
                             <button disabled={!!formik.errors.postMessage} type="submit">add post</button>
                         </Form>
                     )}

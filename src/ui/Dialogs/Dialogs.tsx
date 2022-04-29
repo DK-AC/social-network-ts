@@ -2,11 +2,12 @@ import React, {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import * as Yup from 'yup';
-import {ErrorMessage, Field, Form, Formik, FormikHelpers, FormikValues} from 'formik';
+import {Form, Formik, FormikHelpers, FormikValues} from 'formik';
 
 import {sendMessageAC} from '../../redux/reducers/dialogsReducer';
 import {useAppSelector} from '../../redux/store';
 import {PATH} from '../Routing/Routing';
+import {FormikField} from '../../reusableComponent/FormikField';
 
 import styles from './dialogs.module.css';
 import {DialogItem} from './DialogItem/DialogItem';
@@ -57,12 +58,11 @@ export const Dialogs: React.FC = () => {
                     >
                         {formik => (
                             <Form>
-                                <div style={{color: 'red'}}>
-                                    <Field name={'dialogMessage'} type={'text'}/>
-                                    <div>
-                                        <ErrorMessage name={'dialogMessage'}/>
-                                    </div>
-                                </div>
+                                <FormikField name={'dialogMessage'}
+                                             type={'text'}
+                                             isShowError={true}
+                                             isShowLabel={false}
+                                />
                                 <button disabled={!!formik.errors.dialogMessage} type="submit">
                                     add message
                                 </button>
