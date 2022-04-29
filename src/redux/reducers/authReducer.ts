@@ -7,7 +7,7 @@ import {setIsLoadingAC} from './appReducer';
 const SET_IS_INITIALIZED = 'SET_IS_INITIALIZED';
 const SET_IS_AUTH_USER = 'SET_IS_AUTH_USER';
 const SET_IS_LOGGED_IN = 'SET_IS_LOGGED_IN';
-const SET_IS_LOGGED_OUT = 'SET_IS_LOGGED_OUT';
+const CLEAR_AUTH_STATE = 'CLEAR_AUTH_STATE';
 
 const initialAuthState = {
     isInitialized: false,
@@ -17,7 +17,7 @@ const initialAuthState = {
     password: '',
 };
 
-export const authReducer = (state = initialAuthState, action: AppActionsType): InitialAuthStateType => {
+export const authReducer = (state = initialAuthState, action: AuthActionsType): InitialAuthStateType => {
     switch (action.type) {
         case SET_IS_INITIALIZED:
             return {
@@ -35,6 +35,14 @@ export const authReducer = (state = initialAuthState, action: AppActionsType): I
                 email: action.data.email,
                 password: action.data.password,
             }
+        case CLEAR_AUTH_STATE:
+            return {
+                login: '',
+                email: '',
+                id: 19179,
+                password: '',
+                isInitialized: false,
+            }
         default:
             return state;
     }
@@ -45,7 +53,7 @@ export const authReducer = (state = initialAuthState, action: AppActionsType): I
 export const setIsInitializedAC = (isInitialized: boolean) => ({type: SET_IS_INITIALIZED, isInitialized}) as const;
 export const setIsAuthUser = (data: AuthUserType) => ({type: SET_IS_AUTH_USER, data}) as const;
 export const setIsLoggedInAC = (data: LoginUserType) => ({type: SET_IS_LOGGED_IN, data}) as const;
-export const setIsLoggedOutAC = () => ({type: SET_IS_LOGGED_OUT}) as const;
+export const clearAuthStateAC = () => ({type: CLEAR_AUTH_STATE}) as const
 
 //thunks
 export const authMeTC = () => (dispatch: Dispatch) => {
@@ -63,16 +71,18 @@ export const authMeTC = () => (dispatch: Dispatch) => {
         });
 };
 
-export const loginTC = (data: LoginUserType) => (dispatch: Dispatch) => {
+export const loginTC = (data: LoginUserType) => (dispatch: Dispatch<any>) => {
     dispatch(setIsLoadingAC('loading'));
     return authAPI.login(data)
         .then(res => {
-            dispatch(setIsLoggedInAC(res.data.data));
-            dispatch(setIsLoadingAC('successful'));
             if (res.data.resultCode === 0) {
                 dispatch(setIsInitializedAC(true));
+                dispatch(setIsLoggedInAC(res.data.data));
+                dispatch(authMeTC())
+                dispatch(setIsLoadingAC('successful'));
             } else {
                 dispatch(setIsInitializedAC(false));
+                dispatch(setIsLoadingAC('failed'));
             }
         });
 };
@@ -80,12 +90,13 @@ export const logoutTC = () => (dispatch: Dispatch) => {
     dispatch(setIsLoadingAC('loading'));
     return authAPI.logout()
         .then(res => {
-            dispatch(setIsLoggedOutAC());
-            dispatch(setIsLoadingAC('successful'));
             if (res.data.resultCode === 0) {
                 dispatch(setIsInitializedAC(false));
+                dispatch(clearAuthStateAC());
+                dispatch(setIsLoadingAC('successful'));
             } else {
                 dispatch(setIsInitializedAC(true));
+                dispatch(setIsLoadingAC('failed'));
             }
         });
 };
@@ -93,8 +104,8 @@ export const logoutTC = () => (dispatch: Dispatch) => {
 //types
 export type InitialAuthStateType = typeof initialAuthState
 
-export type AppActionsType =
+export type AuthActionsType =
     ReturnType<typeof setIsLoggedInAC>
     | ReturnType<typeof setIsInitializedAC>
     | ReturnType<typeof setIsAuthUser>
-    | ReturnType<typeof setIsLoggedOutAC>
+    | ReturnType<typeof clearAuthStateAC>
