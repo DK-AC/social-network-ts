@@ -1,76 +1,24 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
 
 import {useAppSelector} from '../../redux/store';
+import {NavBarLink} from '../../reusableComponent/NavBarLink';
+import {PATH} from '../Routing/Routing';
 
 import styles from './navbar.module.css';
 
-
 export const Navbar: React.FC = () => {
-
-    const activeStyle = {
-        color: 'gold',
-        fontWeight: 'bold',
-        textDecoration: 'none',
-    };
-    const defaultStyle = {
-        color: 'white',
-        textDecoration: 'none',
-    };
 
     const friends = useAppSelector(state => state.sideBar.friends);
 
     return (
         <nav className={styles.nav}>
-            <div>
-                <NavLink to={'/profile'}
-                         style={({isActive}) => isActive ? activeStyle : defaultStyle}
-                >
-                    Profile
-                </NavLink>
-            </div>
-            <div>
-                <NavLink to={'/users'}
-                         style={({isActive}) => isActive ? activeStyle : defaultStyle}
-                >
-                    Users
-                </NavLink>
-            </div>
-            <div>
-                <NavLink to={'/dialogs'}
-                         style={({isActive}) => isActive ? activeStyle : defaultStyle}
-                >
-                    Dialogs
-                </NavLink>
-            </div>
-            <div>
-                <NavLink to={'/news'}
-                         style={({isActive}) => isActive ? activeStyle : defaultStyle}
-                >
-                    News
-                </NavLink>
-            </div>
-            <div>
-                <NavLink to={'/music'}
-                         style={({isActive}) => isActive ? activeStyle : defaultStyle}
-                >
-                    Music
-                </NavLink>
-            </div>
-            <div>
-                <NavLink to={'/settings'}
-                         style={({isActive}) => isActive ? activeStyle : defaultStyle}
-                >
-                    Settings
-                </NavLink>
-            </div>
-            <div className={`${styles.friends}`}>
-                <NavLink to={'/friends'}
-                         style={({isActive}) => isActive ? activeStyle : defaultStyle}
-                >
-                    Friends
-                </NavLink>
-            </div>
+            <NavBarLink path={PATH.START_PAGE} title={'Profile'}/>
+            <NavBarLink path={PATH.USERS_PAGE} title={'Users'}/>
+            <NavBarLink path={PATH.DIALOGS_PAGE} title={'Dialogs'}/>
+            <NavBarLink path={PATH.NEWS_PAGE} title={'News'}/>
+            <NavBarLink path={PATH.MUSIC_PAGE} title={'Music'}/>
+            <NavBarLink path={PATH.SETTINGS_PAGE} title={'Settings'}/>
+            <NavBarLink path={PATH.FRIENDS_PAGE} title={'Friends'}/>
             <div className={styles.friendsPage}>
                 {friends.map(f => {
                     return (<div key={f.id}>
