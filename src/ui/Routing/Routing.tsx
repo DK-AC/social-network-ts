@@ -1,6 +1,5 @@
-import {Route, Routes} from 'react-router-dom';
+import {Navigate, Route, Routes} from 'react-router-dom';
 import React from 'react';
-import { Navigate } from 'react-router-dom';
 
 
 import {Profile} from '../Profile/Profile';
@@ -31,7 +30,7 @@ export const Routing: React.FC = () => {
     return (
         <>
             <Routes>
-                <Route path="/" element={<Navigate to="/profile" />} />
+                <Route path="/" element={<Navigate to={PATH.START_PAGE}/>}/>
                 <Route path={PATH.START_PAGE} element={<Profile/>}/>
                 <Route path={PATH.PROFILE_PAGE} element={<Profile/>}/>
                 <Route path={PATH.USERS_PAGE} element={<Users/>}/>

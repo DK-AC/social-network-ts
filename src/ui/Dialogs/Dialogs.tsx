@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import * as Yup from 'yup';
@@ -6,7 +6,6 @@ import {Form, Formik, FormikHelpers, FormikValues} from 'formik';
 
 import {sendMessageAC} from '../../redux/reducers/dialogsReducer';
 import {useAppSelector} from '../../redux/store';
-import {PATH} from '../Routing/Routing';
 import {FormikField} from '../../reusableComponent/FormikField';
 
 import styles from './dialogs.module.css';
@@ -16,10 +15,8 @@ import {MessageItem} from './MessageItem/MessageItem';
 export const Dialogs: React.FC = () => {
 
     const dispatch = useDispatch();
-    const navigate = useNavigate()
 
     const {dialogs, messages} = useAppSelector(state => state.dialogs);
-    const isAuth = useAppSelector(state => state.auth.isAuth);
     const error = useAppSelector(state => state.app.error)
 
     const dialog = dialogs.map(d => {
@@ -38,12 +35,6 @@ export const Dialogs: React.FC = () => {
             .max(30, `Max length is ${30} symbols`),
     }
 
-    // useEffect(() => {
-    //     console.log('Dialogs', isAuth)
-    //     if (!isAuth) {
-    //         navigate(PATH.LOGIN_PAGE)
-    //     }
-    // }, [isAuth])
 
     return (
         <>

@@ -21,7 +21,7 @@ export const App: React.FC = () => {
 
     useEffect(() => {
         dispatch(authMeTC());
-    }, [])
+    }, [dispatch])
     
 
     useEffect(() => {
@@ -29,7 +29,7 @@ export const App: React.FC = () => {
             navigate(PATH.LOGIN_PAGE)
         }
         return
-    }, [isAuth]);
+    }, [isAuth, isInitialized, navigate]);
 
    return  !isInitialized ? <Preloader/>:
 

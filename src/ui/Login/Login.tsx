@@ -36,7 +36,7 @@ export const Login = () => {
             navigate(PATH.START_PAGE)
         }
         return
-    }, [isAuth])
+    }, [isAuth, navigate])
 
     return (
         <div style={{width: '200px', margin: '0 auto'}}>

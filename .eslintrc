@@ -1,4 +1,7 @@
 {
+  "plugins": [
+    "react-hooks"
+  ],
   "extends": [
     "react-app",
     "react-app/jest"
@@ -6,6 +9,8 @@
   "rules": {
     "no-console": "warn",
     "prefer-const": "error",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "quotes": [
       "error",
       "single"
