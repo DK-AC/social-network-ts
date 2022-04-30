@@ -1,6 +1,5 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
-import {useNavigate} from 'react-router-dom';
 import * as Yup from 'yup';
 import {Form, Formik, FormikHelpers, FormikValues} from 'formik';
 
@@ -22,7 +21,6 @@ export const Dialogs: React.FC = () => {
     const dialog = dialogs.map(d => {
         return <DialogItem key={d.id} id={d.id} name={d.name}/>;
     });
-
     const message = messages.map(m => {
         return <MessageItem key={m.id} id={m.id} message={m.message}/>;
     });
@@ -34,7 +32,6 @@ export const Dialogs: React.FC = () => {
         dialogMessage: Yup.string()
             .max(30, `Max length is ${30} symbols`),
     }
-
 
     return (
         <>

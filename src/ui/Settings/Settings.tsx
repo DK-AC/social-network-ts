@@ -15,7 +15,7 @@ export const Settings = () => {
         if (!isAuth) {
             navigate(PATH.LOGIN_PAGE)
         }
-    }, [isAuth])
+    }, [isAuth, navigate])
 
     return (
         <div>

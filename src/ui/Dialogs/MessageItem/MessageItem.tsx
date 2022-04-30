@@ -9,8 +9,7 @@ export const MessageItem: React.FC<PropsType> = ({id, message}) => {
     return (
         <div>
                 <span className={styles.messageItem}>
-                                    {message}
-
+                    {message}
                     <img
                         src={messagePhoto}
                         alt={'messagePhoto'}/>

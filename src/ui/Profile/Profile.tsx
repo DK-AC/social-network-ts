@@ -34,7 +34,7 @@ export const Profile: React.FC = () => {
         }
         dispatch(getProfileUserStatusTC(profileUserId))
         dispatch(setProfileUserTC(profileUserId));
-    }, [profileUserId]);
+    }, [dispatch, isAuth, navigate, profileUserId]);
 
 
     return (

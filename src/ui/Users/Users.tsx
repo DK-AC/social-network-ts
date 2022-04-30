@@ -45,7 +45,7 @@ export const Users: React.FC = () => {
             navigate(PATH.LOGIN_PAGE)
         }
         dispatch(setUsersTC(params));
-    }, [currentPage, isAuth]);
+    }, [currentPage, dispatch, isAuth, navigate]);
 
     return (
         <div className={styles.userItems}>

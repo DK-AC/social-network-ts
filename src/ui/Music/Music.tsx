@@ -14,7 +14,7 @@ export const Music = () => {
         if (!isAuth) {
             navigate(PATH.LOGIN_PAGE)
         }
-    }, [isAuth])
+    }, [isAuth, navigate])
 
     return (
         <div>Music</div>

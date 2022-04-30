@@ -23,7 +23,7 @@ export const Friends: React.FC = () => {
         if (!isAuth) {
             navigate(PATH.LOGIN_PAGE)
         }
-    }, [isAuth])
+    }, [isAuth, navigate])
 
     return (
         <div className={styles.friends}>
