@@ -5,7 +5,8 @@ import messagePhoto from './../../../assets/img/messagePhoto.png';
 
 type PropsType = { id: number, message: string }
 
-export const MessageItem: React.FC<PropsType> = ({id, message}) => {
+export const MessageItem: React.FC<PropsType> = React.memo(({id, message}) => {
+
     return (
         <div>
                 <span className={styles.messageItem}>
@@ -16,5 +17,5 @@ export const MessageItem: React.FC<PropsType> = ({id, message}) => {
             </span>
         </div>
     );
-};
+})
 

@@ -9,7 +9,8 @@ type PropsType = {
     likesCount: number
 }
 
-export const Post: React.FC<PropsType> = ({id, message, likesCount}) => {
+export const Post: React.FC<PropsType> = React.memo(({id, message, likesCount}) => {
+
     return (
         <div className={styles.post}>
             <div className={`${styles.item}`}>
@@ -21,4 +22,4 @@ export const Post: React.FC<PropsType> = ({id, message, likesCount}) => {
             <span> like {likesCount}</span>
         </div>
     );
-};
+})

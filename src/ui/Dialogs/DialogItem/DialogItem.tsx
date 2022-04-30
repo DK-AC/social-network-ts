@@ -6,7 +6,7 @@ import dialogPhoto from './../../../assets/img/dialogPhoto1.png';
 
 type PropsType = { id: number, name: string }
 
-export const DialogItem: React.FC<PropsType> = ({id, name}) => {
+export const DialogItem: React.FC<PropsType> = React.memo(({id, name}) => {
 
     const activeStyle = {
         color: 'gold',
@@ -30,4 +30,4 @@ export const DialogItem: React.FC<PropsType> = ({id, name}) => {
             </NavLink>
         </div>
     );
-};
+})

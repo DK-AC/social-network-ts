@@ -12,7 +12,7 @@ type PropsType = {
     user: ProfileUserType | null
 }
 
-export const ProfileInfo: React.FC<PropsType> = ({user}) => {
+export const ProfileInfo: React.FC<PropsType> = React.memo(({user}) => {
 
     if (!user) {
         return <Preloader/>;
@@ -48,4 +48,4 @@ export const ProfileInfo: React.FC<PropsType> = ({user}) => {
             </div>
         </>
     );
-};
+})

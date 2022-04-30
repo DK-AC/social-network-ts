@@ -10,7 +10,7 @@ import {FormikField} from '../../../reusableComponent/FormikField';
 import {Post} from './Post/Post';
 import styles from './posts.module.css';
 
-export const Posts: React.FC = () => {
+export const Posts: React.FC = React.memo(() => {
 
     const dispatch = useDispatch();
 
@@ -54,5 +54,5 @@ export const Posts: React.FC = () => {
             {post}
         </div>
     );
-};
+})
 
