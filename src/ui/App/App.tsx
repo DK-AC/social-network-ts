@@ -13,6 +13,8 @@ import styles from './App.module.css';
 
 export const App: React.FC = () => {
 
+    console.log('APP:', App)
+
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -22,7 +24,7 @@ export const App: React.FC = () => {
     useEffect(() => {
         dispatch(authMeTC());
     }, [dispatch])
-    
+
 
     useEffect(() => {
         if (isInitialized && !isAuth) {
@@ -31,16 +33,16 @@ export const App: React.FC = () => {
         return
     }, [isAuth, isInitialized, navigate]);
 
-   return  !isInitialized ? <Preloader/>:
+    return !isInitialized ? <Preloader/> :
 
-     (
-        <div className={styles.appWrapper}>
-            <Header/>
-            <Navbar/>
-            <div className={styles.appWrapperContent}>
-                <Routing/>
+        (
+            <div className={styles.appWrapper}>
+                <Header/>
+                <Navbar/>
+                <div className={styles.appWrapperContent}>
+                    <Routing/>
+                </div>
             </div>
-        </div>
-    );
+        );
 };
 
