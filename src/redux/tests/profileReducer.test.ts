@@ -1,5 +1,6 @@
 import {
     addPostAC,
+    deletePostAC,
     getProfileUserStatusAC,
     ProfilePageType,
     profileReducer,
@@ -74,4 +75,14 @@ test('user status should be changed', () => {
 
     expect(fakeState.status).toBe('')
     expect(endState.status).toBe('change status')
+})
+
+test('correct post should be deleted', () => {
+
+    const endState = profileReducer(fakeState, deletePostAC(2))
+
+    expect(fakeState.posts.length).toBe(3)
+    expect(endState.posts.length).toBe(2)
+    expect(fakeState.posts[1].id).toBe(2)
+    expect(endState.posts[1].id).toBe(3)
 })
