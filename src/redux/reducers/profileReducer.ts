@@ -45,7 +45,6 @@ export const profileReducer = (state: initialStateType = initialState, action: P
                 status: action.status,
             }
         case DELETE_POST:
-            debugger
             return {
                 ...state,
                 posts: state.posts.filter(post => post.id !== action.postId),
