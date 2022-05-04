@@ -1,4 +1,10 @@
-import {addPostAC, ProfilePageType, profileReducer, setProfileUserAC} from '../reducers/profileReducer';
+import {
+    addPostAC,
+    getProfileUserStatusAC,
+    ProfilePageType,
+    profileReducer,
+    setProfileUserAC
+} from '../reducers/profileReducer';
 import {ProfileUserType} from '../../api/profileAPI';
 
 let fakeState: ProfilePageType;
@@ -49,8 +55,15 @@ test('user should be set', () => {
     }
     const endState = profileReducer(fakeState, setProfileUserAC(user))
 
-    expect(fakeState.profile).toBe(null)
+    expect(fakeState.profile).toBeNull()
     expect(endState.profile?.userId).toBe(3)
     expect(endState.profile?.fullName).toBe('DK_AC')
-    expect(endState.profile?.lookingForAJob).toBe(true)
+    expect(endState.profile?.lookingForAJob).toBeTruthy()
+})
+
+test('set user status', () => {
+    const endState = profileReducer(fakeState, getProfileUserStatusAC('new status'))
+
+    expect(fakeState.status).toBe('')
+    expect(endState.status).toBe('new status')
 })
