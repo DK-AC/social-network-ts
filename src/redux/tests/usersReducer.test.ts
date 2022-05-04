@@ -60,7 +60,7 @@ test('users should be sets', () => {
 
     const endState = usersReducer(fakeState, setUsersAC(startState.users));
 
-    expect(fakeState).toEqual({users: [], totalCount: 1, currentPage: 1, pageSize: 5});
+    expect(fakeState).toEqual({users: [], totalCount: 1, currentPage: 1, pageSize: 5, followingInProgress: []});
     expect(fakeState.users.length).toBe(0);
     expect(endState).toEqual({
         users: [
@@ -84,6 +84,7 @@ test('users should be sets', () => {
         totalCount: 1,
         pageSize: 5,
         currentPage: 1,
+        followingInProgress: [],
     });
     expect(endState.users.length).toBe(2);
 });

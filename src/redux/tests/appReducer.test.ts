@@ -1,4 +1,10 @@
-import {appReducer, InitialAppStateType, setAppErrorAC, setIsLoadingAC} from '../reducers/appReducer';
+import {
+    appReducer,
+    InitialAppStateType,
+    initializeApp,
+    setAppErrorAC,
+    setIsLoadingAC,
+} from '../reducers/appReducer';
 
 let startState: InitialAppStateType;
 
@@ -22,4 +28,11 @@ test('set app error', () => {
 
     expect(startState.error).toBe('');
     expect(endState.error).toBe('error');
+});
+
+test('set app initialize', () => {
+    const endState = appReducer(startState, initializeApp(true));
+
+    expect(startState.isInitialized).toBeFalsy();
+    expect(endState.isInitialized).toBeTruthy();
 });
