@@ -4,12 +4,12 @@ import {ParamsUserPageType, userAPI} from '../../api/userAPI';
 
 import {setIsLoadingAC} from './appReducer';
 
-const FOLLOW_USER = 'FOLLOW_USER';
-const UNFOLLOW_USER = 'UNFOLLOW_USER';
-const SET_USERS = 'SET_USERS';
-const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT';
-const CHANGE_CURRENT_PAGE = 'CHANGE_CURRENT_PAGE';
-const FOLLOW_IN_PROGRESS = 'FOLLOW_IN_PROGRESS';
+const FOLLOW_USER = 'social-network/users/FOLLOW_USER';
+const UNFOLLOW_USER = 'social-network/users/UNFOLLOW_USER';
+const SET_USERS = 'social-network/users/SET_USERS';
+const SET_TOTAL_COUNT = 'social-network/users/SET_TOTAL_COUNT';
+const CHANGE_CURRENT_PAGE = 'social-network/users/CHANGE_CURRENT_PAGE';
+const FOLLOW_IN_PROGRESS = 'social-network/users/FOLLOW_IN_PROGRESS';
 
 
 const initialState = {

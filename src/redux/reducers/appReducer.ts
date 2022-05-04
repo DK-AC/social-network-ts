@@ -1,6 +1,6 @@
-const SET_IS_LOADING = 'SET_IS_LOADING';
-const SET_APP_ERROR = 'SET_APP_ERROR';
-const SET_INITIALIZE = 'SET_INITIALIZE';
+const SET_IS_LOADING = 'social-network/app/SET_IS_LOADING';
+const SET_APP_ERROR = 'social-network/app/SET_APP_ERROR';
+const SET_INITIALIZE = 'social-network/app/SET_INITIALIZE';
 
 
 const initialAppState = {

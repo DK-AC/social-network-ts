@@ -4,11 +4,11 @@ import {profileAPI, ProfileUserType} from '../../api/profileAPI';
 
 import {setIsLoadingAC} from './appReducer';
 
-const ADD_POST = 'ADD_POST';
-const SET_PROFILE_USER = 'SET_PROFILE_USER';
-const GET_PROFILE_USER_STATUS = 'GET_PROFILE_USER_STATUS';
-const UPDATE_PROFILE_USER_STATUS = 'UPDATE_PROFILE_USER_STATUS';
-const DELETE_POST = 'DELETE_POST'
+const ADD_POST = 'social-network/profile/ADD_POST';
+const SET_PROFILE_USER = 'social-network/profile/SET_PROFILE_USER';
+const GET_PROFILE_USER_STATUS = 'social-network/profile/GET_PROFILE_USER_STATUS';
+const UPDATE_PROFILE_USER_STATUS = 'social-network/profile/UPDATE_PROFILE_USER_STATUS';
+const DELETE_POST = 'social-network/profile/DELETE_POST'
 
 
 const initialState = {

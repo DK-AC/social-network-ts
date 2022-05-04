@@ -4,10 +4,10 @@ import {authAPI, AuthUserType, LoginUserType} from '../../api/authAPI';
 
 import {initializeApp, setAppErrorAC, setIsLoadingAC} from './appReducer';
 
-const SET_IS_INITIALIZED = 'SET_IS_INITIALIZED';
-const SET_IS_AUTH_USER = 'SET_IS_AUTH_USER';
-const SET_IS_LOGGED_IN = 'SET_IS_LOGGED_IN';
-const CLEAR_AUTH_STATE = 'CLEAR_AUTH_STATE';
+const SET_IS_INITIALIZED = 'social-network/auth/SET_IS_INITIALIZED';
+const SET_IS_AUTH_USER = 'social-network/auth/SET_IS_AUTH_USER';
+const SET_IS_LOGGED_IN = 'social-network/auth/SET_IS_LOGGED_IN';
+const CLEAR_AUTH_STATE = 'social-network/auth/CLEAR_AUTH_STATE';
 
 const initialAuthState = {
     isAuth: false,
