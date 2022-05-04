@@ -3,7 +3,8 @@ import {
     getProfileUserStatusAC,
     ProfilePageType,
     profileReducer,
-    setProfileUserAC
+    setProfileUserAC,
+    updateProfileUserStatusAC,
 } from '../reducers/profileReducer';
 import {ProfileUserType} from '../../api/profileAPI';
 
@@ -66,4 +67,11 @@ test('set user status', () => {
 
     expect(fakeState.status).toBe('')
     expect(endState.status).toBe('new status')
+})
+
+test('user status should be changed', () => {
+    const endState = profileReducer(fakeState, updateProfileUserStatusAC('change status'))
+
+    expect(fakeState.status).toBe('')
+    expect(endState.status).toBe('change status')
 })
