@@ -1,4 +1,5 @@
-import {addPostAC, ProfilePageType, profileReducer} from '../reducers/profileReducer';
+import {addPostAC, ProfilePageType, profileReducer, setProfileUserAC} from '../reducers/profileReducer';
+import {ProfileUserType} from '../../api/profileAPI';
 
 let fakeState: ProfilePageType;
 
@@ -9,27 +10,7 @@ beforeEach(() => {
             {id: 2, message: '2 post', likesCount: 1},
             {id: 3, message: '3 post', likesCount: 55},
         ],
-        profile: {
-            aboutMe: '',
-            contacts: {
-                facebook: '',
-                website: '',
-                vk: '',
-                twitter: '',
-                instagram: '',
-                youtube: '',
-                github: '',
-                mainLink: '',
-            },
-            lookingForAJob: false,
-            lookingForAJobDescription: '',
-            fullName: '',
-            userId: 3,
-            photos: {
-                small: '',
-                large: '',
-            },
-        },
+        profile: null,
         status: '',
     };
 });
@@ -42,6 +23,34 @@ test('post should be added', () => {
     expect(fakeState.posts[3]).toBeUndefined();
     expect(endState.posts[3]).toBeDefined();
     expect(fakeState.posts[2].message).toBe('3 post');
-    expect(endState.posts[3].message).toBe('New Post Text');
-
+    expect(endState.posts[3].message).toBe('3 post');
+    expect(endState.posts[0].message).toBe('New Post Text');
 });
+
+test('user should be set', () => {
+
+    const user: ProfileUserType = {
+        userId: 3,
+        photos: {small: '', large: ''},
+        lookingForAJob: true,
+        lookingForAJobDescription: '',
+        fullName: 'DK_AC',
+        contacts: {
+            facebook: '',
+            website: '',
+            vk: '',
+            twitter: '',
+            instagram: '',
+            youtube: '',
+            github: '',
+            mainLink: '',
+        },
+        aboutMe: 'DK_AC',
+    }
+    const endState = profileReducer(fakeState, setProfileUserAC(user))
+
+    expect(fakeState.profile).toBe(null)
+    expect(endState.profile?.userId).toBe(3)
+    expect(endState.profile?.fullName).toBe('DK_AC')
+    expect(endState.profile?.lookingForAJob).toBe(true)
+})

@@ -88,7 +88,7 @@ type initialStateType = typeof initialState
 export type PostType = { id: number, message: string, likesCount: number }
 export type ProfilePageType = {
     posts: PostType[]
-    profile: ProfileUserType
+    profile: ProfileUserType | null
     status: string
 }
 

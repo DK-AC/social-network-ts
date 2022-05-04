@@ -13,9 +13,6 @@ import styles from './App.module.css';
 
 export const App: React.FC = () => {
 
-    console.log('APP:', App)
-    console.log('APP:', App)
-
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
