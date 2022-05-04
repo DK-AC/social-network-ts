@@ -124,3 +124,12 @@ test('show following user', () => {
     expect(fakeState.followingInProgress.some(userId => userId === userId1)).toBe(false)
     expect(endState.followingInProgress.some(userId => userId === userId1)).toBe(false)
 });
+
+test('show unfollowing user', () => {
+
+    const userId1 = 2
+    const endState = usersReducer(fakeState, followingInProgressAC(true, userId1));
+
+    expect(fakeState.followingInProgress.some(userId => userId === userId1)).toBe(false)
+    expect(endState.followingInProgress.some(userId => userId === userId1)).toBe(true)
+});
