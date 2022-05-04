@@ -17,12 +17,11 @@ const initialState = {
         {id: 2, message: '2 post', likesCount: 1},
         {id: 3, message: '3 post', likesCount: 55},
     ],
-
     profile: null as ProfileUserType | null,
     status: '',
 };
 
-export const profileReducer = (state: initialStateType = initialState, action: ProfileActionsType): initialStateType => {
+export const profileReducer = (state = initialState, action: ProfileActionsType): InitialProfileStateType => {
     switch (action.type) {
         case ADD_POST:
             return {
@@ -56,50 +55,38 @@ export const profileReducer = (state: initialStateType = initialState, action: P
 
 //actions
 export const addPostAC = (postText: string) => ({type: ADD_POST, postText} as const);
-
 export const setProfileUserAC = (profile: ProfileUserType) => ({type: SET_PROFILE_USER, profile} as const);
-export const getProfileUserStatusAC = (status: string) => {
-    return ({type: GET_PROFILE_USER_STATUS, status}) as const
-}
-export const updateProfileUserStatusAC = (status: string) => {
-    return ({type: UPDATE_PROFILE_USER_STATUS, status}) as const
-}
+export const getProfileUserStatusAC = (status: string) => ({type: GET_PROFILE_USER_STATUS, status}) as const
+export const updateProfileUserStatusAC = (status: string) => ({type: UPDATE_PROFILE_USER_STATUS, status}) as const
 export const deletePostAC = (postId: number) => ({type: DELETE_POST, postId}) as const
 
 
 //thunks
-export const setProfileUserTC = (userId: number) => (dispatch: Dispatch) => {
+export const setProfileUserTC = (userId: number) => async (dispatch: Dispatch) => {
     dispatch(setIsLoadingAC('loading'));
-    return profileAPI.getProfileUserId(userId)
-        .then(res => {
-            dispatch(setProfileUserAC(res.data));
-            dispatch(setIsLoadingAC('successful'));
-        });
+    const response = await profileAPI.getProfileUserId(userId)
+    dispatch(setProfileUserAC(response.data));
+    dispatch(setIsLoadingAC('successful'));
 };
-export const getProfileUserStatusTC = (userId: number) => (dispatch: Dispatch) => {
-    return profileAPI.getProfileUserStatus(userId)
-        .then(res => {
-            dispatch(getProfileUserStatusAC(res.data))
-        })
+export const getProfileUserStatusTC = (userId: number) => async (dispatch: Dispatch) => {
+    dispatch(setIsLoadingAC('loading'));
+    const response = await profileAPI.getProfileUserStatus(userId)
+    dispatch(getProfileUserStatusAC(response.data))
+    dispatch(setIsLoadingAC('successful'));
 }
-export const updateProfileUserStatusTC = (status: string) => (dispatch: Dispatch) => {
-    return profileAPI.updateProfileUserStatus({status})
-        .then(res => {
-            if (res.data.resultCode === 0) {
-                dispatch(updateProfileUserStatusAC(status))
-            }
-        })
+export const updateProfileUserStatusTC = (status: string) => async (dispatch: Dispatch) => {
+    dispatch(setIsLoadingAC('loading'));
+    const response = await profileAPI.updateProfileUserStatus({status})
+    if (response.data.resultCode === 0) {
+        dispatch(updateProfileUserStatusAC(status))
+        dispatch(setIsLoadingAC('successful'));
+    } else {
+        dispatch(setIsLoadingAC('failed'));
+    }
 }
 
 //types
-type initialStateType = typeof initialState
-
-export type PostType = { id: number, message: string, likesCount: number }
-export type ProfilePageType = {
-    posts: PostType[]
-    profile: ProfileUserType | null
-    status: string
-}
+export type InitialProfileStateType = typeof initialState
 
 export type ProfileActionsType =
     ReturnType<typeof addPostAC>

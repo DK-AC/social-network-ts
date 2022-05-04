@@ -2,14 +2,14 @@ import {
     changeCurrentPageAC,
     followingInProgressAC,
     followUserAC,
+    InitialAuthStateType,
     setTotalUserCountAC,
     setUsersAC,
     unfollowUserAC,
-    UsersPageType,
     usersReducer,
 } from '../reducers/usersReducer';
 
-let fakeState: UsersPageType;
+let fakeState: InitialAuthStateType;
 const fakeUsers = [
     {
         id: 1,
@@ -74,7 +74,7 @@ test('users should be sets', () => {
             status: '',
             followed: false,
         }];
-    const fakeUserState: UsersPageType = {
+    const fakeUserState = {
         users: fakeUsersForTests,
         totalCount: 100,
         currentPage: 3,

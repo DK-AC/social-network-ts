@@ -21,7 +21,7 @@ const initialState = {
 };
 
 
-export const usersReducer = (state: initialStateType = initialState, action: UsersActionsType): initialStateType => {
+export const usersReducer = (state = initialState, action: UsersActionsType): InitialAuthStateType => {
     switch (action.type) {
         case FOLLOW_USER:
             return {
@@ -63,6 +63,8 @@ export const usersReducer = (state: initialStateType = initialState, action: Use
             return state;
     }
 };
+
+
 //actions
 export const followUserAC = (userId: number) => ({type: FOLLOW_USER, userId}) as const;
 export const unfollowUserAC = (userId: number) => ({type: UNFOLLOW_USER, userId}) as const;
@@ -74,46 +76,42 @@ export const followingInProgressAC = (isFetching: boolean, userId: number) => (
 
 
 //thunks
-export const setUsersTC = (params: ParamsUserPageType) => (dispatch: Dispatch) => {
+export const setUsersTC = (params: ParamsUserPageType) => async (dispatch: Dispatch) => {
     dispatch(setIsLoadingAC('loading'));
-    return userAPI.getUsers(params)
-        .then(data => {
-            dispatch(setUsersAC(data.items));
-            dispatch(setTotalUserCountAC(data.totalCount));
-            dispatch(setIsLoadingAC('successful'));
-        });
+    const response = await userAPI.getUsers(params)
+    dispatch(setUsersAC(response.items));
+    dispatch(setTotalUserCountAC(response.totalCount));
+    dispatch(setIsLoadingAC('successful'));
 };
-export const followUserTC = (userId: number) => (dispatch: Dispatch) => {
+export const followUserTC = (userId: number) => async (dispatch: Dispatch) => {
     dispatch(followingInProgressAC(true, userId));
     dispatch(setIsLoadingAC('loading'));
-    return userAPI.followUser(userId)
-        .then(data => {
-            if (data.resultCode === 0) {
-                dispatch(followUserAC(userId));
-                dispatch(followingInProgressAC(false, userId));
-                dispatch(setIsLoadingAC('successful'));
-            } else {
-                dispatch(setIsLoadingAC('failed'));
-            }
-        })
+    const response = await userAPI.followUser(userId)
+    if (response.resultCode === 0) {
+        dispatch(followUserAC(userId));
+        dispatch(followingInProgressAC(false, userId));
+        dispatch(setIsLoadingAC('successful'));
+    } else {
+        dispatch(setIsLoadingAC('failed'));
+    }
 }
-export const unfollowUserTC = (userId: number) => (dispatch: Dispatch) => {
+export const unfollowUserTC = (userId: number) => async (dispatch: Dispatch) => {
     dispatch(followingInProgressAC(true, userId));
     dispatch(setIsLoadingAC('loading'));
-    return userAPI.unfollowUser(userId)
-        .then(data => {
-            if (data.resultCode === 0) {
-                dispatch(unfollowUserAC(userId));
-                dispatch(followingInProgressAC(false, userId));
-                dispatch(setIsLoadingAC('successful'));
-            } else {
-                dispatch(setIsLoadingAC('failed'));
-            }
-        })
+    const response = await userAPI.unfollowUser(userId)
+    if (response.resultCode === 0) {
+        dispatch(unfollowUserAC(userId));
+        dispatch(followingInProgressAC(false, userId));
+        dispatch(setIsLoadingAC('successful'));
+    } else {
+        dispatch(setIsLoadingAC('failed'));
+    }
 }
 
 
 //types
+export type InitialAuthStateType = typeof initialState
+
 export type UsersActionsType =
     ReturnType<typeof followUserAC>
     | ReturnType<typeof unfollowUserAC>
@@ -121,8 +119,6 @@ export type UsersActionsType =
     | ReturnType<typeof setTotalUserCountAC>
     | ReturnType<typeof changeCurrentPageAC>
     | ReturnType<typeof followingInProgressAC>
-
-type initialStateType = typeof initialState
 
 export type UserType = {
     id: number,
@@ -136,11 +132,4 @@ export type UserType = {
     followed: boolean
 }
 
-export type UsersPageType = {
-    users: UserType[]
-    totalCount: number
-    pageSize: number
-    currentPage: number
-    followingInProgress: number[]
-}
 

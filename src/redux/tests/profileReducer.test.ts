@@ -2,14 +2,14 @@ import {
     addPostAC,
     deletePostAC,
     getProfileUserStatusAC,
-    ProfilePageType,
+    InitialProfileStateType,
     profileReducer,
     setProfileUserAC,
     updateProfileUserStatusAC,
 } from '../reducers/profileReducer';
 import {ProfileUserType} from '../../api/profileAPI';
 
-let fakeState: ProfilePageType;
+let fakeState: InitialProfileStateType;
 
 beforeEach(() => {
     fakeState = {

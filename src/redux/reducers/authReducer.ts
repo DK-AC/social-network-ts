@@ -9,7 +9,7 @@ const SET_IS_AUTH_USER = 'social-network/auth/SET_IS_AUTH_USER';
 const SET_IS_LOGGED_IN = 'social-network/auth/SET_IS_LOGGED_IN';
 const CLEAR_AUTH_STATE = 'social-network/auth/CLEAR_AUTH_STATE';
 
-const initialAuthState = {
+const initialState = {
     isAuth: false,
     id: 19179,
     login: '',
@@ -17,7 +17,7 @@ const initialAuthState = {
     password: '',
 };
 
-export const authReducer = (state = initialAuthState, action: AuthActionsType): InitialAuthStateType => {
+export const authReducer = (state = initialState, action: AuthActionsType): InitialAuthStateType => {
     switch (action.type) {
         case SET_IS_INITIALIZED:
             return {
@@ -56,53 +56,43 @@ export const setIsLoggedInAC = (data: LoginUserType) => ({type: SET_IS_LOGGED_IN
 export const clearAuthStateAC = () => ({type: CLEAR_AUTH_STATE}) as const
 
 //thunks
-export const authMeTC = () => (dispatch: Dispatch) => {
+export const authMeTC = () => async (dispatch: Dispatch) => {
     dispatch(setIsLoadingAC('loading'));
-    return authAPI.me()
-        .then(res => {
-            if (res.data.resultCode === 0) {
-                dispatch(setIsAuthUser(res.data.data));
-                dispatch(setIsInitializedAC());
-
-                dispatch(setIsLoadingAC('successful'));
-            } else {
-                dispatch(setIsLoadingAC('failed'));
-            }
-        })
-        .finally(() => {
-            dispatch(initializeApp(true))
-        })
+    const response = await authAPI.me()
+    if (response.data.resultCode === 0) {
+        dispatch(setIsAuthUser(response.data.data));
+        dispatch(setIsInitializedAC());
+        dispatch(initializeApp(true))
+        dispatch(setIsLoadingAC('successful'));
+    } else {
+        dispatch(setIsLoadingAC('failed'));
+    }
+}
+export const loginTC = (data: LoginUserType) => async (dispatch: Dispatch<any>) => {
+    dispatch(setIsLoadingAC('loading'));
+    const response = await authAPI.login(data)
+    if (response.data.resultCode === 0) {
+        dispatch(setIsLoggedInAC(response.data.data));
+        dispatch(authMeTC())
+        dispatch(setIsLoadingAC('successful'));
+    } else {
+        dispatch(setAppErrorAC(response.data.messages[0]))
+        dispatch(setIsLoadingAC('failed'));
+    }
 };
-
-export const loginTC = (data: LoginUserType) => (dispatch: Dispatch<any>) => {
+export const logoutTC = () => async (dispatch: Dispatch) => {
     dispatch(setIsLoadingAC('loading'));
-    return authAPI.login(data)
-        .then(res => {
-            if (res.data.resultCode === 0) {
-                dispatch(setIsLoggedInAC(res.data.data));
-                dispatch(authMeTC())
-                dispatch(setIsLoadingAC('successful'));
-            } else {
-                dispatch(setAppErrorAC(res.data.messages[0]))
-                dispatch(setIsLoadingAC('failed'));
-            }
-        });
-};
-export const logoutTC = () => (dispatch: Dispatch) => {
-    dispatch(setIsLoadingAC('loading'));
-    return authAPI.logout()
-        .then(res => {
-            if (res.data.resultCode === 0) {
-                dispatch(clearAuthStateAC());
-                dispatch(setIsLoadingAC('successful'));
-            } else {
-                dispatch(setIsLoadingAC('failed'));
-            }
-        });
+    const response = await authAPI.logout()
+    if (response.data.resultCode === 0) {
+        dispatch(clearAuthStateAC());
+        dispatch(setIsLoadingAC('successful'));
+    } else {
+        dispatch(setIsLoadingAC('failed'));
+    }
 };
 
 //types
-export type InitialAuthStateType = typeof initialAuthState
+export type InitialAuthStateType = typeof initialState
 
 export type AuthActionsType =
     ReturnType<typeof setIsLoggedInAC>

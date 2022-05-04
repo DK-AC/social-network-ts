@@ -1,6 +1,6 @@
-import {DialogsPageType, dialogsReducer, sendMessageAC} from '../reducers/dialogsReducer';
+import {dialogsReducer, initialDialogsStateType, sendMessageAC} from '../reducers/dialogsReducer';
 
-let fakeState: DialogsPageType;
+let fakeState: initialDialogsStateType;
 
 beforeEach(() => {
     fakeState = {
