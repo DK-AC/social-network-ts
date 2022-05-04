@@ -10,10 +10,27 @@ import {
 } from '../reducers/usersReducer';
 
 let fakeState: UsersPageType;
+const fakeUsers = [
+    {
+        id: 1,
+        name: 'Denis',
+        uniqueUrlName: '',
+        photos: {small: '', large: ''},
+        status: '',
+        followed: true,
+    },
+    {
+        id: 2,
+        name: 'Jenya',
+        uniqueUrlName: '',
+        photos: {small: '', large: ''},
+        status: '',
+        followed: false,
+    }]
 
 beforeEach(() => {
         fakeState = {
-            users: [],
+            users: fakeUsers,
             totalCount: 100,
             pageSize: 5,
             currentPage: 3,
@@ -40,23 +57,25 @@ test('followed user should be changed on false', () => {
 
 test('users should be sets', () => {
 
-    const fakeUserState: UsersPageType = {
-        users: [{
-            id: 1,
-            name: 'Denis',
+    const fakeUsersForTests = [
+        {
+            id: 3,
+            name: 'Sasha',
             uniqueUrlName: '',
             photos: {small: '', large: ''},
             status: '',
             followed: true,
         },
-            {
-                id: 2,
-                name: 'Jenya',
-                uniqueUrlName: '',
-                photos: {small: '', large: ''},
-                status: '',
-                followed: false,
-            }],
+        {
+            id: 4,
+            name: 'Rita',
+            uniqueUrlName: '',
+            photos: {small: '', large: ''},
+            status: '',
+            followed: false,
+        }];
+    const fakeUserState: UsersPageType = {
+        users: fakeUsersForTests,
         totalCount: 100,
         currentPage: 3,
         pageSize: 5,
@@ -66,34 +85,19 @@ test('users should be sets', () => {
     const endState = usersReducer(fakeState, setUsersAC(fakeUserState.users));
 
     expect(fakeState).toEqual({
-        users: [],
+        users: fakeUsers,
         totalCount: 100,
         currentPage: 3,
         pageSize: 5,
         followingInProgress: [],
     });
-    expect(fakeState.users.length).toBe(0);
+    expect(fakeState.users.length).toBe(2);
     expect(endState).toEqual({
         totalCount: 100,
         pageSize: 5,
         currentPage: 3,
         followingInProgress: [],
-        users: [{
-            id: 1,
-            name: 'Denis',
-            uniqueUrlName: '',
-            photos: {small: '', large: ''},
-            status: '',
-            followed: true,
-        },
-            {
-                id: 2,
-                name: 'Jenya',
-                uniqueUrlName: '',
-                photos: {small: '', large: ''},
-                status: '',
-                followed: false,
-            }],
+        users: fakeUsersForTests,
     });
     expect(endState.users.length).toBe(2);
 });
