@@ -4,8 +4,7 @@ import {ParamsUserPageType, userAPI} from '../../api/userAPI';
 
 import {setIsLoadingAC} from './appReducer';
 
-const FOLLOW_USER = 'social-network/users/FOLLOW_USER';
-const UNFOLLOW_USER = 'social-network/users/UNFOLLOW_USER';
+const SET_FOLLOW_USER = 'social-network/users/SET_FOLLOW_USER';
 const SET_USERS = 'social-network/users/SET_USERS';
 const SET_TOTAL_COUNT = 'social-network/users/SET_TOTAL_COUNT';
 const CHANGE_CURRENT_PAGE = 'social-network/users/CHANGE_CURRENT_PAGE';
@@ -23,18 +22,11 @@ const initialState = {
 
 export const usersReducer = (state = initialState, action: UsersActionsType): InitialAuthStateType => {
     switch (action.type) {
-        case FOLLOW_USER:
+        case SET_FOLLOW_USER:
             return {
                 ...state,
                 users: state.users.map(user => user.id === action.userId
-                    ? {...user, followed: true}
-                    : user),
-            };
-        case UNFOLLOW_USER:
-            return {
-                ...state,
-                users: state.users.map(user => user.id === action.userId
-                    ? {...user, followed: false}
+                    ? {...user, followed: action.follow}
                     : user),
             };
         case SET_USERS:
@@ -66,8 +58,7 @@ export const usersReducer = (state = initialState, action: UsersActionsType): In
 
 
 //actions
-export const followUserAC = (userId: number) => ({type: FOLLOW_USER, userId}) as const;
-export const unfollowUserAC = (userId: number) => ({type: UNFOLLOW_USER, userId}) as const;
+export const setFollowUserAC = (userId: number, follow: boolean) => ({type: SET_FOLLOW_USER, userId, follow}) as const
 export const setUsersAC = (users: UserType[]) => ({type: SET_USERS, users}) as const;
 export const setTotalUserCountAC = (totalCount: number) => ({type: SET_TOTAL_COUNT, totalCount}) as const;
 export const changeCurrentPageAC = (currentPage: number) => ({type: CHANGE_CURRENT_PAGE, currentPage}) as const;
@@ -88,7 +79,7 @@ export const followUserTC = (userId: number) => async (dispatch: Dispatch) => {
     dispatch(setIsLoadingAC('loading'));
     const response = await userAPI.followUser(userId)
     if (response.resultCode === 0) {
-        dispatch(followUserAC(userId));
+        dispatch(setFollowUserAC(userId, true));
         dispatch(followingInProgressAC(false, userId));
         dispatch(setIsLoadingAC('successful'));
     } else {
@@ -100,7 +91,7 @@ export const unfollowUserTC = (userId: number) => async (dispatch: Dispatch) => 
     dispatch(setIsLoadingAC('loading'));
     const response = await userAPI.unfollowUser(userId)
     if (response.resultCode === 0) {
-        dispatch(unfollowUserAC(userId));
+        dispatch(setFollowUserAC(userId, false));
         dispatch(followingInProgressAC(false, userId));
         dispatch(setIsLoadingAC('successful'));
     } else {
@@ -113,8 +104,7 @@ export const unfollowUserTC = (userId: number) => async (dispatch: Dispatch) => 
 export type InitialAuthStateType = typeof initialState
 
 export type UsersActionsType =
-    ReturnType<typeof followUserAC>
-    | ReturnType<typeof unfollowUserAC>
+    ReturnType<typeof setFollowUserAC>
     | ReturnType<typeof setUsersAC>
     | ReturnType<typeof setTotalUserCountAC>
     | ReturnType<typeof changeCurrentPageAC>

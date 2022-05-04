@@ -1,11 +1,10 @@
 import {
     changeCurrentPageAC,
     followingInProgressAC,
-    followUserAC,
     InitialAuthStateType,
+    setFollowUserAC,
     setTotalUserCountAC,
     setUsersAC,
-    unfollowUserAC,
     usersReducer,
 } from '../reducers/usersReducer';
 
@@ -41,7 +40,7 @@ beforeEach(() => {
 
 test('unfollowed user should be changed on true', () => {
 
-    const endState = usersReducer(fakeState, followUserAC(2));
+    const endState = usersReducer(fakeState, setFollowUserAC(2, true));
 
     expect(fakeState.users[1].followed).toBeFalsy();
     expect(endState.users[1].followed).toBeTruthy();
@@ -49,7 +48,7 @@ test('unfollowed user should be changed on true', () => {
 
 test('followed user should be changed on false', () => {
 
-    const endState = usersReducer(fakeState, unfollowUserAC(1));
+    const endState = usersReducer(fakeState, setFollowUserAC(1, false));
 
     expect(fakeState.users[0].followed).toBeTruthy();
     expect(endState.users[0].followed).toBeFalsy();
