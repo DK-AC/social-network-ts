@@ -3,10 +3,11 @@ import {useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 
 import {useAppSelector} from '../../redux/store';
-import {changeCurrentPageAC, setUsersTC} from '../../redux/reducers/usersReducer';
+import {setUsersTC} from '../../redux/reducers/usersReducer';
 import {ParamsUserPageType} from '../../api/userAPI';
 import {Preloader} from '../Preloader/Preloader';
 import {PATH} from '../Routing/Routing';
+import {Paginator} from '../common/Paginator';
 
 import styles from './users.module.css';
 import {User} from './User/User';
@@ -16,7 +17,7 @@ export const Users: React.FC = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate()
 
-    const {users, pageSize, currentPage, totalCount} = useAppSelector(state => state.users);
+    const {users, pageSize, currentPage} = useAppSelector(state => state.users);
     const isLoading = useAppSelector(state => state.app.isLoading);
     const isAuth = useAppSelector(state => state.auth.isAuth);
 
@@ -29,17 +30,6 @@ export const Users: React.FC = () => {
         return <User key={u.id} user={u}/>;
     });
 
-    const pagesCount = Math.ceil(totalCount / pageSize);
-
-    const pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-        if (i === 50) break;
-        pages.push(i);
-
-    }
-
-    const changeCurrentPageHandle = (page: number) => dispatch(changeCurrentPageAC(page));
-
     useEffect(() => {
         if (!isAuth) {
             navigate(PATH.LOGIN_PAGE)
@@ -51,14 +41,7 @@ export const Users: React.FC = () => {
         <div className={styles.userItems}>
             {isLoading === 'loading' ? <Preloader/>
                 : <div>
-                    {pages.map((p, index) => {
-                        return (
-                            <span key={index}
-                                  className={currentPage === p ? styles.currentPage : '' + styles.pageItems}
-                                  onClick={() => changeCurrentPageHandle(p)}
-                            >
-                        {p}</span>);
-                    })}
+                    <Paginator/>
                     {user}
                 </div>}
         </div>
