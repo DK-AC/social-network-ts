@@ -6,6 +6,7 @@ import {updateProfileUserStatusTC} from '../../../../redux/reducers/profileReduc
 
 
 export const ProfileStatus: React.FC = () => {
+    console.log('need refactoring redux toolkit')
 
     const dispatch = useDispatch()
 
