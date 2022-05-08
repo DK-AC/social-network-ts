@@ -4,7 +4,7 @@ import {
     getProfileUserStatusAC,
     InitialProfileStateType,
     profileReducer,
-    setProfileUserAC,
+    setProfileUserTC,
     updateProfileUserStatusAC,
 } from '../reducers/profileReducer';
 import {ProfileUserType} from '../../api/profileAPI';
@@ -37,7 +37,6 @@ test('post should be added', () => {
 });
 
 test('user should be set', () => {
-
     const user: ProfileUserType = {
         userId: 3,
         photos: {small: '', large: ''},
@@ -56,7 +55,9 @@ test('user should be set', () => {
         },
         aboutMe: 'DK_AC',
     }
-    const endState = profileReducer(fakeState, setProfileUserAC(user))
+
+    const action = setProfileUserTC.fulfilled({profile: user}, 'requestId', 3)
+    const endState = profileReducer(fakeState, action)
 
     expect(fakeState.profile).toBeNull()
     expect(endState.profile?.userId).toBe(3)
@@ -80,7 +81,7 @@ test('user status should be changed', () => {
 
 test('correct post should be deleted', () => {
 
-    const endState = profileReducer(fakeState, deletePost(2))
+    const endState = profileReducer(fakeState, deletePost({postId: 2}))
 
     expect(fakeState.posts.length).toBe(3)
     expect(endState.posts.length).toBe(2)

@@ -100,11 +100,5 @@ export const updateProfileUserStatusTC = createAsyncThunk<{ status: string }, { 
 //types
 export type InitialProfileStateType = typeof initialState
 
-export type ProfileActionsType =
-    | ReturnType<typeof setProfileUserAC>
-    | ReturnType<typeof getProfileUserStatusAC>
-    | ReturnType<typeof updateProfileUserStatusAC>
-
-
 export type ThunkErrorType = { rejectValue: { errors: string[], fieldsErrors?: FieldErrorType[] } }
 export type FieldErrorType = { error: string, field: string };
