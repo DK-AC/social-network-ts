@@ -1,9 +1,9 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 import {profileAPI, ProfileUserType} from '../../api/profileAPI';
+import {handleAsyncNetworkError, handleAsyncServerAppError} from '../../utils/error-utils';
 
 import {setIsLoadingAC} from './appReducer';
-import {handleAsyncNetworkError} from "../../utils/error-utils";
 
 const initialState = {
     posts: [
@@ -53,7 +53,6 @@ export const setProfileUserTC = createAsyncThunk<{ profile: ProfileUserType }, n
             thunkAPI.dispatch(setIsLoadingAC('successful'))
             return {profile: response.data}
         } catch (err: any) {
-            thunkAPI.dispatch(setIsLoadingAC('failed'));
             return handleAsyncNetworkError(err, thunkAPI)
         }
     })
@@ -77,12 +76,10 @@ export const updateProfileUserStatusTC = createAsyncThunk<{ status: string }, { 
                 thunkAPI.dispatch(setIsLoadingAC('successful'))
                 return status
             } else {
-                thunkAPI.dispatch(setIsLoadingAC('failed'));
-                return thunkAPI.rejectWithValue({errors: [], fieldsErrors: []})
+                return handleAsyncServerAppError(response.data, thunkAPI)
             }
-        } catch (e) {
-            thunkAPI.dispatch(setIsLoadingAC('failed'));
-            return thunkAPI.rejectWithValue({errors: [], fieldsErrors: []})
+        } catch (err: any) {
+            return handleAsyncNetworkError(err, thunkAPI)
         }
     })
 
