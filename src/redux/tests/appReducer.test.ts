@@ -1,10 +1,4 @@
-import {
-    appReducer,
-    InitialAppStateType,
-    isAppInitialized,
-    setAppError,
-    setAppStatus,
-} from '../reducers/appReducer';
+import {appReducer, InitialAppStateType, isAppInitialized, setAppError, setAppStatus,} from '../reducers/appReducer';
 
 let startState: InitialAppStateType;
 
@@ -16,23 +10,27 @@ beforeEach(() => {
     };
 });
 
-test('loading should be changed', () => {
-    const endState = appReducer(startState, setAppStatus('successful'));
+describe('app', () => {
 
-    expect(startState.status).toBe('idle');
-    expect(endState.status).toBe('successful');
-});
+    test('loading should be changed', () => {
+        const endState = appReducer(startState, setAppStatus({status: 'successful'}));
 
-test('set app error', () => {
-    const endState = appReducer(startState, setAppError('error'));
+        expect(startState.status).toBe('idle');
+        expect(endState.status).toBe('successful');
+    });
 
-    expect(startState.error).toBe('');
-    expect(endState.error).toBe('error');
-});
+    test('set app error', () => {
+        const endState = appReducer(startState, setAppError({error: 'error'}));
 
-test('set app initialize', () => {
-    const endState = appReducer(startState, isAppInitialized(true));
+        expect(startState.error).toBe('');
+        expect(endState.error).toBe('error');
+    });
 
-    expect(startState.isInitialized).toBeFalsy();
-    expect(endState.isInitialized).toBeTruthy();
-});
+    test('set app initialize', () => {
+        const endState = appReducer(startState, isAppInitialized({isInitialized: true}));
+
+        expect(startState.isInitialized).toBeFalsy();
+        expect(endState.isInitialized).toBeTruthy();
+    });
+})
+
