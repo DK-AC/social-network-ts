@@ -17,6 +17,8 @@ const initialState = {
     password: '',
 };
 
+console.log('next refactoring')
+
 export const authReducer = (state = initialState, action: AuthActionsType): InitialAuthStateType => {
     switch (action.type) {
         case SET_IS_INITIALIZED:
