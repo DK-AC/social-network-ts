@@ -48,7 +48,6 @@ export const authReducer = (state = initialState, action: AuthActionsType): Init
     }
 };
 
-
 //actions
 export const setIsInitializedAC = () => ({type: SET_IS_INITIALIZED}) as const;
 export const setIsAuthUser = (data: AuthUserType) => ({type: SET_IS_AUTH_USER, data}) as const;
@@ -57,37 +56,37 @@ export const clearAuthStateAC = () => ({type: CLEAR_AUTH_STATE}) as const
 
 //thunks
 export const authMeTC = () => async (dispatch: Dispatch) => {
-    dispatch(setAppStatus('loading'));
+    dispatch(setAppStatus({status: 'loading'}));
     const response = await authAPI.me()
     if (response.data.resultCode === 0) {
         dispatch(setIsAuthUser(response.data.data));
         dispatch(setIsInitializedAC());
-        dispatch(isAppInitialized(true))
-        dispatch(setAppStatus('successful'));
+        dispatch(isAppInitialized({isInitialized: true}))
+        dispatch(setAppStatus({status: 'successful'}));
     } else {
-        dispatch(setAppStatus('failed'));
+        dispatch(setAppStatus({status: 'failed'}));
     }
 }
 export const loginTC = (data: LoginUserType) => async (dispatch: Dispatch<any>) => {
-    dispatch(setAppStatus('loading'));
+    dispatch(setAppStatus({status: 'loading'}));
     const response = await authAPI.login(data)
     if (response.data.resultCode === 0) {
         dispatch(setIsLoggedInAC(response.data.data));
         dispatch(authMeTC())
-        dispatch(setAppStatus('successful'));
+        dispatch(setAppStatus({status: 'successful'}));
     } else {
-        dispatch(setAppError(response.data.messages[0]))
-        dispatch(setAppStatus('failed'));
+        dispatch(setAppError({error: response.data.messages[0]}))
+        dispatch(setAppStatus({status: 'failed'}));
     }
 };
 export const logoutTC = () => async (dispatch: Dispatch) => {
-    dispatch(setAppStatus('loading'));
+    dispatch(setAppStatus({status: 'loading'}));
     const response = await authAPI.logout()
     if (response.data.resultCode === 0) {
         dispatch(clearAuthStateAC());
-        dispatch(setAppStatus('successful'));
+        dispatch(setAppStatus({status: 'successful'}));
     } else {
-        dispatch(setAppStatus('failed'));
+        dispatch(setAppStatus({status: 'failed'}));
     }
 };
 

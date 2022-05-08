@@ -47,20 +47,20 @@ export const {addPost, deletePost} = profileSlices.actions
 //thunks
 export const setProfileUserTC = createAsyncThunk<{ profile: ProfileUserType }, number, ThunkErrorType>('profile/setProfileUser',
     async (userId, thunkAPI) => {
-        thunkAPI.dispatch(setAppStatus('loading'));
+        thunkAPI.dispatch(setAppStatus({status: 'loading'}));
         try {
             const response = await profileAPI.getProfileUserId(userId)
-            thunkAPI.dispatch(setAppStatus('successful'))
+            thunkAPI.dispatch(setAppStatus({status: 'successful'}))
             return {profile: response.data}
         } catch (err: any) {
             return handleAsyncNetworkError(err, thunkAPI)
         }
     })
 export const getProfileUserStatusTC = createAsyncThunk<{ status: string }, number, ThunkErrorType>('profile/getProfileUserStatus', async (userId: number, thunkAPI) => {
-    thunkAPI.dispatch(setAppStatus('loading'));
+    thunkAPI.dispatch(setAppStatus({status: 'loading'}));
     try {
         const response = await profileAPI.getProfileUserStatus(userId)
-        thunkAPI.dispatch(setAppStatus('successful'))
+        thunkAPI.dispatch(setAppStatus({status: 'successful'}))
         return {status: response.data}
     } catch (err: any) {
         return handleAsyncNetworkError(err, thunkAPI)
@@ -69,11 +69,11 @@ export const getProfileUserStatusTC = createAsyncThunk<{ status: string }, numbe
 export const updateProfileUserStatusTC = createAsyncThunk<{ status: string }, { status: string }, ThunkErrorType>
 ('profile/updateProfileUserStatus',
     async (status, thunkAPI) => {
-        thunkAPI.dispatch(setAppStatus('loading'));
+        thunkAPI.dispatch(setAppStatus({status: 'loading'}));
         try {
             const response = await profileAPI.updateProfileUserStatus(status)
             if (response.data.resultCode === 0) {
-                thunkAPI.dispatch(setAppStatus('successful'))
+                thunkAPI.dispatch(setAppStatus({status: 'successful'}))
                 return status
             } else {
                 return handleAsyncServerAppError(response.data, thunkAPI)

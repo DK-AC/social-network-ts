@@ -76,25 +76,25 @@ const followUnfollowFlow = async (payload: {
 }) => {
     const {follow, actionCreator, userId, dispatch, apiMethod} = payload
 
-    dispatch(setAppStatus('loading'));
+    dispatch(setAppStatus({status: 'loading'}));
     dispatch(followingInProgressAC(true, userId));
     const response = await apiMethod(userId)
     if (response.resultCode === 0) {
         dispatch(actionCreator(userId, follow));
-        dispatch(setAppStatus('successful'));
+        dispatch(setAppStatus({status: 'successful'}));
         dispatch(followingInProgressAC(false, userId));
     } else {
-        dispatch(setAppStatus('failed'));
+        dispatch(setAppStatus({status: 'failed'}));
     }
 }
 
 //thunks
 export const setUsersTC = (params: ParamsUserPageType) => async (dispatch: Dispatch) => {
-    dispatch(setAppStatus('loading'));
+    dispatch(setAppStatus({status: 'loading'}));
     const response = await userAPI.getUsers(params)
     dispatch(setUsersAC(response.items));
     dispatch(setTotalUserCountAC(response.totalCount));
-    dispatch(setAppStatus('successful'));
+    dispatch(setAppStatus({status: 'successful'}));
 };
 export const followUserTC = (userId: number, follow: boolean) => async (dispatch: Dispatch) => {
     await followUnfollowFlow({
