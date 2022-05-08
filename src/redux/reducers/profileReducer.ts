@@ -3,11 +3,7 @@ import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {profileAPI, ProfileUserType} from '../../api/profileAPI';
 
 import {setIsLoadingAC} from './appReducer';
-
-const SET_PROFILE_USER = 'social-network/profile/SET_PROFILE_USER';
-const GET_PROFILE_USER_STATUS = 'social-network/profile/GET_PROFILE_USER_STATUS';
-const UPDATE_PROFILE_USER_STATUS = 'social-network/profile/UPDATE_PROFILE_USER_STATUS';
-
+import {handleAsyncNetworkError} from "../../utils/error-utils";
 
 const initialState = {
     posts: [
@@ -21,6 +17,7 @@ const initialState = {
 
 export const profileSlices = createSlice({
     name: 'profile',
+    initialState,
     reducers: {
         addPost(state, action: PayloadAction<{ postText: string }>) {
             state.posts.push({id: new Date().getTime(), message: action.payload.postText, likesCount: 0})
@@ -30,7 +27,6 @@ export const profileSlices = createSlice({
             if (index !== -1) state.posts.splice(index, 1)
         },
     },
-    initialState,
     extraReducers: (builder) => {
         builder
             .addCase(setProfileUserTC.fulfilled, (state: InitialProfileStateType, action) => {
@@ -48,12 +44,6 @@ export const profileSlices = createSlice({
 export const profileReducer = profileSlices.reducer
 export const {addPost, deletePost} = profileSlices.actions
 
-//actions
-export const setProfileUserAC = (profile: ProfileUserType) => ({type: SET_PROFILE_USER, profile} as const);
-export const getProfileUserStatusAC = (status: string) => ({type: GET_PROFILE_USER_STATUS, status}) as const
-export const updateProfileUserStatusAC = (status: string) => ({type: UPDATE_PROFILE_USER_STATUS, status}) as const
-
-
 //thunks
 export const setProfileUserTC = createAsyncThunk<{ profile: ProfileUserType }, number, ThunkErrorType>('profile/setProfileUser',
     async (userId, thunkAPI) => {
@@ -62,9 +52,9 @@ export const setProfileUserTC = createAsyncThunk<{ profile: ProfileUserType }, n
             const response = await profileAPI.getProfileUserId(userId)
             thunkAPI.dispatch(setIsLoadingAC('successful'))
             return {profile: response.data}
-        } catch (e) {
+        } catch (err: any) {
             thunkAPI.dispatch(setIsLoadingAC('failed'));
-            return thunkAPI.rejectWithValue({errors: [], fieldsErrors: []})
+            return handleAsyncNetworkError(err, thunkAPI)
         }
     })
 export const getProfileUserStatusTC = createAsyncThunk<{ status: string }, number, ThunkErrorType>('profile/getProfileUserStatus', async (userId: number, thunkAPI) => {
@@ -73,8 +63,8 @@ export const getProfileUserStatusTC = createAsyncThunk<{ status: string }, numbe
         const response = await profileAPI.getProfileUserStatus(userId)
         thunkAPI.dispatch(setIsLoadingAC('successful'))
         return {status: response.data}
-    } catch (e) {
-        return thunkAPI.rejectWithValue({errors: [], fieldsErrors: []})
+    } catch (err: any) {
+        return handleAsyncNetworkError(err, thunkAPI)
     }
 })
 export const updateProfileUserStatusTC = createAsyncThunk<{ status: string }, { status: string }, ThunkErrorType>

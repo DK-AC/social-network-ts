@@ -16,10 +16,12 @@ export const authAPI = {
 
 export type ResponseType<T = {}> = {
     data: T
-    fieldsErrors: string[]
+    fieldsErrors: FieldErrorType[]
     messages: string[]
     resultCode: number
 }
+
+export type FieldErrorType = { error: string, field: string };
 
 export type AuthUserType = {
     id: number
