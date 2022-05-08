@@ -1,6 +1,6 @@
 import {
-    addPostAC,
-    deletePostAC,
+    addPost,
+    deletePost,
     getProfileUserStatusAC,
     InitialProfileStateType,
     profileReducer,
@@ -24,7 +24,7 @@ beforeEach(() => {
 });
 
 test('post should be added', () => {
-    const endState = profileReducer(fakeState, addPostAC('New Post Text'));
+    const endState = profileReducer(fakeState, addPost({profile: 'New Post Text'}));
 
     expect(fakeState.posts.length).toBe(3);
     expect(endState.posts.length).toBe(4);
@@ -79,7 +79,7 @@ test('user status should be changed', () => {
 
 test('correct post should be deleted', () => {
 
-    const endState = profileReducer(fakeState, deletePostAC(2))
+    const endState = profileReducer(fakeState, deletePost( 2))
 
     expect(fakeState.posts.length).toBe(3)
     expect(endState.posts.length).toBe(2)

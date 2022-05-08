@@ -3,7 +3,7 @@ import {TypedUseSelectorHook, useSelector} from 'react-redux';
 import thunk from 'redux-thunk';
 import {configureStore} from '@reduxjs/toolkit';
 
-import {profileReducer, profileReducer1} from './reducers/profileReducer';
+import {profileReducer} from './reducers/profileReducer';
 import {dialogsReducer} from './reducers/dialogsReducer';
 import {sideBarReducer} from './reducers/sideBarReducer';
 import {usersReducer} from './reducers/usersReducer';
@@ -12,7 +12,7 @@ import {authReducer} from './reducers/authReducer';
 
 
 export const rootReducer = combineReducers({
-    profile: profileReducer1,
+    profile: profileReducer,
     dialogs: dialogsReducer,
     sideBar: sideBarReducer,
     users: usersReducer,
