@@ -1,4 +1,3 @@
-import {Dispatch} from 'redux';
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 
 import {profileAPI, ProfileUserType} from '../../api/profileAPI';
@@ -32,6 +31,9 @@ export const profileReducer_ = createSlice({
                 state.profile = action.payload.profile
             })
             .addCase(updateProfileUserStatusTC.fulfilled, (state: InitialProfileStateType, action) => {
+                state.status = action.payload.status
+            })
+            .addCase(getProfileUserStatusTC.fulfilled, (state: InitialProfileStateType, action) => {
                 state.status = action.payload.status
             })
     },
@@ -87,12 +89,13 @@ export const setProfileUserTC = createAsyncThunk<{ profile: ProfileUserType }, n
         thunkAPI.dispatch(setIsLoadingAC('successful'))
         return {profile: response.data}
     })
-export const getProfileUserStatusTC = (userId: number) => async (dispatch: Dispatch) => {
-    dispatch(setIsLoadingAC('loading'));
+export const getProfileUserStatusTC = createAsyncThunk<{ status: string }, number, ThunkErrorType>('profile/getProfileUserStatus', async (userId: number, thunkAPI) => {
+    thunkAPI.dispatch(setIsLoadingAC('loading'));
     const response = await profileAPI.getProfileUserStatus(userId)
-    dispatch(getProfileUserStatusAC(response.data))
-    dispatch(setIsLoadingAC('successful'))
-}
+    thunkAPI.dispatch(setIsLoadingAC('successful'))
+    return {status: response.data}
+
+})
 export const updateProfileUserStatusTC = createAsyncThunk<{ status: string }, { status: string }, ThunkErrorType>
 ('profile/updateProfileUserStatus',
     async (status, thunkAPI) => {
