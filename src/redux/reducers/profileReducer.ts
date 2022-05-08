@@ -1,4 +1,5 @@
 import {Dispatch} from 'redux';
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 
 import {profileAPI, ProfileUserType} from '../../api/profileAPI';
 
@@ -20,6 +21,23 @@ const initialState = {
     profile: null as ProfileUserType | null,
     status: '',
 };
+
+export const profileReducer_ = createSlice({
+    name: 'profile',
+    reducers: {},
+    initialState,
+    extraReducers: (builder) => {
+        builder
+            .addCase(setProfileUserTC.fulfilled, (state: InitialProfileStateType, action) => {
+                state.profile = action.payload.profile
+            })
+            .addCase(updateProfileUserStatusTC.fulfilled, (state: InitialProfileStateType, action) => {
+                state.status = action.payload.status
+            })
+    },
+})
+
+export const profileReducer1 = profileReducer_.reducer
 
 export const profileReducer = (state = initialState, action: ProfileActionsType): InitialProfileStateType => {
     switch (action.type) {
@@ -62,28 +80,33 @@ export const deletePostAC = (postId: number) => ({type: DELETE_POST, postId}) as
 
 
 //thunks
-export const setProfileUserTC = (userId: number) => async (dispatch: Dispatch) => {
-    dispatch(setIsLoadingAC('loading'));
-    const response = await profileAPI.getProfileUserId(userId)
-    dispatch(setProfileUserAC(response.data));
-    dispatch(setIsLoadingAC('successful'));
-};
+export const setProfileUserTC = createAsyncThunk<{ profile: ProfileUserType }, number, ThunkErrorType>('profile/setProfileUser',
+    async (userId, thunkAPI) => {
+        thunkAPI.dispatch(setIsLoadingAC('loading'));
+        const response = await profileAPI.getProfileUserId(userId)
+        thunkAPI.dispatch(setIsLoadingAC('successful'))
+        return {profile: response.data}
+    })
 export const getProfileUserStatusTC = (userId: number) => async (dispatch: Dispatch) => {
     dispatch(setIsLoadingAC('loading'));
     const response = await profileAPI.getProfileUserStatus(userId)
     dispatch(getProfileUserStatusAC(response.data))
-    dispatch(setIsLoadingAC('successful'));
+    dispatch(setIsLoadingAC('successful'))
 }
-export const updateProfileUserStatusTC = (status: string) => async (dispatch: Dispatch) => {
-    dispatch(setIsLoadingAC('loading'));
-    const response = await profileAPI.updateProfileUserStatus({status})
-    if (response.data.resultCode === 0) {
-        dispatch(updateProfileUserStatusAC(status))
-        dispatch(setIsLoadingAC('successful'));
-    } else {
-        dispatch(setIsLoadingAC('failed'));
-    }
-}
+export const updateProfileUserStatusTC = createAsyncThunk<{ status: string }, { status: string }, ThunkErrorType>
+('profile/updateProfileUserStatus',
+    async (status, thunkAPI) => {
+        thunkAPI.dispatch(setIsLoadingAC('loading'));
+        const response = await profileAPI.updateProfileUserStatus(status)
+        if (response.data.resultCode === 0) {
+            thunkAPI.dispatch(setIsLoadingAC('successful'))
+            return status
+        } else {
+            thunkAPI.dispatch(setIsLoadingAC('failed'));
+            return thunkAPI.rejectWithValue({errors: [], fieldsErrors: []})
+        }
+    })
+
 
 //types
 export type InitialProfileStateType = typeof initialState
@@ -95,3 +118,6 @@ export type ProfileActionsType =
     | ReturnType<typeof updateProfileUserStatusAC>
     | ReturnType<typeof deletePostAC>
 
+
+export type ThunkErrorType = { rejectValue: { errors: string[], fieldsErrors?: FieldErrorType[] } }
+export type FieldErrorType = { error: string, field: string };

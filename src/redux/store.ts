@@ -1,24 +1,18 @@
-import {applyMiddleware, combineReducers, compose, createStore} from 'redux';
+import {combineReducers} from 'redux';
 import {TypedUseSelectorHook, useSelector} from 'react-redux';
 import thunk from 'redux-thunk';
+import {configureStore} from '@reduxjs/toolkit';
 
-import {profileReducer} from './reducers/profileReducer';
+import {profileReducer, profileReducer1} from './reducers/profileReducer';
 import {dialogsReducer} from './reducers/dialogsReducer';
 import {sideBarReducer} from './reducers/sideBarReducer';
 import {usersReducer} from './reducers/usersReducer';
 import {appReducer} from './reducers/appReducer';
 import {authReducer} from './reducers/authReducer';
 
-declare global {
-    interface Window {
-        __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
-    }
-}
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export const rootReducer = combineReducers({
-    profile: profileReducer,
+    profile: profileReducer1,
     dialogs: dialogsReducer,
     sideBar: sideBarReducer,
     users: usersReducer,
@@ -28,7 +22,12 @@ export const rootReducer = combineReducers({
 
 export type RootStateType = ReturnType<typeof rootReducer>
 
-export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
+export const store = configureStore({
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().prepend(thunk),
+    devTools: process.env.NODE_ENV !== 'production',
+
+});
 export const useAppSelector: TypedUseSelectorHook<RootStateType> = useSelector;
 
 

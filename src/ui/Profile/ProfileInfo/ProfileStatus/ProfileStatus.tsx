@@ -26,7 +26,7 @@ export const ProfileStatus: React.FC = () => {
         setValue(e.currentTarget.value)
     }
     const updateStatus = (status: string) => {
-        dispatch(updateProfileUserStatusTC(status))
+        dispatch(updateProfileUserStatusTC({status}))
     }
 
 
