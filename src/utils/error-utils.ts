@@ -1,6 +1,6 @@
 import {AxiosError} from 'axios';
 
-import {setAppErrorAC, setIsLoadingAC} from '../redux/reducers/appReducer'
+import {setAppErrorAC, setAppStatus} from '../redux/reducers/appReducer'
 import {ResponseType} from '../api/authAPI';
 
 type ThunkAPIType = {
@@ -12,7 +12,7 @@ export const handleAsyncServerAppError = (data: ResponseType, thunkAPI: ThunkAPI
     if (showError) {
         thunkAPI.dispatch(setAppErrorAC(data.messages.length ? data.messages[0] : 'Some error occurred'))
     }
-    thunkAPI.dispatch(setIsLoadingAC('failed'))
+    thunkAPI.dispatch(setAppStatus('failed'))
 
     return thunkAPI.rejectWithValue({errors: data.messages, fieldsErrors: data.fieldsErrors})
 }
@@ -20,7 +20,7 @@ export const handleAsyncNetworkError = (error: AxiosError, thunkAPI: ThunkAPITyp
     if (showError) {
         thunkAPI.dispatch(setAppErrorAC(error.message ? error.message : 'Some error occurred'))
     }
-    thunkAPI.dispatch(setIsLoadingAC('failed'))
+    thunkAPI.dispatch(setAppStatus('failed'))
 
     return thunkAPI.rejectWithValue({errors: [error.message], fieldsErrors: undefined})
 }

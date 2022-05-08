@@ -2,7 +2,7 @@ import {Dispatch} from 'redux';
 
 import {ParamsUserPageType, userAPI} from '../../api/userAPI';
 
-import {setIsLoadingAC} from './appReducer';
+import {setAppStatus} from './appReducer';
 
 const SET_IS_FOLLOW_USER = 'social-network/users/SET_IS_FOLLOW_USER';
 const SET_USERS = 'social-network/users/SET_USERS';
@@ -76,25 +76,25 @@ const followUnfollowFlow = async (payload: {
 }) => {
     const {follow, actionCreator, userId, dispatch, apiMethod} = payload
 
-    dispatch(setIsLoadingAC('loading'));
+    dispatch(setAppStatus('loading'));
     dispatch(followingInProgressAC(true, userId));
     const response = await apiMethod(userId)
     if (response.resultCode === 0) {
         dispatch(actionCreator(userId, follow));
-        dispatch(setIsLoadingAC('successful'));
+        dispatch(setAppStatus('successful'));
         dispatch(followingInProgressAC(false, userId));
     } else {
-        dispatch(setIsLoadingAC('failed'));
+        dispatch(setAppStatus('failed'));
     }
 }
 
 //thunks
 export const setUsersTC = (params: ParamsUserPageType) => async (dispatch: Dispatch) => {
-    dispatch(setIsLoadingAC('loading'));
+    dispatch(setAppStatus('loading'));
     const response = await userAPI.getUsers(params)
     dispatch(setUsersAC(response.items));
     dispatch(setTotalUserCountAC(response.totalCount));
-    dispatch(setIsLoadingAC('successful'));
+    dispatch(setAppStatus('successful'));
 };
 export const followUserTC = (userId: number, follow: boolean) => async (dispatch: Dispatch) => {
     await followUnfollowFlow({

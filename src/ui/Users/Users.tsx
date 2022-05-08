@@ -20,7 +20,7 @@ export const Users: React.FC = () => {
     const navigate = useNavigate()
 
     const {users, pageSize, currentPage} = useAppSelector(state => state.users);
-    const isLoading = useAppSelector(state => state.app.isLoading);
+    const isLoading = useAppSelector(state => state.app.status);
     const isAuth = useAppSelector(state => state.auth.isAuth);
 
     const params: ParamsUserPageType = {

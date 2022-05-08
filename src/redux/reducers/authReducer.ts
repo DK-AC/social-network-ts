@@ -2,7 +2,7 @@ import {Dispatch} from 'redux';
 
 import {authAPI, AuthUserType, LoginUserType} from '../../api/authAPI';
 
-import {initializeApp, setAppErrorAC, setIsLoadingAC} from './appReducer';
+import {initializeApp, setAppErrorAC, setAppStatus} from './appReducer';
 
 const SET_IS_INITIALIZED = 'social-network/auth/SET_IS_INITIALIZED';
 const SET_IS_AUTH_USER = 'social-network/auth/SET_IS_AUTH_USER';
@@ -57,37 +57,37 @@ export const clearAuthStateAC = () => ({type: CLEAR_AUTH_STATE}) as const
 
 //thunks
 export const authMeTC = () => async (dispatch: Dispatch) => {
-    dispatch(setIsLoadingAC('loading'));
+    dispatch(setAppStatus('loading'));
     const response = await authAPI.me()
     if (response.data.resultCode === 0) {
         dispatch(setIsAuthUser(response.data.data));
         dispatch(setIsInitializedAC());
         dispatch(initializeApp(true))
-        dispatch(setIsLoadingAC('successful'));
+        dispatch(setAppStatus('successful'));
     } else {
-        dispatch(setIsLoadingAC('failed'));
+        dispatch(setAppStatus('failed'));
     }
 }
 export const loginTC = (data: LoginUserType) => async (dispatch: Dispatch<any>) => {
-    dispatch(setIsLoadingAC('loading'));
+    dispatch(setAppStatus('loading'));
     const response = await authAPI.login(data)
     if (response.data.resultCode === 0) {
         dispatch(setIsLoggedInAC(response.data.data));
         dispatch(authMeTC())
-        dispatch(setIsLoadingAC('successful'));
+        dispatch(setAppStatus('successful'));
     } else {
         dispatch(setAppErrorAC(response.data.messages[0]))
-        dispatch(setIsLoadingAC('failed'));
+        dispatch(setAppStatus('failed'));
     }
 };
 export const logoutTC = () => async (dispatch: Dispatch) => {
-    dispatch(setIsLoadingAC('loading'));
+    dispatch(setAppStatus('loading'));
     const response = await authAPI.logout()
     if (response.data.resultCode === 0) {
         dispatch(clearAuthStateAC());
-        dispatch(setIsLoadingAC('successful'));
+        dispatch(setAppStatus('successful'));
     } else {
-        dispatch(setIsLoadingAC('failed'));
+        dispatch(setAppStatus('failed'));
     }
 };
 

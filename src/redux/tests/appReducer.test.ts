@@ -3,7 +3,7 @@ import {
     InitialAppStateType,
     initializeApp,
     setAppErrorAC,
-    setIsLoadingAC,
+    setAppStatus,
 } from '../reducers/appReducer';
 
 let startState: InitialAppStateType;
@@ -11,16 +11,16 @@ let startState: InitialAppStateType;
 beforeEach(() => {
     startState = {
         isInitialized: false,
-        isLoading: 'idle',
+        status: 'idle',
         error: '',
     };
 });
 
 test('loading should be changed', () => {
-    const endState = appReducer(startState, setIsLoadingAC('successful'));
+    const endState = appReducer(startState, setAppStatus('successful'));
 
-    expect(startState.isLoading).toBe('idle');
-    expect(endState.isLoading).toBe('successful');
+    expect(startState.status).toBe('idle');
+    expect(endState.status).toBe('successful');
 });
 
 test('set app error', () => {

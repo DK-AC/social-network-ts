@@ -3,7 +3,7 @@ import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {profileAPI, ProfileUserType} from '../../api/profileAPI';
 import {handleAsyncNetworkError, handleAsyncServerAppError} from '../../utils/error-utils';
 
-import {setIsLoadingAC} from './appReducer';
+import {setAppStatus} from './appReducer';
 
 const initialState = {
     posts: [
@@ -47,20 +47,20 @@ export const {addPost, deletePost} = profileSlices.actions
 //thunks
 export const setProfileUserTC = createAsyncThunk<{ profile: ProfileUserType }, number, ThunkErrorType>('profile/setProfileUser',
     async (userId, thunkAPI) => {
-        thunkAPI.dispatch(setIsLoadingAC('loading'));
+        thunkAPI.dispatch(setAppStatus('loading'));
         try {
             const response = await profileAPI.getProfileUserId(userId)
-            thunkAPI.dispatch(setIsLoadingAC('successful'))
+            thunkAPI.dispatch(setAppStatus('successful'))
             return {profile: response.data}
         } catch (err: any) {
             return handleAsyncNetworkError(err, thunkAPI)
         }
     })
 export const getProfileUserStatusTC = createAsyncThunk<{ status: string }, number, ThunkErrorType>('profile/getProfileUserStatus', async (userId: number, thunkAPI) => {
-    thunkAPI.dispatch(setIsLoadingAC('loading'));
+    thunkAPI.dispatch(setAppStatus('loading'));
     try {
         const response = await profileAPI.getProfileUserStatus(userId)
-        thunkAPI.dispatch(setIsLoadingAC('successful'))
+        thunkAPI.dispatch(setAppStatus('successful'))
         return {status: response.data}
     } catch (err: any) {
         return handleAsyncNetworkError(err, thunkAPI)
@@ -69,11 +69,11 @@ export const getProfileUserStatusTC = createAsyncThunk<{ status: string }, numbe
 export const updateProfileUserStatusTC = createAsyncThunk<{ status: string }, { status: string }, ThunkErrorType>
 ('profile/updateProfileUserStatus',
     async (status, thunkAPI) => {
-        thunkAPI.dispatch(setIsLoadingAC('loading'));
+        thunkAPI.dispatch(setAppStatus('loading'));
         try {
             const response = await profileAPI.updateProfileUserStatus(status)
             if (response.data.resultCode === 0) {
-                thunkAPI.dispatch(setIsLoadingAC('successful'))
+                thunkAPI.dispatch(setAppStatus('successful'))
                 return status
             } else {
                 return handleAsyncServerAppError(response.data, thunkAPI)
