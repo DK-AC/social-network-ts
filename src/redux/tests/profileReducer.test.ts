@@ -24,15 +24,16 @@ beforeEach(() => {
 });
 
 test('post should be added', () => {
-    const endState = profileReducer(fakeState, addPost({profile: 'New Post Text'}));
+
+    const endState = profileReducer(fakeState, addPost({postText: 'New Post Text'}))
 
     expect(fakeState.posts.length).toBe(3);
     expect(endState.posts.length).toBe(4);
     expect(fakeState.posts[3]).toBeUndefined();
     expect(endState.posts[3]).toBeDefined();
     expect(fakeState.posts[2].message).toBe('3 post');
-    expect(endState.posts[3].message).toBe('3 post');
-    expect(endState.posts[0].message).toBe('New Post Text');
+    expect(endState.posts[3].message).toBe('New Post Text');
+    expect(endState.posts[0].message).toBe('1 post');
 });
 
 test('user should be set', () => {
@@ -79,7 +80,7 @@ test('user status should be changed', () => {
 
 test('correct post should be deleted', () => {
 
-    const endState = profileReducer(fakeState, deletePost( 2))
+    const endState = profileReducer(fakeState, deletePost(2))
 
     expect(fakeState.posts.length).toBe(3)
     expect(endState.posts.length).toBe(2)

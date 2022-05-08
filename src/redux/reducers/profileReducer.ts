@@ -22,10 +22,10 @@ const initialState = {
 export const profileSlices = createSlice({
     name: 'profile',
     reducers: {
-        addPost(state: InitialProfileStateType, action: PayloadAction<{ postText: string }>) {
+        addPost(state, action: PayloadAction<{ postText: string }>) {
             state.posts.push({id: new Date().getTime(), message: action.payload.postText, likesCount: 0})
         },
-        deletePost(state: InitialProfileStateType, action: PayloadAction<{ postId: number }>) {
+        deletePost(state, action: PayloadAction<{ postId: number }>) {
             const index = state.posts.findIndex(post => post.id === action.payload.postId)
             if (index !== -1) state.posts.splice(index, 1)
         },
@@ -46,7 +46,7 @@ export const profileSlices = createSlice({
 })
 
 export const profileReducer = profileSlices.reducer
-export const {addPost,  deletePost} = profileSlices.actions
+export const {addPost, deletePost} = profileSlices.actions
 
 //actions
 export const setProfileUserAC = (profile: ProfileUserType) => ({type: SET_PROFILE_USER, profile} as const);
