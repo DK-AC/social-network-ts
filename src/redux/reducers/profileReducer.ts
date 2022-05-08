@@ -85,26 +85,39 @@ export const deletePostAC = (postId: number) => ({type: DELETE_POST, postId}) as
 export const setProfileUserTC = createAsyncThunk<{ profile: ProfileUserType }, number, ThunkErrorType>('profile/setProfileUser',
     async (userId, thunkAPI) => {
         thunkAPI.dispatch(setIsLoadingAC('loading'));
-        const response = await profileAPI.getProfileUserId(userId)
-        thunkAPI.dispatch(setIsLoadingAC('successful'))
-        return {profile: response.data}
+        try {
+            const response = await profileAPI.getProfileUserId(userId)
+            thunkAPI.dispatch(setIsLoadingAC('successful'))
+            return {profile: response.data}
+        } catch (e) {
+            thunkAPI.dispatch(setIsLoadingAC('failed'));
+            return thunkAPI.rejectWithValue({errors: [], fieldsErrors: []})
+        }
     })
 export const getProfileUserStatusTC = createAsyncThunk<{ status: string }, number, ThunkErrorType>('profile/getProfileUserStatus', async (userId: number, thunkAPI) => {
     thunkAPI.dispatch(setIsLoadingAC('loading'));
-    const response = await profileAPI.getProfileUserStatus(userId)
-    thunkAPI.dispatch(setIsLoadingAC('successful'))
-    return {status: response.data}
-
+    try {
+        const response = await profileAPI.getProfileUserStatus(userId)
+        thunkAPI.dispatch(setIsLoadingAC('successful'))
+        return {status: response.data}
+    } catch (e) {
+        return thunkAPI.rejectWithValue({errors: [], fieldsErrors: []})
+    }
 })
 export const updateProfileUserStatusTC = createAsyncThunk<{ status: string }, { status: string }, ThunkErrorType>
 ('profile/updateProfileUserStatus',
     async (status, thunkAPI) => {
         thunkAPI.dispatch(setIsLoadingAC('loading'));
-        const response = await profileAPI.updateProfileUserStatus(status)
-        if (response.data.resultCode === 0) {
-            thunkAPI.dispatch(setIsLoadingAC('successful'))
-            return status
-        } else {
+        try {
+            const response = await profileAPI.updateProfileUserStatus(status)
+            if (response.data.resultCode === 0) {
+                thunkAPI.dispatch(setIsLoadingAC('successful'))
+                return status
+            } else {
+                thunkAPI.dispatch(setIsLoadingAC('failed'));
+                return thunkAPI.rejectWithValue({errors: [], fieldsErrors: []})
+            }
+        } catch (e) {
             thunkAPI.dispatch(setIsLoadingAC('failed'));
             return thunkAPI.rejectWithValue({errors: [], fieldsErrors: []})
         }
