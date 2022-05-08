@@ -2,7 +2,7 @@ import {Dispatch} from 'redux';
 
 import {authAPI, AuthUserType, LoginUserType} from '../../api/authAPI';
 
-import {initializeApp, setAppErrorAC, setAppStatus} from './appReducer';
+import {isAppInitialized, setAppError, setAppStatus} from './appReducer';
 
 const SET_IS_INITIALIZED = 'social-network/auth/SET_IS_INITIALIZED';
 const SET_IS_AUTH_USER = 'social-network/auth/SET_IS_AUTH_USER';
@@ -62,7 +62,7 @@ export const authMeTC = () => async (dispatch: Dispatch) => {
     if (response.data.resultCode === 0) {
         dispatch(setIsAuthUser(response.data.data));
         dispatch(setIsInitializedAC());
-        dispatch(initializeApp(true))
+        dispatch(isAppInitialized(true))
         dispatch(setAppStatus('successful'));
     } else {
         dispatch(setAppStatus('failed'));
@@ -76,7 +76,7 @@ export const loginTC = (data: LoginUserType) => async (dispatch: Dispatch<any>) 
         dispatch(authMeTC())
         dispatch(setAppStatus('successful'));
     } else {
-        dispatch(setAppErrorAC(response.data.messages[0]))
+        dispatch(setAppError(response.data.messages[0]))
         dispatch(setAppStatus('failed'));
     }
 };

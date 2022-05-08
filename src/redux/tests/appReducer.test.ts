@@ -1,8 +1,8 @@
 import {
     appReducer,
     InitialAppStateType,
-    initializeApp,
-    setAppErrorAC,
+    isAppInitialized,
+    setAppError,
     setAppStatus,
 } from '../reducers/appReducer';
 
@@ -24,14 +24,14 @@ test('loading should be changed', () => {
 });
 
 test('set app error', () => {
-    const endState = appReducer(startState, setAppErrorAC('error'));
+    const endState = appReducer(startState, setAppError('error'));
 
     expect(startState.error).toBe('');
     expect(endState.error).toBe('error');
 });
 
 test('set app initialize', () => {
-    const endState = appReducer(startState, initializeApp(true));
+    const endState = appReducer(startState, isAppInitialized(true));
 
     expect(startState.isInitialized).toBeFalsy();
     expect(endState.isInitialized).toBeTruthy();
