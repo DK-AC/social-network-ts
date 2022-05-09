@@ -19,6 +19,7 @@ const initialState = {
 
 console.log('next refactoring')
 console.log('next refactoring')
+console.log('need refactoring all reducers')
 
 export const authReducer = (state = initialState, action: AuthActionsType): InitialAuthStateType => {
     switch (action.type) {
