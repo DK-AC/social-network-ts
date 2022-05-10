@@ -1,10 +1,5 @@
-import {
-    authReducer,
-    InitialAuthStateType,
-    setIsAuthUser,
-    setIsInitializedAC,
-    setIsLoggedInAC,
-} from '../reducers/authReducer';
+import {authMeTC, authReducer, InitialAuthStateType, loginTC, logoutTC} from '../reducers/authReducer';
+import {LoginUserType} from '../../api/authAPI';
 
 let fakeState: InitialAuthStateType;
 
@@ -18,43 +13,49 @@ beforeEach(() => {
     }
 })
 
-test('user should be initialized', () => {
-    const endState = authReducer(fakeState, setIsInitializedAC())
+describe('auth', () => {
 
-    expect(fakeState.isAuth).toBeFalsy()
-    expect(endState.isAuth).toBeTruthy()
-})
+    test('user should be initialized', () => {
 
-test('show data registered user', () => {
-    const fakeIsAuthUserData = {
-        id: 100,
-        email: 'fake@gmail.com',
-        login: 'fakeUser',
-        password: '',
-        isAuth: true,
-    };
-    const endState = authReducer(fakeState, setIsAuthUser(fakeIsAuthUserData))
+        const action = authMeTC.fulfilled({id: 12, login: 'fake', email: 'fake@gmail.com'}, 'requestId')
+        const endState = authReducer(fakeState, action)
 
-    expect(fakeState.id).toBe(1)
-    expect(endState.id).toBe(100)
-    expect(fakeState).toEqual({
-        id: 1,
-        email: '',
-        password: '',
-        isAuth: false,
-        login: '',
+        expect(fakeState.isAuth).toBeFalsy()
+        expect(endState.isAuth).toBeTruthy()
+
+        expect(fakeState.id).toBe(1)
+        expect(endState.id).toBe(12)
+
+        expect(fakeState.email).toBe('')
+        expect(endState.email).toBe('fake@gmail.com')
+
+        expect(fakeState.login).toBe('')
+        expect(endState.login).toBe('fake')
+
     })
-    expect(endState).toEqual(fakeIsAuthUserData)
+
+    test('show data registered user', () => {
+        const fakeIsAuthUserData: LoginUserType = {
+            email: 'fake@gmail.com',
+            password: '12345678',
+        };
+        const action = loginTC.fulfilled({user: fakeIsAuthUserData}, 'requestId', fakeIsAuthUserData)
+        const endState = authReducer(fakeState, action)
+
+        expect(fakeState.email).toBe('')
+        expect(endState.email).toBe('fake@gmail.com')
+
+        expect(fakeState.password).toBe('')
+        expect(endState.password).toBe('12345678')
+    })
+
+    test('when user logout clear state', () => {
+
+        const action = logoutTC.fulfilled(undefined, 'requestId')
+        const endState = authReducer(fakeState, action)
+
+        expect(fakeState).toEqual(fakeState)
+        expect(endState).toEqual(fakeState)
+    })
 })
 
-test('user should be logged in', () => {
-
-    const fakeLoggedUser = {email: 'fake@gmail.com', password: '123456', rememberMe: false, captcha: false}
-    const endState = authReducer(fakeState, setIsLoggedInAC(fakeLoggedUser))
-
-    expect(fakeState.email).toBe('')
-    expect(endState.email).toBe('fake@gmail.com')
-    expect(fakeState.password).toBe('')
-    expect(endState.password).toBe('123456')
-
-})

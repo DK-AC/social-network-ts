@@ -1,13 +1,10 @@
-import {Dispatch} from 'redux';
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 
 import {authAPI, AuthUserType, LoginUserType} from '../../api/authAPI';
+import {handleAsyncNetworkError, handleAsyncServerAppError} from '../../utils/error-utils';
 
-import {isAppInitialized, setAppError, setAppStatus} from './appReducer';
-
-const SET_IS_INITIALIZED = 'social-network/auth/SET_IS_INITIALIZED';
-const SET_IS_AUTH_USER = 'social-network/auth/SET_IS_AUTH_USER';
-const SET_IS_LOGGED_IN = 'social-network/auth/SET_IS_LOGGED_IN';
-const CLEAR_AUTH_STATE = 'social-network/auth/CLEAR_AUTH_STATE';
+import {setAppStatus} from './appReducer';
+import {ThunkErrorType} from './profileReducer';
 
 const initialState = {
     isAuth: false,
@@ -17,88 +14,76 @@ const initialState = {
     password: '',
 };
 
-console.log('next refactoring')
-console.log('next refactoring')
-console.log('need refactoring all reducers')
+export const authSlices = createSlice({
+    name: 'auth',
+    initialState,
+    reducers: {},
+    extraReducers: (builder) => {
+        builder.addCase(authMeTC.fulfilled, (state: InitialAuthStateType, action) => {
+            state.id = action.payload.id
+            state.email = action.payload.email
+            state.login = action.payload.login
+            state.isAuth = true
+        })
+        builder.addCase(loginTC.fulfilled, (state: InitialAuthStateType, action) => {
+            state.email = action.payload!.user.email
+            state.password = action.payload!.user.password
+            state.isAuth = true
+        })
+        builder.addCase(logoutTC.fulfilled, (state: InitialAuthStateType, action) => {
+            state.email = ''
+            state.password = ''
+            state.isAuth = false
+            state.login = ''
+        })
+    },
+})
 
-export const authReducer = (state = initialState, action: AuthActionsType): InitialAuthStateType => {
-    switch (action.type) {
-        case SET_IS_INITIALIZED:
-            return {
-                ...state, isAuth: true,
-            }
-        case SET_IS_AUTH_USER: {
-            return {
-                ...state,
-                ...action.data,
-            }
-        }
-        case SET_IS_LOGGED_IN:
-            return {
-                ...state,
-                email: action.data.email,
-                password: action.data.password,
-            }
-        case CLEAR_AUTH_STATE:
-            return {
-                login: '',
-                email: '',
-                id: 19179,
-                password: '',
-                isAuth: false,
-            }
-        default:
-            return state;
-    }
-};
-
-//actions
-export const setIsInitializedAC = () => ({type: SET_IS_INITIALIZED}) as const;
-export const setIsAuthUser = (data: AuthUserType) => ({type: SET_IS_AUTH_USER, data}) as const;
-export const setIsLoggedInAC = (data: LoginUserType) => ({type: SET_IS_LOGGED_IN, data}) as const;
-export const clearAuthStateAC = () => ({type: CLEAR_AUTH_STATE}) as const
+export const authReducer = authSlices.reducer
 
 //thunks
-export const authMeTC = () => async (dispatch: Dispatch) => {
-    dispatch(setAppStatus({status: 'loading'}));
-    const response = await authAPI.me()
-    if (response.data.resultCode === 0) {
-        dispatch(setIsAuthUser(response.data.data));
-        dispatch(setIsInitializedAC());
-        dispatch(isAppInitialized({isInitialized: true}))
-        dispatch(setAppStatus({status: 'successful'}));
-    } else {
-        dispatch(setAppStatus({status: 'failed'}));
+export const authMeTC = createAsyncThunk<AuthUserType, void, ThunkErrorType>('auth/authMe', async (_, thunkAPI) => {
+    thunkAPI.dispatch(setAppStatus({status: 'loading'}));
+    try {
+        const response = await authAPI.me()
+        if (response.data.resultCode === 0) {
+            thunkAPI.dispatch(setAppStatus({status: 'successful'}));
+            return response.data.data
+        } else {
+            return handleAsyncServerAppError(response.data, thunkAPI)
+        }
+    } catch (err: any) {
+        return handleAsyncNetworkError(err, thunkAPI)
     }
-}
-export const loginTC = (data: LoginUserType) => async (dispatch: Dispatch<any>) => {
-    dispatch(setAppStatus({status: 'loading'}));
-    const response = await authAPI.login(data)
-    if (response.data.resultCode === 0) {
-        dispatch(setIsLoggedInAC(response.data.data));
-        dispatch(authMeTC())
-        dispatch(setAppStatus({status: 'successful'}));
-    } else {
-        dispatch(setAppError({error: response.data.messages[0]}))
-        dispatch(setAppStatus({status: 'failed'}));
+})
+export const loginTC = createAsyncThunk<{ user: LoginUserType }, LoginUserType, ThunkErrorType>('auth/login', async (data, thunkAPI) => {
+    thunkAPI.dispatch(setAppStatus({status: 'loading'}));
+    try {
+        const response = await authAPI.login(data)
+        if (response.data.resultCode === 0) {
+            await thunkAPI.dispatch(authMeTC())
+            thunkAPI.dispatch(setAppStatus({status: 'successful'}));
+            return {user: response.data.data}
+        } else {
+            return handleAsyncServerAppError(response.data, thunkAPI)
+        }
+    } catch (err: any) {
+        return handleAsyncNetworkError(err, thunkAPI)
     }
-};
-export const logoutTC = () => async (dispatch: Dispatch) => {
-    dispatch(setAppStatus({status: 'loading'}));
-    const response = await authAPI.logout()
-    if (response.data.resultCode === 0) {
-        dispatch(clearAuthStateAC());
-        dispatch(setAppStatus({status: 'successful'}));
-    } else {
-        dispatch(setAppStatus({status: 'failed'}));
+})
+export const logoutTC = createAsyncThunk<undefined, void, ThunkErrorType>('auth/logout', async (_, thunkAPI) => {
+    thunkAPI.dispatch(setAppStatus({status: 'loading'}));
+    try {
+        const response = await authAPI.logout()
+        if (response.data.resultCode === 0) {
+            thunkAPI.dispatch(setAppStatus({status: 'successful'}));
+        } else {
+            return handleAsyncServerAppError(response.data, thunkAPI)
+        }
+    } catch (err: any) {
+        return handleAsyncNetworkError(err, thunkAPI)
     }
-};
+})
 
 //types
 export type InitialAuthStateType = typeof initialState
-
-export type AuthActionsType =
-    ReturnType<typeof setIsLoggedInAC>
-    | ReturnType<typeof setIsInitializedAC>
-    | ReturnType<typeof setIsAuthUser>
-    | ReturnType<typeof clearAuthStateAC>

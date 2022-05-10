@@ -1,6 +1,5 @@
 import {AxiosResponse} from 'axios';
 
-import {UserType} from '../redux/reducers/usersReducer';
 
 import {ResponseType} from './authAPI';
 import {instanceAPI} from './instanceAPI';
@@ -30,4 +29,16 @@ export type ResponseUserType<U = {}> = {
 export type ParamsUserPageType = {
     currentPage: number
     pageSize: number
+}
+
+export type UserType = {
+    id: number,
+    name: string,
+    uniqueUrlName: string,
+    photos: {
+        small: string,
+        large: string
+    },
+    status: string,
+    followed: boolean
 }

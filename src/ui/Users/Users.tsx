@@ -14,8 +14,6 @@ import {User} from './User/User';
 
 export const Users: React.FC = () => {
 
-    console.log('redux toolkit')
-
     const dispatch = useDispatch();
     const navigate = useNavigate()
 

@@ -1,4 +1,4 @@
-import {dialogsReducer, initialDialogsStateType, sendMessageAC} from '../reducers/dialogsReducer';
+import {dialogsReducer, initialDialogsStateType, sendMessage} from '../reducers/dialogsReducer';
 
 let fakeState: initialDialogsStateType;
 
@@ -20,7 +20,7 @@ beforeEach(() => {
 });
 
 test('post should be added', () => {
-    const endState = dialogsReducer(fakeState, sendMessageAC('New Message Text'));
+    const endState = dialogsReducer(fakeState, sendMessage( 'New Message Text'));
 
     expect(fakeState.messages.length).toBe(4);
     expect(endState.messages.length).toBe(5);
