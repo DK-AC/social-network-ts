@@ -33,8 +33,8 @@ describe('profile', () => {
         expect(fakeState.posts[3]).toBeUndefined();
         expect(endState.posts[3]).toBeDefined();
         expect(fakeState.posts[2].message).toBe('3 post');
-        expect(endState.posts[3].message).toBe('New Post Text');
-        expect(endState.posts[0].message).toBe('1 post');
+        expect(endState.posts[3].message).toBe('3 post');
+        expect(endState.posts[0].message).toBe('New Post Text');
     });
 
     test('user should be set', () => {

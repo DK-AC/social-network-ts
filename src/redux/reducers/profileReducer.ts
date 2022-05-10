@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 import {profileAPI, ProfileUserType} from '../../api/profileAPI';
-import {handleAsyncNetworkError, handleAsyncServerAppError} from '../../utils/error-utils';
+import {handleAsyncNetworkError, handleAsyncServerAppError, ThunkErrorType} from '../../utils/error-utils';
 
 import {setAppStatus} from './appReducer';
 
@@ -19,10 +19,10 @@ export const profileSlices = createSlice({
     name: 'profile',
     initialState,
     reducers: {
-        addPost(state, action: PayloadAction<{ postText: string }>) {
-            state.posts.push({id: new Date().getTime(), message: action.payload.postText, likesCount: 0})
+        addPost(state: InitialProfileStateType, action: PayloadAction<{ postText: string }>) {
+            state.posts.unshift({id: new Date().getTime(), message: action.payload.postText, likesCount: 0})
         },
-        deletePost(state, action: PayloadAction<{ postId: number }>) {
+        deletePost(state: InitialProfileStateType, action: PayloadAction<{ postId: number }>) {
             const index = state.posts.findIndex(post => post.id === action.payload.postId)
             if (index !== -1) state.posts.splice(index, 1)
         },
@@ -87,5 +87,3 @@ export const updateProfileUserStatusTC = createAsyncThunk<{ status: string }, { 
 //types
 export type InitialProfileStateType = typeof initialState
 
-export type ThunkErrorType = { rejectValue: { errors: string[], fieldsErrors?: FieldErrorType[] } }
-export type FieldErrorType = { error: string, field: string };

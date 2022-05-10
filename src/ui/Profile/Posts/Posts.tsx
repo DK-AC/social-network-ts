@@ -1,6 +1,7 @@
 import React from 'react';
 import * as Yup from 'yup';
 import {Form, Formik, FormikHelpers, FormikValues} from 'formik';
+import {useDispatch} from 'react-redux';
 
 import {addPost} from '../../../redux/reducers/profileReducer';
 import {useAppSelector} from '../../../redux/store';
@@ -11,6 +12,8 @@ import styles from './posts.module.css';
 
 export const Posts: React.FC = React.memo(() => {
 
+    const dispatch = useDispatch();
+
     const posts = useAppSelector(state => state.profile.posts);
     const error = useAppSelector(state => state.app.error)
 
@@ -18,7 +21,7 @@ export const Posts: React.FC = React.memo(() => {
         return <Post key={p.id} postId={p.id} message={p.message} likesCount={p.likesCount}/>;
     });
     const addPostHandle = (message: FormikValues, action: FormikHelpers<{ postMessage: string }>) => {
-        addPost(message.postMessage.toString())
+        dispatch(addPost({postText: message.postMessage.toString()}))
         action.resetForm({values: {postMessage: ''}})
     }
     const validationSchema = {

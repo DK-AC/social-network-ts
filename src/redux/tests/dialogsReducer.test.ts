@@ -20,7 +20,7 @@ beforeEach(() => {
 });
 
 test('post should be added', () => {
-    const endState = dialogsReducer(fakeState, sendMessage( 'New Message Text'));
+    const endState = dialogsReducer(fakeState, sendMessage({messageText: 'New Message Text'}));
 
     expect(fakeState.messages.length).toBe(4);
     expect(endState.messages.length).toBe(5);

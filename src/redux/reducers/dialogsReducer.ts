@@ -19,8 +19,8 @@ export const dialogSlices = createSlice({
     name: 'dialog',
     initialState,
     reducers: {
-        sendMessage(state, action: PayloadAction<string>) {
-            state.messages.push({id: new Date().getTime(), message: action.payload})
+        sendMessage(state, action: PayloadAction<{ messageText: string }>) {
+            state.messages.push({id: new Date().getTime(), message: action.payload.messageText})
         },
     },
     extraReducers: {},

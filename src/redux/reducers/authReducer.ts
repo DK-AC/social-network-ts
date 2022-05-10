@@ -1,10 +1,9 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 
 import {authAPI, AuthUserType, LoginUserType} from '../../api/authAPI';
-import {handleAsyncNetworkError, handleAsyncServerAppError} from '../../utils/error-utils';
+import {handleAsyncNetworkError, handleAsyncServerAppError, ThunkErrorType} from '../../utils/error-utils';
 
 import {setAppStatus} from './appReducer';
-import {ThunkErrorType} from './profileReducer';
 
 const initialState = {
     isAuth: false,

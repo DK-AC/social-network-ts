@@ -2,11 +2,10 @@ import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {AxiosError} from 'axios';
 
 import {ParamsUserPageType, userAPI, UserType} from '../../api/userAPI';
-import {handleAsyncNetworkError} from '../../utils/error-utils';
+import {handleAsyncNetworkError, ThunkErrorType} from '../../utils/error-utils';
 import {followingHelper} from '../../utils/followingHelper';
 
 import {setAppStatus} from './appReducer';
-import {ThunkErrorType} from './profileReducer';
 
 
 const initialState = {

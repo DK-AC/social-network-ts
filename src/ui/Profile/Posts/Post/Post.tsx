@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {useDispatch} from 'react-redux';
 
 import {deletePost} from '../../../../redux/reducers/profileReducer';
 
@@ -14,8 +14,10 @@ type PropsType = {
 
 export const Post: React.FC<PropsType> = React.memo(({ postId, message, likesCount}) => {
 
+    const dispatch = useDispatch();
+
     const deletePostHandle = () => {
-        deletePost({ postId})
+      dispatch(deletePost({postId}))
     }
 
     return (
