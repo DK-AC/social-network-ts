@@ -3,7 +3,6 @@ import {
     InitialAuthStateType,
     setIsAuthUser,
     setIsInitializedAC,
-    setIsLoggedInAC,
 } from '../reducers/authReducer';
 
 let fakeState: InitialAuthStateType;
@@ -47,14 +46,14 @@ test('show data registered user', () => {
     expect(endState).toEqual(fakeIsAuthUserData)
 })
 
-test('user should be logged in', () => {
-
-    const fakeLoggedUser = {email: 'fake@gmail.com', password: '123456', rememberMe: false, captcha: false}
-    const endState = authReducer(fakeState, setIsLoggedInAC(fakeLoggedUser))
-
-    expect(fakeState.email).toBe('')
-    expect(endState.email).toBe('fake@gmail.com')
-    expect(fakeState.password).toBe('')
-    expect(endState.password).toBe('123456')
-
-})
+// test('user should be logged in', () => {
+//
+//     const fakeLoggedUser = {email: 'fake@gmail.com', password: '123456', rememberMe: false, captcha: false}
+//     const endState = authReducer(fakeState, setIsLoggedInAC(fakeLoggedUser))
+//
+//     expect(fakeState.email).toBe('')
+//     expect(endState.email).toBe('fake@gmail.com')
+//     expect(fakeState.password).toBe('')
+//     expect(endState.password).toBe('123456')
+//
+// })
