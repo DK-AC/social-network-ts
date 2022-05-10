@@ -23,6 +23,7 @@ export const authSlices = createSlice({
             state.id = action.payload.id
             state.email = action.payload.email
             state.login = action.payload.login
+            state.isAuth = true
         })
         builder.addCase(loginTC.fulfilled, (state: InitialAuthStateType, action) => {
             state.email = action.payload!.user.email
