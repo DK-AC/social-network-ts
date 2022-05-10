@@ -8,7 +8,7 @@ import {dialogsReducer} from './reducers/dialogsReducer';
 import {sideBarReducer} from './reducers/sideBarReducer';
 import {usersReducer} from './reducers/usersReducer';
 import {appReducer} from './reducers/appReducer';
-import {authReducer} from './reducers/authReducer';
+import {authReducer, authReducer_} from './reducers/authReducer';
 
 
 export const rootReducer = combineReducers({
@@ -17,7 +17,7 @@ export const rootReducer = combineReducers({
     sideBar: sideBarReducer,
     users: usersReducer,
     app: appReducer,
-    auth: authReducer,
+    auth: authReducer_,
 });
 
 export type RootStateType = ReturnType<typeof rootReducer>
