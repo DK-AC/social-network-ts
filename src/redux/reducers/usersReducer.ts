@@ -106,13 +106,13 @@ const followUnfollowFlow = async (payload: {
 }
 
 //thunks
-export const setUsersTC = createAsyncThunk<{ users: UserType[], totalCount: number, params: ParamsUserPageType }, ParamsUserPageType, ThunkErrorType>('user/setUsers', async (params, thunkAPI) => {
+export const setUsersTC = createAsyncThunk<{ users: UserType[], totalCount: number }, ParamsUserPageType, ThunkErrorType>('user/setUsers', async (params, thunkAPI) => {
     thunkAPI.dispatch(setAppStatus({status: 'loading'}));
     try {
         const response = await userAPI.getUsers(params)
         thunkAPI.dispatch(setTotalUserCountAC(response.totalCount));
         thunkAPI.dispatch(setAppStatus({status: 'successful'}));
-        return {users: response.items}
+        return {users: response.items, totalCount: response.totalCount}
     } catch (err: any) {
         return handleAsyncNetworkError(err, thunkAPI)
     }
