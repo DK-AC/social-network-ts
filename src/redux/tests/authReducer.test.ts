@@ -1,9 +1,4 @@
-import {
-    authReducer,
-    InitialAuthStateType,
-    setIsAuthUser,
-    setIsInitializedAC,
-} from '../reducers/authReducer';
+import {InitialAuthStateType,} from '../reducers/authReducer';
 
 let fakeState: InitialAuthStateType;
 
@@ -17,34 +12,34 @@ beforeEach(() => {
     }
 })
 
-test('user should be initialized', () => {
-    const endState = authReducer(fakeState, setIsInitializedAC())
-
-    expect(fakeState.isAuth).toBeFalsy()
-    expect(endState.isAuth).toBeTruthy()
-})
-
-test('show data registered user', () => {
-    const fakeIsAuthUserData = {
-        id: 100,
-        email: 'fake@gmail.com',
-        login: 'fakeUser',
-        password: '',
-        isAuth: true,
-    };
-    const endState = authReducer(fakeState, setIsAuthUser(fakeIsAuthUserData))
-
-    expect(fakeState.id).toBe(1)
-    expect(endState.id).toBe(100)
-    expect(fakeState).toEqual({
-        id: 1,
-        email: '',
-        password: '',
-        isAuth: false,
-        login: '',
-    })
-    expect(endState).toEqual(fakeIsAuthUserData)
-})
+// test('user should be initialized', () => {
+//     const endState = authReducer(fakeState, setIsInitializedAC())
+//
+//     expect(fakeState.isAuth).toBeFalsy()
+//     expect(endState.isAuth).toBeTruthy()
+// })
+//
+// test('show data registered user', () => {
+//     const fakeIsAuthUserData = {
+//         id: 100,
+//         email: 'fake@gmail.com',
+//         login: 'fakeUser',
+//         password: '',
+//         isAuth: true,
+//     };
+//     const endState = authReducer(fakeState, setIsAuthUser(fakeIsAuthUserData))
+//
+//     expect(fakeState.id).toBe(1)
+//     expect(endState.id).toBe(100)
+//     expect(fakeState).toEqual({
+//         id: 1,
+//         email: '',
+//         password: '',
+//         isAuth: false,
+//         login: '',
+//     })
+//     expect(endState).toEqual(fakeIsAuthUserData)
+// })
 
 // test('user should be logged in', () => {
 //

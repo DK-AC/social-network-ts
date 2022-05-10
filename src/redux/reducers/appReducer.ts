@@ -1,5 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
+import {authMeTC} from './authReducer';
+
 const initialState = {
     status: 'idle' as LoadingType,
     error: '',
@@ -19,6 +21,15 @@ export const appSlices = createSlice({
         isAppInitialized(state: InitialAppStateType, action: PayloadAction<{ isInitialized: boolean }>) {
             state.isInitialized = action.payload.isInitialized
         },
+    },
+    extraReducers: builder => {
+        builder.addCase(authMeTC.fulfilled, (state: InitialAppStateType) => {
+            state.isInitialized = true
+        })
+        builder.addCase(authMeTC.rejected, (state: InitialAppStateType) => {
+            state.isInitialized = true
+            state.error = ''
+        })
     },
 })
 
