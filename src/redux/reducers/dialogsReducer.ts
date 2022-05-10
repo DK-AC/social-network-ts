@@ -1,4 +1,4 @@
-const SEND_MESSAGE = 'social-network/dialogs/SEND_MESSAGE';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 const initialState = {
     dialogs: [
@@ -15,20 +15,18 @@ const initialState = {
     ],
 };
 
-export const dialogsReducer = (state = initialState, action: DialogsActionsType): initialDialogsStateType => {
-    switch (action.type) {
-        case SEND_MESSAGE:
-            return {
-                ...state,
-                messages: [...state.messages, {id: new Date().getTime(), message: action.messageText}],
-            };
-        default:
-            return state;
-    }
-};
-
-export const sendMessageAC = (messageText: string) => ({type: SEND_MESSAGE, messageText}) as const
+export const dialogSlices = createSlice({
+    name: 'dialog',
+    initialState,
+    reducers: {
+        sendMessage(state, action: PayloadAction<string>) {
+            state.messages.push({id: new Date().getTime(), message: action.payload})
+        },
+    },
+    extraReducers: {},
+})
+export const dialogsReducer = dialogSlices.reducer
+export const {sendMessage} = dialogSlices.actions
 
 export type initialDialogsStateType = typeof initialState
 
-export type DialogsActionsType = ReturnType<typeof sendMessageAC>

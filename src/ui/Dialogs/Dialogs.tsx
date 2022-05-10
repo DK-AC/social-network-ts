@@ -3,7 +3,7 @@ import {useDispatch} from 'react-redux';
 import * as Yup from 'yup';
 import {Form, Formik, FormikHelpers, FormikValues} from 'formik';
 
-import {sendMessageAC} from '../../redux/reducers/dialogsReducer';
+import {sendMessage} from '../../redux/reducers/dialogsReducer';
 import {useAppSelector} from '../../redux/store';
 import {FormikField} from '../../reusableComponent/FormikField';
 
@@ -25,7 +25,7 @@ export const Dialogs: React.FC = () => {
         return <MessageItem key={m.id} id={m.id} message={m.message}/>;
     });
     const addDialogMessage = (message: FormikValues, action: FormikHelpers<{ dialogMessage: string }>) => {
-        dispatch(sendMessageAC(message.dialogMessage.toString()))
+        dispatch(sendMessage(message.dialogMessage.toString()))
         action.resetForm({values: {dialogMessage: ''}})
     }
     const validationSchema = {
