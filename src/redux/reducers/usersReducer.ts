@@ -1,8 +1,11 @@
 import {Dispatch} from 'redux';
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 
 import {ParamsUserPageType, userAPI} from '../../api/userAPI';
+import {handleAsyncNetworkError} from '../../utils/error-utils';
 
 import {setAppStatus} from './appReducer';
+import {ThunkErrorType} from './profileReducer';
 
 const SET_IS_FOLLOW_USER = 'social-network/users/SET_IS_FOLLOW_USER';
 const SET_USERS = 'social-network/users/SET_USERS';
@@ -19,8 +22,22 @@ const initialState = {
     followingInProgress: [] as number[],
 };
 
+export const userSlices = createSlice({
+    name: 'user',
+    initialState,
+    reducers: {},
+    extraReducers: (builder) => {
+        builder.addCase(setUsersTC.fulfilled, (state: InitialUsersStateType, action) => {
+            state.users = action.payload.users
+            state.totalCount = action.payload.totalCount
+        })
+    },
+})
 
-export const usersReducer = (state = initialState, action: UsersActionsType): InitialAuthStateType => {
+export const usersReducer_ = userSlices.reducer
+
+
+export const usersReducer = (state = initialState, action: UsersActionsType): InitialUsersStateType => {
     switch (action.type) {
         case SET_IS_FOLLOW_USER:
             return {
@@ -89,13 +106,17 @@ const followUnfollowFlow = async (payload: {
 }
 
 //thunks
-export const setUsersTC = (params: ParamsUserPageType) => async (dispatch: Dispatch) => {
-    dispatch(setAppStatus({status: 'loading'}));
-    const response = await userAPI.getUsers(params)
-    dispatch(setUsersAC(response.items));
-    dispatch(setTotalUserCountAC(response.totalCount));
-    dispatch(setAppStatus({status: 'successful'}));
-};
+export const setUsersTC = createAsyncThunk<{ users: UserType[], totalCount: number, params: ParamsUserPageType }, ParamsUserPageType, ThunkErrorType>('user/setUsers', async (params, thunkAPI) => {
+    thunkAPI.dispatch(setAppStatus({status: 'loading'}));
+    try {
+        const response = await userAPI.getUsers(params)
+        thunkAPI.dispatch(setTotalUserCountAC(response.totalCount));
+        thunkAPI.dispatch(setAppStatus({status: 'successful'}));
+        return {users: response.items}
+    } catch (err: any) {
+        return handleAsyncNetworkError(err, thunkAPI)
+    }
+})
 export const followUserTC = (userId: number, follow: boolean) => async (dispatch: Dispatch) => {
     await followUnfollowFlow({
         dispatch,
@@ -118,7 +139,7 @@ export const unfollowUserTC = (userId: number, follow: boolean) => async (dispat
 
 
 //types
-export type InitialAuthStateType = typeof initialState
+export type InitialUsersStateType = typeof initialState
 
 export type UsersActionsType =
     | ReturnType<typeof setIsFollowUserAC>

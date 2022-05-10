@@ -1,14 +1,14 @@
 import {
     changeCurrentPageAC,
     followingInProgressAC,
-    InitialAuthStateType,
+    InitialUsersStateType,
     setIsFollowUserAC,
     setTotalUserCountAC,
     setUsersAC,
     usersReducer,
 } from '../reducers/usersReducer';
 
-let fakeState: InitialAuthStateType;
+let fakeState: InitialUsersStateType;
 const fakeUsers = [
     {
         id: 1,
