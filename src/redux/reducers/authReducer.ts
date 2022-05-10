@@ -50,7 +50,6 @@ export const authMeTC = createAsyncThunk<AuthUserType, void, ThunkErrorType>('au
             thunkAPI.dispatch(setAppStatus({status: 'successful'}));
             return response.data.data
         } else {
-            thunkAPI.dispatch(setAppStatus({status: 'failed'}));
             return handleAsyncServerAppError(response.data, thunkAPI)
         }
     } catch (err: any) {
@@ -66,7 +65,6 @@ export const loginTC = createAsyncThunk<{ user: LoginUserType }, LoginUserType, 
             thunkAPI.dispatch(setAppStatus({status: 'successful'}));
             return {user: response.data.data}
         } else {
-            thunkAPI.dispatch(setAppStatus({status: 'failed'}));
             return handleAsyncServerAppError(response.data, thunkAPI)
         }
     } catch (err: any) {
@@ -80,7 +78,6 @@ export const logoutTC = createAsyncThunk<undefined, void, ThunkErrorType>('auth/
         if (response.data.resultCode === 0) {
             thunkAPI.dispatch(setAppStatus({status: 'successful'}));
         } else {
-            thunkAPI.dispatch(setAppStatus({status: 'failed'}));
             return handleAsyncServerAppError(response.data, thunkAPI)
         }
     } catch (err: any) {
