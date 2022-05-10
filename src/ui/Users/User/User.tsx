@@ -21,8 +21,8 @@ export const User: React.FC<PropsType> = ({user}) => {
 
     const {id, name, photos, followed, status} = user;
 
-    const followUserHandle = () => dispatch(followUserTC({id, follow: true}));
-    const unFollowUserHandle = () => dispatch(unfollowUserTC({id, follow: false}));
+    const followUserHandle = () => dispatch(followUserTC({userId: id, isFollow: true}));
+    const unFollowUserHandle = () => dispatch(unfollowUserTC({userId: id, isFollow: false}));
 
 
     return (

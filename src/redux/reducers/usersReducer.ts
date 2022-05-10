@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createAsyncThunk, createSlice, Dispatch, PayloadAction} from '@reduxjs/toolkit';
 
 import {ParamsUserPageType, userAPI} from '../../api/userAPI';
 import {handleAsyncNetworkError, handleAsyncServerAppError} from '../../utils/error-utils';
@@ -22,10 +22,10 @@ export const userSlices = createSlice({
         changeCurrentPage(state: InitialUsersStateType, action: PayloadAction<{ currentPage: number }>) {
             state.currentPage = action.payload.currentPage
         },
-        setIsFollowingInProgress(state, action: PayloadAction<{ id: number, isFetching: boolean }>) {
-            state.followingInProgress = action.payload.isFetching
-                ? [...state.followingInProgress, action.payload.id]
-                : state.followingInProgress.filter(id => id !== action.payload.id)
+        setIsFollowingInProgress(state, action: PayloadAction<{ userId: number, isFollow: boolean }>) {
+            state.followingInProgress = action.payload.isFollow
+                ? [...state.followingInProgress, action.payload.userId]
+                : state.followingInProgress.filter(id => id !== action.payload.userId)
         },
     },
     extraReducers: (builder) => {
@@ -34,12 +34,12 @@ export const userSlices = createSlice({
             state.totalCount = action.payload.totalCount
         })
         builder.addCase(followUserTC.fulfilled, (state: InitialUsersStateType, action) => {
-            const index = state.users.findIndex(todo => todo.id === action.payload.id)
-            if (index !== -1) state.users[index].followed = action.payload.follow
+            const index = state.users.findIndex(user => user.id === action.payload.userId)
+            if (index !== -1) state.users[index].followed = action.payload.isFollow
         })
         builder.addCase(unfollowUserTC.fulfilled, (state: InitialUsersStateType, action) => {
-            const index = state.users.findIndex(todo => todo.id === action.payload.id)
-            if (index !== -1) state.users[index].followed = action.payload.follow
+            const index = state.users.findIndex(user => user.id === action.payload.userId)
+            if (index !== -1) state.users[index].followed = action.payload.isFollow
         })
     },
 })
@@ -47,27 +47,6 @@ export const userSlices = createSlice({
 export const usersReducer_ = userSlices.reducer
 export const {changeCurrentPage, setIsFollowingInProgress} = userSlices.actions
 
-
-// const followUnfollowFlow = async (payload: {
-//     dispatch: Dispatch,
-//     userId: number,
-//     actionCreator: any,
-//     apiMethod: any,
-//     follow: boolean
-// }) => {
-//     const {follow, actionCreator, userId, dispatch, apiMethod} = payload
-//
-//     dispatch(setAppStatus({status: 'loading'}));
-//     dispatch(followingInProgressAC(true, userId));
-//     const response = await apiMethod(userId)
-//     if (response.resultCode === 0) {
-//         dispatch(actionCreator(userId, follow));
-//         dispatch(setAppStatus({status: 'successful'}));
-//         dispatch(followingInProgressAC(false, userId));
-//     } else {
-//         dispatch(setAppStatus({status: 'failed'}));
-//     }
-// }
 
 //thunks
 export const setUsersTC = createAsyncThunk<{ users: UserType[], totalCount: number }, ParamsUserPageType, ThunkErrorType>('user/setUsers', async (params, thunkAPI) => {
@@ -80,11 +59,11 @@ export const setUsersTC = createAsyncThunk<{ users: UserType[], totalCount: numb
         return handleAsyncNetworkError(err, thunkAPI)
     }
 })
-export const followUserTC = createAsyncThunk<{ id: number, follow: boolean }, { id: number, follow: boolean }, ThunkErrorType>('user/followUser', async (payload: { id: number, follow: boolean }, thunkAPI) => {
+export const followUserTC = createAsyncThunk<{ userId: number, isFollow: boolean }, { userId: number, isFollow: boolean }, ThunkErrorType>('user/followUser', async (payload: { userId: number, isFollow: boolean }, thunkAPI) => {
     thunkAPI.dispatch(setAppStatus({status: 'loading'}));
-    thunkAPI.dispatch(setIsFollowingInProgress({id: payload.id, isFetching: true}))
+    thunkAPI.dispatch(setIsFollowingInProgress({userId: payload.userId, isFollow: true}))
     try {
-        const response = await userAPI.followUser(payload.id)
+        const response = await userAPI.followUser(payload.userId)
         if (response.resultCode === 0) {
             thunkAPI.dispatch(setAppStatus({status: 'successful'}));
             return payload
@@ -95,14 +74,14 @@ export const followUserTC = createAsyncThunk<{ id: number, follow: boolean }, { 
     } catch (err: any) {
         return handleAsyncNetworkError(err, thunkAPI)
     } finally {
-        thunkAPI.dispatch(setIsFollowingInProgress({id: payload.id, isFetching: false}))
+        thunkAPI.dispatch(setIsFollowingInProgress({userId: payload.userId, isFollow: false}))
     }
 })
-export const unfollowUserTC = createAsyncThunk<{ id: number, follow: boolean }, { id: number, follow: boolean }, ThunkErrorType>('user/unfollowUser', async (payload: { id: number, follow: boolean }, thunkAPI) => {
+export const unfollowUserTC = createAsyncThunk<{ userId: number, isFollow: boolean }, { userId: number, isFollow: boolean }, ThunkErrorType>('user/unfollowUser', async (payload: { userId: number, isFollow: boolean }, thunkAPI) => {
     thunkAPI.dispatch(setAppStatus({status: 'loading'}));
-    thunkAPI.dispatch(setIsFollowingInProgress({id: payload.id, isFetching: true}))
+    thunkAPI.dispatch(setIsFollowingInProgress({userId: payload.userId, isFollow: true}))
     try {
-        const response = await userAPI.unfollowUser(payload.id)
+        const response = await userAPI.unfollowUser(payload.userId)
         if (response.resultCode === 0) {
             thunkAPI.dispatch(setAppStatus({status: 'successful'}));
             return payload
@@ -113,7 +92,7 @@ export const unfollowUserTC = createAsyncThunk<{ id: number, follow: boolean }, 
     } catch (err: any) {
         return handleAsyncNetworkError(err, thunkAPI)
     } finally {
-        thunkAPI.dispatch(setIsFollowingInProgress({id: payload.id, isFetching: false}))
+        thunkAPI.dispatch(setIsFollowingInProgress({userId: payload.userId, isFollow: false}))
     }
 })
 
@@ -130,4 +109,25 @@ export type UserType = {
     },
     status: string,
     followed: boolean
+}
+
+const followUnfollowFlow = async (payload: {
+    dispatch: Dispatch,
+    userId: number,
+    actionCreator: any,
+    apiMethod: any,
+    isFollow: boolean
+}) => {
+    const {isFollow, actionCreator, userId, dispatch, apiMethod} = payload
+
+    dispatch(setAppStatus({status: 'loading'}));
+    dispatch(setIsFollowingInProgress({userId: userId, isFollow}));
+    const response = await apiMethod(userId)
+    if (response.resultCode === 0) {
+        dispatch(actionCreator(userId, isFollow));
+        dispatch(setAppStatus({status: 'successful'}));
+        dispatch(setIsFollowingInProgress({userId, isFollow}));
+    } else {
+        dispatch(setAppStatus({status: 'failed'}));
+    }
 }
