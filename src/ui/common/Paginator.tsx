@@ -2,7 +2,7 @@ import React from 'react';
 import {useDispatch} from 'react-redux';
 
 import {useAppSelector} from '../../redux/store';
-import {changeCurrentPageAC} from '../../redux/reducers/usersReducer';
+import {changeCurrentPage} from '../../redux/reducers/usersReducer';
 
 import styles from './paginator.module.css';
 
@@ -20,7 +20,7 @@ export const Paginator: React.FC = () => {
         pages.push(i);
     }
 
-    const changeCurrentPageHandle = (page: number) => dispatch(changeCurrentPageAC(page));
+    const changeCurrentPageHandle = (currentPage: number) => dispatch(changeCurrentPage({currentPage}));
 
     return (
         <div>

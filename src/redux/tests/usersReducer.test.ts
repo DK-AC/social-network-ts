@@ -1,11 +1,11 @@
 import {
-    changeCurrentPageAC,
+    changeCurrentPage,
     followingInProgressAC,
     InitialUsersStateType,
     setIsFollowUserAC,
     setTotalUserCountAC,
     setUsersAC,
-    usersReducer,
+    usersReducer, usersReducer_,
 } from '../reducers/usersReducer';
 
 let fakeState: InitialUsersStateType;
@@ -109,7 +109,7 @@ test('total user count should be set', () => {
 });
 
 test('page should be changed', () => {
-    const endState = usersReducer(fakeState, changeCurrentPageAC(10));
+    const endState = usersReducer_(fakeState, changeCurrentPage({currentPage: 10}));
 
     expect(fakeState.currentPage).toBe(3);
     expect(endState.currentPage).toBe(10);

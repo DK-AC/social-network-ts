@@ -1,5 +1,5 @@
 import {Dispatch} from 'redux';
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 import {ParamsUserPageType, userAPI} from '../../api/userAPI';
 import {handleAsyncNetworkError} from '../../utils/error-utils';
@@ -10,7 +10,6 @@ import {ThunkErrorType} from './profileReducer';
 const SET_IS_FOLLOW_USER = 'social-network/users/SET_IS_FOLLOW_USER';
 const SET_USERS = 'social-network/users/SET_USERS';
 const SET_TOTAL_COUNT = 'social-network/users/SET_TOTAL_COUNT';
-const CHANGE_CURRENT_PAGE = 'social-network/users/CHANGE_CURRENT_PAGE';
 const FOLLOW_IN_PROGRESS = 'social-network/users/FOLLOW_IN_PROGRESS';
 
 
@@ -25,7 +24,11 @@ const initialState = {
 export const userSlices = createSlice({
     name: 'user',
     initialState,
-    reducers: {},
+    reducers: {
+        changeCurrentPage(state: InitialUsersStateType, action: PayloadAction<{ currentPage: number }>) {
+            state.currentPage = action.payload.currentPage
+        },
+    },
     extraReducers: (builder) => {
         builder.addCase(setUsersTC.fulfilled, (state: InitialUsersStateType, action) => {
             state.users = action.payload.users
@@ -35,6 +38,7 @@ export const userSlices = createSlice({
 })
 
 export const usersReducer_ = userSlices.reducer
+export const {changeCurrentPage} = userSlices.actions
 
 
 export const usersReducer = (state = initialState, action: UsersActionsType): InitialUsersStateType => {
@@ -56,11 +60,6 @@ export const usersReducer = (state = initialState, action: UsersActionsType): In
                 ...state,
                 totalCount: action.totalCount,
             };
-        case CHANGE_CURRENT_PAGE:
-            return {
-                ...state,
-                currentPage: action.currentPage,
-            };
         case FOLLOW_IN_PROGRESS:
             return {
                 ...state,
@@ -79,7 +78,6 @@ export const setIsFollowUserAC = (userId: number, follow: boolean) => (
     {type: SET_IS_FOLLOW_USER, userId, follow}) as const
 export const setUsersAC = (users: UserType[]) => ({type: SET_USERS, users}) as const;
 export const setTotalUserCountAC = (totalCount: number) => ({type: SET_TOTAL_COUNT, totalCount}) as const;
-export const changeCurrentPageAC = (currentPage: number) => ({type: CHANGE_CURRENT_PAGE, currentPage}) as const;
 export const followingInProgressAC = (isFetching: boolean, userId: number) => (
     {type: FOLLOW_IN_PROGRESS, isFetching, userId}) as const;
 
@@ -145,7 +143,6 @@ export type UsersActionsType =
     | ReturnType<typeof setIsFollowUserAC>
     | ReturnType<typeof setUsersAC>
     | ReturnType<typeof setTotalUserCountAC>
-    | ReturnType<typeof changeCurrentPageAC>
     | ReturnType<typeof followingInProgressAC>
 
 export type UserType = {
