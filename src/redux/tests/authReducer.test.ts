@@ -1,4 +1,5 @@
-import {authMeTC, authReducer, InitialAuthStateType} from '../reducers/authReducer';
+import {authMeTC, authReducer, InitialAuthStateType, loginTC, logoutTC} from '../reducers/authReducer';
+import {LoginUserType} from '../../api/authAPI';
 
 let fakeState: InitialAuthStateType;
 
@@ -33,38 +34,28 @@ describe('auth', () => {
 
     })
 
-    test.skip('show data registered user', () => {
-        const fakeIsAuthUserData = {
-            id: 100,
+    test('show data registered user', () => {
+        const fakeIsAuthUserData: LoginUserType = {
             email: 'fake@gmail.com',
-            login: 'fakeUser',
-            password: '',
-            isAuth: true,
+            password: '12345678',
         };
-        const endState = authReducer(fakeState, setIsAuthUser(fakeIsAuthUserData))
-
-        expect(fakeState.id).toBe(1)
-        expect(endState.id).toBe(100)
-        expect(fakeState).toEqual({
-            id: 1,
-            email: '',
-            password: '',
-            isAuth: false,
-            login: '',
-        })
-        expect(endState).toEqual(fakeIsAuthUserData)
-    })
-
-    test.skip('user should be logged in', () => {
-
-        const fakeLoggedUser = {email: 'fake@gmail.com', password: '123456', rememberMe: false, captcha: false}
-        const endState = authReducer(fakeState, setIsLoggedInAC(fakeLoggedUser))
+        const action = loginTC.fulfilled({user: fakeIsAuthUserData}, 'requestId', fakeIsAuthUserData)
+        const endState = authReducer(fakeState, action)
 
         expect(fakeState.email).toBe('')
         expect(endState.email).toBe('fake@gmail.com')
-        expect(fakeState.password).toBe('')
-        expect(endState.password).toBe('123456')
 
+        expect(fakeState.password).toBe('')
+        expect(endState.password).toBe('12345678')
+    })
+
+    test('when user logout clear state', () => {
+
+        const action = logoutTC.fulfilled(undefined, 'requestId')
+        const endState = authReducer(fakeState, action)
+
+        expect(fakeState).toEqual(fakeState)
+        expect(endState).toEqual(fakeState)
     })
 })
 
