@@ -32,7 +32,7 @@ export const Login = () => {
 
     useEffect(() => {
         if (isAuth) {
-            navigate(PATH.START_PAGE)
+            navigate(PATH.PROFILE_PAGE)
         }
         return
     }, [isAuth, navigate])

@@ -12,7 +12,7 @@ export const Navbar: React.FC = () => {
 
     return (
         <nav className={styles.nav}>
-            <NavBarLink path={PATH.START_PAGE} title={'Profile'}/>
+            <NavBarLink path={PATH.PROFILE_PAGE} title={'Profile'}/>
             <NavBarLink path={PATH.USERS_PAGE} title={'Users'}/>
             <NavBarLink path={PATH.DIALOGS_PAGE} title={'Dialogs'}/>
             <NavBarLink path={PATH.NEWS_PAGE} title={'News'}/>

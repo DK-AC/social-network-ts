@@ -9,8 +9,9 @@ import {NotFound404} from '../NotFound404/NotFound404';
 import {Settings} from '../Settings/Settings';
 
 export const PATH = {
-    START_PAGE: '/profile',
-    PROFILE_PAGE: '/profile/:profileUserId',
+    START_PAGE: '/',
+    PROFILE_PAGE: '/profile',
+    PROFILE_USER_PAGE: '/profile/:profileUserId',
     USERS_PAGE: '/users/*',
     DIALOGS_PAGE: '/dialogs/*',
     NEWS_PAGE: '/news',
@@ -31,9 +32,9 @@ export const Routing: React.FC = () => {
         <>
             <React.Suspense fallback={<p> Loading...</p>}>
                 <Routes>
-                    <Route path="/" element={<Navigate to={PATH.START_PAGE}/>}/>
-                    <Route path={PATH.START_PAGE} element={<Profile/>}/>
+                    <Route path={PATH.START_PAGE} element={<Navigate to={PATH.PROFILE_PAGE}/>}/>
                     <Route path={PATH.PROFILE_PAGE} element={<Profile/>}/>
+                    <Route path={PATH.PROFILE_USER_PAGE} element={<Profile/>}/>
                     <Route path={PATH.USERS_PAGE} element={<Users/>}/>
                     <Route path={PATH.DIALOGS_PAGE} element={<Dialogs/>}/>
                     <Route path={PATH.NEWS_PAGE} element={<News/>}/>
