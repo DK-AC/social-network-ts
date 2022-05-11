@@ -1,4 +1,10 @@
-import {followingTC, InitialUsersStateType, setUsersTC, usersReducer} from '../reducers/usersReducer';
+import {
+    changePortionNumber,
+    followingTC,
+    InitialUsersStateType,
+    setUsersTC,
+    usersReducer,
+} from '../reducers/usersReducer';
 
 let fakeState: InitialUsersStateType;
 const fakeUsers = [
@@ -88,14 +94,7 @@ test('users should be sets', () => {
 
     expect(fakeState).toEqual(fakeState);
     expect(fakeState.users.length).toBe(2);
-    expect(endState).toEqual({
-        totalCount: 100,
-        pageSize: 5,
-        currentPage: 3,
-        followingInProgress: [],
-        users: fakeUsersForTests,
-        portionNumber: 1,
-    });
+    expect(endState).toEqual(fakeUserState);
     expect(endState.users.length).toBe(2);
 });
 //
@@ -130,3 +129,9 @@ test('users should be sets', () => {
 //     expect(fakeState.followingInProgress.some(userId => userId === userId1)).toBe(false)
 //     expect(endState.followingInProgress.some(userId => userId === userId1)).toBe(true)
 // });
+test('portionNumber should be changed', () => {
+    const endState = usersReducer(fakeState, changePortionNumber({portionNumber: 4}))
+
+    expect(fakeState.portionNumber).toBe(1);
+    expect(endState.portionNumber).toBe(4);
+})
