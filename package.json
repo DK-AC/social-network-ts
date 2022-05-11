@@ -1,5 +1,6 @@
 {
   "name": "social-network-ts",
+  "homepage": "https://dk-ac.github.io/social-network-ts",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -33,7 +34,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint -c .eslintrc --ext .ts,.tsx .",
-    "lint:fix": "yarn lint -- --fix"
+    "lint:fix": "yarn lint -- --fix",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "browserslist": {
     "production": [
@@ -48,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "gh-pages": "^4.0.0",
     "jest": "^27.5.1"
   }
 }
