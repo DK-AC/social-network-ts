@@ -17,11 +17,8 @@ export const profileAPI = {
         const formData = new FormData();
         formData.append('image', photoFile);
 
-        return instanceAPI.put('/profile/photo', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-        })
+        return instanceAPI.put<any, AxiosResponse<ResponseType<PhotosType>, PhotosType>>
+        ('/profile/photo', formData, {headers: {'Content-Type': 'multipart/form-data'}})
     },
 };
 

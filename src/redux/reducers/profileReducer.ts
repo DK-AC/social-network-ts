@@ -91,7 +91,7 @@ export const savePhotoTC = createAsyncThunk<{ photos: PhotosType }, File, ThunkE
         const response = await profileAPI.savePhoto(file)
         if (response.data.resultCode === 0) {
             thunkAPI.dispatch(setAppStatus({status: 'successful'}))
-            return response.data.photos
+            return response.data.data
         } else {
             return handleAsyncServerAppError(response.data, thunkAPI)
         }
