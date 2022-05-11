@@ -12,12 +12,15 @@ import {Paginator} from '../common/Paginator';
 import styles from './users.module.css';
 import {User} from './User/User';
 
+
 export const Users: React.FC = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate()
 
-    const {users, pageSize, currentPage} = useAppSelector(state => state.users);
+    const pageSize = useAppSelector(state => state.users.pageSize);
+    const users = useAppSelector(state => state.users.users);
+    const currentPage = useAppSelector(state => state.users.currentPage);
     const isLoading = useAppSelector(state => state.app.status);
     const isAuth = useAppSelector(state => state.auth.isAuth);
 
@@ -30,12 +33,14 @@ export const Users: React.FC = () => {
         return <User key={u.id} user={u}/>;
     });
 
+
     useEffect(() => {
+
         if (!isAuth) {
             navigate(PATH.LOGIN_PAGE)
         }
         dispatch(setUsersTC(params));
-    }, [currentPage, dispatch, isAuth, navigate]);
+    }, [isAuth, navigate, currentPage]);
 
     return (
         <div className={styles.userItems}>

@@ -10,9 +10,7 @@ import styles from './user.module.css';
 import avaImg from './../../../assets/img/client-2-512.webp';
 
 
-type PropsType = {
-    user: UserType
-}
+type PropsType = { user: UserType }
 
 export const User: React.FC<PropsType> = ({user}) => {
 

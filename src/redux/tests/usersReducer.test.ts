@@ -26,6 +26,7 @@ beforeEach(() => {
             pageSize: 5,
             currentPage: 3,
             followingInProgress: [],
+            portionNumber: 1,
         };
     },
 );

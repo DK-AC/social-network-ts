@@ -6,7 +6,7 @@ import {configureStore} from '@reduxjs/toolkit';
 import {profileReducer} from './reducers/profileReducer';
 import {dialogsReducer} from './reducers/dialogsReducer';
 import {sideBarReducer} from './reducers/sideBarReducer';
-import {usersReducer_} from './reducers/usersReducer';
+import {usersReducer} from './reducers/usersReducer';
 import {appReducer} from './reducers/appReducer';
 import {authReducer} from './reducers/authReducer';
 
@@ -15,7 +15,7 @@ export const rootReducer = combineReducers({
     profile: profileReducer,
     dialogs: dialogsReducer,
     sideBar: sideBarReducer,
-    users: usersReducer_,
+    users: usersReducer,
     app: appReducer,
     auth: authReducer,
 });
