@@ -27,7 +27,6 @@ export const Profile: React.FC = () => {
         profileUserId = id;
     }
 
-
     useEffect(() => {
         if (!isAuth) {
             navigate(PATH.LOGIN_PAGE)
@@ -39,7 +38,7 @@ export const Profile: React.FC = () => {
 
     return (
         <div>
-            <ProfileInfo user={user}/>
+            <ProfileInfo user={user} isOwner={profileUserId===id}/>
             <Posts/>
         </div>
     );

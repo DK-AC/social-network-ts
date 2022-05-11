@@ -10,9 +10,10 @@ import {ProfileStatus} from './ProfileStatus/ProfileStatus';
 
 type PropsType = {
     user: ProfileUserType | null
+    isOwner: boolean
 }
 
-export const ProfileInfo: React.FC<PropsType> = React.memo(({user}) => {
+export const ProfileInfo: React.FC<PropsType> = React.memo(({user, isOwner}) => {
 
     if (!user) {
         return <Preloader/>;
@@ -20,16 +21,13 @@ export const ProfileInfo: React.FC<PropsType> = React.memo(({user}) => {
 
     return (
         <>
-            <div className={styles.profileImage}>
-                <img src="https://www.gettyimages.pt/gi-resources/images/Homepage/Hero/PT/PT_hero_42_153645159.jpg"
-                     alt="img"/>
-            </div>
             <div className={styles.profileDescription}>
                 <div>
                     <img className={styles.avatar}
                          src={user.photos.small ? user.photos.small : ava}
                          alt="avatar"
                     />
+                    {isOwner ? <div><input type="file"/></div> : ''}
                 </div>
                 <h2>{user ? user.fullName : ''}</h2>
                 <div>{user ? user.aboutMe : ''}</div>
