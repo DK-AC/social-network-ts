@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 
-import {profileAPI, ProfileUserType} from '../../api/profileAPI';
+import {PhotosType, profileAPI, ProfileUserType} from '../../api/profileAPI';
 import {handleAsyncNetworkError, handleAsyncServerAppError, ThunkErrorType} from '../../utils/error-utils';
 
 import {setAppStatus} from './appReducer';
@@ -37,6 +37,9 @@ export const profileSlices = createSlice({
             })
             .addCase(getProfileUserStatusTC.fulfilled, (state: InitialProfileStateType, action) => {
                 state.status = action.payload.status
+            })
+            .addCase(savePhotoTC.fulfilled, (state: InitialProfileStateType, action) => {
+                state.profile!.photos = action.payload.photos
             })
     },
 })
@@ -82,7 +85,20 @@ export const updateProfileUserStatusTC = createAsyncThunk<{ status: string }, { 
             return handleAsyncNetworkError(err, thunkAPI)
         }
     })
-
+export const savePhotoTC = createAsyncThunk<{ photos: PhotosType }, File, ThunkErrorType>('profile/savePhoto', async (file, thunkAPI) => {
+    thunkAPI.dispatch(setAppStatus({status: 'loading'}))
+    try {
+        const response = await profileAPI.savePhoto(file)
+        if (response.data.resultCode === 0) {
+            thunkAPI.dispatch(setAppStatus({status: 'successful'}))
+            return response.data.photos
+        } else {
+            return handleAsyncServerAppError(response.data, thunkAPI)
+        }
+    } catch (err: any) {
+        return handleAsyncNetworkError(err, thunkAPI)
+    }
+})
 
 //types
 export type InitialProfileStateType = typeof initialState

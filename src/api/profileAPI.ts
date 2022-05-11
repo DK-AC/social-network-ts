@@ -13,7 +13,22 @@ export const profileAPI = {
     updateProfileUserStatus(params: { status: string }) {
         return instanceAPI.put<any, AxiosResponse<ResponseType<{ status: string }>>>('/profile/status', params)
     },
+    savePhoto(photoFile: File) {
+        const formData = new FormData();
+        formData.append('image', photoFile);
+
+        return instanceAPI.put('/profile/photo', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        })
+    },
 };
+
+export type PhotosType = {
+    small: string | null
+    large: string | null
+}
 
 export type ProfileUserType = {
     aboutMe: string,
@@ -22,7 +37,7 @@ export type ProfileUserType = {
     lookingForAJobDescription: string
     fullName: string
     userId: number
-    photos: { small: string, large: string }
+    photos: PhotosType
 }
 
 type ContactsUserType = {
