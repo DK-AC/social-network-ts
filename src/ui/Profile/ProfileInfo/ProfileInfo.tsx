@@ -18,6 +18,7 @@ type PropsType = {
 export const ProfileInfo: React.FC<PropsType> = React.memo(({user, isOwner}) => {
 
     const dispatch = useDispatch()
+    console.log('Profile Info')
 
     const savePhotoHandle = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length) {
