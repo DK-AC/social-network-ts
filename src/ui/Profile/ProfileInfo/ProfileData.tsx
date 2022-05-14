@@ -15,6 +15,10 @@ type PropsType = {
 
 export const ProfileData: React.FC<PropsType> = ({profile, isOwner, goToEditMode}) => {
     const {fullName, lookingForAJobDescription, lookingForAJob, contacts, aboutMe} = profile
+    //
+    // useEffect(() => {
+    //     setProfileUserTC(profile.userId)
+    // }, [profile.userId, profileTest!.fullName])
 
     return (
         <>
@@ -26,6 +30,6 @@ export const ProfileData: React.FC<PropsType> = ({profile, isOwner, goToEditMode
                             lookingForAJobDescription={lookingForAJobDescription}
             />
             <AboutMe aboutMe={aboutMe}/>
-            <Contacts contacts={Object.keys(contacts)}/>
+            <Contacts contacts={contacts}/>
         </>)
 }

@@ -29,16 +29,7 @@ export const ProfileDataForm: React.FC<PropsType> = ({profile, goToSaveMode, edi
         lookingForAJob,
         lookingForAJobDescription,
         aboutMe,
-        contacts: {
-            facebook: contacts.facebook,
-            website: contacts.website,
-            vk: contacts.vk,
-            twitter: contacts.twitter,
-            instagram: contacts.instagram,
-            youtube: contacts.youtube,
-            github: contacts.github,
-            mainLink: contacts.mainLink,
-        },
+        contacts,
         userId: profile.userId,
         photos: profile.photos,
     }
@@ -97,7 +88,7 @@ export const ProfileDataForm: React.FC<PropsType> = ({profile, goToSaveMode, edi
                                     return (
                                         <div key={key} className={styles.contact}>
                                             <b>{key}:
-                                                <FormikField name={key}
+                                                <FormikField name={`contacts.${key}`}
                                                              error={error}
                                                              placeholder={key}
                                                 />

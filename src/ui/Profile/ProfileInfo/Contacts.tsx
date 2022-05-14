@@ -1,16 +1,26 @@
 import React from 'react';
 
+import {ContactsUserType} from '../../../api/profileAPI';
+
 import {Contact} from './Contact';
 
 type PropsType = {
-    contacts: string[]
+    contacts: ContactsUserType
 }
 
 export const Contacts: React.FC<PropsType> = ({contacts}) => {
     return (
         <div>
             <b>Contacts: </b>{
-            contacts.map(key => <Contact key={key} contactTitle={key} contactValue={''}/>)}
+            Object
+                .keys(contacts)
+                .map
+                (key => {
+                    return <Contact key={key}
+                                    contactTitle={key}
+                                    contactValue={contacts[key as keyof ContactsUserType]}
+                    />
+                })}
         </div>
     );
 };
