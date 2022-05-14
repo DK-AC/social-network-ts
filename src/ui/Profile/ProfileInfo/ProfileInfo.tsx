@@ -30,7 +30,7 @@ export const ProfileInfo: React.FC<PropsType> = React.memo(({profile, isOwner}) 
             <div className={styles.profileDescription}>
                 <Photo photo={profile.photos} isOwner={isOwner}/>
                 {editMode
-                    ? <ProfileDataForm profile={profile} goToSaveMode={goToSaveMode} editMode={editMode}/>
+                    ? <ProfileDataForm profile={profile} goToSaveMode={goToSaveMode}/>
                     : <ProfileData profile={profile} isOwner={isOwner} goToEditMode={goToEditMode}/>
                 }
                 <Status/>
