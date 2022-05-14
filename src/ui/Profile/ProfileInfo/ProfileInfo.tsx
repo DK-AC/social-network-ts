@@ -6,6 +6,8 @@ import {Preloader} from '../../Preloader/Preloader';
 import styles from './profileInfo.module.css';
 import {Photo} from './Photo';
 import {ProfileData} from './ProfileData';
+import {ProfileDataForm} from './ProfileDataForm.';
+import {Status} from './Status';
 
 type PropsType = {
     profile: ProfileUserType | null
@@ -14,10 +16,10 @@ type PropsType = {
 
 export const ProfileInfo: React.FC<PropsType> = React.memo(({profile, isOwner}) => {
 
-    const [editMode, setEditMode] = useState(isOwner)
+    const [editMode, setEditMode] = useState(false)
 
-    const goToEditModeHandle = () => {
-        setEditMode(!editMode)
+    const goToEditMode = () => {
+        setEditMode(true)
     }
 
     if (!profile) {
@@ -28,8 +30,12 @@ export const ProfileInfo: React.FC<PropsType> = React.memo(({profile, isOwner}) 
         <>
             <div className={styles.profileDescription}>
                 <Photo photo={profile.photos} isOwner={isOwner}/>
-                {editMode ? <button onClick={goToEditModeHandle}>edit</button> : ''}
-                <ProfileData profile={profile}/>
+                {editMode
+                    ? <ProfileDataForm/>
+                    : <ProfileData profile={profile} isOwner={isOwner} goToEditMode={goToEditMode}/>
+
+                }
+                <Status/>
             </div>
         </>
     );
