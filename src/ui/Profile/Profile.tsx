@@ -16,7 +16,7 @@ export const Profile: React.FC = () => {
     const params = useParams<'profileUserId'>();
     const navigate = useNavigate()
 
-    const user = useAppSelector(state => state.profile.profile);
+    const profile = useAppSelector(state => state.profile.profile);
     const {id, isAuth} = useAppSelector(state => state.auth);
 
     let profileUserId: number;
@@ -38,7 +38,7 @@ export const Profile: React.FC = () => {
 
     return (
         <div>
-            <ProfileInfo user={user} isOwner={profileUserId===id}/>
+            <ProfileInfo profile={profile} isOwner={profileUserId===id}/>
             <Posts/>
         </div>
     );

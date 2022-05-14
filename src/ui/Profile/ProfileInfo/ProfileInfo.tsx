@@ -1,39 +1,35 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {ProfileUserType} from '../../../api/profileAPI';
 import {Preloader} from '../../Preloader/Preloader';
 
 import styles from './profileInfo.module.css';
-import {Status} from './Status';
-import {Contact} from './Contact';
 import {Photo} from './Photo';
-import {FullName} from './FullName';
-import {LookingForAJob} from './LookingForAJob';
-import {AboutMe} from './AboutMe';
-import {Contacts} from './Contacts';
+import {ProfileData} from './ProfileData';
 
 type PropsType = {
-    user: ProfileUserType | null
+    profile: ProfileUserType | null
     isOwner: boolean
 }
 
-export const ProfileInfo: React.FC<PropsType> = React.memo(({user, isOwner}) => {
+export const ProfileInfo: React.FC<PropsType> = React.memo(({profile, isOwner}) => {
 
-    if (!user) {
+    const [editMode, setEditMode] = useState(isOwner)
+
+    const goToEditModeHandle = () => {
+        setEditMode(!editMode)
+    }
+
+    if (!profile) {
         return <Preloader/>;
     }
 
     return (
         <>
             <div className={styles.profileDescription}>
-                <Photo photo={user.photos} isOwner={isOwner}/>
-                <FullName fullName={user.fullName}/>
-                <LookingForAJob lookingForAJob={user.lookingForAJob}
-                                lookingForAJobDescription={user.lookingForAJobDescription}
-                />
-                <AboutMe aboutMe={user.aboutMe}/>
-                <Contacts contacts={Object.keys(user.contacts)}/>
-                <Status/>
+                <Photo photo={profile.photos} isOwner={isOwner}/>
+                {editMode ? <button onClick={goToEditModeHandle}>edit</button> : ''}
+                <ProfileData profile={profile}/>
             </div>
         </>
     );
