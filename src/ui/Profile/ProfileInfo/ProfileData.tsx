@@ -14,16 +14,18 @@ type PropsType = {
 }
 
 export const ProfileData: React.FC<PropsType> = ({profile, isOwner, goToEditMode}) => {
+    const {fullName, lookingForAJobDescription, lookingForAJob, contacts, aboutMe} = profile
+
     return (
         <>
             {isOwner && <div>
                 <button onClick={goToEditMode}>edit</button>
             </div>}
-            <FullName fullName={profile.fullName}/>
-            <LookingForAJob lookingForAJob={profile.lookingForAJob}
-                            lookingForAJobDescription={profile.lookingForAJobDescription}
+            <FullName fullName={fullName}/>
+            <LookingForAJob lookingForAJob={lookingForAJob}
+                            lookingForAJobDescription={lookingForAJobDescription}
             />
-            <AboutMe aboutMe={profile.aboutMe}/>
-            <Contacts contacts={Object.keys(profile.contacts)}/>
+            <AboutMe aboutMe={aboutMe}/>
+            <Contacts contacts={Object.keys(contacts)}/>
         </>)
 }
