@@ -107,7 +107,6 @@ export const savePhotoTC = createAsyncThunk<{ photos: PhotosType }, File, ThunkE
     }
 })
 export const saveProfileTC = createAsyncThunk<{ profile: ProfileUserType }, ProfileUserType, ThunkErrorType>('profile/saveProfile', async (profile, thunkAPI) => {
-    debugger
     thunkAPI.dispatch(setAppStatus({status: 'loading'}))
     try {
         const response = await profileAPI.saveProfile(profile)
