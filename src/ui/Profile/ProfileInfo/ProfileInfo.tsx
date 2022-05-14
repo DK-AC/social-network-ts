@@ -3,12 +3,12 @@ import {useDispatch} from 'react-redux';
 
 import {ProfileUserType} from '../../../api/profileAPI';
 import {Preloader} from '../../Preloader/Preloader';
-import select from '../../../assets/img/select.png';
 import ava from '../../../assets/img/client-2-512.webp';
 import {savePhotoTC} from '../../../redux/reducers/profileReducer';
 
 import styles from './profileInfo.module.css';
 import {ProfileStatus} from './ProfileStatus/ProfileStatus';
+import {Contact} from './Contact/Contact';
 
 type PropsType = {
     user: ProfileUserType | null
@@ -18,7 +18,6 @@ type PropsType = {
 export const ProfileInfo: React.FC<PropsType> = React.memo(({user, isOwner}) => {
 
     const dispatch = useDispatch()
-    console.log('Profile Info')
 
     const savePhotoHandle = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length) {
@@ -40,21 +39,16 @@ export const ProfileInfo: React.FC<PropsType> = React.memo(({user, isOwner}) => 
                     />
                     {isOwner ? <div><input type="file" onChange={savePhotoHandle}/></div> : ''}
                 </div>
-                <h2>{user ? user.fullName : ''}</h2>
-                <div>{user ? user.aboutMe : ''}</div>
+                <div><b>Full name: </b> {user ? user.fullName : ''}</div>
+                <div><b>Looking for a job: </b>{user.lookingForAJob ? 'Yes' : 'No'}</div>
+                <div>{user.lookingForAJobDescription}</div>
+                <div><b>About me: </b>{user ? user.aboutMe : ''}</div>
+                <div><b>Contacts: </b>{Object.keys(user.contacts).map(key => {
+                    return <Contact key={key} contactTitle={key} contactValue={''}/>
+                })}</div>
                 <ProfileStatus/>
-                <div>
-                    {user.lookingForAJob
-                        ? <div>
-                            <b>lookingForAJob? </b>
-                            <img className={styles.select} src={select} alt="select"/>
-                        </div>
-                        : ''}
-                </div>
-                <div>
-                    {user.lookingForAJobDescription}
-                </div>
             </div>
         </>
     );
 })
+

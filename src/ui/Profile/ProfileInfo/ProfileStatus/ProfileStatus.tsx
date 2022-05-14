@@ -45,7 +45,7 @@ export const ProfileStatus: React.FC = () => {
                          onChange={onChangeValueHandle}
                          autoFocus
                 />
-                : <span onDoubleClick={changeOnEditModeHandle}>{status || '----'}</span>
+                : <span onDoubleClick={changeOnEditModeHandle}><b>Status: </b>{status || '----'}</span>
             }
         </>
     );
