@@ -4,11 +4,13 @@ import {ProfileUserType} from '../../../api/profileAPI';
 import {Preloader} from '../../Preloader/Preloader';
 
 import styles from './profileInfo.module.css';
-import {ProfileStatus} from './ProfileStatus/ProfileStatus';
-import {Contact} from './Contact/Contact';
-import {Photo} from './Photo/Photo';
-import {FullName} from './FullName/FullName';
-import {LookingForAJob} from './LookingForAJob/LookingForAJob';
+import {Status} from './Status';
+import {Contact} from './Contact';
+import {Photo} from './Photo';
+import {FullName} from './FullName';
+import {LookingForAJob} from './LookingForAJob';
+import {AboutMe} from './AboutMe';
+import {Contacts} from './Contacts';
 
 type PropsType = {
     user: ProfileUserType | null
@@ -29,11 +31,9 @@ export const ProfileInfo: React.FC<PropsType> = React.memo(({user, isOwner}) => 
                 <LookingForAJob lookingForAJob={user.lookingForAJob}
                                 lookingForAJobDescription={user.lookingForAJobDescription}
                 />
-                <div><b>About me: </b>{user ? user.aboutMe : ''}</div>
-                <div><b>Contacts: </b>{Object.keys(user.contacts).map(key => {
-                    return <Contact key={key} contactTitle={key} contactValue={''}/>
-                })}</div>
-                <ProfileStatus/>
+                <AboutMe aboutMe={user.aboutMe}/>
+                <Contacts contacts={Object.keys(user.contacts)}/>
+                <Status/>
             </div>
         </>
     );

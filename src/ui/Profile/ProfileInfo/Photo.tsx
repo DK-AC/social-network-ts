@@ -1,10 +1,11 @@
 import React, {ChangeEvent} from 'react';
 import {useDispatch} from 'react-redux';
 
-import styles from '../profileInfo.module.css';
-import ava from '../../../../assets/img/client-2-512.webp';
-import {PhotosType} from '../../../../api/profileAPI';
-import {savePhotoTC} from '../../../../redux/reducers/profileReducer';
+import ava from '../../../assets/img/client-2-512.webp';
+import {PhotosType} from '../../../api/profileAPI';
+import {savePhotoTC} from '../../../redux/reducers/profileReducer';
+
+import styles from './profileInfo.module.css';
 
 type PropsType = {
     photo: PhotosType
