@@ -41,6 +41,13 @@ export const profileSlices = createSlice({
             .addCase(savePhotoTC.fulfilled, (state: InitialProfileStateType, action) => {
                 state.profile!.photos = action.payload.photos
             })
+            .addCase(saveProfileTC.fulfilled, (state: InitialProfileStateType, action) => {
+                console.log(action.payload.profile)
+                state.profile!.fullName = action.payload.profile.fullName
+                state.profile!.lookingForAJob = action.payload.profile.lookingForAJob
+                state.profile!.lookingForAJobDescription = action.payload.profile.lookingForAJobDescription
+                state.profile!.aboutMe = action.payload.profile.aboutMe
+            })
     },
 })
 
@@ -99,6 +106,22 @@ export const savePhotoTC = createAsyncThunk<{ photos: PhotosType }, File, ThunkE
         return handleAsyncNetworkError(err, thunkAPI)
     }
 })
+export const saveProfileTC = createAsyncThunk<{ profile: ProfileUserType }, ProfileUserType, ThunkErrorType>('profile/saveProfile', async (profile, thunkAPI) => {
+    debugger
+    thunkAPI.dispatch(setAppStatus({status: 'loading'}))
+    try {
+        const response = await profileAPI.saveProfile(profile)
+        if (response.data.resultCode === 0) {
+            thunkAPI.dispatch(setAppStatus({status: 'successful'}))
+            return response.data.data
+        } else {
+            return handleAsyncServerAppError(response.data, thunkAPI)
+        }
+    } catch (err: any) {
+        return handleAsyncNetworkError(err, thunkAPI)
+    }
+})
+
 
 //types
 export type InitialProfileStateType = typeof initialState

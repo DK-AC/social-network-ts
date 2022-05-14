@@ -1,10 +1,12 @@
 import React from 'react';
 import * as Yup from 'yup';
 import {Form, Formik} from 'formik';
+import {useDispatch} from 'react-redux';
 
-import {ContactsUserType, ProfileUserType} from '../../../api/profileAPI';
+import {ProfileUserType} from '../../../api/profileAPI';
 import {FormikField} from '../../../reusableComponent/FormikField';
 import {useAppSelector} from '../../../redux/store';
+import {saveProfileTC} from '../../../redux/reducers/profileReducer';
 
 import styles from './profileInfo.module.css'
 
@@ -14,15 +16,9 @@ type PropsType = {
     editMode: boolean
 }
 
-type Values = {
-    fullName: string
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
-    aboutMe: string
-    contacts: ContactsUserType
-}
-
 export const ProfileDataForm: React.FC<PropsType> = ({profile, goToSaveMode, editMode}) => {
+
+    const dispatch = useDispatch()
 
     const error = useAppSelector(state => state.app.error)
 
@@ -33,14 +29,25 @@ export const ProfileDataForm: React.FC<PropsType> = ({profile, goToSaveMode, edi
         lookingForAJob,
         lookingForAJobDescription,
         aboutMe,
-        contacts,
-
+        contacts: {
+            facebook: contacts.facebook,
+            website: contacts.website,
+            vk: contacts.vk,
+            twitter: contacts.twitter,
+            instagram: contacts.instagram,
+            youtube: contacts.youtube,
+            github: contacts.github,
+            mainLink: contacts.mainLink,
+        },
+        userId: profile.userId,
+        photos: profile.photos,
     }
     const validationSchema = {
         // fullName: Yup.string().email('Invalid email format').required('Required'),
         // password: Yup.string().required('Required'),
     }
-    const onSubmitLoginUser = (values: Values) => {
+    const onSubmitLoginUser = (values: ProfileUserType) => {
+        dispatch(saveProfileTC(values))
         goToSaveMode()
     }
 
@@ -84,17 +91,19 @@ export const ProfileDataForm: React.FC<PropsType> = ({profile, goToSaveMode, edi
                         </div>
                         <div>
                             <b>Contacts: </b>{
-                            Object.keys(contacts).map(key => {
-                                return (
-                                    <div key={key} className={styles.contact}>
-                                        <b>{key}:
-                                            <FormikField name={`contacts + ${key}`}
-                                                         error={error}
-                                                         placeholder={key}
-                                            />
-                                        </b>
-                                    </div>)
-                            })}
+                            Object
+                                .keys(contacts)
+                                .map(key => {
+                                    return (
+                                        <div key={key} className={styles.contact}>
+                                            <b>{key}:
+                                                <FormikField name={key}
+                                                             error={error}
+                                                             placeholder={key}
+                                                />
+                                            </b>
+                                        </div>)
+                                })}
                         </div>
                     </Form>
                 )}

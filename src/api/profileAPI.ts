@@ -20,6 +20,9 @@ export const profileAPI = {
         return instanceAPI.put<any, AxiosResponse<ResponseType<PhotosType>, PhotosType>>
         ('/profile/photo', formData, {headers: {'Content-Type': 'multipart/form-data'}})
     },
+    saveProfile(profile: ProfileUserType) {
+        return instanceAPI.put<any, AxiosResponse<ResponseType<ProfileUserType>, ResponseType>>('/profile', profile)
+    },
 };
 
 export type PhotosType = {
