@@ -8,6 +8,7 @@ import {ProfileStatus} from './ProfileStatus/ProfileStatus';
 import {Contact} from './Contact/Contact';
 import {Photo} from './Photo/Photo';
 import {FullName} from './FullName/FullName';
+import {LookingForAJob} from './LookingForAJob/LookingForAJob';
 
 type PropsType = {
     user: ProfileUserType | null
@@ -25,8 +26,9 @@ export const ProfileInfo: React.FC<PropsType> = React.memo(({user, isOwner}) => 
             <div className={styles.profileDescription}>
                 <Photo photo={user.photos} isOwner={isOwner}/>
                 <FullName fullName={user.fullName}/>
-                <div><b>Looking for a job: </b>{user.lookingForAJob ? 'Yes' : 'No'}</div>
-                <div>{user.lookingForAJobDescription}</div>
+                <LookingForAJob lookingForAJob={user.lookingForAJob}
+                                lookingForAJobDescription={user.lookingForAJobDescription}
+                />
                 <div><b>About me: </b>{user ? user.aboutMe : ''}</div>
                 <div><b>Contacts: </b>{Object.keys(user.contacts).map(key => {
                     return <Contact key={key} contactTitle={key} contactValue={''}/>
