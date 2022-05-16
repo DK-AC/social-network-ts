@@ -10,8 +10,8 @@ import {getCaptchaURLTC, loginTC} from '../../redux/reducers/authReducer';
 import {useAppSelector} from '../../redux/store';
 import {PATH} from '../Routing/Routing';
 import {FormikField} from '../../reusableComponent/FormikField';
+import {LoginUserType} from '../../api/authAPI';
 
-type Values = { email: string, password: string, rememberMe: boolean }
 
 export const Login = () => {
 
@@ -21,12 +21,12 @@ export const Login = () => {
     const {isAuth, captchaURL} = useAppSelector(state => state.auth)
     const error = useAppSelector(state => state.app.error)
 
-    const initialValues = {email: '', password: '', rememberMe: false}
+    const initialValues: LoginUserType = {email: '', password: '', rememberMe: false, captcha: ''}
     const validationSchema = {
         email: Yup.string().email('Invalid email format').required('Required'),
         password: Yup.string().required('Required'),
     }
-    const onSubmitLoginUser = (values: Values) => {
+    const onSubmitLoginUser = (values: LoginUserType) => {
         dispatch(loginTC(values))
         dispatch(getCaptchaURLTC())
     }
@@ -66,8 +66,19 @@ export const Login = () => {
                                      isShowLabel={true}
                                      error={error}
                         />
-                        {/*<img src={captchaURL} alt=""/>*/}
-                        {/*<input type="text"/>*/}
+                        {captchaURL
+                            ? <>
+                                <img src={captchaURL} alt="captchaURL"/>
+                                <FormikField type={'text'}
+                                             name={'captcha'}
+                                             isShowError={false}
+                                             isShowLabel={false}
+                                             error={error}
+                                             placeholder={'Symbols from image'}
+                                />
+                            </>
+                            : null
+                        }
                         <div>
                             <button disabled={!formik.isValid} type="submit">Sign Up</button>
                         </div>

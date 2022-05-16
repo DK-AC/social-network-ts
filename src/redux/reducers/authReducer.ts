@@ -68,11 +68,10 @@ export const loginTC = createAsyncThunk<{ user: LoginUserType }, LoginUserType, 
             await thunkAPI.dispatch(authMeTC())
             thunkAPI.dispatch(setAppStatus({status: 'successful'}))
             return {user: response.data.data}
-        }
-        if (response.data.resultCode === 10) {
-            getCaptchaURLTC()
-            return handleAsyncServerAppError(response.data, thunkAPI)
         } else {
+            if (response.data.resultCode === 10) {
+                getCaptchaURLTC()
+            }
             return handleAsyncServerAppError(response.data, thunkAPI)
         }
 
