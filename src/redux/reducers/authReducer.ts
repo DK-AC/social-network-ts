@@ -36,6 +36,7 @@ export const authSlices = createSlice({
             state.password = ''
             state.isAuth = false
             state.login = ''
+            state.captchaURL = ''
         })
         builder.addCase(getCaptchaURLTC.fulfilled, (state: InitialAuthStateType, action) => {
             state.captchaURL = action.payload.url
