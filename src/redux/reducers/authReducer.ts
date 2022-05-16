@@ -2,6 +2,7 @@ import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 
 import {authAPI, AuthUserType, LoginUserType} from '../../api/authAPI';
 import {handleAsyncNetworkError, handleAsyncServerAppError, ThunkErrorType} from '../../utils/error-utils';
+import {securityAPI} from '../../api/securityAPI';
 
 import {setAppStatus} from './appReducer';
 
@@ -11,6 +12,7 @@ const initialState = {
     login: '',
     email: '',
     password: '',
+    captchaURL: '',
 };
 
 export const authSlices = createSlice({
@@ -35,6 +37,9 @@ export const authSlices = createSlice({
             state.isAuth = false
             state.login = ''
         })
+        builder.addCase(getCaptchaURLTC.fulfilled, (state: InitialAuthStateType, action) => {
+            state.captchaURL = action.payload.url
+        })
     },
 })
 
@@ -56,16 +61,21 @@ export const authMeTC = createAsyncThunk<AuthUserType, void, ThunkErrorType>('au
     }
 })
 export const loginTC = createAsyncThunk<{ user: LoginUserType }, LoginUserType, ThunkErrorType>('auth/login', async (data, thunkAPI) => {
-    thunkAPI.dispatch(setAppStatus({status: 'loading'}));
+    thunkAPI.dispatch(setAppStatus({status: 'loading'}))
     try {
         const response = await authAPI.login(data)
         if (response.data.resultCode === 0) {
             await thunkAPI.dispatch(authMeTC())
-            thunkAPI.dispatch(setAppStatus({status: 'successful'}));
+            thunkAPI.dispatch(setAppStatus({status: 'successful'}))
             return {user: response.data.data}
+        }
+        if (response.data.resultCode === 10) {
+            getCaptchaURLTC()
+            return handleAsyncServerAppError(response.data, thunkAPI)
         } else {
             return handleAsyncServerAppError(response.data, thunkAPI)
         }
+
     } catch (err: any) {
         return handleAsyncNetworkError(err, thunkAPI)
     }
@@ -79,6 +89,16 @@ export const logoutTC = createAsyncThunk<undefined, void, ThunkErrorType>('auth/
         } else {
             return handleAsyncServerAppError(response.data, thunkAPI)
         }
+    } catch (err: any) {
+        return handleAsyncNetworkError(err, thunkAPI)
+    }
+})
+export const getCaptchaURLTC = createAsyncThunk<{ url: string }, void, ThunkErrorType>('auth/captcha', async (_, thunkAPI) => {
+    thunkAPI.dispatch(setAppStatus({status: 'loading'}));
+    try {
+        const response = await securityAPI.getCaptchaUrl()
+        thunkAPI.dispatch(setAppStatus({status: 'successful'}));
+        return {url: response.data.url}
     } catch (err: any) {
         return handleAsyncNetworkError(err, thunkAPI)
     }

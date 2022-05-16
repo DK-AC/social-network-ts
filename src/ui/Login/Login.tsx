@@ -6,7 +6,7 @@ import {useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import * as Yup from 'yup';
 
-import {loginTC} from '../../redux/reducers/authReducer';
+import {getCaptchaURLTC, loginTC} from '../../redux/reducers/authReducer';
 import {useAppSelector} from '../../redux/store';
 import {PATH} from '../Routing/Routing';
 import {FormikField} from '../../reusableComponent/FormikField';
@@ -18,7 +18,7 @@ export const Login = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const isAuth = useAppSelector(state => state.auth.isAuth)
+    const {isAuth, captchaURL} = useAppSelector(state => state.auth)
     const error = useAppSelector(state => state.app.error)
 
     const initialValues = {email: '', password: '', rememberMe: false}
@@ -28,6 +28,7 @@ export const Login = () => {
     }
     const onSubmitLoginUser = (values: Values) => {
         dispatch(loginTC(values))
+        dispatch(getCaptchaURLTC())
     }
 
     useEffect(() => {
@@ -35,7 +36,7 @@ export const Login = () => {
             navigate(PATH.PROFILE_PAGE)
         }
         return
-    }, [isAuth, navigate])
+    }, [dispatch, isAuth, navigate])
 
     return (
         <div style={{width: '200px', margin: '0 auto'}}>
@@ -65,9 +66,12 @@ export const Login = () => {
                                      isShowLabel={true}
                                      error={error}
                         />
+                        {/*<img src={captchaURL} alt=""/>*/}
+                        {/*<input type="text"/>*/}
                         <div>
                             <button disabled={!formik.isValid} type="submit">Sign Up</button>
                         </div>
+
                     </Form>
                 )}
             </Formik>

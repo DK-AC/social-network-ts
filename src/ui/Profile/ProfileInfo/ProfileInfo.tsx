@@ -16,8 +16,6 @@ type PropsType = {
 
 export const ProfileInfo: React.FC<PropsType> = React.memo(({profile, isOwner}) => {
 
-    console.log('ProfileInfo')
-
     const [editMode, setEditMode] = useState(false)
 
     const goToEditMode = () => setEditMode(true)
