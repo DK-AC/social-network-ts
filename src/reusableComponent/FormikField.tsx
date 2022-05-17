@@ -1,8 +1,16 @@
 import {Field} from 'formik';
 import * as React from 'react';
 
+import {ContactsUserType, ProfileUserType} from '../api/profileAPI';
+import {LoginUserType} from '../api/typesAPI';
+
+
+export type ContactsKeysType = keyof ContactsUserType
+type ProfileUserKeysType = keyof ProfileUserType
+type LoginKeysType = keyof LoginUserType
+
 type PropsType = {
-    name: string
+    name: ProfileUserKeysType | LoginKeysType | 'dialogMessage' | 'postMessage' | `contacts.${ContactsKeysType}`
     type?: string
     isShowError?: boolean
     isShowLabel?: boolean

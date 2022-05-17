@@ -3,7 +3,7 @@ import {Form, Formik} from 'formik';
 import {useDispatch} from 'react-redux';
 
 import {ProfileUserType} from '../../../api/profileAPI';
-import {FormikField} from '../../../reusableComponent/FormikField';
+import {ContactsKeysType, FormikField} from '../../../reusableComponent/FormikField';
 import {useAppSelector} from '../../../redux/store';
 import {saveProfileTC} from '../../../redux/reducers/profileReducer';
 
@@ -82,7 +82,7 @@ export const ProfileDataForm: React.FC<PropsType> = ({profile, goToSaveMode}) =>
                                     return (
                                         <div key={key} className={styles.contact}>
                                             <b>{key}:
-                                                <FormikField name={`contacts.${key}`}
+                                                <FormikField name={`contacts.${key as ContactsKeysType}`}
                                                              error={error}
                                                              placeholder={key}
                                                 />
