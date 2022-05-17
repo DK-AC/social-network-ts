@@ -50,7 +50,8 @@ export const usersReducer = userSlices.reducer
 export const {changeCurrentPage, setIsFollowingInProgress, changePortionNumber} = userSlices.actions
 
 
-export const setUsersTC = createAsyncThunk<{ users: UserType[], totalCount: number }, ParamsUserPageType, ThunkErrorType>('user/setUsers',
+export const setUsersTC = createAsyncThunk <{ users: UserType[], totalCount: number }, ParamsUserPageType, ThunkErrorType>
+('user/setUsers',
     async (params, thunkAPI) => {
         thunkAPI.dispatch(setAppStatus({status: 'loading'}));
         try {
@@ -61,7 +62,8 @@ export const setUsersTC = createAsyncThunk<{ users: UserType[], totalCount: numb
             return handleAsyncNetworkError(err as AxiosError, thunkAPI)
         }
     })
-export const followingTC = createAsyncThunk<FollowUnFollowPayloadType, FollowUnFollowPayloadType, ThunkErrorType>('user/followingTC',
+export const followingTC = createAsyncThunk<FollowUnFollowPayloadType, FollowUnFollowPayloadType, ThunkErrorType>
+('user/followingTC',
     async (payload, thunkAPI) => {
         thunkAPI.dispatch(setAppStatus({status: 'loading'}));
         thunkAPI.dispatch(setIsFollowingInProgress({userId: payload.userId, isFollow: true}))

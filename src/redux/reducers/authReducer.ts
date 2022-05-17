@@ -48,62 +48,70 @@ export const authSlices = createSlice({
 
 export const authReducer = authSlices.reducer
 
-export const authMeTC = createAsyncThunk<AuthUserType, void, ThunkErrorType>('auth/authMe', async (_, thunkAPI) => {
-    thunkAPI.dispatch(setAppStatus({status: 'loading'}));
-    try {
-        const {data} = await authAPI.me()
-        if (data.resultCode === ResultCode.Success) {
-            thunkAPI.dispatch(setAppStatus({status: 'successful'}));
-            return data.data
-        } else {
-            return handleAsyncServerAppError(data, thunkAPI)
-        }
-    } catch (err) {
-        return handleAsyncNetworkError(err as AxiosError, thunkAPI)
-    }
-})
-export const loginTC = createAsyncThunk<{ user: LoginUserType }, LoginUserType, ThunkErrorType>('auth/login', async (loginData, thunkAPI) => {
-    thunkAPI.dispatch(setAppStatus({status: 'loading'}))
-    try {
-        const {data} = await authAPI.login(loginData)
-        if (data.resultCode === ResultCode.Success) {
-            await thunkAPI.dispatch(authMeTC())
-            thunkAPI.dispatch(setAppStatus({status: 'successful'}))
-            thunkAPI.dispatch(setAppError({error: ''}))
-            return data
-        } else {
-            if (data.resultCode === ResultCode.Captcha) {
-                thunkAPI.dispatch(getCaptchaURLTC())
-                thunkAPI.dispatch(setAppError({error: ''}))
+export const authMeTC = createAsyncThunk<AuthUserType, void, ThunkErrorType>
+('auth/authMe',
+    async (_, thunkAPI) => {
+        thunkAPI.dispatch(setAppStatus({status: 'loading'}));
+        try {
+            const {data} = await authAPI.me()
+            if (data.resultCode === ResultCode.Success) {
+                thunkAPI.dispatch(setAppStatus({status: 'successful'}));
+                return data.data
+            } else {
+                return handleAsyncServerAppError(data, thunkAPI)
             }
-            return handleAsyncServerAppError(data, thunkAPI)
+        } catch (err) {
+            return handleAsyncNetworkError(err as AxiosError, thunkAPI)
         }
-    } catch (err) {
-        return handleAsyncNetworkError(err as AxiosError, thunkAPI)
-    }
-})
-export const logoutTC = createAsyncThunk<undefined, void, ThunkErrorType>('auth/logout', async (_, thunkAPI) => {
-    thunkAPI.dispatch(setAppStatus({status: 'loading'}));
-    try {
-        const {data} = await authAPI.logout()
-        if (data.resultCode === ResultCode.Success) {
+    })
+export const loginTC = createAsyncThunk<{ user: LoginUserType }, LoginUserType, ThunkErrorType>
+('auth/login',
+    async (loginData, thunkAPI) => {
+        thunkAPI.dispatch(setAppStatus({status: 'loading'}))
+        try {
+            const {data} = await authAPI.login(loginData)
+            if (data.resultCode === ResultCode.Success) {
+                await thunkAPI.dispatch(authMeTC())
+                thunkAPI.dispatch(setAppStatus({status: 'successful'}))
+                thunkAPI.dispatch(setAppError({error: ''}))
+                return data
+            } else {
+                if (data.resultCode === ResultCode.Captcha) {
+                    thunkAPI.dispatch(getCaptchaURLTC())
+                    thunkAPI.dispatch(setAppError({error: ''}))
+                }
+                return handleAsyncServerAppError(data, thunkAPI)
+            }
+        } catch (err) {
+            return handleAsyncNetworkError(err as AxiosError, thunkAPI)
+        }
+    })
+export const logoutTC = createAsyncThunk<undefined, void, ThunkErrorType>
+('auth/logout',
+    async (_, thunkAPI) => {
+        thunkAPI.dispatch(setAppStatus({status: 'loading'}));
+        try {
+            const {data} = await authAPI.logout()
+            if (data.resultCode === ResultCode.Success) {
+                thunkAPI.dispatch(setAppStatus({status: 'successful'}));
+            } else {
+                return handleAsyncServerAppError(data, thunkAPI)
+            }
+        } catch (err) {
+            return handleAsyncNetworkError(err as AxiosError, thunkAPI)
+        }
+    })
+export const getCaptchaURLTC = createAsyncThunk<{ url: string }, void, ThunkErrorType>
+('auth/captcha',
+    async (_, thunkAPI) => {
+        thunkAPI.dispatch(setAppStatus({status: 'loading'}));
+        try {
+            const {data} = await securityAPI.getCaptchaUrl()
             thunkAPI.dispatch(setAppStatus({status: 'successful'}));
-        } else {
-            return handleAsyncServerAppError(data, thunkAPI)
+            return {url: data.url}
+        } catch (err) {
+            return handleAsyncNetworkError(err as AxiosError, thunkAPI)
         }
-    } catch (err) {
-        return handleAsyncNetworkError(err as AxiosError, thunkAPI)
-    }
-})
-export const getCaptchaURLTC = createAsyncThunk<{ url: string }, void, ThunkErrorType>('auth/captcha', async (_, thunkAPI) => {
-    thunkAPI.dispatch(setAppStatus({status: 'loading'}));
-    try {
-        const {data} = await securityAPI.getCaptchaUrl()
-        thunkAPI.dispatch(setAppStatus({status: 'successful'}));
-        return {url: data.url}
-    } catch (err) {
-        return handleAsyncNetworkError(err as AxiosError, thunkAPI)
-    }
-})
+    })
 
 export type InitialAuthStateType = typeof initialState
