@@ -1,5 +1,7 @@
 import {AxiosResponse} from 'axios';
 
+import {PhotosType} from './profileAPI';
+
 export type AxiosResponseType<T = {}> = AxiosResponse<ResponseType<T>>
 
 export enum ResultCode {
@@ -40,10 +42,7 @@ export type UserType = {
     id: number,
     name: string,
     uniqueUrlName: string,
-    photos: {
-        small: string,
-        large: string
-    },
+    photos: PhotosType
     status: string,
     followed: boolean
 }
