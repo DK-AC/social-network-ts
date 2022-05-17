@@ -4,7 +4,7 @@ import {AxiosError} from 'axios';
 import {authAPI} from '../../api/authAPI';
 import {handleAsyncNetworkError, handleAsyncServerAppError, ThunkErrorType} from '../../utils/error-utils';
 import {securityAPI} from '../../api/securityAPI';
-import {AuthUserType, LoginUserType} from '../../api/typesAPI';
+import {AuthUserType, LoginUserType, ResultCode} from '../../api/typesAPI';
 
 import {setAppStatus} from './appReducer';
 
@@ -52,7 +52,7 @@ export const authMeTC = createAsyncThunk<AuthUserType, void, ThunkErrorType>('au
     thunkAPI.dispatch(setAppStatus({status: 'loading'}));
     try {
         const {data} = await authAPI.me()
-        if (data.resultCode === 0) {
+        if (data.resultCode === ResultCode.Success) {
             thunkAPI.dispatch(setAppStatus({status: 'successful'}));
             return data.data
         } else {
@@ -66,12 +66,12 @@ export const loginTC = createAsyncThunk<{ user: LoginUserType }, LoginUserType, 
     thunkAPI.dispatch(setAppStatus({status: 'loading'}))
     try {
         const {data} = await authAPI.login(loginData)
-        if (data.resultCode === 0) {
+        if (data.resultCode === ResultCode.Success) {
             await thunkAPI.dispatch(authMeTC())
             thunkAPI.dispatch(setAppStatus({status: 'successful'}))
             return data
         } else {
-            if (data.resultCode === 10) {
+            if (data.resultCode === ResultCode.Captcha) {
                 getCaptchaURLTC()
             }
             return handleAsyncServerAppError(data, thunkAPI)
@@ -84,7 +84,7 @@ export const logoutTC = createAsyncThunk<undefined, void, ThunkErrorType>('auth/
     thunkAPI.dispatch(setAppStatus({status: 'loading'}));
     try {
         const {data} = await authAPI.logout()
-        if (data.resultCode === 0) {
+        if (data.resultCode === ResultCode.Success) {
             thunkAPI.dispatch(setAppStatus({status: 'successful'}));
         } else {
             return handleAsyncServerAppError(data, thunkAPI)

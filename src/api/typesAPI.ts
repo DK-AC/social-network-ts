@@ -2,6 +2,12 @@ import {AxiosResponse} from 'axios';
 
 export type AxiosResponseType<T = {}> = AxiosResponse<ResponseType<T>>
 
+export enum ResultCode {
+    Success = 0,
+    Error = 1,
+    Captcha = 10,
+}
+
 export type FieldErrorType = { error: string, field: string };
 export type AuthUserType = {
     id: number
@@ -18,7 +24,7 @@ export type ResponseType<T = {}> = {
     data: T
     fieldsErrors: FieldErrorType[]
     messages: string[]
-    resultCode: number
+    resultCode: ResultCode
 }
 
 export type ResponseUserType<U = {}> = {
