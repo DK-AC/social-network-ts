@@ -21,3 +21,23 @@ export type ResponseType<T = {}> = {
     resultCode: number
 }
 
+export type ResponseUserType<U = {}> = {
+    items: U
+    totalCount: number
+    error: string
+}
+export type ParamsUserPageType = {
+    currentPage: number
+    pageSize: number
+}
+export type UserType = {
+    id: number,
+    name: string,
+    uniqueUrlName: string,
+    photos: {
+        small: string,
+        large: string
+    },
+    status: string,
+    followed: boolean
+}

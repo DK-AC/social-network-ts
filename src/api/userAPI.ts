@@ -2,7 +2,7 @@ import {AxiosResponse} from 'axios';
 
 
 import {instanceAPI} from './instanceAPI';
-import {ResponseType} from './typesAPI';
+import {AxiosResponseType, ParamsUserPageType, ResponseType, ResponseUserType, UserType} from './typesAPI';
 
 export const userAPI = {
     getUsers(params: ParamsUserPageType) {
@@ -10,34 +10,10 @@ export const userAPI = {
         (`/users?page=${params.currentPage}&count=${params.pageSize}`)
     },
     followUser(userId: number) {
-        return instanceAPI.post<any, AxiosResponse<ResponseType>, ResponseType>(`/follow/${userId}`)
-            .then(res => res.data)
+        return instanceAPI.post<any, AxiosResponseType, ResponseType>(`/follow/${userId}`)
     },
     unfollowUser(userId: number) {
-        return instanceAPI.delete<any, AxiosResponse<ResponseType>, ResponseType>(`/follow/${userId}`)
-            .then(res => res.data)
+        return instanceAPI.delete<any, AxiosResponseType, ResponseType>(`/follow/${userId}`)
     },
 };
 
-export type ResponseUserType<U = {}> = {
-    items: U
-    totalCount: number
-    error: string
-}
-
-export type ParamsUserPageType = {
-    currentPage: number
-    pageSize: number
-}
-
-export type UserType = {
-    id: number,
-    name: string,
-    uniqueUrlName: string,
-    photos: {
-        small: string,
-        large: string
-    },
-    status: string,
-    followed: boolean
-}
