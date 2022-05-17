@@ -1,5 +1,5 @@
-import {ResponseType} from '../api/authAPI';
 import {setAppStatus} from '../redux/reducers/appReducer';
+import {ResponseType} from '../api/typesAPI';
 
 import {handleAsyncServerAppError} from './error-utils';
 

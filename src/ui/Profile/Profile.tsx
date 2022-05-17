@@ -12,6 +12,10 @@ import {ProfileInfo} from './ProfileInfo/ProfileInfo';
 
 export const Profile: React.FC = () => {
 
+    const { captchaURL, email, login, password} = useAppSelector(state => state.auth)
+
+    // console.log(email, password, login)
+
     const dispatch = useDispatch();
     const params = useParams<'profileUserId'>();
     const navigate = useNavigate()

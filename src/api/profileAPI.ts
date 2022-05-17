@@ -1,7 +1,7 @@
 import {AxiosResponse} from 'axios';
 
-import {ResponseType} from './authAPI';
 import {instanceAPI} from './instanceAPI';
+import {ResponseType} from './typesAPI';
 
 export const profileAPI = {
     getProfileUserId(userId: number) {

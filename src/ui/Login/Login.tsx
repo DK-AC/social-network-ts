@@ -21,6 +21,7 @@ export const Login = () => {
     const {isAuth, captchaURL} = useAppSelector(state => state.auth)
     const error = useAppSelector(state => state.app.error)
 
+
     const initialValues: LoginUserType = {email: '', password: '', rememberMe: false, captcha: ''}
     const validationSchema = {
         email: Yup.string().email('Invalid email format').required('Required'),

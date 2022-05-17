@@ -1,25 +1,21 @@
-import {AxiosResponse} from 'axios';
-
 import {instanceAPI} from './instanceAPI';
+import {AxiosResponseType} from './typesAPI';
 
 export const authAPI = {
     me() {
-        return instanceAPI.get<any, AxiosResponse<ResponseType<AuthUserType>>, AuthUserType>('/auth/me');
+        return instanceAPI.get<any, AxiosResponseType<AuthUserType>, AuthUserType>('/auth/me')
+            .then(res => res.data)
     },
     login(data: LoginUserType) {
-        return instanceAPI.post<any, AxiosResponse<ResponseType<LoginUserType>>, LoginUserType>('/auth/login', data);
+        return instanceAPI.post<any, AxiosResponseType<LoginUserType>, LoginUserType>('/auth/login', data)
+            .then(res => res.data)
     },
     logout() {
-        return instanceAPI.delete<any, AxiosResponse<ResponseType>, ResponseType>('/auth/login')
+        return instanceAPI.delete<any, AxiosResponseType, ResponseType>('/auth/login')
+            .then(res => res.data)
     },
 };
 
-export type ResponseType<T = {}> = {
-    data: T
-    fieldsErrors: FieldErrorType[]
-    messages: string[]
-    resultCode: number
-}
 
 export type FieldErrorType = { error: string, field: string };
 
@@ -30,8 +26,8 @@ export type AuthUserType = {
 }
 
 export type LoginUserType = {
-    email: string
-    password: string
+    email: string | null
+    password: string | null
     rememberMe?: boolean
-    captcha?: string
+    captcha?: string | null
 }
