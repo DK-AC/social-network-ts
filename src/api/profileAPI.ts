@@ -1,27 +1,25 @@
-import {AxiosResponse} from 'axios';
-
 import {instanceAPI} from './instanceAPI';
-import {ResponseType} from './typesAPI';
+import {AxiosResponseType} from './typesAPI';
 
 export const profileAPI = {
     getProfileUserId(userId: number) {
-        return instanceAPI.get<any, ResponseType<ProfileUserType>, ProfileUserType>(`/profile/${userId}`)
+        return instanceAPI.get<any, AxiosResponseType<ProfileUserType>, ProfileUserType>(`/profile/${userId}`)
     },
     getProfileUserStatus(userId: number) {
-        return instanceAPI.get<string>(`/profile/status/${userId}`)
+        return instanceAPI.get<any, AxiosResponseType<string>>(`/profile/status/${userId}`)
     },
-    updateProfileUserStatus(params: { status: string }) {
-        return instanceAPI.put<any, AxiosResponse<ResponseType<{ status: string }>>>('/profile/status', params)
+    updateProfileUserStatus(payload: { status: string }) {
+        return instanceAPI.put<any, AxiosResponseType<string>>('/profile/status', payload)
     },
     savePhoto(photoFile: File) {
         const formData = new FormData();
         formData.append('image', photoFile);
 
-        return instanceAPI.put<any, AxiosResponse<ResponseType<PhotosType>, PhotosType>>
+        return instanceAPI.put<any, AxiosResponseType<PhotosType>, FormData>
         ('/profile/photo', formData, {headers: {'Content-Type': 'multipart/form-data'}})
     },
     saveProfile(profile: ProfileUserType) {
-        return instanceAPI.put<any, AxiosResponse<ResponseType<ProfileUserType>, ResponseType>>('/profile', profile)
+        return instanceAPI.put<any, AxiosResponseType<ProfileUserType>, ProfileUserType>('/profile', profile)
     },
 };
 

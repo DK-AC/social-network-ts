@@ -1,5 +1,5 @@
 import {authMeTC, authReducer, InitialAuthStateType, loginTC, logoutTC} from '../reducers/authReducer';
-import {LoginUserType} from '../../api/authAPI';
+import {LoginUserType} from "../../api/typesAPI";
 
 let fakeState: InitialAuthStateType;
 

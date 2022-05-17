@@ -1,4 +1,5 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {AxiosError} from 'axios';
 
 import {PhotosType, profileAPI, ProfileUserType} from '../../api/profileAPI';
 import {handleAsyncNetworkError, handleAsyncServerAppError, ThunkErrorType} from '../../utils/error-utils';
@@ -20,7 +21,8 @@ export const profileSlices = createSlice({
     initialState,
     reducers: {
         addPost(state: InitialProfileStateType, action: PayloadAction<{ postText: string }>) {
-            state.posts.unshift({id: new Date().getTime(), message: action.payload.postText, likesCount: 0})
+            state.posts.unshift(
+                {id: new Date().getTime(), message: action.payload.postText, likesCount: 0})
         },
         deletePost(state: InitialProfileStateType, action: PayloadAction<{ postId: number }>) {
             const index = state.posts.findIndex(post => post.id === action.payload.postId)
@@ -50,76 +52,75 @@ export const profileSlices = createSlice({
 export const profileReducer = profileSlices.reducer
 export const {addPost, deletePost} = profileSlices.actions
 
-//thunks
 export const setProfileUserTC = createAsyncThunk<{ profile: ProfileUserType }, number, ThunkErrorType>('profile/setProfileUser',
     async (userId, thunkAPI) => {
         thunkAPI.dispatch(setAppStatus({status: 'loading'}));
         try {
-            const response = await profileAPI.getProfileUserId(userId)
+            const {data} = await profileAPI.getProfileUserId(userId)
             thunkAPI.dispatch(setAppStatus({status: 'successful'}))
-            return {profile: response.data}
-        } catch (err: any) {
-            return handleAsyncNetworkError(err, thunkAPI)
+            return {profile: data}
+        } catch (err) {
+            return handleAsyncNetworkError(err as AxiosError, thunkAPI)
         }
     })
-export const getProfileUserStatusTC = createAsyncThunk<{ status: string }, number, ThunkErrorType>('profile/getProfileUserStatus', async (userId: number, thunkAPI) => {
-    thunkAPI.dispatch(setAppStatus({status: 'loading'}));
-    try {
-        const response = await profileAPI.getProfileUserStatus(userId)
-        thunkAPI.dispatch(setAppStatus({status: 'successful'}))
-        return {status: response.data}
-    } catch (err: any) {
-        return handleAsyncNetworkError(err, thunkAPI)
-    }
-})
+export const getProfileUserStatusTC = createAsyncThunk<{ status: string }, number, ThunkErrorType>('profile/getProfileUserStatus',
+    async (userId: number, thunkAPI) => {
+        thunkAPI.dispatch(setAppStatus({status: 'loading'}));
+        try {
+            const {data} = await profileAPI.getProfileUserStatus(userId)
+            thunkAPI.dispatch(setAppStatus({status: 'successful'}))
+            return {status: data}
+        } catch (err) {
+            return handleAsyncNetworkError(err as AxiosError, thunkAPI)
+        }
+    })
 export const updateProfileUserStatusTC = createAsyncThunk<{ status: string }, { status: string }, ThunkErrorType>
 ('profile/updateProfileUserStatus',
     async (status, thunkAPI) => {
         thunkAPI.dispatch(setAppStatus({status: 'loading'}));
         try {
-            const response = await profileAPI.updateProfileUserStatus(status)
-            if (response.data.resultCode === 0) {
+            const {data} = await profileAPI.updateProfileUserStatus(status)
+            if (data.resultCode === 0) {
                 thunkAPI.dispatch(setAppStatus({status: 'successful'}))
                 return status
             } else {
-                return handleAsyncServerAppError(response.data, thunkAPI)
+                return handleAsyncServerAppError(data, thunkAPI)
             }
-        } catch (err: any) {
-            return handleAsyncNetworkError(err, thunkAPI)
+        } catch (err) {
+            return handleAsyncNetworkError(err as AxiosError, thunkAPI)
         }
     })
 export const savePhotoTC = createAsyncThunk<{ photos: PhotosType }, File, ThunkErrorType>('profile/savePhoto',
     async (file, thunkAPI) => {
         thunkAPI.dispatch(setAppStatus({status: 'loading'}))
         try {
-            const response = await profileAPI.savePhoto(file)
-            if (response.data.resultCode === 0) {
+            const {data} = await profileAPI.savePhoto(file)
+            if (data.resultCode === 0) {
                 thunkAPI.dispatch(setAppStatus({status: 'successful'}))
-                return response.data.data
+                return data
             } else {
-                return handleAsyncServerAppError(response.data, thunkAPI)
+                return handleAsyncServerAppError(data, thunkAPI)
             }
-        } catch (err: any) {
-            return handleAsyncNetworkError(err, thunkAPI)
+        } catch (err) {
+            return handleAsyncNetworkError(err as AxiosError, thunkAPI)
         }
     })
 export const saveProfileTC = createAsyncThunk<{ profile: ProfileUserType }, ProfileUserType, ThunkErrorType>('profile/saveProfile',
     async (profile, thunkAPI) => {
         thunkAPI.dispatch(setAppStatus({status: 'loading'}))
         try {
-            const response = await profileAPI.saveProfile(profile)
-            if (response.data.resultCode === 0) {
+            const {data} = await profileAPI.saveProfile(profile)
+            if (data.resultCode === 0) {
                 thunkAPI.dispatch(setAppStatus({status: 'successful'}))
-                return response.data.data
+                return data.data
             } else {
-                return handleAsyncServerAppError(response.data, thunkAPI)
+                return handleAsyncServerAppError(data, thunkAPI)
             }
-        } catch (err: any) {
-            return handleAsyncNetworkError(err, thunkAPI)
+        } catch (err) {
+            return handleAsyncNetworkError(err as AxiosError, thunkAPI)
         }
     })
 
 
-//types
 export type InitialProfileStateType = typeof initialState
 
