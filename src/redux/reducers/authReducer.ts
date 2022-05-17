@@ -6,7 +6,7 @@ import {handleAsyncNetworkError, handleAsyncServerAppError, ThunkErrorType} from
 import {securityAPI} from '../../api/securityAPI';
 import {AuthUserType, LoginUserType, ResultCode} from '../../api/typesAPI';
 
-import {setAppStatus} from './appReducer';
+import {setAppError, setAppStatus} from './appReducer';
 
 const initialState = {
     isAuth: false,
@@ -69,10 +69,12 @@ export const loginTC = createAsyncThunk<{ user: LoginUserType }, LoginUserType, 
         if (data.resultCode === ResultCode.Success) {
             await thunkAPI.dispatch(authMeTC())
             thunkAPI.dispatch(setAppStatus({status: 'successful'}))
+            thunkAPI.dispatch(setAppError({error: ''}))
             return data
         } else {
             if (data.resultCode === ResultCode.Captcha) {
-                getCaptchaURLTC()
+                thunkAPI.dispatch(getCaptchaURLTC())
+                thunkAPI.dispatch(setAppError({error: ''}))
             }
             return handleAsyncServerAppError(data, thunkAPI)
         }

@@ -6,14 +6,14 @@ import {useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import * as Yup from 'yup';
 
-import {getCaptchaURLTC, loginTC} from '../../redux/reducers/authReducer';
+import {loginTC} from '../../redux/reducers/authReducer';
 import {useAppSelector} from '../../redux/store';
 import {PATH} from '../Routing/Routing';
 import {FormikField} from '../../reusableComponent/FormikField';
 import {LoginUserType} from '../../api/typesAPI';
 
 
-export const Login = () => {
+export const Login: React.FC = () => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -29,7 +29,6 @@ export const Login = () => {
     }
     const onSubmitLoginUser = (values: LoginUserType) => {
         dispatch(loginTC(values))
-        dispatch(getCaptchaURLTC())
     }
 
     useEffect(() => {
