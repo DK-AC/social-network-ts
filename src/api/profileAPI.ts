@@ -2,7 +2,7 @@ import {instanceAPI} from './instanceAPI';
 import {AxiosResponseType} from './typesAPI';
 
 export const profileAPI = {
-    getProfileUserId(userId: number) {
+    getProfileUser(userId: number) {
         return instanceAPI.get<any, AxiosResponseType<ProfileUserType>, ProfileUserType>(`/profile/${userId}`)
     },
     getProfileUserStatus(userId: number) {
@@ -14,7 +14,6 @@ export const profileAPI = {
     savePhoto(photoFile: File) {
         const formData = new FormData();
         formData.append('image', photoFile);
-
         return instanceAPI.put<any, AxiosResponseType<PhotosType>, FormData>
         ('/profile/photo', formData, {headers: {'Content-Type': 'multipart/form-data'}})
     },

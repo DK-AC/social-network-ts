@@ -56,7 +56,7 @@ export const setProfileUserTC = createAsyncThunk<{ profile: ProfileUserType }, n
     async (userId, thunkAPI) => {
         thunkAPI.dispatch(setAppStatus({status: 'loading'}));
         try {
-            const {data} = await profileAPI.getProfileUserId(userId)
+            const {data} = await profileAPI.getProfileUser(userId)
             thunkAPI.dispatch(setAppStatus({status: 'successful'}))
             return {profile: data}
         } catch (err) {

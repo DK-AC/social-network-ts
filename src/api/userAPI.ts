@@ -8,7 +8,6 @@ export const userAPI = {
     getUsers(params: ParamsUserPageType) {
         return instanceAPI.get<any, AxiosResponse<ResponseUserType<UserType[]>>, UserType[]>
         (`/users?page=${params.currentPage}&count=${params.pageSize}`)
-            .then(res => res.data);
     },
     followUser(userId: number) {
         return instanceAPI.post<any, AxiosResponse<ResponseType>, ResponseType>(`/follow/${userId}`)
