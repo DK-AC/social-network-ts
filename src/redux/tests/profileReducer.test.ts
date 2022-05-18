@@ -10,6 +10,7 @@ import {
 import {ProfileUserType} from '../../api/profileAPI';
 
 let fakeState: InitialProfileStateType;
+let fakeFile: File
 
 beforeEach(() => {
     fakeState = {
@@ -18,7 +19,7 @@ beforeEach(() => {
             {id: 2, message: '2 post', likesCount: 1},
             {id: 3, message: '3 post', likesCount: 55},
         ],
-        profile: null,
+        profile: null as ProfileUserType | null,
         status: '',
     };
 });
@@ -95,6 +96,15 @@ describe('profile', () => {
         expect(fakeState.posts[1].id).toBe(2)
         expect(endState.posts[1].id).toBe(3)
     })
+//todo: need refactoring test
+    // test('photo should be set', () => {
+    //
+    //     const action = savePhoto.fulfilled({photos: {small: 'small', large: 'large'}}, 'requestId', fakeFile)
+    //     const endState = profileReducer(fakeState, action)
+    //
+    //     expect(endState.profile!.photos.small).toBe('')
+    //     expect(endState.profile!.photos.small).toBe('')
+    // })
 
 })
 
