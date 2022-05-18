@@ -3,7 +3,7 @@ import {AxiosError} from 'axios';
 import {setAppError, setAppStatus} from '../redux/reducers/appReducer'
 import {ResponseType} from '../api/instanceAPI';
 
-type ThunkAPIType = {
+export type ThunkAPIType = {
     dispatch: (action: any) => any
     rejectWithValue: Function
 }
@@ -20,7 +20,6 @@ export const handleAsyncNetworkError = (error: AxiosError, thunkAPI: ThunkAPITyp
         thunkAPI.dispatch(setAppError({error: error.message ? error.message : 'Some error occurred'}))
     }
     thunkAPI.dispatch(setAppStatus({status: 'failed'}))
-
     return thunkAPI.rejectWithValue({errors: [error.message], fieldsErrors: undefined})
 }
 
