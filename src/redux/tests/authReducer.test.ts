@@ -1,16 +1,15 @@
-import {authMe, authReducer, InitialAuthStateType, loginTC, logoutTC} from '../reducers/authReducer';
-import {LoginUserType} from "../../api/authAPI";
+import {authMe, authReducer, InitialAuthStateType, logoutTC} from '../reducers/authReducer';
 
 let fakeState: InitialAuthStateType;
 
 beforeEach(() => {
     fakeState = {
         id: 1,
-        email: '',
-        password: '',
+        email: null,
+        password: null,
         isAuth: false,
-        login: '',
-        captchaURL: '',
+        login: null,
+        captchaURL: null,
     }
 })
 
@@ -27,27 +26,12 @@ describe('auth', () => {
         expect(fakeState.id).toBe(1)
         expect(endState.id).toBe(12)
 
-        expect(fakeState.email).toBe('')
+        expect(fakeState.email).toBe(null)
         expect(endState.email).toBe('fake@gmail.com')
 
-        expect(fakeState.login).toBe('')
+        expect(fakeState.login).toBe(null)
         expect(endState.login).toBe('fake')
 
-    })
-
-    test('show data registered user', () => {
-        const fakeIsAuthUserData: LoginUserType = {
-            email: 'fake@gmail.com',
-            password: '12345678',
-        };
-        const action = loginTC.fulfilled({user: fakeIsAuthUserData}, 'requestId', fakeIsAuthUserData)
-        const endState = authReducer(fakeState, action)
-
-        expect(fakeState.email).toBe('')
-        expect(endState.email).toBe('fake@gmail.com')
-
-        expect(fakeState.password).toBe('')
-        expect(endState.password).toBe('12345678')
     })
 
     test('when user logout clear state', () => {

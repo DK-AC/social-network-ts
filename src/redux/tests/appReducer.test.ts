@@ -1,4 +1,4 @@
-import {appReducer, InitialAppStateType, isAppInitialized, setAppError, setAppStatus,} from '../reducers/appReducer';
+import {appReducer, InitialAppStateType, isAppInitialized, setAppError, setAppStatus} from '../reducers/appReducer';
 
 let startState: InitialAppStateType;
 
