@@ -28,14 +28,14 @@ export const authSlices = createSlice({
             state.login = action.payload.login
             state.isAuth = true
         })
-        builder.addCase(logoutTC.fulfilled, (state: InitialAuthStateType, action) => {
+        builder.addCase(logout.fulfilled, (state: InitialAuthStateType, action) => {
             state.email = null
             state.password = null
             state.isAuth = false
             state.login = null
             state.captchaURL = null
         })
-        builder.addCase(getCaptchaURLTC.fulfilled, (state: InitialAuthStateType, action) => {
+        builder.addCase(getCaptchaURL.fulfilled, (state: InitialAuthStateType, action) => {
             state.captchaURL = action.payload.url
         })
     },
@@ -59,7 +59,7 @@ export const authMe = createAsyncThunk<AuthUserType, void, ThunkErrorType>
             return handleAsyncNetworkError(err as AxiosError, thunkAPI)
         }
     })
-export const loginTC = createAsyncThunk<{ user: LoginUserType }, LoginUserType, ThunkErrorType>
+export const login = createAsyncThunk<{ user: LoginUserType }, LoginUserType, ThunkErrorType>
 ('auth/login',
     async (loginData, thunkAPI) => {
         thunkAPI.dispatch(setAppStatus({status: 'loading'}))
@@ -72,7 +72,7 @@ export const loginTC = createAsyncThunk<{ user: LoginUserType }, LoginUserType, 
                 return data
             } else {
                 if (data.resultCode === ResultCodeRequireCaptchaEnum.Captcha) {
-                    thunkAPI.dispatch(getCaptchaURLTC())
+                    thunkAPI.dispatch(getCaptchaURL())
                     thunkAPI.dispatch(setAppError({error: ''}))
                 }
                 return handleAsyncServerAppError(data, thunkAPI)
@@ -81,7 +81,7 @@ export const loginTC = createAsyncThunk<{ user: LoginUserType }, LoginUserType, 
             return handleAsyncNetworkError(err as AxiosError, thunkAPI)
         }
     })
-export const logoutTC = createAsyncThunk<undefined, void, ThunkErrorType>
+export const logout = createAsyncThunk<undefined, void, ThunkErrorType>
 ('auth/logout',
     async (_, thunkAPI) => {
         thunkAPI.dispatch(setAppStatus({status: 'loading'}));
@@ -96,7 +96,7 @@ export const logoutTC = createAsyncThunk<undefined, void, ThunkErrorType>
             return handleAsyncNetworkError(err as AxiosError, thunkAPI)
         }
     })
-export const getCaptchaURLTC = createAsyncThunk<{ url: string }, void, ThunkErrorType>
+export const getCaptchaURL = createAsyncThunk<{ url: string }, void, ThunkErrorType>
 ('auth/captcha',
     async (_, thunkAPI) => {
         thunkAPI.dispatch(setAppStatus({status: 'loading'}));

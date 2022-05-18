@@ -6,7 +6,7 @@ import {useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import * as Yup from 'yup';
 
-import {loginTC} from '../../redux/reducers/authReducer';
+import {login} from '../../redux/reducers/authReducer';
 import {useAppSelector} from '../../redux/store';
 import {PATH} from '../Routing/Routing';
 import {FormikField} from '../../reusableComponent/FormikField';
@@ -28,7 +28,7 @@ export const Login: React.FC = () => {
         password: Yup.string().required('Required'),
     }
     const onSubmitLoginUser = (values: LoginUserType) => {
-        dispatch(loginTC(values))
+        dispatch(login(values))
     }
 
     useEffect(() => {

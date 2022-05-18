@@ -1,4 +1,4 @@
-import {authMe, authReducer, InitialAuthStateType, logoutTC} from '../reducers/authReducer';
+import {authMe, authReducer, getCaptchaURL, InitialAuthStateType, logout} from '../reducers/authReducer';
 
 let fakeState: InitialAuthStateType;
 
@@ -26,21 +26,30 @@ describe('auth', () => {
         expect(fakeState.id).toBe(1)
         expect(endState.id).toBe(12)
 
-        expect(fakeState.email).toBe(null)
+        expect(fakeState.email).toBeNull()
         expect(endState.email).toBe('fake@gmail.com')
 
-        expect(fakeState.login).toBe(null)
+        expect(fakeState.login).toBeNull()
         expect(endState.login).toBe('fake')
 
     })
 
     test('when user logout clear state', () => {
 
-        const action = logoutTC.fulfilled(undefined, 'requestId')
+        const action = logout.fulfilled(undefined, 'requestId')
         const endState = authReducer(fakeState, action)
 
         expect(fakeState).toEqual(fakeState)
         expect(endState).toEqual(fakeState)
+    })
+
+    test('If the user entered the wrong username and password, set the captcha', () => {
+
+        const action = getCaptchaURL.fulfilled({url: 'captchaURL'}, 'requestId')
+        const endState = authReducer(fakeState, action)
+
+        expect(fakeState.captchaURL).toBeNull()
+        expect(endState.captchaURL).toBe('captchaURL')
     })
 })
 

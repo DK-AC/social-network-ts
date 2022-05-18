@@ -2,7 +2,7 @@ import React from 'react';
 import {useDispatch} from 'react-redux';
 
 import {useAppSelector} from '../../redux/store';
-import {logoutTC} from '../../redux/reducers/authReducer';
+import {logout} from '../../redux/reducers/authReducer';
 
 import styles from './header.module.css';
 import logoDK from './../../assets/img/logoDK.svg';
@@ -14,7 +14,7 @@ export const Header = () => {
     const isAuth = useAppSelector<boolean>(state => state.auth.isAuth);
 
     const logoutHandle = () => {
-        dispatch(logoutTC())
+        dispatch(logout())
     }
 
     return (
