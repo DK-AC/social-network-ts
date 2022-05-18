@@ -3,7 +3,7 @@ import {AxiosError} from 'axios';
 
 import {PhotosType, profileAPI, ProfileUserType} from '../../api/profileAPI';
 import {handleAsyncNetworkError, handleAsyncServerAppError, ThunkErrorType} from '../../utils/error-utils';
-import {ResultCode} from '../../api/typesAPI';
+import {ResultCodeEnum} from '../../api/instanceAPI';
 
 import {setAppStatus} from './appReducer';
 
@@ -83,7 +83,7 @@ export const updateProfileUserStatusTC = createAsyncThunk<{ status: string }, { 
         thunkAPI.dispatch(setAppStatus({status: 'loading'}));
         try {
             const {data} = await profileAPI.updateProfileUserStatus(status)
-            if (data.resultCode === ResultCode.Success) {
+            if (data.resultCode === ResultCodeEnum.Success) {
                 thunkAPI.dispatch(setAppStatus({status: 'successful'}))
                 return status
             } else {
@@ -99,7 +99,7 @@ export const savePhotoTC = createAsyncThunk<{ photos: PhotosType }, File, ThunkE
         thunkAPI.dispatch(setAppStatus({status: 'loading'}))
         try {
             const {data} = await profileAPI.savePhoto(file)
-            if (data.resultCode === ResultCode.Success) {
+            if (data.resultCode === ResultCodeEnum.Success) {
                 thunkAPI.dispatch(setAppStatus({status: 'successful'}))
                 return data.data
             } else {
@@ -115,7 +115,7 @@ export const saveProfileTC = createAsyncThunk<{ profile: ProfileUserType }, Prof
         thunkAPI.dispatch(setAppStatus({status: 'loading'}))
         try {
             const {data} = await profileAPI.saveProfile(profile)
-            if (data.resultCode === ResultCode.Success) {
+            if (data.resultCode === ResultCodeEnum.Success) {
                 thunkAPI.dispatch(setAppStatus({status: 'successful'}))
                 return data.data
             } else {

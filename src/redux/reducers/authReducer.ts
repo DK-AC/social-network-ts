@@ -1,10 +1,10 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {AxiosError} from 'axios';
 
-import {authAPI} from '../../api/authAPI';
+import {authAPI, AuthUserType, LoginUserType} from '../../api/authAPI';
 import {handleAsyncNetworkError, handleAsyncServerAppError, ThunkErrorType} from '../../utils/error-utils';
 import {securityAPI} from '../../api/securityAPI';
-import {AuthUserType, LoginUserType, ResultCode} from '../../api/typesAPI';
+import {ResultCodeEnum, ResultCodeRequireCaptchaEnum} from '../../api/instanceAPI';
 
 import {setAppError, setAppStatus} from './appReducer';
 
@@ -49,7 +49,7 @@ export const authMeTC = createAsyncThunk<AuthUserType, void, ThunkErrorType>
         thunkAPI.dispatch(setAppStatus({status: 'loading'}));
         try {
             const {data} = await authAPI.me()
-            if (data.resultCode === ResultCode.Success) {
+            if (data.resultCode === ResultCodeEnum.Success) {
                 thunkAPI.dispatch(setAppStatus({status: 'successful'}));
                 return data.data
             } else {
@@ -65,13 +65,13 @@ export const loginTC = createAsyncThunk<{ user: LoginUserType }, LoginUserType, 
         thunkAPI.dispatch(setAppStatus({status: 'loading'}))
         try {
             const {data} = await authAPI.login(loginData)
-            if (data.resultCode === ResultCode.Success) {
+            if (data.resultCode === ResultCodeEnum.Success) {
                 await thunkAPI.dispatch(authMeTC())
                 thunkAPI.dispatch(setAppStatus({status: 'successful'}))
                 thunkAPI.dispatch(setAppError({error: ''}))
                 return data
             } else {
-                if (data.resultCode === ResultCode.Captcha) {
+                if (data.resultCode === ResultCodeRequireCaptchaEnum.Captcha) {
                     thunkAPI.dispatch(getCaptchaURLTC())
                     thunkAPI.dispatch(setAppError({error: ''}))
                 }
@@ -87,7 +87,7 @@ export const logoutTC = createAsyncThunk<undefined, void, ThunkErrorType>
         thunkAPI.dispatch(setAppStatus({status: 'loading'}));
         try {
             const {data} = await authAPI.logout()
-            if (data.resultCode === ResultCode.Success) {
+            if (data.resultCode === ResultCodeEnum.Success) {
                 thunkAPI.dispatch(setAppStatus({status: 'successful'}));
             } else {
                 return handleAsyncServerAppError(data, thunkAPI)

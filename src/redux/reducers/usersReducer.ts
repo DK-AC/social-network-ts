@@ -1,10 +1,10 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {AxiosError} from 'axios';
 
-import {userAPI} from '../../api/userAPI';
+import {ParamsUserPageType, userAPI, UserType} from '../../api/userAPI';
 import {handleAsyncNetworkError, ThunkErrorType} from '../../utils/error-utils';
 import {followingHelper} from '../../utils/followingHelper';
-import {AxiosResponseType, ParamsUserPageType, UserType} from '../../api/typesAPI';
+import {AxiosResponseType} from '../../api/instanceAPI';
 
 import {setAppStatus} from './appReducer';
 

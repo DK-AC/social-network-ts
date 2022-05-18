@@ -7,10 +7,10 @@ import {setUsersTC} from '../../redux/reducers/usersReducer';
 import {Preloader} from '../Preloader/Preloader';
 import {PATH} from '../Routing/Routing';
 import {Paginator} from '../common/Paginator';
+import {ParamsUserPageType} from '../../api/userAPI';
 
 import styles from './users.module.css';
 import {User} from './User/User';
-import {ParamsUserPageType} from "../../api/typesAPI";
 
 
 export const Users: React.FC = () => {

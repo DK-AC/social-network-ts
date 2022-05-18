@@ -4,10 +4,10 @@ import {NavLink} from 'react-router-dom';
 
 import {followingTC} from '../../../redux/reducers/usersReducer';
 import {useAppSelector} from '../../../redux/store';
+import {UserType} from '../../../api/userAPI';
 
 import styles from './user.module.css';
 import avaImg from './../../../assets/img/client-2-512.webp';
-import {UserType} from "../../../api/typesAPI";
 
 
 type PropsType = { user: UserType }

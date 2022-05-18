@@ -10,7 +10,7 @@ import {loginTC} from '../../redux/reducers/authReducer';
 import {useAppSelector} from '../../redux/store';
 import {PATH} from '../Routing/Routing';
 import {FormikField} from '../../reusableComponent/FormikField';
-import {LoginUserType} from '../../api/typesAPI';
+import {LoginUserType} from '../../api/authAPI';
 
 
 export const Login: React.FC = () => {

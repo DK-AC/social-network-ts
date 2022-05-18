@@ -1,5 +1,4 @@
-import {instanceAPI} from './instanceAPI';
-import {AxiosResponseType} from './typesAPI';
+import {AxiosResponseType, instanceAPI} from './instanceAPI';
 
 export const profileAPI = {
     getProfileUser(userId: number) {
@@ -26,7 +25,6 @@ export type PhotosType = {
     small: string | null
     large: string | null
 }
-
 export type ProfileUserType = {
     aboutMe: string,
     contacts: ContactsUserType,
@@ -36,7 +34,6 @@ export type ProfileUserType = {
     userId: number
     photos: PhotosType
 }
-
 export type ContactsUserType = {
     facebook: string,
     website: string

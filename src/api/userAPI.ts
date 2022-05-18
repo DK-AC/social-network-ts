@@ -1,8 +1,8 @@
 import {AxiosResponse} from 'axios';
 
+import {AxiosResponseType, instanceAPI, ResponseType, ResponseUserType} from './instanceAPI';
+import {PhotosType} from './profileAPI';
 
-import {instanceAPI} from './instanceAPI';
-import {AxiosResponseType, ParamsUserPageType, ResponseType, ResponseUserType, UserType} from './typesAPI';
 
 export const userAPI = {
     getUsers(params: ParamsUserPageType) {
@@ -16,4 +16,17 @@ export const userAPI = {
         return instanceAPI.delete<any, AxiosResponseType, ResponseType>(`/follow/${userId}`)
     },
 };
+
+export type UserType = {
+    id: number,
+    name: string,
+    uniqueUrlName: string,
+    photos: PhotosType
+    status: string,
+    followed: boolean
+}
+export type ParamsUserPageType = {
+    currentPage: number
+    pageSize: number
+}
 

@@ -2,7 +2,7 @@ import {Field} from 'formik';
 import * as React from 'react';
 
 import {ContactsUserType, ProfileUserType} from '../api/profileAPI';
-import {LoginUserType} from '../api/typesAPI';
+import {LoginUserType} from '../api/authAPI';
 
 
 export type ContactsKeysType = keyof ContactsUserType

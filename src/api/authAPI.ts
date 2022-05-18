@@ -1,5 +1,5 @@
-import {instanceAPI} from './instanceAPI';
-import {AuthUserType, AxiosResponseType, LoginUserType} from './typesAPI';
+import {AxiosResponseType, instanceAPI} from './instanceAPI'
+
 
 export const authAPI = {
     me() {
@@ -13,4 +13,15 @@ export const authAPI = {
     },
 };
 
+export type AuthUserType = {
+    id: number
+    login: string
+    email: string
+}
+export type LoginUserType = {
+    email: string | null
+    password: string | null
+    rememberMe?: boolean
+    captcha?: string | null
+}
 
