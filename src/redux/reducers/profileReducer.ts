@@ -32,19 +32,19 @@ export const profileSlices = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(setProfileUserTC.fulfilled, (state: InitialProfileStateType, action) => {
+            .addCase(setProfileUser.fulfilled, (state: InitialProfileStateType, action) => {
                 state.profile = action.payload.profile
             })
-            .addCase(updateProfileUserStatusTC.fulfilled, (state: InitialProfileStateType, action) => {
+            .addCase(updateProfileUserStatus.fulfilled, (state: InitialProfileStateType, action) => {
                 state.status = action.payload.status
             })
-            .addCase(getProfileUserStatusTC.fulfilled, (state: InitialProfileStateType, action) => {
+            .addCase(getProfileUserStatus.fulfilled, (state: InitialProfileStateType, action) => {
                 state.status = action.payload.status
             })
-            .addCase(savePhotoTC.fulfilled, (state: InitialProfileStateType, action) => {
+            .addCase(savePhoto.fulfilled, (state: InitialProfileStateType, action) => {
                 state.profile!.photos = action.payload.photos
             })
-            .addCase(saveProfileTC.fulfilled, (state: InitialProfileStateType, action) => {
+            .addCase(saveProfile.fulfilled, (state: InitialProfileStateType, action) => {
                 state.profile = action.meta.arg
             })
     },
@@ -53,7 +53,7 @@ export const profileSlices = createSlice({
 export const profileReducer = profileSlices.reducer
 export const {addPost, deletePost} = profileSlices.actions
 
-export const setProfileUserTC = createAsyncThunk<{ profile: ProfileUserType }, number, ThunkErrorType>
+export const setProfileUser = createAsyncThunk<{ profile: ProfileUserType }, number, ThunkErrorType>
 ('profile/setProfileUser',
     async (userId, thunkAPI) => {
         thunkAPI.dispatch(setAppStatus({status: 'loading'}));
@@ -65,7 +65,7 @@ export const setProfileUserTC = createAsyncThunk<{ profile: ProfileUserType }, n
             return handleAsyncNetworkError(err as AxiosError, thunkAPI)
         }
     })
-export const getProfileUserStatusTC = createAsyncThunk<{ status: string }, number, ThunkErrorType>
+export const getProfileUserStatus = createAsyncThunk<{ status: string }, number, ThunkErrorType>
 ('profile/getProfileUserStatus',
     async (userId: number, thunkAPI) => {
         thunkAPI.dispatch(setAppStatus({status: 'loading'}));
@@ -77,7 +77,7 @@ export const getProfileUserStatusTC = createAsyncThunk<{ status: string }, numbe
             return handleAsyncNetworkError(err as AxiosError, thunkAPI)
         }
     })
-export const updateProfileUserStatusTC = createAsyncThunk<{ status: string }, { status: string }, ThunkErrorType>
+export const updateProfileUserStatus = createAsyncThunk<{ status: string }, { status: string }, ThunkErrorType>
 ('profile/updateProfileUserStatus',
     async (status, thunkAPI) => {
         thunkAPI.dispatch(setAppStatus({status: 'loading'}));
@@ -93,7 +93,7 @@ export const updateProfileUserStatusTC = createAsyncThunk<{ status: string }, { 
             return handleAsyncNetworkError(err as AxiosError, thunkAPI)
         }
     })
-export const savePhotoTC = createAsyncThunk<{ photos: PhotosType }, File, ThunkErrorType>
+export const savePhoto = createAsyncThunk<{ photos: PhotosType }, File, ThunkErrorType>
 ('profile/savePhoto',
     async (file, thunkAPI) => {
         thunkAPI.dispatch(setAppStatus({status: 'loading'}))
@@ -109,7 +109,7 @@ export const savePhotoTC = createAsyncThunk<{ photos: PhotosType }, File, ThunkE
             return handleAsyncNetworkError(err as AxiosError, thunkAPI)
         }
     })
-export const saveProfileTC = createAsyncThunk<{ profile: ProfileUserType }, ProfileUserType, ThunkErrorType>
+export const saveProfile = createAsyncThunk<{ profile: ProfileUserType }, ProfileUserType, ThunkErrorType>
 ('profile/saveProfile',
     async (profile, thunkAPI) => {
         thunkAPI.dispatch(setAppStatus({status: 'loading'}))

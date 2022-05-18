@@ -3,7 +3,7 @@ import {useDispatch} from 'react-redux';
 
 import ava from '../../../assets/img/client-2-512.webp';
 import {PhotosType} from '../../../api/profileAPI';
-import {savePhotoTC} from '../../../redux/reducers/profileReducer';
+import {savePhoto} from '../../../redux/reducers/profileReducer';
 
 import styles from './profileInfo.module.css';
 
@@ -18,7 +18,7 @@ export const Photo: React.FC<PropsType> = ({photo, isOwner}) => {
 
     const savePhotoHandle = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length) {
-            dispatch(savePhotoTC(e.target.files[0]))
+            dispatch(savePhoto(e.target.files[0]))
         }
     }
 

@@ -5,7 +5,7 @@ import {useNavigate} from 'react-router-dom';
 import {Header} from '../Header/Header';
 import {Navbar} from '../Navbar/Navbar';
 import {PATH, Routing} from '../Routing/Routing';
-import {authMeTC} from '../../redux/reducers/authReducer';
+import {authMe} from '../../redux/reducers/authReducer';
 import {useAppSelector} from '../../redux/store';
 import {Preloader} from '../Preloader/Preloader';
 
@@ -20,7 +20,7 @@ export const App: React.FC = () => {
     const isInitialized = useAppSelector(state => state.app.isInitialized)
 
     useEffect(() => {
-        dispatch(authMeTC());
+        dispatch(authMe());
     }, [dispatch])
 
 

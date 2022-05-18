@@ -5,7 +5,7 @@ import {useDispatch} from 'react-redux';
 import {ProfileUserType} from '../../../api/profileAPI';
 import {ContactsKeysType, FormikField} from '../../../reusableComponent/FormikField';
 import {useAppSelector} from '../../../redux/store';
-import {saveProfileTC} from '../../../redux/reducers/profileReducer';
+import {saveProfile} from '../../../redux/reducers/profileReducer';
 
 import styles from './profileInfo.module.css'
 
@@ -33,7 +33,7 @@ export const ProfileDataForm: React.FC<PropsType> = ({profile, goToSaveMode}) =>
     }
 
     const onSubmitLoginUser = (values: ProfileUserType) => {
-        dispatch(saveProfileTC(values))
+        dispatch(saveProfile(values))
         goToSaveMode()
     }
 

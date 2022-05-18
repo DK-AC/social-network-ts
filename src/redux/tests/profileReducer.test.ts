@@ -1,11 +1,11 @@
 import {
     addPost,
     deletePost,
-    getProfileUserStatusTC,
+    getProfileUserStatus,
     InitialProfileStateType,
     profileReducer,
-    setProfileUserTC,
-    updateProfileUserStatusTC,
+    setProfileUser,
+    updateProfileUserStatus,
 } from '../reducers/profileReducer';
 import {ProfileUserType} from '../../api/profileAPI';
 
@@ -57,7 +57,7 @@ describe('profile', () => {
             aboutMe: 'DK_AC',
         }
 
-        const action = setProfileUserTC.fulfilled({profile: user}, 'requestId', 3)
+        const action = setProfileUser.fulfilled({profile: user}, 'requestId', 3)
         const endState = profileReducer(fakeState, action)
 
         expect(fakeState.profile).toBeNull()
@@ -68,7 +68,7 @@ describe('profile', () => {
 
     test('set user status', () => {
 
-        const action = getProfileUserStatusTC
+        const action = getProfileUserStatus
             .fulfilled({status: 'new status'}, 'requestId', 1)
         const endState = profileReducer(fakeState, action)
 
@@ -78,7 +78,7 @@ describe('profile', () => {
 
     test('user status should be changed', () => {
 
-        const action = updateProfileUserStatusTC
+        const action = updateProfileUserStatus
             .fulfilled({status: 'change status'}, 'requestId', {status: ''})
         const endState = profileReducer(fakeState, action)
 

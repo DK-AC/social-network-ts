@@ -2,7 +2,7 @@ import React from 'react';
 import {useDispatch} from 'react-redux';
 import {NavLink} from 'react-router-dom';
 
-import {followingTC} from '../../../redux/reducers/usersReducer';
+import {followUnfollow} from '../../../redux/reducers/usersReducer';
 import {useAppSelector} from '../../../redux/store';
 import {UserType} from '../../../api/userAPI';
 
@@ -20,8 +20,8 @@ export const User: React.FC<PropsType> = ({user}) => {
 
     const {id, name, photos, followed, status} = user;
 
-    const followUserHandle = () => dispatch(followingTC({userId: id, isFollow: true}));
-    const unFollowUserHandle = () => dispatch(followingTC({userId: id, isFollow: false}));
+    const followUserHandle = () => dispatch(followUnfollow({userId: id, isFollow: true}));
+    const unFollowUserHandle = () => dispatch(followUnfollow({userId: id, isFollow: false}));
 
 
     return (

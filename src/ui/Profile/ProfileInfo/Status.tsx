@@ -2,7 +2,7 @@ import React, {ChangeEvent, useEffect, useState} from 'react';
 import {useDispatch} from 'react-redux';
 
 import {useAppSelector} from '../../../redux/store';
-import {updateProfileUserStatusTC} from '../../../redux/reducers/profileReducer';
+import {updateProfileUserStatus} from '../../../redux/reducers/profileReducer';
 
 
 export const Status: React.FC = () => {
@@ -26,7 +26,7 @@ export const Status: React.FC = () => {
         setValue(e.currentTarget.value)
     }
     const updateStatus = (status: string) => {
-        dispatch(updateProfileUserStatusTC({status}))
+        dispatch(updateProfileUserStatus({status}))
     }
 
 

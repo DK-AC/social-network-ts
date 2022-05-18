@@ -3,7 +3,7 @@ import {useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 
 import {useAppSelector} from '../../redux/store';
-import {setUsersTC} from '../../redux/reducers/usersReducer';
+import {setUsers} from '../../redux/reducers/usersReducer';
 import {Preloader} from '../Preloader/Preloader';
 import {PATH} from '../Routing/Routing';
 import {Paginator} from '../common/Paginator';
@@ -39,7 +39,7 @@ export const Users: React.FC = () => {
         if (!isAuth) {
             navigate(PATH.LOGIN_PAGE)
         }
-        dispatch(setUsersTC(params));
+        dispatch(setUsers(params));
     }, [isAuth, navigate, currentPage]);
 
     return (

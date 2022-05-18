@@ -3,7 +3,7 @@ import {useDispatch} from 'react-redux';
 import {useNavigate, useParams} from 'react-router-dom';
 
 import {useAppSelector} from '../../redux/store';
-import {getProfileUserStatusTC, setProfileUserTC} from '../../redux/reducers/profileReducer';
+import {getProfileUserStatus, setProfileUser} from '../../redux/reducers/profileReducer';
 import {PATH} from '../Routing/Routing';
 
 import {Posts} from './Posts/Posts';
@@ -35,8 +35,8 @@ export const Profile: React.FC = () => {
         if (!isAuth) {
             navigate(PATH.LOGIN_PAGE)
         }
-        dispatch(getProfileUserStatusTC(profileUserId))
-        dispatch(setProfileUserTC(profileUserId));
+        dispatch(getProfileUserStatus(profileUserId))
+        dispatch(setProfileUser(profileUserId));
     }, [dispatch, isAuth, navigate, profileUserId]);
 
 

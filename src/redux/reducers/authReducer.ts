@@ -22,7 +22,7 @@ export const authSlices = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(authMeTC.fulfilled, (state: InitialAuthStateType, action) => {
+        builder.addCase(authMe.fulfilled, (state: InitialAuthStateType, action) => {
             state.id = action.payload.id
             state.email = action.payload.email
             state.login = action.payload.login
@@ -43,7 +43,7 @@ export const authSlices = createSlice({
 
 export const authReducer = authSlices.reducer
 
-export const authMeTC = createAsyncThunk<AuthUserType, void, ThunkErrorType>
+export const authMe = createAsyncThunk<AuthUserType, void, ThunkErrorType>
 ('auth/authMe',
     async (_, thunkAPI) => {
         thunkAPI.dispatch(setAppStatus({status: 'loading'}));
@@ -66,7 +66,7 @@ export const loginTC = createAsyncThunk<{ user: LoginUserType }, LoginUserType, 
         try {
             const {data} = await authAPI.login(loginData)
             if (data.resultCode === ResultCodeEnum.Success) {
-                await thunkAPI.dispatch(authMeTC())
+                await thunkAPI.dispatch(authMe())
                 thunkAPI.dispatch(setAppStatus({status: 'successful'}))
                 thunkAPI.dispatch(setAppError({error: ''}))
                 return data

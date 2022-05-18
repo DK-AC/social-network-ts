@@ -1,10 +1,10 @@
 import {
     changeCurrentPage,
     changePortionNumber,
-    followingTC,
+    followUnfollow,
     InitialUsersStateType,
     setIsFollowingInProgress,
-    setUsersTC,
+    setUsers,
     usersReducer,
 } from '../reducers/usersReducer';
 
@@ -42,7 +42,7 @@ beforeEach(() => {
 describe('user', () => {
     test('unfollowed user should be changed on true', () => {
 
-        const action = followingTC
+        const action = followUnfollow
             .fulfilled({isFollow: true, userId: 2}, 'requestId', {isFollow: true, userId: 2})
         const endState = usersReducer(fakeState, action);
 
@@ -52,7 +52,7 @@ describe('user', () => {
 
     test('followed user should be changed on false', () => {
 
-        const action = followingTC
+        const action = followUnfollow
             .fulfilled({isFollow: false, userId: 1}, 'requestId', {isFollow: false, userId: 1})
         const endState = usersReducer(fakeState, action);
 
@@ -88,7 +88,7 @@ describe('user', () => {
             portionNumber: 1,
         };
 
-        const action = setUsersTC.fulfilled({
+        const action = setUsers.fulfilled({
             users: fakeUserState.users,
             totalCount: fakeUserState.totalCount,
         }, 'requestId', {currentPage: 3, pageSize: 5})

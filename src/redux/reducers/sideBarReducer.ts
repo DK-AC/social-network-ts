@@ -6,13 +6,12 @@ const initialState = {
     ],
 };
 
-export const sideBarReducer = (state = initialState, action: SideBarActionsType): InitialSideBarStateType => {
+export const sideBarReducer = (state = initialState, action: SideBarActionsType) => {
     switch (action) {
         default :
             return state;
     }
 };
 
-//types
 export type InitialSideBarStateType = typeof initialState
 export type SideBarActionsType = {}

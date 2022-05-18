@@ -35,11 +35,11 @@ export const userSlices = createSlice({
         },
     },
     extraReducers: (builder) => {
-        builder.addCase(setUsersTC.fulfilled, (state: InitialUsersStateType, action) => {
+        builder.addCase(setUsers.fulfilled, (state: InitialUsersStateType, action) => {
             state.users = action.payload.users
             state.totalCount = action.payload.totalCount
         })
-        builder.addCase(followingTC.fulfilled, (state: InitialUsersStateType, action) => {
+        builder.addCase(followUnfollow.fulfilled, (state: InitialUsersStateType, action) => {
             const index = state.users.findIndex(user => user.id === action.payload.userId)
             if (index !== -1) state.users[index].followed = action.payload.isFollow
         })
@@ -50,7 +50,7 @@ export const usersReducer = userSlices.reducer
 export const {changeCurrentPage, setIsFollowingInProgress, changePortionNumber} = userSlices.actions
 
 
-export const setUsersTC = createAsyncThunk <{ users: UserType[], totalCount: number }, ParamsUserPageType, ThunkErrorType>
+export const setUsers = createAsyncThunk <{ users: UserType[], totalCount: number }, ParamsUserPageType, ThunkErrorType>
 ('user/setUsers',
     async (params, thunkAPI) => {
         thunkAPI.dispatch(setAppStatus({status: 'loading'}));
@@ -62,7 +62,7 @@ export const setUsersTC = createAsyncThunk <{ users: UserType[], totalCount: num
             return handleAsyncNetworkError(err as AxiosError, thunkAPI)
         }
     })
-export const followingTC = createAsyncThunk<FollowUnFollowPayloadType, FollowUnFollowPayloadType, ThunkErrorType>
+export const followUnfollow = createAsyncThunk<FollowUnFollowPayloadType, FollowUnFollowPayloadType, ThunkErrorType>
 ('user/followingTC',
     async (payload, thunkAPI) => {
         thunkAPI.dispatch(setAppStatus({status: 'loading'}));

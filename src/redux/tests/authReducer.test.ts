@@ -1,4 +1,4 @@
-import {authMeTC, authReducer, InitialAuthStateType, loginTC, logoutTC} from '../reducers/authReducer';
+import {authMe, authReducer, InitialAuthStateType, loginTC, logoutTC} from '../reducers/authReducer';
 import {LoginUserType} from "../../api/authAPI";
 
 let fakeState: InitialAuthStateType;
@@ -18,7 +18,7 @@ describe('auth', () => {
 
     test('user should be initialized', () => {
 
-        const action = authMeTC.fulfilled({id: 12, login: 'fake', email: 'fake@gmail.com'}, 'requestId')
+        const action = authMe.fulfilled({id: 12, login: 'fake', email: 'fake@gmail.com'}, 'requestId')
         const endState = authReducer(fakeState, action)
 
         expect(fakeState.isAuth).toBeFalsy()
