@@ -53,7 +53,7 @@ export const profileSlices = createSlice({
 export const profileReducer = profileSlices.reducer
 export const {addPost, deletePost} = profileSlices.actions
 
-export const setProfileUser = createAsyncThunk<{ profile: ProfileUserType }, number, ThunkErrorType>
+export const setProfileUser = createAsyncThunk<{ profile: ProfileUserType }, number | null, ThunkErrorType>
 ('profile/setProfileUser',
     async (userId, thunkAPI) => {
         thunkAPI.dispatch(setAppStatus({status: 'loading'}));
@@ -65,9 +65,9 @@ export const setProfileUser = createAsyncThunk<{ profile: ProfileUserType }, num
             return handleAsyncNetworkError(err as AxiosError, thunkAPI)
         }
     })
-export const getProfileUserStatus = createAsyncThunk<{ status: string }, number, ThunkErrorType>
+export const getProfileUserStatus = createAsyncThunk<{ status: string }, number | null, ThunkErrorType>
 ('profile/getProfileUserStatus',
-    async (userId: number, thunkAPI) => {
+    async (userId: number | null, thunkAPI) => {
         thunkAPI.dispatch(setAppStatus({status: 'loading'}));
         try {
             const {data} = await profileAPI.getProfileUserStatus(userId)
@@ -116,8 +116,12 @@ export const saveProfile = createAsyncThunk<{ profile: ProfileUserType }, Profil
         try {
             const {data} = await profileAPI.saveProfile(profile)
             if (data.resultCode === ResultCodeEnum.Success) {
-                thunkAPI.dispatch(setAppStatus({status: 'successful'}))
-                return data.data
+                if (profile.userId !== null) {
+                    thunkAPI.dispatch(setAppStatus({status: 'successful'}))
+                    return data.data
+                } else {
+                    return handleAsyncServerAppError(data, thunkAPI)
+                }
             } else {
                 return handleAsyncServerAppError(data, thunkAPI)
             }

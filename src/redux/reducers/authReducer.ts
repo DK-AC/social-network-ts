@@ -10,7 +10,7 @@ import {setAppError, setAppStatus} from './appReducer';
 
 const initialState = {
     isAuth: false,
-    id: 19179,
+    id: null as number | null,
     login: null as string | null,
     email: null as string | null,
     password: null as string | null,
@@ -28,12 +28,13 @@ export const authSlices = createSlice({
             state.login = action.payload.login
             state.isAuth = true
         })
-        builder.addCase(logout.fulfilled, (state: InitialAuthStateType, action) => {
+        builder.addCase(logout.fulfilled, (state: InitialAuthStateType) => {
             state.email = null
             state.password = null
             state.isAuth = false
             state.login = null
             state.captchaURL = null
+            state.id = null
         })
         builder.addCase(getCaptchaURL.fulfilled, (state: InitialAuthStateType, action) => {
             state.captchaURL = action.payload.url
