@@ -4,6 +4,8 @@ import {
     getProfileUserStatus,
     InitialProfileStateType,
     profileReducer,
+    savePhoto,
+    saveProfile,
     setProfileUser,
     updateProfileUserStatus,
 } from '../reducers/profileReducer';
@@ -11,15 +13,36 @@ import {ProfileUserType} from '../../api/profileAPI';
 
 let fakeState: InitialProfileStateType;
 let fakeFile: File
+let fakeProfile: ProfileUserType
 
 beforeEach(() => {
+
+    fakeProfile = {
+        userId: 3,
+        photos: {small: '', large: ''},
+        lookingForAJob: true,
+        lookingForAJobDescription: '',
+        fullName: 'DK_AC',
+        contacts: {
+            facebook: '',
+            website: '',
+            vk: '',
+            twitter: '',
+            instagram: '',
+            youtube: '',
+            github: '',
+            mainLink: '',
+        },
+        aboutMe: 'DK_AC',
+    }
+
     fakeState = {
         posts: [
             {id: 1, message: '1 post', likesCount: 20},
             {id: 2, message: '2 post', likesCount: 1},
             {id: 3, message: '3 post', likesCount: 55},
         ],
-        profile: null as ProfileUserType | null,
+        profile: fakeProfile,
         status: '',
     };
 });
@@ -39,29 +62,10 @@ describe('profile', () => {
     });
 
     test('user should be set', () => {
-        const user: ProfileUserType = {
-            userId: 3,
-            photos: {small: '', large: ''},
-            lookingForAJob: true,
-            lookingForAJobDescription: '',
-            fullName: 'DK_AC',
-            contacts: {
-                facebook: '',
-                website: '',
-                vk: '',
-                twitter: '',
-                instagram: '',
-                youtube: '',
-                github: '',
-                mainLink: '',
-            },
-            aboutMe: 'DK_AC',
-        }
-
-        const action = setProfileUser.fulfilled({profile: user}, 'requestId', 3)
+        const action = setProfileUser.fulfilled({profile: fakeProfile}, 'requestId', 3)
         const endState = profileReducer(fakeState, action)
 
-        expect(fakeState.profile).toBeNull()
+        expect(fakeState.profile).toBe(fakeProfile)
         expect(endState.profile?.userId).toBe(3)
         expect(endState.profile?.fullName).toBe('DK_AC')
         expect(endState.profile?.lookingForAJob).toBeTruthy()
@@ -96,15 +100,40 @@ describe('profile', () => {
         expect(fakeState.posts[1].id).toBe(2)
         expect(endState.posts[1].id).toBe(3)
     })
-//todo: need refactoring test
-    // test('photo should be set', () => {
-    //
-    //     const action = savePhoto.fulfilled({photos: {small: 'small', large: 'large'}}, 'requestId', fakeFile)
-    //     const endState = profileReducer(fakeState, action)
-    //
-    //     expect(endState.profile!.photos.small).toBe('')
-    //     expect(endState.profile!.photos.small).toBe('')
-    // })
+
+    test('photo should be set', () => {
+
+        const action = savePhoto.fulfilled({photos: {small: 'small', large: 'large'}}, 'requestId', fakeFile)
+        const endState = profileReducer(fakeState, action)
+
+        expect(fakeState.profile!.photos.small).toBe('')
+        expect(endState.profile!.photos.small).toBe('small')
+    })
+
+    test('changed data profile should be save', () => {
+
+        const action = saveProfile.fulfilled({profile: fakeProfile}, 'requestId', {
+            ...fakeProfile,
+            contacts: {
+                vk: 'vk.com',
+                facebook: '',
+                mainLink: '',
+                github: '',
+                youtube: '',
+                instagram: '',
+                twitter: '',
+                website: '',
+            },
+            aboutMe: 'YO YO YO',
+        })
+        const endState = profileReducer(fakeState, action)
+
+        expect(fakeState.profile).toBe(fakeProfile)
+        expect(fakeState.profile?.aboutMe).toBe('DK_AC')
+        expect(fakeState.profile?.contacts.vk).toBe('')
+        expect(endState.profile?.contacts.vk).toBe('vk.com')
+        expect(endState.profile?.aboutMe).toBe('YO YO YO')
+    })
 
 })
 
