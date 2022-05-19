@@ -1,12 +1,12 @@
-import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {AxiosError} from 'axios';
+import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
+import {AxiosError} from 'axios'
 
-import {ParamsUserPageType, userAPI, UserType} from '../../api/userAPI';
-import {handleAsyncNetworkError, ThunkErrorType} from '../../utils/error-utils';
-import {followingHelper} from '../../utils/followingHelper';
-import {AxiosResponseType} from '../../api/instanceAPI';
+import {ParamsUserPageType, userAPI, UserType} from '../../api/userAPI'
+import {handleAsyncNetworkError, ThunkErrorType} from '../../utils/error-utils'
+import {followingHelper} from '../../utils/followingHelper'
+import {AxiosResponseType} from '../../api/instanceAPI'
 
-import {setAppStatus} from './appReducer';
+import {setAppStatus} from './appReducer'
 
 
 const initialState = {
@@ -16,7 +16,7 @@ const initialState = {
     currentPage: 1,
     followingInProgress: [] as number[],
     portionNumber: 1,
-};
+}
 
 export const userSlices = createSlice({
     name: 'user',
@@ -50,13 +50,13 @@ export const usersReducer = userSlices.reducer
 export const {changeCurrentPage, setIsFollowingInProgress, changePortionNumber} = userSlices.actions
 
 
-export const setUsers = createAsyncThunk <{ users: UserType[], totalCount: number }, ParamsUserPageType, ThunkErrorType>
+export const setUsers = createAsyncThunk<{ users: UserType[], totalCount: number }, ParamsUserPageType, ThunkErrorType>
 ('user/setUsers',
     async (params, thunkAPI) => {
-        thunkAPI.dispatch(setAppStatus({status: 'loading'}));
+        thunkAPI.dispatch(setAppStatus({status: 'loading'}))
         try {
             const {data} = await userAPI.getUsers(params)
-            thunkAPI.dispatch(setAppStatus({status: 'successful'}));
+            thunkAPI.dispatch(setAppStatus({status: 'successful'}))
             return {users: data.items, totalCount: data.totalCount}
         } catch (err) {
             return handleAsyncNetworkError(err as AxiosError, thunkAPI)
@@ -65,7 +65,7 @@ export const setUsers = createAsyncThunk <{ users: UserType[], totalCount: numbe
 export const followUnfollow = createAsyncThunk<FollowUnFollowPayloadType, FollowUnFollowPayloadType, ThunkErrorType>
 ('user/followingTC',
     async (payload, thunkAPI) => {
-        thunkAPI.dispatch(setAppStatus({status: 'loading'}));
+        thunkAPI.dispatch(setAppStatus({status: 'loading'}))
         thunkAPI.dispatch(setIsFollowingInProgress({userId: payload.userId, isFollow: true}))
         try {
             let data: AxiosResponseType

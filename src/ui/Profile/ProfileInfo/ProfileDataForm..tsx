@@ -1,11 +1,11 @@
-import React from 'react';
-import {Form, Formik} from 'formik';
-import {useDispatch} from 'react-redux';
+import React from 'react'
+import {Form, Formik} from 'formik'
+import {useDispatch} from 'react-redux'
 
-import {ProfileUserType} from '../../../api/profileAPI';
-import {ContactsKeysType, FormikField} from '../../../reusableComponent/FormikField';
-import {useAppSelector} from '../../../redux/store';
-import {saveProfile} from '../../../redux/reducers/profileReducer';
+import {ProfileUserType} from '../../../api/profileAPI'
+import {ContactsKeysType, FormikField} from '../../../reusableComponent/FormikField'
+import {useAppSelector} from '../../../redux/store'
+import {saveProfile} from '../../../redux/reducers/profileReducer'
 
 import styles from './profileInfo.module.css'
 

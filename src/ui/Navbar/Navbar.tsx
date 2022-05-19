@@ -1,14 +1,14 @@
-import React from 'react';
+import React from 'react'
 
-import {useAppSelector} from '../../redux/store';
-import {NavBarLink} from '../../reusableComponent/NavBarLink';
-import {PATH} from '../Routing/Routing';
+import {useAppSelector} from '../../redux/store'
+import {NavBarLink} from '../../reusableComponent/NavBarLink'
+import {PATH} from '../Routing/Routing'
 
-import styles from './navbar.module.css';
+import styles from './navbar.module.css'
 
 export const Navbar: React.FC = () => {
 
-    const friends = useAppSelector(state => state.sideBar.friends);
+    const friends = useAppSelector(state => state.sideBar.friends)
 
     return (
         <nav className={styles.nav}>
@@ -25,12 +25,12 @@ export const Navbar: React.FC = () => {
                         <img
                             src="https://st4.depositphotos.com/1001248/29463/v/600/depositphotos_294631336-stock-illustration-user-sign-flat-related-vector.jpg"
                             alt="friends"/>
-                    </div>);
+                    </div>)
                 })}
             </div>
             <div>
 
             </div>
         </nav>
-    );
-};
+    )
+}

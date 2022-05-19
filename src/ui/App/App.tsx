@@ -1,15 +1,15 @@
-import {useDispatch} from 'react-redux';
-import React, {useEffect} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useDispatch} from 'react-redux'
+import React, {useEffect} from 'react'
+import {useNavigate} from 'react-router-dom'
 
-import {Header} from '../Header/Header';
-import {Navbar} from '../Navbar/Navbar';
-import {PATH, Routing} from '../Routing/Routing';
-import {authMe} from '../../redux/reducers/authReducer';
-import {useAppSelector} from '../../redux/store';
-import {Preloader} from '../Preloader/Preloader';
+import {Header} from '../Header/Header'
+import {Navbar} from '../Navbar/Navbar'
+import {PATH, Routing} from '../Routing/Routing'
+import {authMe} from '../../redux/reducers/authReducer'
+import {useAppSelector} from '../../redux/store'
+import {Preloader} from '../Preloader/Preloader'
 
-import styles from './App.module.css';
+import styles from './App.module.css'
 
 export const App: React.FC = () => {
 
@@ -20,7 +20,7 @@ export const App: React.FC = () => {
     const isInitialized = useAppSelector(state => state.app.isInitialized)
 
     useEffect(() => {
-        dispatch(authMe());
+        dispatch(authMe())
     }, [dispatch])
 
 
@@ -29,7 +29,7 @@ export const App: React.FC = () => {
             navigate(PATH.LOGIN_PAGE)
         }
         return
-    }, [isAuth, isInitialized, navigate]);
+    }, [isAuth, isInitialized, navigate])
 
     return !isInitialized ? <Preloader/> :
 
@@ -41,6 +41,6 @@ export const App: React.FC = () => {
                     <Routing/>
                 </div>
             </div>
-        );
-};
+        )
+}
 

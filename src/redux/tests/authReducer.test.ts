@@ -1,6 +1,6 @@
-import {authMe, authReducer, getCaptchaURL, InitialAuthStateType, logout} from '../reducers/authReducer';
+import {authMe, authReducer, getCaptchaURL, InitialAuthStateType, logout} from '../reducers/authReducer'
 
-let fakeState: InitialAuthStateType;
+let fakeState: InitialAuthStateType
 
 beforeEach(() => {
     fakeState = {

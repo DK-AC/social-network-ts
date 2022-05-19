@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'
 
-import {ContactsUserType} from '../../../api/profileAPI';
+import {ContactsUserType} from '../../../api/profileAPI'
 
-import {Contact} from './Contact';
+import {Contact} from './Contact'
 
 type PropsType = {
     contacts: ContactsUserType
@@ -22,6 +22,6 @@ export const Contacts: React.FC<PropsType> = ({contacts}) => {
                     />
                 })}
         </div>
-    );
-};
+    )
+}
 

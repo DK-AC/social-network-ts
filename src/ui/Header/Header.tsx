@@ -1,17 +1,17 @@
-import React from 'react';
-import {useDispatch} from 'react-redux';
+import React from 'react'
+import {useDispatch} from 'react-redux'
 
-import {useAppSelector} from '../../redux/store';
-import {logout} from '../../redux/reducers/authReducer';
+import {useAppSelector} from '../../redux/store'
+import {logout} from '../../redux/reducers/authReducer'
 
-import styles from './header.module.css';
-import logoDK from './../../assets/img/logoDK.svg';
+import styles from './header.module.css'
+import logoDK from './../../assets/img/logoDK.svg'
 
 export const Header = () => {
 
     const dispatch = useDispatch()
 
-    const isAuth = useAppSelector<boolean>(state => state.auth.isAuth);
+    const isAuth = useAppSelector<boolean>(state => state.auth.isAuth)
 
     const logoutHandle = () => {
         dispatch(logout())
@@ -31,6 +31,6 @@ export const Header = () => {
             </span>
             }
         </header>
-    );
-};
+    )
+}
 

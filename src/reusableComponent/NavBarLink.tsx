@@ -1,5 +1,5 @@
-import {NavLink} from 'react-router-dom';
-import React from 'react';
+import {NavLink} from 'react-router-dom'
+import React from 'react'
 
 type PropsType = { path: string, title: string }
 
@@ -9,11 +9,11 @@ export const NavBarLink: React.FC<PropsType> = ({path, title}) => {
         color: 'gold',
         fontWeight: 'bold',
         textDecoration: 'none',
-    };
+    }
     const defaultStyle = {
         color: 'white',
         textDecoration: 'none',
-    };
+    }
 
     return (
         <div>

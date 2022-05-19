@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 
-import styles from './notFound404.module.css';
+import styles from './notFound404.module.css'
 
 export const NotFound404 = () => {
     return (
@@ -8,6 +8,6 @@ export const NotFound404 = () => {
             <h2>404</h2>
             <h3>Page not found</h3>
         </div>
-    );
-};
+    )
+}
 

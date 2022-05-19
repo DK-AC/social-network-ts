@@ -1,14 +1,14 @@
-import React, {useEffect} from 'react';
-import {useNavigate} from 'react-router-dom';
+import React, {useEffect} from 'react'
+import {useNavigate} from 'react-router-dom'
 
-import {PATH} from '../Routing/Routing';
-import {useAppSelector} from '../../redux/store';
+import {PATH} from '../Routing/Routing'
+import {useAppSelector} from '../../redux/store'
 
 export const Music = () => {
 
     const navigate = useNavigate()
 
-    const isAuth = useAppSelector(state => state.auth.isAuth);
+    const isAuth = useAppSelector(state => state.auth.isAuth)
 
     useEffect(() => {
         if (!isAuth) {
@@ -18,5 +18,5 @@ export const Music = () => {
 
     return (
         <div>Music</div>
-    );
-};
+    )
+}

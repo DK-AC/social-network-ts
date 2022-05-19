@@ -1,4 +1,4 @@
-import {AxiosResponseType, instanceAPI} from './instanceAPI';
+import {AxiosResponseType, instanceAPI} from './instanceAPI'
 
 export const profileAPI = {
     getProfileUser(userId: number) {
@@ -11,15 +11,15 @@ export const profileAPI = {
         return instanceAPI.put<any, AxiosResponseType<string>>('/profile/status', payload)
     },
     savePhoto(photoFile: File) {
-        const formData = new FormData();
-        formData.append('image', photoFile);
+        const formData = new FormData()
+        formData.append('image', photoFile)
         return instanceAPI.put<any, AxiosResponseType<PhotosType>, FormData>
         ('/profile/photo', formData, {headers: {'Content-Type': 'multipart/form-data'}})
     },
     saveProfile(profile: ProfileUserType) {
         return instanceAPI.put<any, AxiosResponseType<ProfileUserType>, ProfileUserType>('/profile', profile)
     },
-};
+}
 
 export type PhotosType = {
     small: string | null

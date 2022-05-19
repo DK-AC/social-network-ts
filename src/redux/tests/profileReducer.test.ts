@@ -8,10 +8,10 @@ import {
     saveProfile,
     setProfileUser,
     updateProfileUserStatus,
-} from '../reducers/profileReducer';
-import {ProfileUserType} from '../../api/profileAPI';
+} from '../reducers/profileReducer'
+import {ProfileUserType} from '../../api/profileAPI'
 
-let fakeState: InitialProfileStateType;
+let fakeState: InitialProfileStateType
 let fakeFile: File
 let fakeProfile: ProfileUserType
 
@@ -44,22 +44,22 @@ beforeEach(() => {
         ],
         profile: fakeProfile,
         status: '',
-    };
-});
+    }
+})
 
 describe('profile', () => {
     test('post should be added', () => {
 
         const endState = profileReducer(fakeState, addPost({postText: 'New Post Text'}))
 
-        expect(fakeState.posts.length).toBe(3);
-        expect(endState.posts.length).toBe(4);
-        expect(fakeState.posts[3]).toBeUndefined();
-        expect(endState.posts[3]).toBeDefined();
-        expect(fakeState.posts[2].message).toBe('3 post');
-        expect(endState.posts[3].message).toBe('3 post');
-        expect(endState.posts[0].message).toBe('New Post Text');
-    });
+        expect(fakeState.posts.length).toBe(3)
+        expect(endState.posts.length).toBe(4)
+        expect(fakeState.posts[3]).toBeUndefined()
+        expect(endState.posts[3]).toBeDefined()
+        expect(fakeState.posts[2].message).toBe('3 post')
+        expect(endState.posts[3].message).toBe('3 post')
+        expect(endState.posts[0].message).toBe('New Post Text')
+    })
 
     test('user should be set', () => {
         const action = setProfileUser.fulfilled({profile: fakeProfile}, 'requestId', 3)

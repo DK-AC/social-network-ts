@@ -1,12 +1,12 @@
-import {Navigate, Route, Routes} from 'react-router-dom';
-import React from 'react';
+import {Navigate, Route, Routes} from 'react-router-dom'
+import React from 'react'
 
-import {Music} from '../Music/Music';
-import {Friends} from '../Friends/Friends';
-import {News} from '../News/News';
-import {Login} from '../Login/Login';
-import {NotFound404} from '../NotFound404/NotFound404';
-import {Settings} from '../Settings/Settings';
+import {Music} from '../Music/Music'
+import {Friends} from '../Friends/Friends'
+import {News} from '../News/News'
+import {Login} from '../Login/Login'
+import {NotFound404} from '../NotFound404/NotFound404'
+import {Settings} from '../Settings/Settings'
 
 export const PATH = {
     START_PAGE: '/',
@@ -20,7 +20,7 @@ export const PATH = {
     FRIENDS_PAGE: '/friends',
     LOGIN_PAGE: '/login',
     NOT_FOUND_PAGE: '/*',
-};
+}
 
 const Profile = React.lazy(async () => ({default: (await import('../Profile/Profile')).Profile}))
 const Users = React.lazy(async () => ({default: (await import('../Users/Users')).Users}))
@@ -47,5 +47,5 @@ export const Routing: React.FC = () => {
             </React.Suspense>
         </>
 
-    );
-};
+    )
+}

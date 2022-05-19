@@ -1,7 +1,7 @@
-import {AxiosResponse} from 'axios';
+import {AxiosResponse} from 'axios'
 
-import {AxiosResponseType, instanceAPI, ResponseType, ResponseUserType} from './instanceAPI';
-import {PhotosType} from './profileAPI';
+import {AxiosResponseType, instanceAPI, ResponseType, ResponseUserType} from './instanceAPI'
+import {PhotosType} from './profileAPI'
 
 
 export const userAPI = {
@@ -15,14 +15,14 @@ export const userAPI = {
     unfollowUser(userId: number) {
         return instanceAPI.delete<any, AxiosResponseType, ResponseType>(`/follow/${userId}`)
     },
-};
+}
 
 export type UserType = {
-    id: number,
-    name: string,
-    uniqueUrlName: string,
+    id: number
+    name: string
+    uniqueUrlName: string
     photos: PhotosType
-    status: string,
+    status: string
     followed: boolean
 }
 export type ParamsUserPageType = {

@@ -10,7 +10,7 @@
 }
 
 
-.active{
+.active {
     color: gold;
     font-weight: bold;
 }
@@ -20,11 +20,11 @@
     font-weight: bold;
 }
 
-.friends{
+.friends {
     padding-top: 30px;
 }
 
-.friendsPage{
+.friendsPage {
     display: flex;
     flex-direction: row;
 }
@@ -35,7 +35,7 @@
 /*    flex-direction: row;*/
 /*}*/
 
-.friendsPage img{
+.friendsPage img {
     width: 30px;
     height: 30px;
     border-radius: 50%;

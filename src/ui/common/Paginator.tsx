@@ -1,28 +1,28 @@
-import React from 'react';
-import {useDispatch} from 'react-redux';
+import React from 'react'
+import {useDispatch} from 'react-redux'
 
-import {changeCurrentPage, changePortionNumber} from '../../redux/reducers/usersReducer';
-import {useAppSelector} from '../../redux/store';
+import {changeCurrentPage, changePortionNumber} from '../../redux/reducers/usersReducer'
+import {useAppSelector} from '../../redux/store'
 
-import styles from './paginator.module.css';
+import styles from './paginator.module.css'
 
 type PropsType = { portionSize?: number }
 
 export const Paginator: React.FC<PropsType> = ({portionSize = 10}) => {
 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
 
     const {pageSize, currentPage, totalCount, portionNumber} = useAppSelector(state => state.users)
 
-    const pagesCount = Math.ceil(totalCount / pageSize);
-    const portionCount = Math.ceil(pagesCount / portionSize);
-    const leftPortionPageNumber = (portionNumber - 1) * portionSize + 1;
-    const rightPortionPageNumber = portionNumber * portionSize;
+    const pagesCount = Math.ceil(totalCount / pageSize)
+    const portionCount = Math.ceil(pagesCount / portionSize)
+    const leftPortionPageNumber = (portionNumber - 1) * portionSize + 1
+    const rightPortionPageNumber = portionNumber * portionSize
 
-    const pages = [];
+    const pages = []
     for (let i = 1; i <= pagesCount; i++) {
-        if (i === totalCount) break;
-        pages.push(i);
+        if (i === totalCount) break
+        pages.push(i)
     }
 
     const setPortionMinusNumberHandle = () => {
@@ -46,7 +46,7 @@ export const Paginator: React.FC<PropsType> = ({portionSize = 10}) => {
                               onClick={() => dispatch(changeCurrentPage({currentPage: p}))}
                         >
                         {p}
-                    </span>);
+                    </span>)
                 })}
 
             {portionCount > portionNumber && <button onClick={setPortionPlusNumberHandle}>NEXT</button>}
@@ -54,7 +54,7 @@ export const Paginator: React.FC<PropsType> = ({portionSize = 10}) => {
         </div>
 
     )
-};
+}
 
 
 

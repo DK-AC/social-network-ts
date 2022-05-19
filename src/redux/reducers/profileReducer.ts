@@ -1,11 +1,11 @@
-import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {AxiosError} from 'axios';
+import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
+import {AxiosError} from 'axios'
 
-import {PhotosType, profileAPI, ProfileUserType} from '../../api/profileAPI';
-import {handleAsyncNetworkError, handleAsyncServerAppError, ThunkErrorType} from '../../utils/error-utils';
-import {ResultCodeEnum} from '../../api/instanceAPI';
+import {PhotosType, profileAPI, ProfileUserType} from '../../api/profileAPI'
+import {handleAsyncNetworkError, handleAsyncServerAppError, ThunkErrorType} from '../../utils/error-utils'
+import {ResultCodeEnum} from '../../api/instanceAPI'
 
-import {setAppStatus} from './appReducer';
+import {setAppStatus} from './appReducer'
 
 const initialState = {
     posts: [
@@ -15,7 +15,7 @@ const initialState = {
     ],
     profile: null as ProfileUserType | null,
     status: '',
-};
+}
 
 export const profileSlices = createSlice({
     name: 'profile',
@@ -56,7 +56,7 @@ export const {addPost, deletePost} = profileSlices.actions
 export const setProfileUser = createAsyncThunk<{ profile: ProfileUserType }, number, ThunkErrorType>
 ('profile/setProfileUser',
     async (userId, thunkAPI) => {
-        thunkAPI.dispatch(setAppStatus({status: 'loading'}));
+        thunkAPI.dispatch(setAppStatus({status: 'loading'}))
         try {
             const {data} = await profileAPI.getProfileUser(userId)
             thunkAPI.dispatch(setAppStatus({status: 'successful'}))
@@ -68,7 +68,7 @@ export const setProfileUser = createAsyncThunk<{ profile: ProfileUserType }, num
 export const getProfileUserStatus = createAsyncThunk<{ status: string }, number, ThunkErrorType>
 ('profile/getProfileUserStatus',
     async (userId, thunkAPI) => {
-        thunkAPI.dispatch(setAppStatus({status: 'loading'}));
+        thunkAPI.dispatch(setAppStatus({status: 'loading'}))
         try {
             const {data} = await profileAPI.getProfileUserStatus(userId)
             thunkAPI.dispatch(setAppStatus({status: 'successful'}))
@@ -80,7 +80,7 @@ export const getProfileUserStatus = createAsyncThunk<{ status: string }, number,
 export const updateProfileUserStatus = createAsyncThunk<{ status: string }, { status: string }, ThunkErrorType>
 ('profile/updateProfileUserStatus',
     async (status, thunkAPI) => {
-        thunkAPI.dispatch(setAppStatus({status: 'loading'}));
+        thunkAPI.dispatch(setAppStatus({status: 'loading'}))
         try {
             const {data} = await profileAPI.updateProfileUserStatus(status)
             if (data.resultCode === ResultCodeEnum.Success) {

@@ -1,8 +1,8 @@
-import {Field} from 'formik';
-import * as React from 'react';
+import {Field} from 'formik'
+import * as React from 'react'
 
-import {ContactsUserType, ProfileUserType} from '../api/profileAPI';
-import {LoginUserType} from '../api/authAPI';
+import {ContactsUserType, ProfileUserType} from '../api/profileAPI'
+import {LoginUserType} from '../api/authAPI'
 
 
 export type ContactsKeysType = keyof ContactsUserType
@@ -30,5 +30,5 @@ export const FormikField: React.FC<PropsType> = ({
         {isShowLabel && <label htmlFor={name}>{name}</label>}
         <Field name={name} type={type} placeholder={placeholder}/>
         {isShowError && <div style={{color: 'red'}}>{error}</div>}
-    </>;
+    </>
 }

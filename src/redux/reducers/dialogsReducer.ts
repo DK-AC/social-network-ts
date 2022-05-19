@@ -1,4 +1,4 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 
 const initialState = {
     dialogs: [
@@ -13,7 +13,7 @@ const initialState = {
         {id: 3, message: 'let\'s go'},
         {id: 4, message: 'Stop'},
     ],
-};
+}
 
 export const dialogSlices = createSlice({
     name: 'dialog',

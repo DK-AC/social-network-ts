@@ -1,16 +1,16 @@
-import 'react-app-polyfill/ie11';
-import * as React from 'react';
-import {useEffect} from 'react';
-import {Form, Formik} from 'formik';
-import {useDispatch} from 'react-redux';
-import {useNavigate} from 'react-router-dom';
-import * as Yup from 'yup';
+import 'react-app-polyfill/ie11'
+import * as React from 'react'
+import {useEffect} from 'react'
+import {Form, Formik} from 'formik'
+import {useDispatch} from 'react-redux'
+import {useNavigate} from 'react-router-dom'
+import * as Yup from 'yup'
 
-import {login} from '../../redux/reducers/authReducer';
-import {useAppSelector} from '../../redux/store';
-import {PATH} from '../Routing/Routing';
-import {FormikField} from '../../reusableComponent/FormikField';
-import {LoginUserType} from '../../api/authAPI';
+import {login} from '../../redux/reducers/authReducer'
+import {useAppSelector} from '../../redux/store'
+import {PATH} from '../Routing/Routing'
+import {FormikField} from '../../reusableComponent/FormikField'
+import {LoginUserType} from '../../api/authAPI'
 
 
 export const Login: React.FC = () => {
@@ -88,5 +88,5 @@ export const Login: React.FC = () => {
             </Formik>
         </div>
     )
-};
+}
 

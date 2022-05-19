@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 
-import {ProfileUserType} from '../../../api/profileAPI';
+import {ProfileUserType} from '../../../api/profileAPI'
 
-import {FullName} from './FullName';
-import {LookingForAJob} from './LookingForAJob';
-import {AboutMe} from './AboutMe';
-import {Contacts} from './Contacts';
+import {FullName} from './FullName'
+import {LookingForAJob} from './LookingForAJob'
+import {AboutMe} from './AboutMe'
+import {Contacts} from './Contacts'
 
 type PropsType = {
     profile: ProfileUserType

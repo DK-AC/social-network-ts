@@ -1,23 +1,23 @@
-import React, {useEffect} from 'react';
-import {useNavigate} from 'react-router-dom';
+import React, {useEffect} from 'react'
+import {useNavigate} from 'react-router-dom'
 
-import {useAppSelector} from '../../redux/store';
-import {PATH} from '../Routing/Routing';
+import {useAppSelector} from '../../redux/store'
+import {PATH} from '../Routing/Routing'
 
-import {FriendItem} from './FriendItem/FriendItem';
-import styles from './friends.module.css';
+import {FriendItem} from './FriendItem/FriendItem'
+import styles from './friends.module.css'
 
 
 export const Friends: React.FC = () => {
 
     const navigate = useNavigate()
 
-    const friends = useAppSelector(state => state.sideBar.friends);
-    const isAuth = useAppSelector(state => state.auth.isAuth);
+    const friends = useAppSelector(state => state.sideBar.friends)
+    const isAuth = useAppSelector(state => state.auth.isAuth)
 
     const friendsData = friends.map(f => {
-        return <FriendItem key={f.id} id={f.id} name={f.name}/>;
-    });
+        return <FriendItem key={f.id} id={f.id} name={f.name}/>
+    })
 
     useEffect(() => {
         if (!isAuth) {
@@ -29,7 +29,7 @@ export const Friends: React.FC = () => {
         <div className={styles.friends}>
             {friendsData}
         </div>
-    );
-};
+    )
+}
 
 

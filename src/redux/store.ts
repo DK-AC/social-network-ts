@@ -1,14 +1,14 @@
-import {combineReducers} from 'redux';
-import {TypedUseSelectorHook, useSelector} from 'react-redux';
-import thunk from 'redux-thunk';
-import {configureStore} from '@reduxjs/toolkit';
+import {combineReducers} from 'redux'
+import {TypedUseSelectorHook, useSelector} from 'react-redux'
+import thunk from 'redux-thunk'
+import {configureStore} from '@reduxjs/toolkit'
 
-import {profileReducer} from './reducers/profileReducer';
-import {dialogsReducer} from './reducers/dialogsReducer';
-import {sideBarReducer} from './reducers/sideBarReducer';
-import {usersReducer} from './reducers/usersReducer';
-import {appReducer} from './reducers/appReducer';
-import {authReducer} from './reducers/authReducer';
+import {profileReducer} from './reducers/profileReducer'
+import {dialogsReducer} from './reducers/dialogsReducer'
+import {sideBarReducer} from './reducers/sideBarReducer'
+import {usersReducer} from './reducers/usersReducer'
+import {appReducer} from './reducers/appReducer'
+import {authReducer} from './reducers/authReducer'
 
 
 export const rootReducer = combineReducers({
@@ -18,7 +18,7 @@ export const rootReducer = combineReducers({
     users: usersReducer,
     app: appReducer,
     auth: authReducer,
-});
+})
 
 export type RootStateType = ReturnType<typeof rootReducer>
 
@@ -27,11 +27,11 @@ export const store = configureStore({
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().prepend(thunk),
     devTools: process.env.NODE_ENV !== 'production',
 
-});
-export const useAppSelector: TypedUseSelectorHook<RootStateType> = useSelector;
+})
+export const useAppSelector: TypedUseSelectorHook<RootStateType> = useSelector
 
 
 // @ts-ignore
-window.store = store;
+window.store = store
 
 

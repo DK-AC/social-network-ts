@@ -1,13 +1,13 @@
-import React, {useState} from 'react';
+import React, {useState} from 'react'
 
-import {ProfileUserType} from '../../../api/profileAPI';
-import {Preloader} from '../../Preloader/Preloader';
+import {ProfileUserType} from '../../../api/profileAPI'
+import {Preloader} from '../../Preloader/Preloader'
 
-import styles from './profileInfo.module.css';
-import {Photo} from './Photo';
-import {ProfileData} from './ProfileData';
-import {ProfileDataForm} from './ProfileDataForm.';
-import {Status} from './Status';
+import styles from './profileInfo.module.css'
+import {Photo} from './Photo'
+import {ProfileData} from './ProfileData'
+import {ProfileDataForm} from './ProfileDataForm.'
+import {Status} from './Status'
 
 type PropsType = {
     profile: ProfileUserType | null
@@ -22,7 +22,7 @@ export const ProfileInfo: React.FC<PropsType> = React.memo(({profile, isOwner}) 
     const goToSaveMode = () => setEditMode(false)
 
     if (!profile) {
-        return <Preloader/>;
+        return <Preloader/>
     }
 
     return (
@@ -36,6 +36,6 @@ export const ProfileInfo: React.FC<PropsType> = React.memo(({profile, isOwner}) 
                 <Status/>
             </div>
         </>
-    );
+    )
 })
 

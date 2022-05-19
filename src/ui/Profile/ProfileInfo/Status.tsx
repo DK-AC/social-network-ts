@@ -1,8 +1,8 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
-import {useDispatch} from 'react-redux';
+import React, {ChangeEvent, useEffect, useState} from 'react'
+import {useDispatch} from 'react-redux'
 
-import {useAppSelector} from '../../../redux/store';
-import {updateProfileUserStatus} from '../../../redux/reducers/profileReducer';
+import {useAppSelector} from '../../../redux/store'
+import {updateProfileUserStatus} from '../../../redux/reducers/profileReducer'
 
 
 export const Status: React.FC = () => {
@@ -48,6 +48,6 @@ export const Status: React.FC = () => {
                 : <span onDoubleClick={changeOnEditModeHandle}><b>Status: </b>{status || '----'}</span>
             }
         </>
-    );
-};
+    )
+}
 

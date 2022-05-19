@@ -11,7 +11,7 @@ export const authAPI = {
     logout() {
         return instanceAPI.delete<any, AxiosResponseType, ResponseType>('/auth/login')
     },
-};
+}
 
 export type AuthUserType = {
     id: number

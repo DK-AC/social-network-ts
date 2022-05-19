@@ -1,10 +1,10 @@
-import React from 'react';
-import {useDispatch} from 'react-redux';
+import React from 'react'
+import {useDispatch} from 'react-redux'
 
-import {deletePost} from '../../../../redux/reducers/profileReducer';
+import {deletePost} from '../../../../redux/reducers/profileReducer'
 
-import styles from './post.module.css';
-import postPhoto from './../../../../assets/img/postPhoto.jpg';
+import styles from './post.module.css'
+import postPhoto from './../../../../assets/img/postPhoto.jpg'
 
 type PropsType = {
     postId: number
@@ -12,12 +12,12 @@ type PropsType = {
     likesCount: number
 }
 
-export const Post: React.FC<PropsType> = React.memo(({ postId, message, likesCount}) => {
+export const Post: React.FC<PropsType> = React.memo(({postId, message, likesCount}) => {
 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
 
     const deletePostHandle = () => {
-      dispatch(deletePost({postId}))
+        dispatch(deletePost({postId}))
     }
 
     return (
@@ -31,5 +31,5 @@ export const Post: React.FC<PropsType> = React.memo(({ postId, message, likesCou
             </div>
             <span> like {likesCount}</span>
         </div>
-    );
+    )
 })

@@ -1,12 +1,12 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 
-import {authMe} from './authReducer';
+import {authMe} from './authReducer'
 
 const initialState = {
     status: 'idle' as LoadingType,
     error: '',
     isInitialized: false,
-};
+}
 
 export const appSlices = createSlice({
     name: 'app',

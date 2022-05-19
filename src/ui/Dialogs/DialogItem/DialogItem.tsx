@@ -1,8 +1,8 @@
-import {NavLink} from 'react-router-dom';
-import React from 'react';
+import {NavLink} from 'react-router-dom'
+import React from 'react'
 
-import styles from './dialogItem.module.css';
-import dialogPhoto from './../../../assets/img/dialogPhoto1.png';
+import styles from './dialogItem.module.css'
+import dialogPhoto from './../../../assets/img/dialogPhoto1.png'
 
 type PropsType = { id: number, name: string }
 
@@ -12,11 +12,11 @@ export const DialogItem: React.FC<PropsType> = React.memo(({id, name}) => {
         color: 'gold',
         fontWeight: 'bold',
         textDecoration: 'none',
-    };
+    }
     const defaultStyle = {
         color: 'white',
         textDecoration: 'none',
-    };
+    }
 
     return (
         <div>
@@ -29,5 +29,5 @@ export const DialogItem: React.FC<PropsType> = React.memo(({id, name}) => {
                 {name}
             </NavLink>
         </div>
-    );
+    )
 })
