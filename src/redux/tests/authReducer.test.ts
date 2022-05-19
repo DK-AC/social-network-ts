@@ -4,7 +4,7 @@ let fakeState: InitialAuthStateType;
 
 beforeEach(() => {
     fakeState = {
-        id: 1,
+        id: null,
         email: null,
         password: null,
         isAuth: false,
@@ -23,7 +23,7 @@ describe('auth', () => {
         expect(fakeState.isAuth).toBeFalsy()
         expect(endState.isAuth).toBeTruthy()
 
-        expect(fakeState.id).toBe(1)
+        expect(fakeState.id).toBeNull()
         expect(endState.id).toBe(12)
 
         expect(fakeState.email).toBeNull()
