@@ -1,10 +1,10 @@
 import {AxiosResponseType, instanceAPI} from './instanceAPI';
 
 export const profileAPI = {
-    getProfileUser(userId: number | null) {
+    getProfileUser(userId: number) {
         return instanceAPI.get<any, AxiosResponseType<ProfileUserType>, ProfileUserType>(`/profile/${userId}`)
     },
-    getProfileUserStatus(userId: number | null) {
+    getProfileUserStatus(userId: number) {
         return instanceAPI.get<any, AxiosResponseType<string>>(`/profile/status/${userId}`)
     },
     updateProfileUserStatus(payload: { status: string }) {

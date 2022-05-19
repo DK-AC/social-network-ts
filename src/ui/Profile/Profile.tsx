@@ -19,7 +19,7 @@ export const Profile: React.FC = () => {
     const profile = useAppSelector(state => state.profile.profile);
     const {id, isAuth} = useAppSelector(state => state.auth);
 
-    let profileUserId: number|null;
+    let profileUserId: number | null;
 
     if (params.profileUserId) {
         profileUserId = +params.profileUserId;
@@ -30,16 +30,16 @@ export const Profile: React.FC = () => {
     useEffect(() => {
         if (!isAuth) {
             navigate(PATH.LOGIN_PAGE)
-        }else {
-            dispatch(getProfileUserStatus(profileUserId))
-            dispatch(setProfileUser(profileUserId))
+        } else {
+            dispatch(getProfileUserStatus(profileUserId as number))
+            dispatch(setProfileUser(profileUserId as number))
         }
     }, [dispatch, isAuth, navigate, profileUserId]);
 
 
     return (
         <div>
-            <ProfileInfo profile={profile} isOwner={profileUserId===id}/>
+            <ProfileInfo profile={profile} isOwner={profileUserId === id}/>
             <Posts/>
         </div>
     );

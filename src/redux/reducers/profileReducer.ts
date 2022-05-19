@@ -53,7 +53,7 @@ export const profileSlices = createSlice({
 export const profileReducer = profileSlices.reducer
 export const {addPost, deletePost} = profileSlices.actions
 
-export const setProfileUser = createAsyncThunk<{ profile: ProfileUserType }, number | null, ThunkErrorType>
+export const setProfileUser = createAsyncThunk<{ profile: ProfileUserType }, number, ThunkErrorType>
 ('profile/setProfileUser',
     async (userId, thunkAPI) => {
         thunkAPI.dispatch(setAppStatus({status: 'loading'}));
@@ -65,9 +65,9 @@ export const setProfileUser = createAsyncThunk<{ profile: ProfileUserType }, num
             return handleAsyncNetworkError(err as AxiosError, thunkAPI)
         }
     })
-export const getProfileUserStatus = createAsyncThunk<{ status: string }, number | null, ThunkErrorType>
+export const getProfileUserStatus = createAsyncThunk<{ status: string }, number, ThunkErrorType>
 ('profile/getProfileUserStatus',
-    async (userId: number | null, thunkAPI) => {
+    async (userId, thunkAPI) => {
         thunkAPI.dispatch(setAppStatus({status: 'loading'}));
         try {
             const {data} = await profileAPI.getProfileUserStatus(userId)
