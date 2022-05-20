@@ -1,5 +1,5 @@
 import React from 'react'
-import {Form, Formik} from 'formik'
+import {Field, Form, Formik} from 'formik'
 import * as Yup from 'yup'
 import {useDispatch} from 'react-redux'
 
@@ -40,6 +40,11 @@ export const UsersSearchForm = () => {
                                  placeholder={'find users'}
                     />
                     <button disabled={!formik.isValid} type="submit">Search</button>
+                    <Field name="color" as="select">
+                        <option value="all">all</option>
+                        <option value="follow">follow</option>
+                        <option value="unfollow">unfollow</option>
+                    </Field>
                     <div>
                     </div>
                 </Form>

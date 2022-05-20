@@ -37,6 +37,7 @@ beforeEach(() => {
             portionNumber: 1,
             filter: {
                 term: '',
+                friend: null,
             },
         }
     },
@@ -91,6 +92,7 @@ describe('user', () => {
             portionNumber: 1,
             filter: {
                 term: '',
+                friend: null,
             },
         }
 
@@ -98,7 +100,8 @@ describe('user', () => {
             users: fakeUserState.users,
             totalCount: fakeUserState.totalCount,
             term: '',
-        }, 'requestId', {currentPage: 3, pageSize: 5, term: ''})
+            friend: null,
+        }, 'requestId', {currentPage: 3, pageSize: 5, term: '', friend: null})
 
         const endState = usersReducer(fakeState, action)
 

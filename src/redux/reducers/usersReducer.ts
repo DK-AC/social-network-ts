@@ -18,6 +18,7 @@ const initialState = {
     portionNumber: 1,
     filter: {
         term: '',
+        friend: null as boolean | null,
     },
 }
 
@@ -58,7 +59,7 @@ export const usersReducer = userSlices.reducer
 export const {changeCurrentPage, setIsFollowingInProgress, changePortionNumber} = userSlices.actions
 
 
-export const setUsers = createAsyncThunk<{ users: UserType[], totalCount: number, term: string }, ParamsUserPageType, ThunkErrorType>
+export const setUsers = createAsyncThunk<{ users: UserType[], totalCount: number, term: string, friend: null | boolean }, ParamsUserPageType, ThunkErrorType>
 ('user/setUsers',
     async (params, thunkAPI) => {
         thunkAPI.dispatch(setAppStatus({status: 'loading'}))
