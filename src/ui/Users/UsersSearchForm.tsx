@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {Field, Form, Formik} from 'formik'
 import * as Yup from 'yup'
 import {useDispatch} from 'react-redux'
@@ -23,9 +23,6 @@ export const UsersSearchForm = () => {
         //todo fix to change curr page if term is changed
         dispatch(changeCurrentPage({currentPage: 1}))
     }
-    useEffect(() => {
-        },
-        [friend])
 
     return (
         <Formik
