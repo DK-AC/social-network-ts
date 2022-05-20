@@ -44,9 +44,7 @@ export const userSlices = createSlice({
             state.totalCount = action.payload.totalCount
             //todo need fix meta arg
             state.filter.term = action.meta.arg.term
-            if (state.filter.term !== action.meta.arg.term) {
-                state.currentPage = 1
-            }
+            state.filter.friend = action.meta.arg.friend
         })
         builder.addCase(followUnfollow.fulfilled, (state: InitialUsersStateType, action) => {
             const index = state.users.findIndex(user => user.id === action.payload.userId)
