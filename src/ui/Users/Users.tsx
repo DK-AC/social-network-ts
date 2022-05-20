@@ -7,7 +7,6 @@ import {setUsers} from '../../redux/reducers/usersReducer'
 import {Preloader} from '../Preloader/Preloader'
 import {PATH} from '../Routing/Routing'
 import {Paginator} from '../common/Paginator'
-import {ParamsUserPageType} from '../../api/userAPI'
 
 import {User} from './User/User'
 import styles from './users.module.css'
@@ -23,23 +22,16 @@ export const Users: React.FC = () => {
     const {status} = useAppSelector(state => state.app)
     const isAuth = useAppSelector(state => state.auth.isAuth)
 
-    const params: ParamsUserPageType = {
-        pageSize,
-        currentPage,
-    }
-
-
     const user = users.map(u => {
         return <User key={u.id} user={u}/>
     })
-
 
     useEffect(() => {
 
         if (!isAuth) {
             navigate(PATH.LOGIN_PAGE)
         }
-        dispatch(setUsers(params))
+        dispatch(setUsers({pageSize, currentPage}))
     }, [isAuth, navigate, currentPage])
 
     return (
