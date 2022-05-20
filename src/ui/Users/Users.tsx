@@ -19,6 +19,7 @@ export const Users: React.FC = () => {
     const navigate = useNavigate()
 
     const {users, currentPage, pageSize} = useAppSelector(state => state.users)
+    const {term} = useAppSelector(state => state.users.filter)
     const {status} = useAppSelector(state => state.app)
     const isAuth = useAppSelector(state => state.auth.isAuth)
 
@@ -31,7 +32,7 @@ export const Users: React.FC = () => {
         if (!isAuth) {
             navigate(PATH.LOGIN_PAGE)
         }
-        dispatch(setUsers({pageSize, currentPage}))
+        dispatch(setUsers({pageSize, currentPage, term}))
     }, [isAuth, navigate, currentPage])
 
     return (

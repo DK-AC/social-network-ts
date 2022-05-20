@@ -7,7 +7,7 @@ import {PhotosType} from './profileAPI'
 export const userAPI = {
     getUsers(params: ParamsUserPageType) {
         return instanceAPI.get<any, AxiosResponse<ResponseUserType<UserType[]>>, UserType[]>
-        (`/users?page=${params.currentPage}&count=${params.pageSize}`)
+        (`/users?page=${params.currentPage}&count=${params.pageSize}&term=${params.term}`)
     },
     followUser(userId: number) {
         return instanceAPI.post<any, AxiosResponseType, ResponseType>(`/follow/${userId}`)
@@ -28,5 +28,6 @@ export type UserType = {
 export type ParamsUserPageType = {
     currentPage: number
     pageSize: number
+    term: string
 }
 

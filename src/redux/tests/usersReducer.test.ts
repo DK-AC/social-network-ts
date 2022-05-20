@@ -35,6 +35,9 @@ beforeEach(() => {
             currentPage: 3,
             followingInProgress: [],
             portionNumber: 1,
+            filter: {
+                term: '',
+            },
         }
     },
 )
@@ -86,12 +89,16 @@ describe('user', () => {
             pageSize: 5,
             followingInProgress: [],
             portionNumber: 1,
+            filter: {
+                term: '',
+            },
         }
 
         const action = setUsers.fulfilled({
             users: fakeUserState.users,
             totalCount: fakeUserState.totalCount,
-        }, 'requestId', {currentPage: 3, pageSize: 5})
+            term: '',
+        }, 'requestId', {currentPage: 3, pageSize: 5, term: ''})
 
         const endState = usersReducer(fakeState, action)
 

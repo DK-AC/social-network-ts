@@ -1,11 +1,14 @@
 import React from 'react'
 import {Form, Formik} from 'formik'
 import * as Yup from 'yup'
+import {useDispatch} from 'react-redux'
 
 import {FormikField} from '../../reusableComponent/FormikField'
 import {useAppSelector} from '../../redux/store'
 
 export const UsersSearchForm = () => {
+
+    const dispatch = useDispatch()
 
     const {error} = useAppSelector(state => state.app)
 
@@ -30,7 +33,7 @@ export const UsersSearchForm = () => {
                                  error={error}
                                  placeholder={'find users'}
                     />
-                    <button disabled={!formik.isValid} type="submit">Sign Up</button>
+                    <button disabled={!formik.isValid} type="submit">Search</button>
                     <div>
                     </div>
                 </Form>

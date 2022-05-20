@@ -16,6 +16,9 @@ const initialState = {
     currentPage: 1,
     followingInProgress: [] as number[],
     portionNumber: 1,
+    filter: {
+        term: '',
+    },
 }
 
 export const userSlices = createSlice({
@@ -38,6 +41,8 @@ export const userSlices = createSlice({
         builder.addCase(setUsers.fulfilled, (state: InitialUsersStateType, action) => {
             state.users = action.payload.users
             state.totalCount = action.payload.totalCount
+            //todo need fix meta arg
+            state.filter.term = action.meta.arg.term
         })
         builder.addCase(followUnfollow.fulfilled, (state: InitialUsersStateType, action) => {
             const index = state.users.findIndex(user => user.id === action.payload.userId)
@@ -50,7 +55,7 @@ export const usersReducer = userSlices.reducer
 export const {changeCurrentPage, setIsFollowingInProgress, changePortionNumber} = userSlices.actions
 
 
-export const setUsers = createAsyncThunk<{ users: UserType[], totalCount: number }, ParamsUserPageType, ThunkErrorType>
+export const setUsers = createAsyncThunk<{ users: UserType[], totalCount: number, term: string }, ParamsUserPageType, ThunkErrorType>
 ('user/setUsers',
     async (params, thunkAPI) => {
         thunkAPI.dispatch(setAppStatus({status: 'loading'}))
