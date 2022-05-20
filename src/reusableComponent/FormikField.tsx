@@ -10,7 +10,7 @@ type ProfileUserKeysType = keyof ProfileUserType
 type LoginKeysType = keyof LoginUserType
 
 type PropsType = {
-    name: ProfileUserKeysType | LoginKeysType | 'dialogMessage' | 'postMessage' | `contacts.${ContactsKeysType}`
+    name: ProfileUserKeysType | LoginKeysType | 'dialogMessage' | 'postMessage' | `contacts.${ContactsKeysType}` | 'term'
     type?: string
     isShowError?: boolean
     isShowLabel?: boolean
