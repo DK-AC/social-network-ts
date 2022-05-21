@@ -5,7 +5,7 @@ import {useDispatch} from 'react-redux'
 
 import {FormikField} from '../../reusableComponent/FormikField'
 import {useAppSelector} from '../../redux/store'
-import {changeCurrentPage, setUsers} from '../../redux/reducers/usersReducer'
+import {setUsers} from '../../redux/reducers/usersReducer'
 import {ParamsUserPageType} from '../../api/userAPI'
 
 export const UsersSearchForm = () => {

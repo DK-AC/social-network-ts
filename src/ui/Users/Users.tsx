@@ -1,29 +1,21 @@
 import React, {useEffect} from 'react'
 import {useDispatch} from 'react-redux'
-import {createSearchParams, useNavigate, useSearchParams} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 
 import {useAppSelector} from '../../redux/store'
+import {setUsers} from '../../redux/reducers/usersReducer'
 import {Preloader} from '../Preloader/Preloader'
 import {PATH} from '../Routing/Routing'
 import {Paginator} from '../common/Paginator'
-import {setUsers} from '../../redux/reducers/usersReducer'
 
 import {User} from './User/User'
 import styles from './users.module.css'
 import {UsersSearchForm} from './UsersSearchForm'
 
-
-
 export const Users: React.FC = () => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const [searchParams] = useSearchParams()
-
-    // @ts-ignore
-
-    const test: QueryParamsType = Object.fromEntries([...searchParams])
-    console.log(test)
 
     const {users, currentPage, pageSize} = useAppSelector(state => state.users)
     const {term, friend} = useAppSelector(state => state.users.filter)
@@ -34,36 +26,19 @@ export const Users: React.FC = () => {
         return <User key={u.id} user={u}/>
     })
 
+    useEffect(() => {
+        navigate({
+            pathname: '/users',
+            search: `?page=${currentPage}&count=${pageSize}&term=${term}&friend=${friend}`,
+        })
+    }, [pageSize, currentPage, term, friend, navigate])
 
     useEffect(() => {
-
-
-        dispatch(setUsers({
-            pageSize: test.pageSize,
-            currentPage: test.page,
-            term: test.term,
-            friend: test.friend,
-        }))
-
-    }, [test.page, test.term])
-
-    useEffect(() => {
-            navigate({
-                pathname: '/users',
-                search: createSearchParams({
-                    page: `${currentPage}`,
-                    count: `${pageSize}`,
-                    term: `${term}`,
-                    friend: `${friend}`,
-                }).toString(),
-            })
+        if (!isAuth) {
+            navigate(PATH.LOGIN_PAGE)
         }
-        , [])
-
-
-    if (!isAuth) {
-        navigate(PATH.LOGIN_PAGE)
-    }
+        dispatch(setUsers({pageSize, currentPage, term, friend}))
+    }, [isAuth, navigate, currentPage])
 
     return (
         <div className={styles.userItems}>
@@ -76,6 +51,3 @@ export const Users: React.FC = () => {
         </div>
     )
 }
-
-
-
