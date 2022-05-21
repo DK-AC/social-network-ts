@@ -21,7 +21,7 @@ export const UsersSearchForm = () => {
     const onSubmitLoginUser = (values: ParamsUserPageType) => {
         dispatch(setUsers({pageSize, currentPage, term: values.term, friend: values.friend}))
         //todo fix to change curr page if term is changed
-        dispatch(changeCurrentPage({currentPage: 1}))
+        // dispatch(changeCurrentPage({currentPage: 1}))
     }
 
     return (
