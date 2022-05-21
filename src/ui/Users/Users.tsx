@@ -12,7 +12,6 @@ import {User} from './User/User'
 import styles from './users.module.css'
 import {UsersSearchForm} from './UsersSearchForm'
 
-type QueryParamsType = { term?: string; page?: string; friend?: string c }
 
 
 export const Users: React.FC = () => {
