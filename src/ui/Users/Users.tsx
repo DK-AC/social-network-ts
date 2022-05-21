@@ -28,7 +28,13 @@ export const Users: React.FC = () => {
     })
 
     useEffect(() => {
+        navigate({
+            pathname: '/users',
+            search: `?page=${currentPage}&count=${pageSize}&term=${term}&friend=${friend}`,
+        })
+    }, [pageSize, currentPage, term, friend, navigate])
 
+    useEffect(() => {
         if (!isAuth) {
             navigate(PATH.LOGIN_PAGE)
         }
