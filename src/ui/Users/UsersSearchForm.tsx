@@ -2,13 +2,18 @@ import React from 'react'
 import {Field, Form, Formik} from 'formik'
 import * as Yup from 'yup'
 import {useDispatch} from 'react-redux'
+import { URLSearchParamsInit } from 'react-router-dom'
 
 import {FormikField} from '../../reusableComponent/FormikField'
 import {useAppSelector} from '../../redux/store'
 import {setUsers} from '../../redux/reducers/usersReducer'
 import {ParamsUserPageType} from '../../api/userAPI'
 
-export const UsersSearchForm = () => {
+type PropsType = {
+    setSearchParams: (nextInit: URLSearchParamsInit) => void
+}
+
+export const UsersSearchForm: React.FC<PropsType> = ({setSearchParams}) => {
 
     const dispatch = useDispatch()
 
@@ -16,12 +21,12 @@ export const UsersSearchForm = () => {
     const {term, friend} = useAppSelector(state => state.users.filter)
     const {error} = useAppSelector(state => state.app)
 
+
     const initialValues = {term, currentPage, pageSize, friend}
     const validationSchema = {}
     const onSubmitLoginUser = (values: ParamsUserPageType) => {
         dispatch(setUsers({pageSize, currentPage, term: values.term, friend: values.friend}))
-        //todo fix to change curr page if term is changed
-        // dispatch(changeCurrentPage({currentPage: 1}))
+        setSearchParams({page: '1', term: values.term, friend: values.friend as string})
     }
 
     return (

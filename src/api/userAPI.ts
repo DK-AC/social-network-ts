@@ -29,6 +29,6 @@ export type ParamsUserPageType = {
     currentPage: number
     pageSize: number
     term: string
-    friend: null | boolean
+    friend: null | boolean | string
 }
 
