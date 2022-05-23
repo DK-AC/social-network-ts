@@ -15,6 +15,7 @@ import {UsersSearchForm} from './UsersSearchForm'
 
 
 export const Users: React.FC = () => {
+
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -44,12 +45,12 @@ export const Users: React.FC = () => {
         setSearchParams(uriParams)
 
         dispatch(setUsers({
-            pageSize: +uriParams.count,
-            currentPage: +uriParams.page,
+            pageSize: Number(uriParams.count),
+            currentPage: Number(uriParams.page),
             term: uriParams.term,
             friend: uriParams.friend === 'null' ? null : uriParams.friend === 'true',
         }))
-        dispatch(changeCurrentPage({currentPage: +uriParams.page}))
+        dispatch(changeCurrentPage({currentPage: Number(uriParams.page)}))
 
     }, [dispatch, pageQ, uriParams.page])
 
@@ -63,7 +64,7 @@ export const Users: React.FC = () => {
             {status === 'loading' ? <Preloader/>
                 : <div>
                     <Paginator setSearchParams={setSearchParams} uriParams={uriParams}/>
-                    <UsersSearchForm setSearchParams={setSearchParams} />
+                    <UsersSearchForm setSearchParams={setSearchParams}/>
                     {user}
                 </div>}
         </div>

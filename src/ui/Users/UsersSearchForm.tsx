@@ -2,7 +2,7 @@ import React from 'react'
 import {Field, Form, Formik} from 'formik'
 import * as Yup from 'yup'
 import {useDispatch} from 'react-redux'
-import { URLSearchParamsInit } from 'react-router-dom'
+import {URLSearchParamsInit} from 'react-router-dom'
 
 import {FormikField} from '../../reusableComponent/FormikField'
 import {useAppSelector} from '../../redux/store'
@@ -45,11 +45,11 @@ export const UsersSearchForm: React.FC<PropsType> = ({setSearchParams}) => {
                                  placeholder={'find users'}
                     />
                     <Field name="friend" as="select">
-                        <option value="null">All</option>
-                        <option value="true">Only followed</option>
-                        <option value="false">Only unfollowed</option>
+                        <option value={'null'}>All</option>
+                        <option value={'true'}>Only followed</option>
+                        <option value={'false'}>Only unfollowed</option>
                     </Field>
-                    <button disabled={!formik.isValid} type="submit">Search</button>
+                    <button disabled={!formik.isValid} type={'submit'}>Search</button>
                     <div>
                     </div>
                 </Form>
