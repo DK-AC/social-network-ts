@@ -25,7 +25,7 @@ export const Dialogs: React.FC = () => {
         return <MessageItem key={m.id} id={m.id} message={m.message}/>
     })
     const addDialogMessage = (message: FormikValues, action: FormikHelpers<{ dialogMessage: string }>) => {
-        dispatch(sendMessage({messageText: message.dialogMessage.toString()}))
+        dispatch(sendMessage({messageText: String(message.dialogMessage)}))
         action.resetForm({values: {dialogMessage: ''}})
     }
     const validationSchema = {

@@ -30,7 +30,7 @@ export const Users: React.FC = () => {
     })
 
     const actualPage = searchParams.get('page') || '1'
-    const actualCount = searchParams.get('count') || pageSize.toString()
+    const actualCount = searchParams.get('count') || String(pageSize)
     const actualTerm = searchParams.get('term') || ''
     const actualFriend = searchParams.get('friend') || 'null'
 
@@ -40,7 +40,6 @@ export const Users: React.FC = () => {
         term: actualTerm,
         friend: actualFriend,
     }
-
 
     useEffect(() => {
         setSearchParams(uriParams)
@@ -54,7 +53,6 @@ export const Users: React.FC = () => {
         dispatch(changeCurrentPage({currentPage: Number(uriParams.page)}))
 
     }, [dispatch, actualPage, uriParams.page])
-
 
     if (!isAuth) {
         navigate(PATH.LOGIN_PAGE)

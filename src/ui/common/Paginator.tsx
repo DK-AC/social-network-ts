@@ -52,7 +52,7 @@ export const Paginator: React.FC<PropsType> = ({portionSize = 10, setSearchParam
                               className={currentPage === p ? styles.selectedPage : '' + styles.pageNumber}
                               onClick={() => {
                                   dispatch(changeCurrentPage({currentPage: p}))
-                                  setSearchParams({page: p.toString(), term, friend})
+                                  setSearchParams({page: String(p), term, friend})
                               }}
                         >
                         {p}

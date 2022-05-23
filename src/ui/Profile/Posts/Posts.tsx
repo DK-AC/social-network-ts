@@ -21,7 +21,7 @@ export const Posts: React.FC = React.memo(() => {
         return <Post key={p.id} postId={p.id} message={p.message} likesCount={p.likesCount}/>
     })
     const addPostHandle = (message: FormikValues, action: FormikHelpers<{ postMessage: string }>) => {
-        dispatch(addPost({postText: message.postMessage.toString()}))
+        dispatch(addPost({postText: String(message.postMessage)}))
         action.resetForm({values: {postMessage: ''}})
     }
     const validationSchema = {
