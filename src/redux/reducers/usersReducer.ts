@@ -18,7 +18,7 @@ const initialState = {
     portionNumber: 1,
     filter: {
         term: '',
-        friend: null as boolean | null | string,
+        friend: 'null' as boolean | null | string,
     },
 }
 

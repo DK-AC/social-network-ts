@@ -29,17 +29,18 @@ export const Users: React.FC = () => {
         return <User key={u.id} user={u}/>
     })
 
-    const pageQ = searchParams.get('page') || '1'
-    const countQ = searchParams.get('count') || pageSize.toString()
-    const termQ = searchParams.get('term') || ''
-    const friendQ = searchParams.get('friend') || 'null'
+    const actualPage = searchParams.get('page') || '1'
+    const actualCount = searchParams.get('count') || pageSize.toString()
+    const actualTerm = searchParams.get('term') || ''
+    const actualFriend = searchParams.get('friend') || 'null'
 
     const uriParams: UriParamsType = {
-        page: pageQ,
-        count: countQ,
-        term: termQ,
-        friend: friendQ,
+        page: actualPage,
+        count: actualCount,
+        term: actualTerm,
+        friend: actualFriend,
     }
+
 
     useEffect(() => {
         setSearchParams(uriParams)
@@ -48,11 +49,11 @@ export const Users: React.FC = () => {
             pageSize: Number(uriParams.count),
             currentPage: Number(uriParams.page),
             term: uriParams.term,
-            friend: uriParams.friend === 'null' ? null : uriParams.friend === 'true',
+            friend: uriParams.friend === 'null' ? 'null' : uriParams.friend === 'true',
         }))
         dispatch(changeCurrentPage({currentPage: Number(uriParams.page)}))
 
-    }, [dispatch, pageQ, uriParams.page])
+    }, [dispatch, actualPage, uriParams.page])
 
 
     if (!isAuth) {
