@@ -7,15 +7,16 @@ import {Preloader} from '../Preloader/Preloader'
 import {PATH} from '../Routing/Routing'
 import {Paginator} from '../common/Paginator'
 import {changeCurrentPage, setUsers} from '../../redux/reducers/usersReducer'
+import {UriParamsType} from '../../api/userAPI'
 
 import {User} from './User/User'
 import styles from './users.module.css'
 import {UsersSearchForm} from './UsersSearchForm'
 
+
 export const Users: React.FC = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-
 
     const {users, pageSize} = useAppSelector(state => state.users)
     const {status} = useAppSelector(state => state.app)
@@ -32,7 +33,7 @@ export const Users: React.FC = () => {
     const termQ = searchParams.get('term') || ''
     const friendQ = searchParams.get('friend') || 'null'
 
-    const params = {
+    const uriParams: UriParamsType = {
         page: pageQ,
         count: countQ,
         term: termQ,
@@ -40,17 +41,17 @@ export const Users: React.FC = () => {
     }
 
     useEffect(() => {
-        setSearchParams(params)
+        setSearchParams(uriParams)
 
         dispatch(setUsers({
-            pageSize: +params.count,
-            currentPage: +params.page,
-            term: params.term,
-            friend: params.friend === 'null' ? null : params.friend === 'true',
+            pageSize: +uriParams.count,
+            currentPage: +uriParams.page,
+            term: uriParams.term,
+            friend: uriParams.friend === 'null' ? null : uriParams.friend === 'true',
         }))
-        dispatch(changeCurrentPage({currentPage: +params.page}))
+        dispatch(changeCurrentPage({currentPage: +uriParams.page}))
 
-    }, [dispatch, pageQ, params.page])
+    }, [dispatch, pageQ, uriParams.page])
 
 
     if (!isAuth) {
@@ -61,8 +62,8 @@ export const Users: React.FC = () => {
         <div className={styles.userItems}>
             {status === 'loading' ? <Preloader/>
                 : <div>
-                    <Paginator setSearchParams={setSearchParams}/>
-                    <UsersSearchForm setSearchParams={setSearchParams}/>
+                    <Paginator setSearchParams={setSearchParams} uriParams={uriParams}/>
+                    <UsersSearchForm setSearchParams={setSearchParams} />
                     {user}
                 </div>}
         </div>

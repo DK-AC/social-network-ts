@@ -4,19 +4,22 @@ import {URLSearchParamsInit} from 'react-router-dom'
 
 import {changeCurrentPage, changePortionNumber} from '../../redux/reducers/usersReducer'
 import {useAppSelector} from '../../redux/store'
+import {UriParamsType} from '../../api/userAPI'
 
 import styles from './paginator.module.css'
 
 type PropsType = {
     portionSize?: number
     setSearchParams: (nextInit: URLSearchParamsInit) => void
+    uriParams: UriParamsType
 }
 
-export const Paginator: React.FC<PropsType> = ({portionSize = 10, setSearchParams}) => {
+export const Paginator: React.FC<PropsType> = ({portionSize = 10, setSearchParams, uriParams}) => {
 
     const dispatch = useDispatch()
 
     const {pageSize, currentPage, totalCount, portionNumber} = useAppSelector(state => state.users)
+    const {term, friend} = uriParams
 
     const pagesCount = Math.ceil(totalCount / pageSize)
     const portionCount = Math.ceil(pagesCount / portionSize)
@@ -48,8 +51,8 @@ export const Paginator: React.FC<PropsType> = ({portionSize = 10, setSearchParam
                         <span key={index}
                               className={currentPage === p ? styles.selectedPage : '' + styles.pageNumber}
                               onClick={() => {
-                                  setSearchParams({page: p.toString()})
                                   dispatch(changeCurrentPage({currentPage: p}))
+                                  setSearchParams({page: p.toString(), term, friend})
                               }}
                         >
                         {p}

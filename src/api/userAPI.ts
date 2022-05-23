@@ -32,3 +32,7 @@ export type ParamsUserPageType = {
     friend: null | boolean | string
 }
 
+export type UriParamsType = { page: string, count: string, term: string, friend: string }
+
+
+
