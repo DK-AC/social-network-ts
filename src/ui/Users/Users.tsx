@@ -6,7 +6,7 @@ import {useAppSelector} from '../../redux/store'
 import {Preloader} from '../Preloader/Preloader'
 import {PATH} from '../Routing/Routing'
 import {Paginator} from '../common/Paginator'
-import {changeCurrentPage, setUsers} from '../../redux/reducers/usersReducer'
+import {changeCurrentPage, changePageSize, setUsers} from '../../redux/reducers/usersReducer'
 import {UriParamsType} from '../../api/userAPI'
 
 import {User} from './User/User'
@@ -50,6 +50,7 @@ export const Users: React.FC = () => {
             friend: uriParams.friend === 'null' ? 'null' : uriParams.friend === 'true',
         }))
         dispatch(changeCurrentPage({currentPage: Number(uriParams.page)}))
+        dispatch(changePageSize({pageSize: Number(uriParams.count)}))
 
     }, [dispatch, actualPage, uriParams.page, uriParams.count])
 

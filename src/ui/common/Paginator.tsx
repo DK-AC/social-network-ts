@@ -29,16 +29,19 @@ export const Paginator: React.FC<PropsType> = ({setSearchParams, uriParams}) => 
         return originalElement
     }
 
+    const changePageAndPageSizeHandle = (page: number, pageSize: number) => {
+        dispatch(changeCurrentPage({currentPage: page}))
+        dispatch(changePageSize({pageSize}))
+        setSearchParams({page: String(page), term, friend, count: String(pageSize)})
+
+    }
+
 
     return (
 
         <Pagination total={totalCount}
                     itemRender={itemRender}
-                    onChange={(page, pageSize) => {
-                        dispatch(changeCurrentPage({currentPage: page}))
-                        dispatch(changePageSize({pageSize}))
-                        setSearchParams({page: String(page), term, friend, count: String(pageSize)})
-                    }}
+                    onChange={changePageAndPageSizeHandle}
                     current={currentPage}
                     showQuickJumper
                     pageSize={pageSize}
