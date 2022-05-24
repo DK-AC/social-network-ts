@@ -1,13 +1,9 @@
 import React from 'react'
 
-import preloader from './../../assets/img/Circle-Preloaders.svg'
+import {Spin} from 'antd'
+
 import styles from './preloader.module.css'
 
-export const Preloader = () => {
-    return (
-        <div>
-            <img className={styles.preloader} src={preloader} alt="preloader"/>
-        </div>
-    )
-}
+export const Preloader = () => <Spin className={styles.preloader} size="large"/>
+
 
