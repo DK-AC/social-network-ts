@@ -6,14 +6,15 @@ import {
     CustomerServiceOutlined,
     MessageOutlined,
     ProfileOutlined,
+    ReadOutlined,
     SettingOutlined,
     TeamOutlined,
     UsergroupDeleteOutlined,
 } from '@ant-design/icons'
 
-import {PATH} from '../Routing/Routing'
-import {authMe} from '../../redux/reducers/authReducer'
 import {useAppSelector} from '../../redux/store'
+import {PATH, Routing} from '../Routing/Routing'
+import {authMe} from '../../redux/reducers/authReducer'
 
 import './App.css'
 
@@ -33,36 +34,43 @@ export const App: React.FC = () => {
             key: '1',
             label: 'Profile',
             icon: <ProfileOutlined/>,
+            onClick: () => navigate(PATH.PROFILE_PAGE),
         },
         {
             key: '2',
             label: 'Users',
             icon: <UsergroupDeleteOutlined/>,
+            onClick: () => navigate(PATH.USERS_PAGE),
         },
         {
             key: '3',
             label: 'Dialogs',
             icon: <MessageOutlined/>,
+            onClick: () => navigate(PATH.DIALOGS_PAGE),
         },
         {
             key: '4',
             label: 'News',
-            icon: <MessageOutlined/>,
+            icon: <ReadOutlined/>,
+            onClick: () => navigate(PATH.NEWS_PAGE),
         },
         {
             key: '5',
             label: 'Music',
             icon: <CustomerServiceOutlined/>,
+            onClick: () => navigate(PATH.MUSIC_PAGE),
         },
         {
             key: '6',
             label: 'Settings',
             icon: <SettingOutlined/>,
+            onClick: () => navigate(PATH.SETTINGS_PAGE),
         },
         {
             key: '7',
             label: 'Friends',
             icon: <TeamOutlined/>,
+            onClick: () => navigate(PATH.FRIENDS_PAGE),
         },
     ]
 
@@ -94,10 +102,10 @@ export const App: React.FC = () => {
                 <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} items={items}/>
             </Sider>
             <Layout className="site-layout" style={{marginLeft: 200}}>
-                {/*<Header/>*/}
                 <Header className="site-layout-background" style={{padding: 0}}/>
                 <Content style={{margin: '24px 16px 0', overflow: 'initial'}}>
-                    <div className="site-layout-background" style={{padding: 24, textAlign: 'center'}}>
+                    <div className="site-layout-background" style={{padding: 24}}>
+                        <Routing/>
                     </div>
                 </Content>
                 <Footer style={{textAlign: 'center'}}>Ant Design ©2018 Created by Ant UED</Footer>
