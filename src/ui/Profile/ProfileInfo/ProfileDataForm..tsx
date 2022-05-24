@@ -2,6 +2,10 @@ import React from 'react'
 import {Form, Formik} from 'formik'
 import {useDispatch} from 'react-redux'
 
+import {CheckOutlined} from '@ant-design/icons'
+
+import {Button} from 'antd'
+
 import {ProfileUserType} from '../../../api/profileAPI'
 import {ContactsKeysType, FormikField} from '../../../reusableComponent/FormikField'
 import {useAppSelector} from '../../../redux/store'
@@ -45,7 +49,7 @@ export const ProfileDataForm: React.FC<PropsType> = ({profile, goToSaveMode}) =>
             >
                 {formik => (
                     <Form>
-                        <button type="submit">Save</button>
+                        <Button htmlType={'submit'} icon={<CheckOutlined/>} size={'small'}> Save</Button>
                         <div>
                             <b>Full name: </b>
                             <FormikField name={'fullName'}
@@ -95,6 +99,6 @@ export const ProfileDataForm: React.FC<PropsType> = ({profile, goToSaveMode}) =>
             </Formik>
 
         </>
-    );
-};
+    )
+}
 

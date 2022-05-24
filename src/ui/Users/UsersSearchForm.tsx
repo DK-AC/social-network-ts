@@ -4,6 +4,10 @@ import * as Yup from 'yup'
 import {useDispatch} from 'react-redux'
 import {URLSearchParamsInit} from 'react-router-dom'
 
+import {SearchOutlined} from '@ant-design/icons'
+
+import {Button} from 'antd'
+
 import {FormikField} from '../../reusableComponent/FormikField'
 import {useAppSelector} from '../../redux/store'
 import {setUsers} from '../../redux/reducers/usersReducer'
@@ -49,7 +53,7 @@ export const UsersSearchForm: React.FC<PropsType> = ({setSearchParams}) => {
                         <option value={'true'}>Only followed</option>
                         <option value={'false'}>Only unfollowed</option>
                     </Field>
-                    <button disabled={!formik.isValid} type={'submit'}>Search</button>
+                    <Button size={'small'} icon={<SearchOutlined/>}>Search</Button>
                     <div>
                     </div>
                 </Form>

@@ -1,5 +1,9 @@
 import React from 'react'
 
+import {EditOutlined} from '@ant-design/icons'
+
+import {Button} from 'antd'
+
 import {ProfileUserType} from '../../../api/profileAPI'
 
 import {FullName} from './FullName'
@@ -19,7 +23,7 @@ export const ProfileData: React.FC<PropsType> = ({profile, isOwner, goToEditMode
     return (
         <>
             {isOwner && <div>
-                <button onClick={goToEditMode}>edit</button>
+                <Button onClick={goToEditMode} icon={<EditOutlined/>} size={'small'}> Edit</Button>
             </div>}
             <FullName fullName={fullName}/>
             <LookingForAJob lookingForAJob={lookingForAJob}
