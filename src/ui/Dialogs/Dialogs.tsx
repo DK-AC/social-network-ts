@@ -3,6 +3,10 @@ import {useDispatch} from 'react-redux'
 import * as Yup from 'yup'
 import {Form, Formik, FormikHelpers, FormikValues} from 'formik'
 
+import {SendOutlined} from '@ant-design/icons'
+
+import {Button} from 'antd'
+
 import {sendMessage} from '../../redux/reducers/dialogsReducer'
 import {useAppSelector} from '../../redux/store'
 import {FormikField} from '../../reusableComponent/FormikField'
@@ -54,9 +58,12 @@ export const Dialogs: React.FC = () => {
                                              isShowLabel={false}
                                              error={error}
                                 />
-                                <button disabled={!!formik.errors.dialogMessage} type="submit">
-                                    add message
-                                </button>
+                                <Button disabled={!!formik.errors.dialogMessage}
+                                        htmlType={'submit'}
+                                        icon={<SendOutlined/>}
+                                        size={'small'}>
+                                    Send message
+                                </Button>
                             </Form>
                         )}
                     </Formik>

@@ -1,6 +1,10 @@
 import React from 'react'
 import {useDispatch} from 'react-redux'
 
+import {DeleteOutlined} from '@ant-design/icons'
+
+import {Button} from 'antd'
+
 import {deletePost} from '../../../../redux/reducers/profileReducer'
 
 import styles from './post.module.css'
@@ -27,7 +31,7 @@ export const Post: React.FC<PropsType> = React.memo(({postId, message, likesCoun
                     src={postPhoto}
                     alt="postPhoto"/>
                 {message}
-                <button onClick={deletePostHandle}>X</button>
+                <Button danger icon={<DeleteOutlined/>} size={'small'} onClick={deletePostHandle}/>
             </div>
             <span> like {likesCount}</span>
         </div>

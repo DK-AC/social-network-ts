@@ -3,6 +3,10 @@ import * as Yup from 'yup'
 import {Form, Formik, FormikHelpers, FormikValues} from 'formik'
 import {useDispatch} from 'react-redux'
 
+import {Button} from 'antd'
+
+import {SendOutlined} from '@ant-design/icons'
+
 import {addPost} from '../../../redux/reducers/profileReducer'
 import {useAppSelector} from '../../../redux/store'
 import {FormikField} from '../../../reusableComponent/FormikField'
@@ -46,7 +50,12 @@ export const Posts: React.FC = React.memo(() => {
                                          isShowLabel={false}
                                          error={error}
                             />
-                            <button disabled={!!formik.errors.postMessage} type="submit">add post</button>
+                            <Button disabled={!!formik.errors.postMessage}
+                                    htmlType={'submit'}
+                                    icon={<SendOutlined/>}
+                                    size={'small'}>
+                                Send post
+                            </Button>
                         </Form>
                     )}
                 </Formik>
