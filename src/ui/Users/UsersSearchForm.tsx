@@ -53,7 +53,7 @@ export const UsersSearchForm: React.FC<PropsType> = ({setSearchParams}) => {
                         <option value={'true'}>Only followed</option>
                         <option value={'false'}>Only unfollowed</option>
                     </Field>
-                    <Button size={'small'} icon={<SearchOutlined/>}>Search</Button>
+                    <Button htmlType={'submit'} size={'small'} icon={<SearchOutlined/>}>Search</Button>
                     <div>
                     </div>
                 </Form>

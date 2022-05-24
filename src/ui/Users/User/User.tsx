@@ -2,6 +2,10 @@ import React from 'react'
 import {useDispatch} from 'react-redux'
 import {NavLink} from 'react-router-dom'
 
+import {Button} from 'antd'
+
+import {UserAddOutlined, UserDeleteOutlined} from '@ant-design/icons'
+
 import {followUnfollow} from '../../../redux/reducers/usersReducer'
 import {useAppSelector} from '../../../redux/store'
 import {UserType} from '../../../api/userAPI'
@@ -44,10 +48,20 @@ export const User: React.FC<PropsType> = ({user}) => {
 
                 <div>
                     {followed
-                        ? <button disabled={followingInProgress.some(userId => userId === id)}
-                                  onClick={unFollowUserHandle}>Unfollow</button>
-                        : <button disabled={followingInProgress.some(userId => userId === id)}
-                                  onClick={followUserHandle}>Follow</button>
+                        ? <Button disabled={followingInProgress.some(userId => userId === id)}
+                                  htmlType={'submit'}
+                                  icon={<UserDeleteOutlined/>}
+                                  onClick={unFollowUserHandle}
+                                  size={'small'}>
+                            Unfollow
+                        </Button>
+                        : <Button disabled={followingInProgress.some(userId => userId === id)}
+                                  htmlType={'submit'}
+                                  icon={<UserAddOutlined/>}
+                                  onClick={followUserHandle}
+                                  size={'small'}>
+                            Follow
+                        </Button>
                     }
                 </div>
             </div>
