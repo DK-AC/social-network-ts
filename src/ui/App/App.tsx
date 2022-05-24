@@ -1,6 +1,7 @@
 import {useDispatch} from 'react-redux'
 import React, {useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
+import {Button} from 'antd'
 
 import {Header} from '../Header/Header'
 import {Navbar} from '../Navbar/Navbar'
@@ -10,6 +11,7 @@ import {useAppSelector} from '../../redux/store'
 import {Preloader} from '../Preloader/Preloader'
 
 import styles from './App.module.css'
+import './App.css'
 
 export const App: React.FC = () => {
 
@@ -31,16 +33,18 @@ export const App: React.FC = () => {
         return
     }, [isAuth, isInitialized, navigate])
 
-    return !isInitialized ? <Preloader/> :
-
-        (
-            <div className={styles.appWrapper}>
-                <Header/>
-                <Navbar/>
-                <div className={styles.appWrapperContent}>
-                    <Routing/>
-                </div>
-            </div>
-        )
+    return (
+        <div className={'App'}>
+            {!isInitialized
+                ? <Preloader/>
+                : <div className={styles.appWrapper}>
+                    <Header/>
+                    <Navbar/>
+                    <div className={styles.appWrapperContent}>
+                        <Routing/>
+                    </div>
+                </div>}
+        </div>
+    )
 }
 
