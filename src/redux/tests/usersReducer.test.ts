@@ -1,5 +1,5 @@
 import {
-    changeCurrentPage,
+    changeCurrentPage, changePageSize,
     changePortionNumber,
     followUnfollow,
     InitialUsersStateType,
@@ -120,6 +120,13 @@ describe('user', () => {
 
         expect(fakeState.currentPage).toBe(3)
         expect(endState.currentPage).toBe(10)
+    })
+
+    test('pagesize should be changed', () => {
+        const endState = usersReducer(fakeState, changePageSize({pageSize: 100}))
+
+        expect(fakeState.pageSize).toBe(5)
+        expect(endState.pageSize).toBe(100)
     })
 
     test('show following user', () => {

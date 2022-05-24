@@ -43,7 +43,6 @@ export const Users: React.FC = () => {
 
     useEffect(() => {
         setSearchParams(uriParams)
-
         dispatch(setUsers({
             pageSize: Number(uriParams.count),
             currentPage: Number(uriParams.page),
@@ -52,7 +51,7 @@ export const Users: React.FC = () => {
         }))
         dispatch(changeCurrentPage({currentPage: Number(uriParams.page)}))
 
-    }, [dispatch, actualPage, uriParams.page])
+    }, [dispatch, actualPage, uriParams.page, uriParams.count])
 
     if (!isAuth) {
         navigate(PATH.LOGIN_PAGE)

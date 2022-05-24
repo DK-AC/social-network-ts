@@ -29,6 +29,9 @@ export const userSlices = createSlice({
         changeCurrentPage(state: InitialUsersStateType, action: PayloadAction<{ currentPage: number }>) {
             state.currentPage = action.payload.currentPage
         },
+        changePageSize(state: InitialUsersStateType, action: PayloadAction<{ pageSize: number }>) {
+            state.pageSize = action.payload.pageSize
+        },
         changePortionNumber(state: InitialUsersStateType, action: PayloadAction<{ portionNumber: number }>) {
             state.portionNumber = action.payload.portionNumber
         },
@@ -54,7 +57,7 @@ export const userSlices = createSlice({
 })
 
 export const usersReducer = userSlices.reducer
-export const {changeCurrentPage, setIsFollowingInProgress, changePortionNumber} = userSlices.actions
+export const {changeCurrentPage, setIsFollowingInProgress, changePortionNumber, changePageSize} = userSlices.actions
 
 
 export const setUsers = createAsyncThunk<{ users: UserType[], totalCount: number, term: string, friend: null | boolean }, ParamsUserPageType, ThunkErrorType>
