@@ -1,12 +1,14 @@
 import React from 'react'
 import {useDispatch} from 'react-redux'
 
-import {Avatar, Layout} from 'antd'
+import {Avatar, Button, Col, Layout, Row} from 'antd'
 
 import {UserOutlined} from '@ant-design/icons'
 
 import {useAppSelector} from '../../redux/store'
 import {logout} from '../../redux/reducers/authReducer'
+
+import styles from './header.module.css'
 
 
 export const Header = () => {
@@ -14,6 +16,7 @@ export const Header = () => {
     const dispatch = useDispatch()
 
     const isAuth = useAppSelector<boolean>(state => state.auth.isAuth)
+    const {email} = useAppSelector(state => state.auth)
 
     const {Header} = Layout
 
@@ -22,24 +25,30 @@ export const Header = () => {
     }
 
     return (
-        <Header className="site-layout-background" style={{padding: 0}}>
-            <div className="logo" style={{float: 'right', paddingRight: '10px'}}>
-                <Avatar src={''} size="large" icon={<UserOutlined/>}/>
+        <Header className={`site-layout-background + ${styles.container}`}>
+            <div className={styles.content}>
+                {isAuth &&
+                    <div>
+                        <Row>
+                            <Col span={24}><span className={styles.userEmail}>{email}</span></Col>
+                        </Row>
+                        <Row className={styles.contentRight}>
+                            <Col span={12}>
+                                <Avatar size="large" icon={<UserOutlined/>}/>
+                            </Col>
+                            <Col span={12}>
+                                <Button className={styles.logOutButton}
+                                        size={'small'}
+                                        onClick={logoutHandle}
+                                > log out
+                                </Button>
+                            </Col>
+
+                        </Row>
+                    </div>
+                }
             </div>
         </Header>
-        // <header className={styles.header}>
-        //     <img className={styles.logo}
-        //          src={logoDK}
-        //          alt="logo"/>
-        //     {isAuth && <span>
-        //         <img className={styles.initializedUser}
-        //              src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
-        //              alt="initializedUser"
-        //         />
-        //         <button className={styles.button} onClick={logoutHandle}> log out</button>
-        //     </span>
-        //     }
-        // </header>
     )
 }
 
