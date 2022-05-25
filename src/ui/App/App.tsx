@@ -9,10 +9,10 @@ import {authMe} from '../../redux/reducers/authReducer'
 
 import './App.css'
 import {Preloader} from '../Preloader/Preloader'
-import {AppHeader} from '../AppHeader/AppHeader'
+import {Header} from '../AppHeader/Header'
 import {AppMenu} from '../AppMenu/AppMenu'
 
-import {AppContent} from '../AppContent/AppContent'
+import {Content} from '../AppContent/Content'
 
 import styles from './App.module.css'
 
@@ -47,8 +47,8 @@ export const App: React.FC = () => {
                     <AppMenu/>
                 </Sider>
                 <Layout className="site-layout" style={{marginLeft: 200}}>
-                    <AppHeader/>
-                    <AppContent/>
+                    <Header/>
+                    <Content/>
                     <Footer style={{textAlign: 'center'}}>Ant Design ©2018 Created by Ant UED</Footer>
                 </Layout>
             </Layout>

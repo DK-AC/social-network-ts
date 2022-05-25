@@ -1,20 +1,21 @@
 import React from 'react'
 import {useDispatch} from 'react-redux'
 
-import {Avatar} from 'antd'
+import {Avatar, Layout} from 'antd'
 
 import {UserOutlined} from '@ant-design/icons'
-
-import {Header} from 'antd/es/layout/layout'
 
 import {useAppSelector} from '../../redux/store'
 import {logout} from '../../redux/reducers/authReducer'
 
-export const AppHeader = () => {
+
+export const Header = () => {
 
     const dispatch = useDispatch()
 
     const isAuth = useAppSelector<boolean>(state => state.auth.isAuth)
+
+    const {Header} = Layout
 
     const logoutHandle = () => {
         dispatch(logout())

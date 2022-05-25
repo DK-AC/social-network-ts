@@ -1,12 +1,13 @@
 import React from 'react'
-
-import {Content} from 'antd/es/layout/layout'
+import {Layout} from 'antd'
 
 import {Routing} from '../Routing/Routing'
 
-import styles from './appContent.module.css'
+import styles from './content.module.css'
+export const Content: React.FC = () => {
 
-export const AppContent: React.FC = () => {
+    const {Content} = Layout
+
     return (
         <Content className={styles.container}>
             <div className={`site-layout-background + ${styles.content}`}>
