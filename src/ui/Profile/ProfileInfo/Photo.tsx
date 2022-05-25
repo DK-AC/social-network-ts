@@ -1,9 +1,7 @@
 import React, {ChangeEvent} from 'react'
 import {useDispatch} from 'react-redux'
 
-import {Button, Upload} from 'antd'
-
-import {UploadOutlined} from '@ant-design/icons'
+import {Input} from 'antd'
 
 import ava from '../../../assets/img/client-2-512.webp'
 import {PhotosType} from '../../../api/profileAPI'
@@ -29,10 +27,8 @@ export const Photo: React.FC<PropsType> = ({photo, isOwner}) => {
     return (
         <div>
             <img className={styles.avatar} src={photo.large || ava} alt="avatar"/>
-            {isOwner ? <div>
-                <Upload>
-                    <Button icon={<UploadOutlined/>} onChange={savePhotoHandle}>Upload</Button>
-                </Upload>
-            </div> : ''}
+            {isOwner
+                ? <Input type={'file'} size={'small'} onChange={savePhotoHandle} bordered={false}/>
+                : ''}
         </div>)
 }
