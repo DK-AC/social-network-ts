@@ -12,7 +12,7 @@ import {Preloader} from '../Preloader/Preloader'
 import {AppHeader} from '../AppHeader/AppHeader'
 import {AppMenu} from '../AppMenu/AppMenu'
 
-import {AppContent} from '../AppContetn/AppContent'
+import {AppContent} from '../AppContent/AppContent'
 
 import styles from './App.module.css'
 
@@ -26,7 +26,6 @@ export const App: React.FC = () => {
     const {isInitialized} = useAppSelector(state => state.app)
 
     const {Footer, Sider} = Layout
-
 
     useEffect(() => {
         dispatch(authMe())
