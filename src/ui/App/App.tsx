@@ -1,7 +1,7 @@
 import {useDispatch} from 'react-redux'
 import React, {useEffect} from 'react'
 import {useLocation, useNavigate} from 'react-router-dom'
-import {Layout, Menu, MenuProps} from 'antd'
+import {Avatar, Layout, Menu, MenuProps} from 'antd'
 import {
     CustomerServiceOutlined,
     MessageOutlined,
@@ -10,6 +10,7 @@ import {
     SettingOutlined,
     TeamOutlined,
     UsergroupDeleteOutlined,
+    UserOutlined,
 } from '@ant-design/icons'
 
 import {useAppSelector} from '../../redux/store'
@@ -102,11 +103,14 @@ export const App: React.FC = () => {
                         bottom: 0,
                     }}
                 >
-                    <div className="logo"/>
+
                     <Menu theme="dark" mode="inline" selectedKeys={[location.pathname]} items={items}/>
                 </Sider>
                 <Layout className="site-layout" style={{marginLeft: 200}}>
-                    <Header className="site-layout-background" style={{padding: 0}}/>
+                    <Header className="site-layout-background" style={{padding: 0}}>
+                        <div className="logo" style={{float: 'right', paddingRight: '10px'}}>
+                            <Avatar size="large" icon={<UserOutlined/>}/></div>
+                    </Header>
                     <Content style={{margin: '24px 16px 0', overflow: 'initial'}}>
                         <div className="site-layout-background" style={{padding: 24}}>
                             <Routing/>
