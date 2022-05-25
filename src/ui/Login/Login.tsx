@@ -1,10 +1,14 @@
 import 'react-app-polyfill/ie11'
 import * as React from 'react'
 import {useEffect} from 'react'
-import {Form, Formik} from 'formik'
+import { Formik} from 'formik'
 import {useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 import * as Yup from 'yup'
+
+import {SearchOutlined, UserOutlined} from '@ant-design/icons'
+
+import {Input, Form, Button} from 'antd'
 
 import {login} from '../../redux/reducers/authReducer'
 import {useAppSelector} from '../../redux/store'
@@ -24,7 +28,7 @@ export const Login: React.FC = () => {
 
     const initialValues: LoginUserType = {email: '', password: '', rememberMe: false, captcha: ''}
     const validationSchema = {
-        email: Yup.string().email('Invalid email format').required('Required'),
+        // email: Yup.string().email('Invalid email format').required('Required'),
         password: Yup.string().required('Required'),
     }
     const onSubmitLoginUser = (values: LoginUserType) => {
@@ -48,12 +52,23 @@ export const Login: React.FC = () => {
             >
                 {formik => (
                     <Form>
-                        <FormikField type={'email'}
-                                     name={'email'}
-                                     isShowError={false}
-                                     isShowLabel={true}
-                                     error={error}
-                        />
+                        {/*<FormikField type={'email'}*/}
+                        {/*             name={'email'}*/}
+                        {/*             isShowError={false}*/}
+                        {/*             isShowLabel={true}*/}
+                        {/*             error={error}*/}
+                        {/*/>*/}
+                        <Form.Item fieldKey={'email'}
+                            name="email"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your Username!',
+                                },
+                            ]}>
+                            <Input prefix={<UserOutlined className="site-form-item-icon"/>}
+                                   placeholder="Username"/>
+                        </Form.Item>
                         <FormikField type={'password'}
                                      name={'password'}
                                      isShowError={true}
@@ -66,6 +81,7 @@ export const Login: React.FC = () => {
                                      isShowLabel={true}
                                      error={error}
                         />
+
                         {captchaURL
                             ? <>
                                 <img src={captchaURL} alt="captchaURL"/>
@@ -80,6 +96,7 @@ export const Login: React.FC = () => {
                             : null
                         }
                         <div>
+                            <Button htmlType={'submit'} size={'small'} icon={<SearchOutlined/>}>Sign Up</Button>
                             <button disabled={!formik.isValid} type="submit">Sign Up</button>
                         </div>
 
