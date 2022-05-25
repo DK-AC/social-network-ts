@@ -1,6 +1,6 @@
 import {useDispatch} from 'react-redux'
 import React, {useEffect} from 'react'
-import {useNavigate} from 'react-router-dom'
+import {useLocation, useNavigate} from 'react-router-dom'
 import {Layout, Menu, MenuProps} from 'antd'
 import {
     CustomerServiceOutlined,
@@ -24,51 +24,53 @@ export const App: React.FC = () => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const location = useLocation()
 
     const isAuth = useAppSelector(state => state.auth.isAuth)
-    const isInitialized = useAppSelector(state => state.app.isInitialized)
+    const {isInitialized} = useAppSelector(state => state.app)
 
     const {Header, Content, Footer, Sider} = Layout
 
     const items: MenuProps['items'] = [
         {
-            key: '1',
+            key: '/profile',
             label: 'Profile',
             icon: <ProfileOutlined/>,
             onClick: () => navigate(PATH.PROFILE_PAGE),
         },
         {
-            key: '2',
+            key: '/users/*',
             label: 'Users',
             icon: <UsergroupDeleteOutlined/>,
             onClick: () => navigate(PATH.USERS_PAGE),
         },
         {
-            key: '3',
+            key: '/dialogs/*',
             label: 'Dialogs',
             icon: <MessageOutlined/>,
             onClick: () => navigate(PATH.DIALOGS_PAGE),
         },
         {
-            key: '4',
+            key: '/news',
             label: 'News',
             icon: <ReadOutlined/>,
-            onClick: () => navigate(PATH.NEWS_PAGE),
+            onClick: () =>
+                navigate(PATH.NEWS_PAGE),
         },
         {
-            key: '5',
+            key: '/music',
             label: 'Music',
             icon: <CustomerServiceOutlined/>,
             onClick: () => navigate(PATH.MUSIC_PAGE),
         },
         {
-            key: '6',
+            key: '/settings',
             label: 'Settings',
             icon: <SettingOutlined/>,
             onClick: () => navigate(PATH.SETTINGS_PAGE),
         },
         {
-            key: '7',
+            key: '/friends',
             label: 'Friends',
             icon: <TeamOutlined/>,
             onClick: () => navigate(PATH.FRIENDS_PAGE),
@@ -102,7 +104,7 @@ export const App: React.FC = () => {
                     }}
                 >
                     <div className="logo"/>
-                    <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} items={items}/>
+                    <Menu theme="dark" mode="inline" selectedKeys={[location.pathname]} items={items}/>
                 </Sider>
                 <Layout className="site-layout" style={{marginLeft: 200}}>
                     <Header className="site-layout-background" style={{padding: 0}}/>
