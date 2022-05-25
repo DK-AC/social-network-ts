@@ -33,44 +33,43 @@ export const App: React.FC = () => {
 
     const items: MenuProps['items'] = [
         {
-            key: '/profile',
+            key: PATH.PROFILE_PAGE,
             label: 'Profile',
             icon: <ProfileOutlined/>,
             onClick: () => navigate(PATH.PROFILE_PAGE),
         },
         {
-            key: '/users/*',
+            key: PATH.USERS_PAGE,
             label: 'Users',
             icon: <UsergroupDeleteOutlined/>,
             onClick: () => navigate(PATH.USERS_PAGE),
         },
         {
-            key: '/dialogs/*',
+            key: PATH.DIALOGS_PAGE,
             label: 'Dialogs',
             icon: <MessageOutlined/>,
             onClick: () => navigate(PATH.DIALOGS_PAGE),
         },
         {
-            key: '/news',
+            key: PATH.NEWS_PAGE,
             label: 'News',
             icon: <ReadOutlined/>,
-            onClick: () =>
-                navigate(PATH.NEWS_PAGE),
+            onClick: () => navigate(PATH.NEWS_PAGE),
         },
         {
-            key: '/music',
+            key: PATH.MUSIC_PAGE,
             label: 'Music',
             icon: <CustomerServiceOutlined/>,
             onClick: () => navigate(PATH.MUSIC_PAGE),
         },
         {
-            key: '/settings',
+            key: PATH.SETTINGS_PAGE,
             label: 'Settings',
             icon: <SettingOutlined/>,
             onClick: () => navigate(PATH.SETTINGS_PAGE),
         },
         {
-            key: '/friends',
+            key: PATH.FRIENDS_PAGE,
             label: 'Friends',
             icon: <TeamOutlined/>,
             onClick: () => navigate(PATH.FRIENDS_PAGE),
