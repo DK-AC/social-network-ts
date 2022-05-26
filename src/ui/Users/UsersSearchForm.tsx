@@ -12,6 +12,7 @@ import {FormikField} from '../../reusableComponent/FormikField'
 import {useAppSelector} from '../../redux/store'
 import {setUsers} from '../../redux/reducers/usersReducer'
 import {ParamsUserPageType} from '../../api/userAPI'
+import {getAppError} from '../../selectors/appSelectors'
 
 type PropsType = {
     setSearchParams: (nextInit: URLSearchParamsInit) => void
@@ -23,7 +24,7 @@ export const UsersSearchForm: React.FC<PropsType> = ({setSearchParams}) => {
 
     const {currentPage, pageSize} = useAppSelector(state => state.users)
     const {term, friend} = useAppSelector(state => state.users.filter)
-    const {error} = useAppSelector(state => state.app)
+    const error = useAppSelector(getAppError)
 
 
     const initialValues = {term, currentPage, pageSize, friend}

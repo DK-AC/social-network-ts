@@ -13,6 +13,10 @@ import {useAppSelector} from '../../redux/store'
 import {PATH} from '../Routing/Routing'
 import {LoginUserType} from '../../api/authAPI'
 
+import {getCaptchaUrl, getIsAuth} from '../../selectors/authSelectors'
+
+import {getAppStatus} from '../../selectors/appSelectors'
+
 import logo from './../../assets/img/logoDK.svg'
 
 import styles from './login.module.css'
@@ -23,8 +27,9 @@ export const Login: React.FC = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const {isAuth, captchaURL} = useAppSelector(state => state.auth)
-    const status = useAppSelector(state => state.app.status)
+    const isAuth = useAppSelector(getIsAuth)
+    const captchaURL = useAppSelector(getCaptchaUrl)
+    const status = useAppSelector(getAppStatus)
 
     useEffect(() => {
         if (isAuth) {

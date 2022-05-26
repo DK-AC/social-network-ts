@@ -8,7 +8,6 @@ import {PATH} from '../Routing/Routing'
 import {authMe} from '../../redux/reducers/authReducer'
 
 import './App.css'
-import {Preloader} from '../Preloader/Preloader'
 import {Header} from '../AppHeader/Header'
 import {AppMenu} from '../AppMenu/AppMenu'
 
@@ -17,6 +16,8 @@ import {Content} from '../AppContent/Content'
 import {Login} from '../Login/Login'
 
 import {getIsAuth} from '../../selectors/authSelectors'
+
+import {getAppIsInitialized} from '../../selectors/appSelectors'
 
 import styles from './App.module.css'
 
@@ -27,7 +28,7 @@ export const App: React.FC = () => {
     const navigate = useNavigate()
 
     const isAuth = useAppSelector(getIsAuth)
-    const {isInitialized} = useAppSelector(state => state.app)
+    const isInitialized = useAppSelector(getAppIsInitialized)
 
     const {Footer, Sider} = Layout
 

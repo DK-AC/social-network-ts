@@ -11,6 +11,8 @@ import {UriParamsType} from '../../api/userAPI'
 
 import {getIsAuth} from '../../selectors/authSelectors'
 
+import {getAppStatus} from '../../selectors/appSelectors'
+
 import {User} from './User/User'
 import styles from './users.module.css'
 import {UsersSearchForm} from './UsersSearchForm'
@@ -22,7 +24,7 @@ export const Users: React.FC = () => {
     const navigate = useNavigate()
 
     const {users, pageSize} = useAppSelector(state => state.users)
-    const {status} = useAppSelector(state => state.app)
+    const status = useAppSelector(getAppStatus)
     const isAuth = useAppSelector(getIsAuth)
 
     const [searchParams, setSearchParams] = useSearchParams()

@@ -11,6 +11,8 @@ import {sendMessage} from '../../redux/reducers/dialogsReducer'
 import {useAppSelector} from '../../redux/store'
 import {FormikField} from '../../reusableComponent/FormikField'
 
+import {getAppError} from '../../selectors/appSelectors'
+
 import styles from './dialogs.module.css'
 import {DialogItem} from './DialogItem/DialogItem'
 import {MessageItem} from './MessageItem/MessageItem'
@@ -20,7 +22,7 @@ export const Dialogs: React.FC = () => {
     const dispatch = useDispatch()
 
     const {dialogs, messages} = useAppSelector(state => state.dialogs)
-    const error = useAppSelector(state => state.app.error)
+    const error = useAppSelector(getAppError)
 
     const dialog = dialogs.map(d => {
         return <DialogItem key={d.id} id={d.id} name={d.name}/>

@@ -11,6 +11,8 @@ import {addPost} from '../../../redux/reducers/profileReducer'
 import {useAppSelector} from '../../../redux/store'
 import {FormikField} from '../../../reusableComponent/FormikField'
 
+import {getAppError} from '../../../selectors/appSelectors'
+
 import {Post} from './Post/Post'
 import styles from './posts.module.css'
 
@@ -19,7 +21,7 @@ export const Posts: React.FC = React.memo(() => {
     const dispatch = useDispatch()
 
     const posts = useAppSelector(state => state.profile.posts)
-    const error = useAppSelector(state => state.app.error)
+    const error = useAppSelector(getAppError)
 
     const post = posts.map(p => {
         return <Post key={p.id} postId={p.id} message={p.message} likesCount={p.likesCount}/>

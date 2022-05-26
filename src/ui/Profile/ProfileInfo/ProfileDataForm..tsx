@@ -11,6 +11,8 @@ import {ContactsKeysType, FormikField} from '../../../reusableComponent/FormikFi
 import {useAppSelector} from '../../../redux/store'
 import {saveProfile} from '../../../redux/reducers/profileReducer'
 
+import {getAppError} from '../../../selectors/appSelectors'
+
 import styles from './profileInfo.module.css'
 
 type PropsType = {
@@ -22,7 +24,7 @@ export const ProfileDataForm: React.FC<PropsType> = ({profile, goToSaveMode}) =>
 
     const dispatch = useDispatch()
 
-    const error = useAppSelector(state => state.app.error)
+    const error = useAppSelector(getAppError)
 
     const {fullName, lookingForAJobDescription, lookingForAJob, contacts, aboutMe} = profile
 
