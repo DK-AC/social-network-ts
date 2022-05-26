@@ -1,20 +1,21 @@
 import 'react-app-polyfill/ie11'
 import * as React from 'react'
 import {useEffect} from 'react'
-import { Formik} from 'formik'
 import {useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
-import * as Yup from 'yup'
 
-import {SearchOutlined, UserOutlined} from '@ant-design/icons'
+import {LockOutlined, UserOutlined} from '@ant-design/icons'
 
-import {Input, Form, Button} from 'antd'
+import {Button, Form, Input, Spin} from 'antd'
 
 import {login} from '../../redux/reducers/authReducer'
 import {useAppSelector} from '../../redux/store'
 import {PATH} from '../Routing/Routing'
-import {FormikField} from '../../reusableComponent/FormikField'
 import {LoginUserType} from '../../api/authAPI'
+
+import logo from './../../assets/img/logoDK.svg'
+
+import styles from './login.module.css'
 
 
 export const Login: React.FC = () => {
@@ -23,17 +24,7 @@ export const Login: React.FC = () => {
     const navigate = useNavigate()
 
     const {isAuth, captchaURL} = useAppSelector(state => state.auth)
-    const error = useAppSelector(state => state.app.error)
-
-
-    const initialValues: LoginUserType = {email: '', password: '', rememberMe: false, captcha: ''}
-    const validationSchema = {
-        // email: Yup.string().email('Invalid email format').required('Required'),
-        password: Yup.string().required('Required'),
-    }
-    const onSubmitLoginUser = (values: LoginUserType) => {
-        dispatch(login(values))
-    }
+    const status = useAppSelector(state => state.app.status)
 
     useEffect(() => {
         if (isAuth) {
@@ -42,68 +33,60 @@ export const Login: React.FC = () => {
         return
     }, [dispatch, isAuth, navigate])
 
+    const onSubmitLoginUser = (values: LoginUserType) => {
+        dispatch(login(values))
+    }
+
+
     return (
-        <div style={{width: '200px', margin: '0 auto'}}>
-            <h1>Sign up</h1>
-            <Formik
-                initialValues={initialValues}
-                validationSchema={Yup.object(validationSchema)}
-                onSubmit={onSubmitLoginUser}
-            >
-                {formik => (
-                    <Form>
-                        {/*<FormikField type={'email'}*/}
-                        {/*             name={'email'}*/}
-                        {/*             isShowError={false}*/}
-                        {/*             isShowLabel={true}*/}
-                        {/*             error={error}*/}
-                        {/*/>*/}
-                        <Form.Item fieldKey={'email'}
-                            name="email"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Please input your Username!',
-                                },
-                            ]}>
-                            <Input prefix={<UserOutlined className="site-form-item-icon"/>}
-                                   placeholder="Username"/>
-                        </Form.Item>
-                        <FormikField type={'password'}
-                                     name={'password'}
-                                     isShowError={true}
-                                     isShowLabel={true}
-                                     error={error}
-                        />
-                        <FormikField type={'checkbox'}
-                                     name={'rememberMe'}
-                                     isShowError={false}
-                                     isShowLabel={true}
-                                     error={error}
-                        />
+        <Form onFinish={onSubmitLoginUser} className={styles.loginHeader}>
+            <img src={logo} className="App-logo" alt="logo"/>
+            <Spin spinning={status === 'loading'}></Spin>
+            <Form.Item name="email"
+                       rules={[
+                           {
+                               required: true,
+                               message: 'Please input your Username!',
+                           },
+                       ]}>
+                <Input prefix={<UserOutlined className="site-form-item-icon"/>}
+                       placeholder="Username"
+                       type={'email'}/>
+            </Form.Item>
+            <Form.Item
+                name="password"
+                rules={[
+                    {
+                        required: true,
+                        message: 'Please input your Password!',
+                    },
+                ]}>
+                <Input
+                    prefix={<LockOutlined className="site-form-item-icon"/>}
+                    type="password"
+                    placeholder="Password"
+                />
+            </Form.Item>
+            <Form.Item name="rememberMe" label={'Remember Me?'}>
+                <Input type="checkbox" name={'rememberMe'}/>
+            </Form.Item>
 
-                        {captchaURL
-                            ? <>
-                                <img src={captchaURL} alt="captchaURL"/>
-                                <FormikField type={'text'}
-                                             name={'captcha'}
-                                             isShowError={false}
-                                             isShowLabel={false}
-                                             error={error}
-                                             placeholder={'Symbols from image'}
-                                />
-                            </>
-                            : null
-                        }
-                        <div>
-                            <Button htmlType={'submit'} size={'small'} icon={<SearchOutlined/>}>Sign Up</Button>
-                            <button disabled={!formik.isValid} type="submit">Sign Up</button>
-                        </div>
+            {captchaURL
+                ? <>
+                    <img src={captchaURL} alt="captchaURL"/>
+                    <Form.Item name="captcha">
+                        <Input name={'captcha'} placeholder={'Symbols from image'}/>
+                    </Form.Item>
+                </>
+                : null
+            }
+            <Form.Item>
+                <Button type="primary" htmlType="submit" className="login-form-button">
+                    Log in
+                </Button>
 
-                    </Form>
-                )}
-            </Formik>
-        </div>
+            </Form.Item>
+        </Form>
     )
 }
 
