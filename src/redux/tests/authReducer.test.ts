@@ -10,6 +10,7 @@ beforeEach(() => {
         isAuth: false,
         login: null,
         captchaURL: null,
+        myPhoto: null,
     }
 })
 

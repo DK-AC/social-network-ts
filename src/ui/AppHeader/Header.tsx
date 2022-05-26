@@ -15,8 +15,7 @@ export const Header = () => {
 
     const dispatch = useDispatch()
 
-    const {email, isAuth} = useAppSelector(state => state.auth)
-    const {profile} = useAppSelector(state => state.profile)
+    const {email, isAuth, myPhoto} = useAppSelector(state => state.auth)
 
     const {Header} = Layout
 
@@ -34,8 +33,8 @@ export const Header = () => {
                         </Row>
                         <Row className={styles.contentRight}>
                             <Col span={12}>
-                                {profile
-                                    ? <Avatar src={profile.photos.small} size="large" icon={<UserOutlined/>}/>
+                                {myPhoto
+                                    ? <Avatar src={myPhoto.small} size="large" icon={<UserOutlined/>}/>
                                     : <Avatar size="large" icon={<UserOutlined/>}/>
                                 }
                             </Col>

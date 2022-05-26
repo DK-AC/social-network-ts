@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
+import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {AxiosError} from 'axios'
 
 import {authAPI, AuthUserType, LoginUserType} from '../../api/authAPI'
@@ -8,7 +8,10 @@ import {ResultCodeEnum, ResultCodeRequireCaptchaEnum} from '../../api/instanceAP
 
 import {Nullable} from '../../types/Nullable'
 
+import {PhotosType, profileAPI} from '../../api/profileAPI'
+
 import {setAppError, setAppStatus} from './appReducer'
+
 
 const initialState = {
     isAuth: false,
@@ -17,12 +20,17 @@ const initialState = {
     email: null as Nullable<string>,
     password: null as Nullable<string>,
     captchaURL: null as Nullable<string>,
+    myPhoto: null as Nullable<PhotosType>,
 }
 
 export const authSlices = createSlice({
     name: 'auth',
     initialState,
-    reducers: {},
+    reducers: {
+        setMyPhoto(state: InitialAuthStateType, action: PayloadAction<{ myPhoto: Nullable<PhotosType> }>) {
+            state.myPhoto = action.payload.myPhoto
+        },
+    },
     extraReducers: (builder) => {
         builder.addCase(authMe.fulfilled, (state: InitialAuthStateType, action) => {
             state.id = action.payload.id
@@ -44,6 +52,7 @@ export const authSlices = createSlice({
     },
 })
 
+export const {setMyPhoto} = authSlices.actions
 export const authReducer = authSlices.reducer
 
 export const authMe = createAsyncThunk<AuthUserType, void, ThunkErrorType>
@@ -54,7 +63,9 @@ export const authMe = createAsyncThunk<AuthUserType, void, ThunkErrorType>
             const {data} = await authAPI.me()
             if (data.resultCode === ResultCodeEnum.Success) {
                 thunkAPI.dispatch(setAppStatus({status: 'successful'}))
+                thunkAPI.dispatch(getMyPhoto(data.data.id))
                 return data.data
+
             } else {
                 return handleAsyncServerAppError(data, thunkAPI)
             }
@@ -62,6 +73,7 @@ export const authMe = createAsyncThunk<AuthUserType, void, ThunkErrorType>
             return handleAsyncNetworkError(err as AxiosError, thunkAPI)
         }
     })
+
 export const login = createAsyncThunk<{ user: LoginUserType }, LoginUserType, ThunkErrorType>
 ('auth/login',
     async (loginData, thunkAPI) => {
@@ -84,6 +96,7 @@ export const login = createAsyncThunk<{ user: LoginUserType }, LoginUserType, Th
             return handleAsyncNetworkError(err as AxiosError, thunkAPI)
         }
     })
+
 export const logout = createAsyncThunk<undefined, void, ThunkErrorType>
 ('auth/logout',
     async (_, thunkAPI) => {
@@ -99,6 +112,7 @@ export const logout = createAsyncThunk<undefined, void, ThunkErrorType>
             return handleAsyncNetworkError(err as AxiosError, thunkAPI)
         }
     })
+
 export const getCaptchaURL = createAsyncThunk<{ url: string }, void, ThunkErrorType>
 ('auth/captcha',
     async (_, thunkAPI) => {
@@ -107,6 +121,17 @@ export const getCaptchaURL = createAsyncThunk<{ url: string }, void, ThunkErrorT
             const {data} = await securityAPI.getCaptchaUrl()
             thunkAPI.dispatch(setAppStatus({status: 'successful'}))
             return {url: data.url}
+        } catch (err) {
+            return handleAsyncNetworkError(err as AxiosError, thunkAPI)
+        }
+    })
+
+export const getMyPhoto = createAsyncThunk<{ userId: number }, number, ThunkErrorType>('auth/getMyPhoto',
+    async (userId, thunkAPI) => {
+        thunkAPI.dispatch(setAppStatus({status: 'loading'}))
+        try {
+            const res = await profileAPI.getProfileUser(userId)
+            thunkAPI.dispatch(setMyPhoto({myPhoto: res.data.photos}))
         } catch (err) {
             return handleAsyncNetworkError(err as AxiosError, thunkAPI)
         }

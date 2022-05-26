@@ -6,9 +6,10 @@ import {useAppSelector} from '../../redux/store'
 import {getProfileUserStatus, setProfileUser} from '../../redux/reducers/profileReducer'
 import {PATH} from '../Routing/Routing'
 
+import {Nullable} from '../../types/Nullable'
+
 import {Posts} from './Posts/Posts'
 import {ProfileInfo} from './ProfileInfo/ProfileInfo'
-
 
 export const Profile: React.FC = () => {
 
@@ -19,7 +20,7 @@ export const Profile: React.FC = () => {
     const profile = useAppSelector(state => state.profile.profile)
     const {id, isAuth} = useAppSelector(state => state.auth)
 
-    let profileUserId: number | null
+    let profileUserId: Nullable<number>
 
     if (params.profileUserId) {
         profileUserId = +params.profileUserId
@@ -31,8 +32,8 @@ export const Profile: React.FC = () => {
         if (!isAuth) {
             navigate(PATH.LOGIN_PAGE)
         } else {
-            dispatch(getProfileUserStatus(profileUserId as number))
             dispatch(setProfileUser(profileUserId as number))
+            dispatch(getProfileUserStatus(profileUserId as number))
         }
     }, [dispatch, isAuth, navigate, profileUserId])
 

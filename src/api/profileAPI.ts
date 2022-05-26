@@ -1,10 +1,10 @@
 import {Nullable} from '../types/Nullable'
 
-import {AxiosResponseType, instanceAPI} from './instanceAPI'
+import {AxiosResponseType, instanceAPI, ResponseType} from './instanceAPI'
 
 export const profileAPI = {
     getProfileUser(userId: number) {
-        return instanceAPI.get<any, AxiosResponseType<ProfileUserType>, ProfileUserType>(`/profile/${userId}`)
+        return instanceAPI.get<any, ResponseType<ProfileUserType>, ProfileUserType>(`/profile/${userId}`)
     },
     getProfileUserStatus(userId: number) {
         return instanceAPI.get<any, AxiosResponseType<string>>(`/profile/status/${userId}`)
