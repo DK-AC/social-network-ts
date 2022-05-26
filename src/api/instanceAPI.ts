@@ -1,10 +1,13 @@
 import axios, {AxiosResponse} from 'axios'
 
+const baseURL = process.env.REACT_APP_BASE_URL
+const apiKey = String(process.env.REACT_APP_API_KEY)
+
 export const instanceAPI = axios.create({
-    baseURL: 'https://social-network.samuraijs.com/api/1.0',
+    baseURL,
     withCredentials: true,
     headers: {
-        'API-KEY': 'a32b35ae-c578-47f3-b8a9-0885cd248a9d',
+        'API-KEY': apiKey,
     },
 })
 

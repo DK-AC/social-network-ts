@@ -6,7 +6,7 @@ import {handleAsyncNetworkError, handleAsyncServerAppError, ThunkErrorType} from
 import {securityAPI} from '../../api/securityAPI'
 import {ResultCodeEnum, ResultCodeRequireCaptchaEnum} from '../../api/instanceAPI'
 
-import {Nullable} from '../../types/Nullable'
+import {Nullable} from '../../types'
 
 import {PhotosType, profileAPI} from '../../api/profileAPI'
 
