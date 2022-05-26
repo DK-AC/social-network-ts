@@ -3,9 +3,9 @@ import {Layout} from 'antd'
 
 import {Routing} from '../Routing/Routing'
 
-import styles from './content.module.css'
+import styles from './appContent.module.css'
 
-export const Content: React.FC = () => {
+export const AppContent: React.FC = () => {
 
     const {Content} = Layout
 

@@ -8,10 +8,10 @@ import {PATH} from '../Routing/Routing'
 import {authMe} from '../../redux/reducers/authReducer'
 
 import './App.css'
-import {Header} from '../AppHeader/Header'
+import {Header} from '../Header/Header'
 import {AppMenu} from '../AppMenu/AppMenu'
 
-import {Content} from '../AppContent/Content'
+import {AppContent} from '../AppContent/AppContent'
 
 import {Login} from '../Login/Login'
 
@@ -53,7 +53,7 @@ export const App: React.FC = () => {
                 </Sider>
                 <Layout className="site-layout" style={{marginLeft: 200}}>
                     <Header/>
-                    <Content/>
+                    <AppContent/>
                     <Footer style={{textAlign: 'center'}}>Ant Design ©2018 Created by Ant UED</Footer>
                 </Layout>
             </Layout>
