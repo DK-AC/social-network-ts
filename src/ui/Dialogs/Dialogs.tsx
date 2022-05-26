@@ -13,6 +13,8 @@ import {FormikField} from '../../reusableComponent/FormikField'
 
 import {getAppError} from '../../selectors/appSelectors'
 
+import {getDialogs, getMessages} from '../../selectors/dialogsSelectors'
+
 import styles from './dialogs.module.css'
 import {DialogItem} from './DialogItem/DialogItem'
 import {MessageItem} from './MessageItem/MessageItem'
@@ -21,7 +23,8 @@ export const Dialogs: React.FC = () => {
 
     const dispatch = useDispatch()
 
-    const {dialogs, messages} = useAppSelector(state => state.dialogs)
+    const dialogs = useAppSelector(getDialogs)
+    const messages = useAppSelector(getMessages)
     const error = useAppSelector(getAppError)
 
     const dialog = dialogs.map(d => {

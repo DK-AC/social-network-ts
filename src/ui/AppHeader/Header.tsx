@@ -8,6 +8,8 @@ import {UserOutlined} from '@ant-design/icons'
 import {useAppSelector} from '../../redux/store'
 import {logout} from '../../redux/reducers/authReducer'
 
+import {getCurrentUserEmail, getCurrentUserPhotos, getIsAuth} from '../../selectors/authSelectors'
+
 import styles from './header.module.css'
 
 
@@ -15,7 +17,9 @@ export const Header = () => {
 
     const dispatch = useDispatch()
 
-    const {email, isAuth, myPhotos} = useAppSelector(state => state.auth)
+    const email = useAppSelector(getCurrentUserEmail)
+    const  isAuth = useAppSelector(getIsAuth)
+    const  myPhotos = useAppSelector(getCurrentUserPhotos)
 
     const {Header} = Layout
 
