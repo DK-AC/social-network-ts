@@ -1,9 +1,9 @@
 import {AxiosResponse} from 'axios'
 
-import {instanceAPI} from './instanceAPI'
+import {apiConfig} from './apiConfig'
 
 export const securityAPI = {
     getCaptchaUrl() {
-        return instanceAPI.get<any, AxiosResponse<{ url: string }>>('/security/get-captcha-url')
+        return apiConfig.get<any, AxiosResponse<{ url: string }>>('/security/get-captcha-url')
     },
 }

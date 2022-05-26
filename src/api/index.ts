@@ -1,5 +1,14 @@
 export {authAPI} from './authAPI'
-export {} from './userAPI'
-export {} from './profileAPI'
-export {} from './securityAPI'
-export {} from './instanceAPI'
+export type {AuthUserType, LoginUserType} from './authAPI'
+
+export {userAPI} from './userAPI'
+export type {UserType, UriParamsType, ParamsUserPageType} from './userAPI'
+
+export {profileAPI} from './profileAPI'
+export type {PhotosType, ContactsUserType, ProfileUserType} from './profileAPI'
+
+export {securityAPI} from './securityAPI'
+
+export type {ResponseType, ResponseUserType, AxiosResponseType, FieldErrorType} from './types'
+
+export {apiConfig} from './apiConfig'

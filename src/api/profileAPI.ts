@@ -1,25 +1,28 @@
-import {Nullable} from '../types/Nullable'
+import { ResponseType } from 'api'
 
-import {AxiosResponseType, instanceAPI, ResponseType} from './instanceAPI'
+import {Nullable} from '../types'
+
+import {apiConfig} from './apiConfig'
+import {AxiosResponseType} from './types'
 
 export const profileAPI = {
     getProfileUser(userId: number) {
-        return instanceAPI.get<any, ResponseType<ProfileUserType>, ProfileUserType>(`/profile/${userId}`)
+        return apiConfig.get<any, ResponseType<ProfileUserType>, ProfileUserType>(`/profile/${userId}`)
     },
     getProfileUserStatus(userId: number) {
-        return instanceAPI.get<any, AxiosResponseType<string>>(`/profile/status/${userId}`)
+        return apiConfig.get<any, AxiosResponseType<string>>(`/profile/status/${userId}`)
     },
     updateProfileUserStatus(payload: { profileStatus: string }) {
-        return instanceAPI.put<any, AxiosResponseType<string>>('/profile/status', payload)
+        return apiConfig.put<any, AxiosResponseType<string>>('/profile/status', payload)
     },
     savePhoto(photoFile: File) {
         const formData = new FormData()
         formData.append('image', photoFile)
-        return instanceAPI.put<any, AxiosResponseType<PhotosType>, FormData>
+        return apiConfig.put<any, AxiosResponseType<PhotosType>, FormData>
         ('/profile/photo', formData, {headers: {'Content-Type': 'multipart/form-data'}})
     },
     saveProfile(profile: ProfileUserType) {
-        return instanceAPI.put<any, AxiosResponseType<ProfileUserType>, ProfileUserType>('/profile', profile)
+        return apiConfig.put<any, AxiosResponseType<ProfileUserType>, ProfileUserType>('/profile', profile)
     },
 }
 

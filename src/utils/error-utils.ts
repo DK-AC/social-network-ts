@@ -1,7 +1,7 @@
 import {AxiosError} from 'axios'
 
 import {setAppError, setAppStatus} from '../redux/reducers/appReducer'
-import {ResponseType} from '../api/instanceAPI'
+import {ResponseType} from '../api'
 
 export type ThunkAPIType = {
     dispatch: (action: any) => any
