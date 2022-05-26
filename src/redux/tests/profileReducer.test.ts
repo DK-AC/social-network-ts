@@ -43,7 +43,7 @@ beforeEach(() => {
             {id: 3, message: '3 post', likesCount: 55},
         ],
         profile: fakeProfile,
-        status: '',
+        profileStatus: '',
     }
 })
 
@@ -74,21 +74,21 @@ describe('profile', () => {
     test('set user status', () => {
 
         const action = getProfileUserStatus
-            .fulfilled({status: 'new status'}, 'requestId', 1)
+            .fulfilled({profileStatus: 'new status'}, 'requestId', 1)
         const endState = profileReducer(fakeState, action)
 
-        expect(fakeState.status).toBe('')
-        expect(endState.status).toBe('new status')
+        expect(fakeState.profileStatus).toBe('')
+        expect(endState.profileStatus).toBe('new status')
     })
 
     test('user status should be changed', () => {
 
         const action = updateProfileUserStatus
-            .fulfilled({status: 'change status'}, 'requestId', {status: ''})
+            .fulfilled({profileStatus: 'change status'}, 'requestId', {profileStatus: ''})
         const endState = profileReducer(fakeState, action)
 
-        expect(fakeState.status).toBe('')
-        expect(endState.status).toBe('change status')
+        expect(fakeState.profileStatus).toBe('')
+        expect(endState.profileStatus).toBe('change status')
     })
 
     test('correct post should be deleted', () => {

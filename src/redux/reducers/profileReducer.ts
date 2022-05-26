@@ -16,7 +16,7 @@ const initialState = {
         {id: 3, message: '3 post', likesCount: 55},
     ],
     profile: null as Nullable<ProfileUserType>,
-    status: '',
+    profileStatus: '',
 }
 
 export const profileSlices = createSlice({
@@ -38,10 +38,10 @@ export const profileSlices = createSlice({
                 state.profile = action.payload.profile
             })
             .addCase(updateProfileUserStatus.fulfilled, (state: InitialProfileStateType, action) => {
-                state.status = action.payload.status
+                state.profileStatus = action.payload.profileStatus
             })
             .addCase(getProfileUserStatus.fulfilled, (state: InitialProfileStateType, action) => {
-                state.status = action.payload.status
+                state.profileStatus = action.payload.profileStatus
             })
             .addCase(savePhoto.fulfilled, (state: InitialProfileStateType, action) => {
                 state.profile!.photos = action.payload.photos
@@ -67,27 +67,27 @@ export const setProfileUser = createAsyncThunk<{ profile: ProfileUserType }, num
             return handleAsyncNetworkError(err as AxiosError, thunkAPI)
         }
     })
-export const getProfileUserStatus = createAsyncThunk<{ status: string }, number, ThunkErrorType>
+export const getProfileUserStatus = createAsyncThunk<{ profileStatus: string }, number, ThunkErrorType>
 ('profile/getProfileUserStatus',
     async (userId, thunkAPI) => {
         thunkAPI.dispatch(setAppStatus({status: 'loading'}))
         try {
             const {data} = await profileAPI.getProfileUserStatus(userId)
             thunkAPI.dispatch(setAppStatus({status: 'successful'}))
-            return {status: data}
+            return {profileStatus: data}
         } catch (err) {
             return handleAsyncNetworkError(err as AxiosError, thunkAPI)
         }
     })
-export const updateProfileUserStatus = createAsyncThunk<{ status: string }, { status: string }, ThunkErrorType>
+export const updateProfileUserStatus = createAsyncThunk<{ profileStatus: string }, { profileStatus: string }, ThunkErrorType>
 ('profile/updateProfileUserStatus',
-    async (status, thunkAPI) => {
+    async (profileStatus, thunkAPI) => {
         thunkAPI.dispatch(setAppStatus({status: 'loading'}))
         try {
-            const {data} = await profileAPI.updateProfileUserStatus(status)
+            const {data} = await profileAPI.updateProfileUserStatus(profileStatus)
             if (data.resultCode === ResultCodeEnum.Success) {
                 thunkAPI.dispatch(setAppStatus({status: 'successful'}))
-                return status
+                return profileStatus
             } else {
                 return handleAsyncServerAppError(data, thunkAPI)
             }

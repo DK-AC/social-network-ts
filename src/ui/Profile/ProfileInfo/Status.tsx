@@ -3,13 +3,14 @@ import {useDispatch} from 'react-redux'
 
 import {useAppSelector} from '../../../redux/store'
 import {updateProfileUserStatus} from '../../../redux/reducers/profileReducer'
+import {getProfileStatus} from '../../../selectors/profileSelectors'
 
 
 export const Status: React.FC = () => {
 
     const dispatch = useDispatch()
 
-    const status = useAppSelector(state => state.profile.status)
+    const status = useAppSelector(getProfileStatus)
 
     const [editMode, setEditMode] = useState(false)
     const [value, setValue] = useState<string>(status)
@@ -25,8 +26,8 @@ export const Status: React.FC = () => {
     const onChangeValueHandle = (e: ChangeEvent<HTMLInputElement>) => {
         setValue(e.currentTarget.value)
     }
-    const updateStatus = (status: string) => {
-        dispatch(updateProfileUserStatus({status}))
+    const updateStatus = (profileStatus: string) => {
+        dispatch(updateProfileUserStatus({profileStatus}))
     }
 
 

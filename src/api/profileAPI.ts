@@ -9,7 +9,7 @@ export const profileAPI = {
     getProfileUserStatus(userId: number) {
         return instanceAPI.get<any, AxiosResponseType<string>>(`/profile/status/${userId}`)
     },
-    updateProfileUserStatus(payload: { status: string }) {
+    updateProfileUserStatus(payload: { profileStatus: string }) {
         return instanceAPI.put<any, AxiosResponseType<string>>('/profile/status', payload)
     },
     savePhoto(photoFile: File) {
