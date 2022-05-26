@@ -9,6 +9,8 @@ import {Paginator} from '../common/Paginator'
 import {changeCurrentPage, changePageSize, setUsers} from '../../redux/reducers/usersReducer'
 import {UriParamsType} from '../../api/userAPI'
 
+import {getIsAuth} from '../../selectors/authSelectors'
+
 import {User} from './User/User'
 import styles from './users.module.css'
 import {UsersSearchForm} from './UsersSearchForm'
@@ -21,7 +23,7 @@ export const Users: React.FC = () => {
 
     const {users, pageSize} = useAppSelector(state => state.users)
     const {status} = useAppSelector(state => state.app)
-    const isAuth = useAppSelector(state => state.auth.isAuth)
+    const isAuth = useAppSelector(getIsAuth)
 
     const [searchParams, setSearchParams] = useSearchParams()
 

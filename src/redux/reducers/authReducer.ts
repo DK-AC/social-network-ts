@@ -20,7 +20,7 @@ const initialState = {
     email: null as Nullable<string>,
     password: null as Nullable<string>,
     captchaURL: null as Nullable<string>,
-    myPhoto: null as Nullable<PhotosType>,
+    myPhotos: null as Nullable<PhotosType>,
 }
 
 export const authSlices = createSlice({
@@ -28,7 +28,7 @@ export const authSlices = createSlice({
     initialState,
     reducers: {
         setMyPhoto(state: InitialAuthStateType, action: PayloadAction<{ myPhoto: Nullable<PhotosType> }>) {
-            state.myPhoto = action.payload.myPhoto
+            state.myPhotos = action.payload.myPhoto
         },
     },
     extraReducers: (builder) => {

@@ -8,6 +8,8 @@ import {PATH} from '../Routing/Routing'
 
 import {Nullable} from '../../types/Nullable'
 
+import {getCurrentUserId, getIsAuth} from '../../selectors/authSelectors'
+
 import {Posts} from './Posts/Posts'
 import {ProfileInfo} from './ProfileInfo/ProfileInfo'
 
@@ -18,7 +20,8 @@ export const Profile: React.FC = () => {
     const navigate = useNavigate()
 
     const profile = useAppSelector(state => state.profile.profile)
-    const {id, isAuth} = useAppSelector(state => state.auth)
+    const id = useAppSelector(getCurrentUserId)
+    const isAuth = useAppSelector(getIsAuth)
 
     let profileUserId: Nullable<number>
 

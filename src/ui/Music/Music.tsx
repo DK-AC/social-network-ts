@@ -3,12 +3,13 @@ import {useNavigate} from 'react-router-dom'
 
 import {PATH} from '../Routing/Routing'
 import {useAppSelector} from '../../redux/store'
+import {getIsAuth} from '../../selectors/authSelectors'
 
 export const Music = () => {
 
     const navigate = useNavigate()
 
-    const isAuth = useAppSelector(state => state.auth.isAuth)
+    const isAuth = useAppSelector(getIsAuth)
 
     useEffect(() => {
         if (!isAuth) {

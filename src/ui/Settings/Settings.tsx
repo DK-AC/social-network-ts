@@ -3,12 +3,13 @@ import {useNavigate} from 'react-router-dom'
 
 import {useAppSelector} from '../../redux/store'
 import {PATH} from '../Routing/Routing'
+import {getIsAuth} from '../../selectors/authSelectors'
 
 export const Settings = () => {
 
     const navigate = useNavigate()
 
-    const isAuth = useAppSelector(state => state.auth.isAuth)
+    const isAuth = useAppSelector(getIsAuth)
 
 
     useEffect(() => {

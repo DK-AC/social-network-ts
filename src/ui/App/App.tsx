@@ -16,6 +16,8 @@ import {Content} from '../AppContent/Content'
 
 import {Login} from '../Login/Login'
 
+import {getIsAuth} from '../../selectors/authSelectors'
+
 import styles from './App.module.css'
 
 
@@ -24,7 +26,7 @@ export const App: React.FC = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const isAuth = useAppSelector(state => state.auth.isAuth)
+    const isAuth = useAppSelector(getIsAuth)
     const {isInitialized} = useAppSelector(state => state.app)
 
     const {Footer, Sider} = Layout

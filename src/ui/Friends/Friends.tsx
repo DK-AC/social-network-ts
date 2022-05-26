@@ -4,6 +4,8 @@ import {useNavigate} from 'react-router-dom'
 import {useAppSelector} from '../../redux/store'
 import {PATH} from '../Routing/Routing'
 
+import {getIsAuth} from '../../selectors/authSelectors'
+
 import {FriendItem} from './FriendItem/FriendItem'
 import styles from './friends.module.css'
 
@@ -13,7 +15,7 @@ export const Friends: React.FC = () => {
     const navigate = useNavigate()
 
     const friends = useAppSelector(state => state.sideBar.friends)
-    const isAuth = useAppSelector(state => state.auth.isAuth)
+    const isAuth = useAppSelector(getIsAuth)
 
     const friendsData = friends.map(f => {
         return <FriendItem key={f.id} id={f.id} name={f.name}/>
