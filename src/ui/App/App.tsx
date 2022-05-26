@@ -14,6 +14,8 @@ import {AppMenu} from '../AppMenu/AppMenu'
 
 import {Content} from '../AppContent/Content'
 
+import {Login} from '../Login/Login'
+
 import styles from './App.module.css'
 
 
@@ -40,8 +42,8 @@ export const App: React.FC = () => {
     }, [isAuth, isInitialized, navigate])
 
     return (
-        !isInitialized
-            ? <Preloader/>
+        !isAuth
+            ? <Login/>
             : <Layout hasSider>
                 <Sider className={styles.sider}>
                     <AppMenu/>

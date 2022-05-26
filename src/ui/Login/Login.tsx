@@ -50,7 +50,7 @@ export const Login: React.FC = () => {
                            },
                        ]}>
                 <Input prefix={<UserOutlined className="site-form-item-icon"/>}
-                       placeholder="Username"
+                       placeholder="Username" size={'large'}
                        type={'email'}/>
             </Form.Item>
             <Form.Item
@@ -65,6 +65,7 @@ export const Login: React.FC = () => {
                     prefix={<LockOutlined className="site-form-item-icon"/>}
                     type="password"
                     placeholder="Password"
+                    size={'large'}
                 />
             </Form.Item>
             <Form.Item name="rememberMe" label={'Remember Me?'}>
