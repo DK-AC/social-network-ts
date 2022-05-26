@@ -17,7 +17,6 @@ const initialState = {
     pageSize: 10,
     currentPage: 1,
     followingInProgress: [] as number[],
-    portionNumber: 1,
     filter: {
         term: '',
         friend: 'null' as boolean | null | string,
@@ -33,9 +32,6 @@ export const userSlices = createSlice({
         },
         changePageSize(state: InitialUsersStateType, action: PayloadAction<{ pageSize: number }>) {
             state.pageSize = action.payload.pageSize
-        },
-        changePortionNumber(state: InitialUsersStateType, action: PayloadAction<{ portionNumber: number }>) {
-            state.portionNumber = action.payload.portionNumber
         },
         setIsFollowingInProgress(state, action: PayloadAction<FollowUnFollowPayloadType>) {
             state.followingInProgress = action.payload.isFollow
@@ -59,7 +55,7 @@ export const userSlices = createSlice({
 })
 
 export const usersReducer = userSlices.reducer
-export const {changeCurrentPage, setIsFollowingInProgress, changePortionNumber, changePageSize} = userSlices.actions
+export const {changeCurrentPage, setIsFollowingInProgress, changePageSize} = userSlices.actions
 
 
 export const setUsers = createAsyncThunk<{ users: UserType[], totalCount: number, term: string, friend: Nullable<boolean> }, ParamsUserPageType, ThunkErrorType>

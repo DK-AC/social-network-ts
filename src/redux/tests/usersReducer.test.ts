@@ -1,6 +1,6 @@
 import {
-    changeCurrentPage, changePageSize,
-    changePortionNumber,
+    changeCurrentPage,
+    changePageSize,
     followUnfollow,
     InitialUsersStateType,
     setIsFollowingInProgress,
@@ -34,7 +34,6 @@ beforeEach(() => {
             pageSize: 5,
             currentPage: 3,
             followingInProgress: [],
-            portionNumber: 1,
             filter: {
                 term: '',
                 friend: null,
@@ -145,12 +144,6 @@ describe('user', () => {
 
         expect(fakeState.followingInProgress.some(userId => userId === userId2)).toBe(false)
         expect(endState.followingInProgress.some(userId => userId === userId2)).toBe(true)
-    })
-    test('portionNumber should be changed', () => {
-        const endState = usersReducer(fakeState, changePortionNumber({portionNumber: 4}))
-
-        expect(fakeState.portionNumber).toBe(1)
-        expect(endState.portionNumber).toBe(4)
     })
 })
 

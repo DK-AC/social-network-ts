@@ -13,6 +13,8 @@ import {getIsAuth} from '../../selectors/authSelectors'
 
 import {getAppStatus} from '../../selectors/appSelectors'
 
+import {getPageSize, getUsersSelector} from '../../selectors/usersSelectors'
+
 import {User} from './User/User'
 import styles from './users.module.css'
 import {UsersSearchForm} from './UsersSearchForm'
@@ -23,7 +25,8 @@ export const Users: React.FC = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const {users, pageSize} = useAppSelector(state => state.users)
+    const users = useAppSelector(getUsersSelector)
+    const pageSize = useAppSelector(getPageSize)
     const status = useAppSelector(getAppStatus)
     const isAuth = useAppSelector(getIsAuth)
 

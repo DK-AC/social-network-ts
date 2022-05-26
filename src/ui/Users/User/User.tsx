@@ -10,6 +10,8 @@ import {followUnfollow} from '../../../redux/reducers/usersReducer'
 import {useAppSelector} from '../../../redux/store'
 import {UserType} from '../../../api/userAPI'
 
+import {getFollowingInProgress} from '../../../selectors/usersSelectors'
+
 import styles from './user.module.css'
 import avaImg from './../../../assets/img/client-2-512.webp'
 
@@ -20,7 +22,7 @@ export const User: React.FC<PropsType> = ({user}) => {
 
     const dispatch = useDispatch()
 
-    const followingInProgress = useAppSelector(state => state.users.followingInProgress)
+    const followingInProgress = useAppSelector(getFollowingInProgress)
 
     const {id, name, photos, followed, status} = user
 

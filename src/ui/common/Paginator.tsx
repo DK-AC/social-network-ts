@@ -6,6 +6,7 @@ import {Pagination, PaginationProps} from 'antd'
 import {changeCurrentPage, changePageSize} from '../../redux/reducers/usersReducer'
 import {useAppSelector} from '../../redux/store'
 import {UriParamsType} from '../../api/userAPI'
+import {getCurrentPage, getPageSize, getTotalCount} from '../../selectors/usersSelectors'
 
 type PropsType = {
     setSearchParams: (nextInit: UriParamsType) => void
@@ -16,7 +17,10 @@ export const Paginator: React.FC<PropsType> = ({setSearchParams, uriParams}) => 
 
     const dispatch = useDispatch()
 
-    const {currentPage, totalCount, pageSize} = useAppSelector(state => state.users)
+    const currentPage = useAppSelector(getCurrentPage)
+    const totalCount = useAppSelector(getTotalCount)
+    const pageSize = useAppSelector(getPageSize)
+
     const {term, friend} = uriParams
 
     const itemRender: PaginationProps['itemRender'] = (_, type, originalElement) => {

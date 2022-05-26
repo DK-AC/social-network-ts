@@ -13,6 +13,7 @@ import {useAppSelector} from '../../redux/store'
 import {setUsers} from '../../redux/reducers/usersReducer'
 import {ParamsUserPageType} from '../../api/userAPI'
 import {getAppError} from '../../selectors/appSelectors'
+import {getCurrentPage, getFilterFriend, getFilterTerm, getPageSize} from '../../selectors/usersSelectors'
 
 type PropsType = {
     setSearchParams: (nextInit: URLSearchParamsInit) => void
@@ -22,10 +23,11 @@ export const UsersSearchForm: React.FC<PropsType> = ({setSearchParams}) => {
 
     const dispatch = useDispatch()
 
-    const {currentPage, pageSize} = useAppSelector(state => state.users)
-    const {term, friend} = useAppSelector(state => state.users.filter)
+    const currentPage = useAppSelector(getCurrentPage)
+    const pageSize = useAppSelector(getPageSize)
+    const term = useAppSelector(getFilterTerm)
+    const friend = useAppSelector(getFilterFriend)
     const error = useAppSelector(getAppError)
-
 
     const initialValues = {term, currentPage, pageSize, friend}
     const validationSchema = {}
