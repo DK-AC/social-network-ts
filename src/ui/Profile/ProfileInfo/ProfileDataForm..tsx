@@ -1,16 +1,13 @@
-import React from 'react'
+import React, {FC} from 'react'
 import {Form, Formik} from 'formik'
 import {useDispatch} from 'react-redux'
-
 import {CheckOutlined} from '@ant-design/icons'
-
 import {Button} from 'antd'
 
 import {ProfileUserType} from '../../../api/profileAPI'
 import {ContactsKeysType, FormikField} from '../../../reusableComponent/FormikField'
 import {useAppSelector} from '../../../redux/store'
 import {saveProfile} from '../../../redux/reducers/profileReducer'
-
 import {getAppError} from '../../../selectors/appSelectors'
 
 import styles from './profileInfo.module.css'
@@ -20,7 +17,7 @@ type PropsType = {
     goToSaveMode: () => void
 }
 
-export const ProfileDataForm: React.FC<PropsType> = ({profile, goToSaveMode}) => {
+export const ProfileDataForm: FC<PropsType> = ({profile, goToSaveMode}) => {
 
     const dispatch = useDispatch()
 

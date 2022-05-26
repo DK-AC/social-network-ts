@@ -1,11 +1,11 @@
-import React, {useEffect} from 'react'
+import React, {FC, useEffect} from 'react'
 import {useDispatch} from 'react-redux'
 import {useNavigate, useSearchParams} from 'react-router-dom'
 
 import {useAppSelector} from '../../redux/store'
-import {Preloader} from '../Preloader/Preloader'
-import {PATH} from '../Routing/Routing'
-import {Paginator} from '../common/Paginator'
+import {Preloader} from '../Preloader'
+import {PATH} from '../Routing'
+import {Paginator} from '../common'
 import {changeCurrentPage, changePageSize, setUsers} from '../../redux/reducers/usersReducer'
 import {UriParamsType} from '../../api/userAPI'
 import {getIsAuth} from '../../selectors/authSelectors'
@@ -14,11 +14,10 @@ import {getPageSize, getUsersSelector} from '../../selectors/usersSelectors'
 
 import {UsersSearchForm} from './UsersSearchForm'
 import {User} from './User'
-
 import styles from './users.module.css'
 
 
-export const Users: React.FC = () => {
+export const Users: FC = () => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()

@@ -1,12 +1,11 @@
 import {NavLink} from 'react-router-dom'
-import React from 'react'
+import React, {FC} from 'react'
 
 import styles from './dialogItem.module.css'
 import dialogPhoto from './../../../assets/img/dialogPhoto1.png'
-
 type PropsType = { id: number, name: string }
 
-export const DialogItem: React.FC<PropsType> = React.memo(({id, name}) => {
+export const DialogItem: FC<PropsType> = React.memo(({id, name}) => {
 
     const activeStyle = {
         color: 'gold',

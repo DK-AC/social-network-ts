@@ -11,3 +11,5 @@ export {
     Photo,
     AboutMe,
 } from './ProfileInfo'
+
+export {Profile} from './Profile'

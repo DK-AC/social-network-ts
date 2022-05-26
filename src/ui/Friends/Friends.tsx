@@ -1,16 +1,15 @@
-import React, {useEffect} from 'react'
+import React, {FC, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 
 import {useAppSelector} from '../../redux/store'
-import {PATH} from '../Routing/Routing'
-
+import {PATH} from '../Routing'
 import {getIsAuth} from '../../selectors/authSelectors'
 
-import {FriendItem} from './FriendItem/FriendItem'
+import {FriendItem} from './FriendItem'
 import styles from './friends.module.css'
 
 
-export const Friends: React.FC = () => {
+export const Friends: FC = () => {
 
     const navigate = useNavigate()
 

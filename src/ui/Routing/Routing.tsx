@@ -1,11 +1,11 @@
 import {Navigate, Route, Routes} from 'react-router-dom'
-import React from 'react'
+import React, {FC} from 'react'
 
-import {Music} from '../Music/Music'
-import {Friends} from '../Friends/Friends'
-import {News} from '../News/News'
-import {Login} from '../Login/Login'
-import {NotFound404} from '../NotFound404/NotFound404'
+import {Music} from '../Music'
+import {Friends} from '../Friends'
+import {News} from '../News'
+import {Login} from '../Login'
+import {NotFound404} from '../NotFound404'
 import {Settings} from '../Settings'
 
 export const PATH = {
@@ -22,12 +22,12 @@ export const PATH = {
     NOT_FOUND_PAGE: '/*',
 }
 
-const Profile = React.lazy(async () => ({default: (await import('../Profile/Profile')).Profile}))
+const Profile = React.lazy(async () => ({default: (await import('../Profile')).Profile}))
 const Users = React.lazy(async () => ({default: (await import('../Users')).Users}))
 const Dialogs = React.lazy(async () => ({default: (await import('../Dialogs/Dialogs')).Dialogs}))
 
 
-export const Routing: React.FC = () => {
+export const Routing: FC = () => {
     return (
         <>
             <React.Suspense fallback={<p> Loading...</p>}>

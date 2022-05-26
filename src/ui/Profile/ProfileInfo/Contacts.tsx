@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {FC} from 'react'
 
 import {ContactsUserType} from '../../../api/profileAPI'
 
@@ -8,7 +8,7 @@ type PropsType = {
     contacts: ContactsUserType
 }
 
-export const Contacts: React.FC<PropsType> = ({contacts}) => {
+export const Contacts: FC<PropsType> = ({contacts}) => {
     return (
         <div>
             <b>Contacts: </b>{

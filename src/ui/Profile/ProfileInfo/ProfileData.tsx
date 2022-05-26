@@ -1,7 +1,5 @@
-import React from 'react'
-
+import React, {FC} from 'react'
 import {EditOutlined} from '@ant-design/icons'
-
 import {Button} from 'antd'
 
 import {ProfileUserType} from '../../../api/profileAPI'
@@ -17,7 +15,7 @@ type PropsType = {
     goToEditMode: () => void
 }
 
-export const ProfileData: React.FC<PropsType> = ({profile, isOwner, goToEditMode}) => {
+export const ProfileData: FC<PropsType> = ({profile, isOwner, goToEditMode}) => {
     const {fullName, lookingForAJobDescription, lookingForAJob, contacts, aboutMe} = profile
 
     return (

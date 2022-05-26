@@ -1,11 +1,11 @@
-import React, {useEffect} from 'react'
+import React, {FC, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 
-import {PATH} from '../Routing/Routing'
+import {PATH} from '../Routing'
 import {useAppSelector} from '../../redux/store'
 import {getIsAuth} from '../../selectors/authSelectors'
 
-export const Music = () => {
+export const Music: FC = () => {
 
     const navigate = useNavigate()
 

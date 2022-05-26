@@ -1,28 +1,23 @@
 import {useDispatch} from 'react-redux'
-import React, {useEffect} from 'react'
+import React, {FC, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {Layout} from 'antd'
 
 import {useAppSelector} from '../../redux/store'
-import {PATH} from '../Routing/Routing'
+import {PATH} from '../Routing'
 import {authMe} from '../../redux/reducers/authReducer'
-
 import './App.css'
-import {Header} from '../Header/Header'
-import {AppMenu} from '../AppMenu/AppMenu'
-
-import {AppContent} from '../AppContent/AppContent'
-
-import {Login} from '../Login/Login'
-
+import {Header} from '../Header'
+import {AppMenu} from '../AppMenu'
+import {AppContent} from '../AppContent'
+import {Login} from '../Login'
 import {getIsAuth} from '../../selectors/authSelectors'
-
 import {getAppIsInitialized} from '../../selectors/appSelectors'
 
 import styles from './App.module.css'
 
 
-export const App: React.FC = () => {
+export const App: FC = () => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()

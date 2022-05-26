@@ -1,11 +1,9 @@
-import React from 'react'
+import React, {FC} from 'react'
 import {Field, Form, Formik} from 'formik'
 import * as Yup from 'yup'
 import {useDispatch} from 'react-redux'
 import {URLSearchParamsInit} from 'react-router-dom'
-
 import {SearchOutlined} from '@ant-design/icons'
-
 import {Button} from 'antd'
 
 import {FormikField} from '../../reusableComponent/FormikField'
@@ -19,7 +17,7 @@ type PropsType = {
     setSearchParams: (nextInit: URLSearchParamsInit) => void
 }
 
-export const UsersSearchForm: React.FC<PropsType> = ({setSearchParams}) => {
+export const UsersSearchForm: FC<PropsType> = ({setSearchParams}) => {
 
     const dispatch = useDispatch()
 

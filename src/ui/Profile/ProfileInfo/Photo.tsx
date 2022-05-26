@@ -1,6 +1,5 @@
-import React, {ChangeEvent} from 'react'
+import React, {ChangeEvent, FC} from 'react'
 import {useDispatch} from 'react-redux'
-
 import {Input} from 'antd'
 
 import ava from '../../../assets/img/client-2-512.webp'
@@ -14,7 +13,7 @@ type PropsType = {
     isOwner: boolean
 }
 
-export const Photo: React.FC<PropsType> = ({photo, isOwner}) => {
+export const Photo: FC<PropsType> = ({photo, isOwner}) => {
 
     const dispatch = useDispatch()
 

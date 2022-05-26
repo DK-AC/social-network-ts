@@ -1,7 +1,7 @@
-import React, {useState} from 'react'
+import React, {FC, useState} from 'react'
 
 import {ProfileUserType} from '../../../api/profileAPI'
-import {Preloader} from '../../Preloader/Preloader'
+import {Preloader} from '../../Preloader'
 
 import styles from './profileInfo.module.css'
 import {Photo} from './Photo'
@@ -14,7 +14,7 @@ type PropsType = {
     isOwner: boolean
 }
 
-export const ProfileInfo: React.FC<PropsType> = React.memo(({profile, isOwner}) => {
+export const ProfileInfo: FC<PropsType> = React.memo(({profile, isOwner}) => {
 
     const [editMode, setEditMode] = useState(false)
 

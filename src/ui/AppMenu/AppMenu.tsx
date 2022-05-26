@@ -1,5 +1,4 @@
 import {Menu, MenuProps} from 'antd'
-
 import {
     CustomerServiceOutlined,
     MessageOutlined,
@@ -9,13 +8,13 @@ import {
     TeamOutlined,
     UsergroupDeleteOutlined,
 } from '@ant-design/icons'
-import React from 'react'
+import React, {FC} from 'react'
 import {useLocation, useNavigate} from 'react-router-dom'
 
-import {PATH} from '../Routing/Routing'
+import {PATH} from '../Routing'
 
 
-export const AppMenu: React.FC = () => {
+export const AppMenu: FC = () => {
 
     const navigate = useNavigate()
     const location = useLocation()

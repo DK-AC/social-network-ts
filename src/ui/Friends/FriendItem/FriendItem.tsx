@@ -1,11 +1,11 @@
-import React from 'react'
+import React, {FC} from 'react'
 
 import styles from './friendItem.module.css'
 import friendsPhoto from './../../../assets/img/friendsPhoto.jpg'
 
 type PropsType = { id: number, name: string }
 
-export const FriendItem: React.FC<PropsType> = ({id, name}) => {
+export const FriendItem: FC<PropsType> = ({id, name}) => {
     return (
         <div>
             <span className={styles.friendItem}>

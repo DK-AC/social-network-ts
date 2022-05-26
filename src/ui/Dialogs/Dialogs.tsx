@@ -1,25 +1,21 @@
-import React from 'react'
+import React, {FC} from 'react'
 import {useDispatch} from 'react-redux'
 import * as Yup from 'yup'
 import {Form, Formik, FormikHelpers, FormikValues} from 'formik'
-
 import {SendOutlined} from '@ant-design/icons'
-
 import {Button} from 'antd'
 
 import {sendMessage} from '../../redux/reducers/dialogsReducer'
 import {useAppSelector} from '../../redux/store'
 import {FormikField} from '../../reusableComponent/FormikField'
-
 import {getAppError} from '../../selectors/appSelectors'
-
 import {getDialogs, getMessages} from '../../selectors/dialogsSelectors'
 
+import {DialogItem} from './DialogItem'
+import {MessageItem} from './MessageItem'
 import styles from './dialogs.module.css'
-import {DialogItem} from './DialogItem/DialogItem'
-import {MessageItem} from './MessageItem/MessageItem'
 
-export const Dialogs: React.FC = () => {
+export const Dialogs: FC = () => {
 
     const dispatch = useDispatch()
 

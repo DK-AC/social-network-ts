@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {FC} from 'react'
 
 import styles from './profileInfo.module.css'
 
@@ -7,6 +7,6 @@ type PropsType = {
     contactValue: string
 }
 
-export const Contact: React.FC<PropsType> = ({contactValue, contactTitle}) => {
+export const Contact: FC<PropsType> = ({contactValue, contactTitle}) => {
     return <div className={styles.contact}><b>{contactTitle}: </b>{contactValue}</div>
 }

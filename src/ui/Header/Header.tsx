@@ -1,25 +1,22 @@
-import React from 'react'
+import React, {FC} from 'react'
 import {useDispatch} from 'react-redux'
-
 import {Avatar, Button, Col, Layout, Row} from 'antd'
-
 import {UserOutlined} from '@ant-design/icons'
 
 import {useAppSelector} from '../../redux/store'
 import {logout} from '../../redux/reducers/authReducer'
-
 import {getCurrentUserEmail, getCurrentUserPhotos, getIsAuth} from '../../selectors/authSelectors'
 
 import styles from './header.module.css'
 
 
-export const Header = () => {
+export const Header: FC = () => {
 
     const dispatch = useDispatch()
 
     const email = useAppSelector(getCurrentUserEmail)
-    const  isAuth = useAppSelector(getIsAuth)
-    const  myPhotos = useAppSelector(getCurrentUserPhotos)
+    const isAuth = useAppSelector(getIsAuth)
+    const myPhotos = useAppSelector(getCurrentUserPhotos)
 
     const {Header} = Layout
 

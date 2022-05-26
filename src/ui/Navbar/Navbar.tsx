@@ -1,11 +1,11 @@
-import React from 'react'
+import React, {FC} from 'react'
 
 import {NavBarLink} from '../../reusableComponent/NavBarLink'
-import {PATH} from '../Routing/Routing'
+import {PATH} from '../Routing'
 
 import styles from './navbar.module.css'
 
-export const Navbar: React.FC = () => {
+export const Navbar: FC = () => {
 
     return (
         <nav className={styles.nav}>

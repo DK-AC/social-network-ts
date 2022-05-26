@@ -1,20 +1,17 @@
-import React, {useEffect} from 'react'
+import React, {FC, useEffect} from 'react'
 import {useDispatch} from 'react-redux'
 import {useNavigate, useParams} from 'react-router-dom'
 
 import {useAppSelector} from '../../redux/store'
 import {getProfileUserStatus, setProfileUser} from '../../redux/reducers/profileReducer'
-import {PATH} from '../Routing/Routing'
-
+import {PATH} from '../Routing'
 import {Nullable} from '../../types/Nullable'
-
 import {getCurrentUserId, getIsAuth} from '../../selectors/authSelectors'
-
-import {Posts} from './Posts/Posts'
-import {ProfileInfo} from './ProfileInfo/ProfileInfo'
 import {getUserProfile} from '../../selectors/profileSelectors'
 
-export const Profile: React.FC = () => {
+import {Posts} from './Posts'
+import {ProfileInfo} from './ProfileInfo'
+export const Profile: FC = () => {
 
     const dispatch = useDispatch()
     const params = useParams<'profileUserId'>()
@@ -27,7 +24,7 @@ export const Profile: React.FC = () => {
     let profileUserId: Nullable<number>
 
     if (params.profileUserId) {
-        profileUserId = +params.profileUserId
+        profileUserId = Number(params.profileUserId)
     } else {
         profileUserId = id
     }

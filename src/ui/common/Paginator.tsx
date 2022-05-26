@@ -1,6 +1,5 @@
-import React from 'react'
+import React, {FC} from 'react'
 import {useDispatch} from 'react-redux'
-
 import {Pagination, PaginationProps} from 'antd'
 
 import {changeCurrentPage, changePageSize} from '../../redux/reducers/usersReducer'
@@ -13,7 +12,7 @@ type PropsType = {
     uriParams: UriParamsType
 }
 
-export const Paginator: React.FC<PropsType> = ({setSearchParams, uriParams}) => {
+export const Paginator: FC<PropsType> = ({setSearchParams, uriParams}) => {
 
     const dispatch = useDispatch()
 
