@@ -3,10 +3,11 @@ import {AxiosError} from 'axios'
 
 import {ParamsUserPageType, userAPI, UserType} from '../../api/userAPI'
 import {handleAsyncNetworkError, ThunkErrorType} from '../../utils/error-utils'
-import {followingHelper} from '../../utils/followingHelper'
 import {AxiosResponseType} from '../../api/instanceAPI'
 
 import {Nullable} from '../../types/Nullable'
+
+import {followingHelper} from '../../utils'
 
 import {setAppStatus} from './appReducer'
 
@@ -70,6 +71,7 @@ export const setUsers = createAsyncThunk<{ users: UserType[], totalCount: number
             return handleAsyncNetworkError(err as AxiosError, thunkAPI)
         }
     })
+
 export const followUnfollow = createAsyncThunk<FollowUnFollowPayloadType, FollowUnFollowPayloadType, ThunkErrorType>
 ('user/followingTC',
     async (payload, thunkAPI) => {

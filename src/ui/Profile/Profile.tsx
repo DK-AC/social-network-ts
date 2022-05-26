@@ -10,10 +10,9 @@ import {Nullable} from '../../types/Nullable'
 
 import {getCurrentUserId, getIsAuth} from '../../selectors/authSelectors'
 
-import {getUserProfile} from '../../selectors/profileSelectors'
-
 import {Posts} from './Posts/Posts'
 import {ProfileInfo} from './ProfileInfo/ProfileInfo'
+import {getUserProfile} from '../../selectors/profileSelectors'
 
 export const Profile: React.FC = () => {
 

@@ -6,7 +6,7 @@ import {Friends} from '../Friends/Friends'
 import {News} from '../News/News'
 import {Login} from '../Login/Login'
 import {NotFound404} from '../NotFound404/NotFound404'
-import {Settings} from '../Settings/Settings'
+import {Settings} from '../Settings'
 
 export const PATH = {
     START_PAGE: '/',
@@ -23,7 +23,7 @@ export const PATH = {
 }
 
 const Profile = React.lazy(async () => ({default: (await import('../Profile/Profile')).Profile}))
-const Users = React.lazy(async () => ({default: (await import('../Users/Users')).Users}))
+const Users = React.lazy(async () => ({default: (await import('../Users')).Users}))
 const Dialogs = React.lazy(async () => ({default: (await import('../Dialogs/Dialogs')).Dialogs}))
 
 

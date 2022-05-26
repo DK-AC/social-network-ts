@@ -8,16 +8,14 @@ import {PATH} from '../Routing/Routing'
 import {Paginator} from '../common/Paginator'
 import {changeCurrentPage, changePageSize, setUsers} from '../../redux/reducers/usersReducer'
 import {UriParamsType} from '../../api/userAPI'
-
 import {getIsAuth} from '../../selectors/authSelectors'
-
 import {getAppStatus} from '../../selectors/appSelectors'
-
 import {getPageSize, getUsersSelector} from '../../selectors/usersSelectors'
 
-import {User} from './User/User'
-import styles from './users.module.css'
 import {UsersSearchForm} from './UsersSearchForm'
+import {User} from './User'
+
+import styles from './users.module.css'
 
 
 export const Users: React.FC = () => {
