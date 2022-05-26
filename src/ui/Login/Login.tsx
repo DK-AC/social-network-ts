@@ -4,9 +4,9 @@ import {useEffect} from 'react'
 import {useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 
-import {LockOutlined, UserOutlined} from '@ant-design/icons'
+import {UserOutlined} from '@ant-design/icons'
 
-import {Button, Form, Input, Spin} from 'antd'
+import {Button, Checkbox, Form, Input, Spin} from 'antd'
 
 import {login} from '../../redux/reducers/authReducer'
 import {useAppSelector} from '../../redux/store'
@@ -37,7 +37,6 @@ export const Login: React.FC = () => {
         dispatch(login(values))
     }
 
-
     return (
         <Form onFinish={onSubmitLoginUser} className={styles.loginHeader}>
             <img src={logo} className="App-logo" alt="logo"/>
@@ -61,15 +60,13 @@ export const Login: React.FC = () => {
                         message: 'Please input your Password!',
                     },
                 ]}>
-                <Input
-                    prefix={<LockOutlined className="site-form-item-icon"/>}
-                    type="password"
+                <Input.Password
                     placeholder="Password"
                     size={'large'}
                 />
             </Form.Item>
-            <Form.Item name="rememberMe" label={'Remember Me?'}>
-                <Input type="checkbox" name={'rememberMe'}/>
+            <Form.Item name="rememberMe" valuePropName="checked">
+                <Checkbox style={{color: '#C6C6C7FF'}}>Remember me?</Checkbox>
             </Form.Item>
 
             {captchaURL
@@ -82,7 +79,7 @@ export const Login: React.FC = () => {
                 : null
             }
             <Form.Item>
-                <Button type="primary" htmlType="submit" className="login-form-button">
+                <Button type="default" htmlType="submit" className="login-form-button">
                     Log in
                 </Button>
 
