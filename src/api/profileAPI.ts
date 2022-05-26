@@ -1,3 +1,5 @@
+import {Nullable} from '../types/Nullable'
+
 import {AxiosResponseType, instanceAPI} from './instanceAPI'
 
 export const profileAPI = {
@@ -22,8 +24,8 @@ export const profileAPI = {
 }
 
 export type PhotosType = {
-    small: string | null
-    large: string | null
+    small: Nullable<string>
+    large: Nullable<string>
 }
 export type ProfileUserType = {
     aboutMe: string,

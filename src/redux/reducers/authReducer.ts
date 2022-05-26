@@ -6,15 +6,17 @@ import {handleAsyncNetworkError, handleAsyncServerAppError, ThunkErrorType} from
 import {securityAPI} from '../../api/securityAPI'
 import {ResultCodeEnum, ResultCodeRequireCaptchaEnum} from '../../api/instanceAPI'
 
+import {Nullable} from '../../types/Nullable'
+
 import {setAppError, setAppStatus} from './appReducer'
 
 const initialState = {
     isAuth: false,
-    id: null as number | null,
-    login: null as string | null,
-    email: null as string | null,
-    password: null as string | null,
-    captchaURL: null as string | null,
+    id: null as Nullable<number>,
+    login: null as Nullable<string>,
+    email: null as Nullable<string>,
+    password: null as Nullable<string>,
+    captchaURL: null as Nullable<string>,
 }
 
 export const authSlices = createSlice({

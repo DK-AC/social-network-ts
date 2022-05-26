@@ -1,3 +1,5 @@
+import {Nullable} from '../types/Nullable'
+
 import {AxiosResponseType, instanceAPI} from './instanceAPI'
 
 
@@ -19,9 +21,9 @@ export type AuthUserType = {
     email: string
 }
 export type LoginUserType = {
-    email: string | null
-    password: string | null
+    email: Nullable<string>
+    password: Nullable<string>
     rememberMe?: boolean
-    captcha?: string | null
+    captcha?: Nullable<string>
 }
 

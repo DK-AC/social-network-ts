@@ -6,6 +6,8 @@ import {handleAsyncNetworkError, ThunkErrorType} from '../../utils/error-utils'
 import {followingHelper} from '../../utils/followingHelper'
 import {AxiosResponseType} from '../../api/instanceAPI'
 
+import {Nullable} from '../../types/Nullable'
+
 import {setAppStatus} from './appReducer'
 
 
@@ -60,7 +62,7 @@ export const usersReducer = userSlices.reducer
 export const {changeCurrentPage, setIsFollowingInProgress, changePortionNumber, changePageSize} = userSlices.actions
 
 
-export const setUsers = createAsyncThunk<{ users: UserType[], totalCount: number, term: string, friend: null | boolean }, ParamsUserPageType, ThunkErrorType>
+export const setUsers = createAsyncThunk<{ users: UserType[], totalCount: number, term: string, friend: Nullable<boolean> }, ParamsUserPageType, ThunkErrorType>
 ('user/setUsers',
     async (params, thunkAPI) => {
         thunkAPI.dispatch(setAppStatus({status: 'loading'}))

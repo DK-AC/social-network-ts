@@ -5,6 +5,8 @@ import {PhotosType, profileAPI, ProfileUserType} from '../../api/profileAPI'
 import {handleAsyncNetworkError, handleAsyncServerAppError, ThunkErrorType} from '../../utils/error-utils'
 import {ResultCodeEnum} from '../../api/instanceAPI'
 
+import {Nullable} from '../../types/Nullable'
+
 import {setAppStatus} from './appReducer'
 
 const initialState = {
@@ -13,7 +15,7 @@ const initialState = {
         {id: 2, message: '2 post', likesCount: 1},
         {id: 3, message: '3 post', likesCount: 55},
     ],
-    profile: null as ProfileUserType | null,
+    profile: null as Nullable<ProfileUserType>,
     status: '',
 }
 
