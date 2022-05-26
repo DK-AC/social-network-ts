@@ -11,7 +11,7 @@ import {
 import React, {FC} from 'react'
 import {useLocation, useNavigate} from 'react-router-dom'
 
-import {PATH} from '../Routing'
+import {Paths} from '../../enum'
 
 
 export const AppMenu: FC = () => {
@@ -21,46 +21,46 @@ export const AppMenu: FC = () => {
 
     const items: MenuProps['items'] = [
         {
-            key: PATH.PROFILE_PAGE,
+            key: Paths.PROFILE_PAGE,
             label: 'Profile',
             icon: <ProfileOutlined/>,
-            onClick: () => navigate(PATH.PROFILE_PAGE),
+            onClick: () => navigate(Paths.PROFILE_PAGE),
         },
         {
-            key: PATH.USERS_PAGE,
+            key: Paths.USERS_PAGE,
             label: 'Users',
             icon: <UsergroupDeleteOutlined/>,
-            onClick: () => navigate(PATH.USERS_PAGE),
+            onClick: () => navigate(Paths.USERS_PAGE),
         },
         {
-            key: PATH.DIALOGS_PAGE,
+            key: Paths.DIALOGS_PAGE,
             label: 'Dialogs',
             icon: <MessageOutlined/>,
-            onClick: () => navigate(PATH.DIALOGS_PAGE),
+            onClick: () => navigate(Paths.DIALOGS_PAGE),
         },
         {
-            key: PATH.NEWS_PAGE,
+            key: Paths.NEWS_PAGE,
             label: 'News',
             icon: <ReadOutlined/>,
-            onClick: () => navigate(PATH.NEWS_PAGE),
+            onClick: () => navigate(Paths.NEWS_PAGE),
         },
         {
-            key: PATH.MUSIC_PAGE,
+            key: Paths.MUSIC_PAGE,
             label: 'Music',
             icon: <CustomerServiceOutlined/>,
-            onClick: () => navigate(PATH.MUSIC_PAGE),
+            onClick: () => navigate(Paths.MUSIC_PAGE),
         },
         {
-            key: PATH.SETTINGS_PAGE,
+            key: Paths.SETTINGS_PAGE,
             label: 'Settings',
             icon: <SettingOutlined/>,
-            onClick: () => navigate(PATH.SETTINGS_PAGE),
+            onClick: () => navigate(Paths.SETTINGS_PAGE),
         },
         {
-            key: PATH.FRIENDS_PAGE,
+            key: Paths.FRIENDS_PAGE,
             label: 'Friends',
             icon: <TeamOutlined/>,
-            onClick: () => navigate(PATH.FRIENDS_PAGE),
+            onClick: () => navigate(Paths.FRIENDS_PAGE),
         },
     ]
 

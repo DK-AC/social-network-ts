@@ -1,6 +1,6 @@
 import {setAppStatus} from '../redux/reducers/appReducer'
 
-import {ResultCode} from '../enum/resultCode'
+import {ResultCode} from '../enum'
 import {ResponseType} from '../api'
 
 import {handleAsyncServerAppError, ThunkAPIType} from './error-utils'

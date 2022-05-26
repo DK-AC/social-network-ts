@@ -7,20 +7,7 @@ import {News} from '../News'
 import {Login} from '../Login'
 import {NotFound404} from '../NotFound404'
 import {Settings} from '../Settings'
-
-export const PATH = {
-    START_PAGE: '/',
-    PROFILE_PAGE: '/profile',
-    PROFILE_USER_PAGE: '/profile/:profileUserId',
-    USERS_PAGE: '/users/*',
-    DIALOGS_PAGE: '/dialogs/*',
-    NEWS_PAGE: '/news',
-    MUSIC_PAGE: '/music',
-    SETTINGS_PAGE: '/settings',
-    FRIENDS_PAGE: '/friends',
-    LOGIN_PAGE: '/login',
-    NOT_FOUND_PAGE: '/*',
-}
+import {Paths} from '../../enum'
 
 const Profile = React.lazy(async () => ({default: (await import('../Profile')).Profile}))
 const Users = React.lazy(async () => ({default: (await import('../Users')).Users}))
@@ -32,17 +19,17 @@ export const Routing: FC = () => {
         <>
             <React.Suspense fallback={<p> Loading...</p>}>
                 <Routes>
-                    <Route path={PATH.START_PAGE} element={<Navigate to={PATH.PROFILE_PAGE}/>}/>
-                    <Route path={PATH.PROFILE_PAGE} element={<Profile/>}/>
-                    <Route path={PATH.PROFILE_USER_PAGE} element={<Profile/>}/>
-                    <Route path={PATH.USERS_PAGE} element={<Users/>}/>
-                    <Route path={PATH.DIALOGS_PAGE} element={<Dialogs/>}/>
-                    <Route path={PATH.NEWS_PAGE} element={<News/>}/>
-                    <Route path={PATH.MUSIC_PAGE} element={<Music/>}/>
-                    <Route path={PATH.SETTINGS_PAGE} element={<Settings/>}/>
-                    <Route path={PATH.FRIENDS_PAGE} element={<Friends/>}/>
-                    <Route path={PATH.LOGIN_PAGE} element={<Login/>}/>
-                    <Route path={PATH.NOT_FOUND_PAGE} element={<NotFound404/>}/>
+                    <Route path={Paths.START_PAGE} element={<Navigate to={Paths.PROFILE_PAGE}/>}/>
+                    <Route path={Paths.PROFILE_PAGE} element={<Profile/>}/>
+                    <Route path={Paths.PROFILE_USER_PAGE} element={<Profile/>}/>
+                    <Route path={Paths.USERS_PAGE} element={<Users/>}/>
+                    <Route path={Paths.DIALOGS_PAGE} element={<Dialogs/>}/>
+                    <Route path={Paths.NEWS_PAGE} element={<News/>}/>
+                    <Route path={Paths.MUSIC_PAGE} element={<Music/>}/>
+                    <Route path={Paths.SETTINGS_PAGE} element={<Settings/>}/>
+                    <Route path={Paths.FRIENDS_PAGE} element={<Friends/>}/>
+                    <Route path={Paths.LOGIN_PAGE} element={<Login/>}/>
+                    <Route path={Paths.NOT_FOUND_PAGE} element={<NotFound404/>}/>
                 </Routes>
             </React.Suspense>
         </>

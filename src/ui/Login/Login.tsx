@@ -3,17 +3,15 @@ import * as React from 'react'
 import {FC, useEffect} from 'react'
 import {useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
-
 import {UserOutlined} from '@ant-design/icons'
-
 import {Button, Checkbox, Form, Input, Spin} from 'antd'
 
 import {login} from '../../redux/reducers/authReducer'
 import {useAppSelector} from '../../redux/store'
-import {PATH} from '../Routing'
-import {LoginUserType} from '../../api/authAPI'
+import {LoginUserType} from '../../api'
 import {getCaptchaUrl, getIsAuth} from '../../selectors/authSelectors'
 import {getAppStatus} from '../../selectors/appSelectors'
+import {Paths} from '../../enum'
 
 import logo from './../../assets/img/logoDK.svg'
 import styles from './login.module.css'
@@ -30,7 +28,7 @@ export const Login: FC = () => {
 
     useEffect(() => {
         if (isAuth) {
-            navigate(PATH.PROFILE_PAGE)
+            navigate(Paths.PROFILE_PAGE)
         }
         return
     }, [dispatch, isAuth, navigate])

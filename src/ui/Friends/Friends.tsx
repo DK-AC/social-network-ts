@@ -2,8 +2,9 @@ import React, {FC, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 
 import {useAppSelector} from '../../redux/store'
-import {PATH} from '../Routing'
 import {getIsAuth} from '../../selectors/authSelectors'
+
+import {Paths} from '../../enum'
 
 import {FriendItem} from './FriendItem'
 import styles from './friends.module.css'
@@ -22,7 +23,7 @@ export const Friends: FC = () => {
 
     useEffect(() => {
         if (!isAuth) {
-            navigate(PATH.LOGIN_PAGE)
+            navigate(Paths.LOGIN_PAGE)
         }
     }, [isAuth, navigate])
 

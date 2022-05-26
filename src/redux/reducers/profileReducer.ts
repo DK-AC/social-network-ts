@@ -5,7 +5,7 @@ import {PhotosType, profileAPI, ProfileUserType} from '../../api'
 import {handleAsyncNetworkError, handleAsyncServerAppError, ThunkErrorType} from '../../utils/error-utils'
 import {Nullable} from '../../types'
 
-import {ResultCode} from '../../enum/resultCode'
+import {ResultCode} from '../../enum'
 
 import {setAppStatus} from './appReducer'
 

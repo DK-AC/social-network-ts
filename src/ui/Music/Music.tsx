@@ -1,9 +1,9 @@
 import React, {FC, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 
-import {PATH} from '../Routing'
 import {useAppSelector} from '../../redux/store'
 import {getIsAuth} from '../../selectors/authSelectors'
+import {Paths} from '../../enum'
 
 export const Music: FC = () => {
 
@@ -13,7 +13,7 @@ export const Music: FC = () => {
 
     useEffect(() => {
         if (!isAuth) {
-            navigate(PATH.LOGIN_PAGE)
+            navigate(Paths.LOGIN_PAGE)
         }
     }, [isAuth, navigate])
 

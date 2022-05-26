@@ -4,10 +4,11 @@ import {useNavigate, useParams} from 'react-router-dom'
 
 import {useAppSelector} from '../../redux/store'
 import {getProfileUserStatus, setProfileUser} from '../../redux/reducers/profileReducer'
-import {PATH} from '../Routing'
-import {Nullable} from '../../types/Nullable'
+import {Nullable} from '../../types'
 import {getCurrentUserId, getIsAuth} from '../../selectors/authSelectors'
 import {getUserProfile} from '../../selectors/profileSelectors'
+
+import {Paths} from '../../enum'
 
 import {Posts} from './Posts'
 import {ProfileInfo} from './ProfileInfo'
@@ -31,7 +32,7 @@ export const Profile: FC = () => {
 
     useEffect(() => {
         if (!isAuth) {
-            navigate(PATH.LOGIN_PAGE)
+            navigate(Paths.LOGIN_PAGE)
         } else {
             dispatch(setProfileUser(profileUserId as number))
             dispatch(getProfileUserStatus(profileUserId as number))

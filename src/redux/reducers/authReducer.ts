@@ -4,7 +4,7 @@ import {AxiosError} from 'axios'
 import {authAPI, AuthUserType, LoginUserType, PhotosType, profileAPI, securityAPI} from '../../api'
 import {handleAsyncNetworkError, handleAsyncServerAppError, ThunkErrorType} from '../../utils/error-utils'
 import {Nullable} from '../../types'
-import {ResultCode, ResultCodeRequireCaptcha} from '../../enum/resultCode'
+import {ResultCode, ResultCodeRequireCaptcha} from '../../enum'
 
 import {setAppError, setAppStatus} from './appReducer'
 

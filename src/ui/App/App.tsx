@@ -4,7 +4,6 @@ import {useNavigate} from 'react-router-dom'
 import {Layout} from 'antd'
 
 import {useAppSelector} from '../../redux/store'
-import {PATH} from '../Routing'
 import {authMe} from '../../redux/reducers/authReducer'
 import './App.css'
 import {Header} from '../Header'
@@ -13,6 +12,8 @@ import {AppContent} from '../AppContent'
 import {Login} from '../Login'
 import {getIsAuth} from '../../selectors/authSelectors'
 import {getAppIsInitialized} from '../../selectors/appSelectors'
+
+import {Paths} from '../../enum'
 
 import styles from './App.module.css'
 
@@ -34,7 +35,7 @@ export const App: FC = () => {
 
     useEffect(() => {
         if (isInitialized && !isAuth) {
-            navigate(PATH.LOGIN_PAGE)
+            navigate(Paths.LOGIN_PAGE)
         }
         return
     }, [isAuth, isInitialized, navigate])

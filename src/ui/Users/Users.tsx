@@ -4,13 +4,14 @@ import {useNavigate, useSearchParams} from 'react-router-dom'
 
 import {useAppSelector} from '../../redux/store'
 import {Preloader} from '../Preloader'
-import {PATH} from '../Routing'
 import {Paginator} from '../common'
 import {changeCurrentPage, changePageSize, setUsers} from '../../redux/reducers/usersReducer'
-import {UriParamsType} from '../../api/userAPI'
+import {UriParamsType} from '../../api'
 import {getIsAuth} from '../../selectors/authSelectors'
 import {getAppStatus} from '../../selectors/appSelectors'
 import {getPageSize, getUsersSelector} from '../../selectors/usersSelectors'
+
+import {Paths} from '../../enum'
 
 import {UsersSearchForm} from './UsersSearchForm'
 import {User} from './User'
@@ -59,7 +60,7 @@ export const Users: FC = () => {
     }, [dispatch, actualPage, uriParams.page, uriParams.count])
 
     if (!isAuth) {
-        navigate(PATH.LOGIN_PAGE)
+        navigate(Paths.LOGIN_PAGE)
     }
 
     return (

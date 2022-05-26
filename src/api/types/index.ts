@@ -1,6 +1,6 @@
 import {AxiosResponse} from 'axios'
 
-import {ResultCode, ResultCodeRequireCaptcha} from '../../enum/resultCode'
+import {ResultCode, ResultCodeRequireCaptcha} from '../../enum'
 
 export type AxiosResponseType<T = {}> = AxiosResponse<ResponseType<T>>
 
