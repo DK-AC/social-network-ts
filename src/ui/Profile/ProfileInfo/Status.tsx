@@ -19,17 +19,6 @@ export const Status: React.FC = () => {
         setEditMode(true)
         setValue(value)
     }
-    const changeOnViewModeHandle = () => {
-        setEditMode(false)
-        updateStatus(value)
-    }
-    const onChangeValueHandle = (e: ChangeEvent<HTMLInputElement>) => {
-        setValue(e.currentTarget.value)
-    }
-    const updateStatus = (profileStatus: string) => {
-        dispatch(updateProfileUserStatus({profileStatus}))
-    }
-
 
     useEffect(() => {
         setValue(status)
@@ -37,6 +26,20 @@ export const Status: React.FC = () => {
             setValue('')
         }
     }, [status])
+
+    const changeOnViewModeHandle = () => {
+        setEditMode(false)
+        updateStatus(value)
+    }
+
+    const onChangeValueHandle = (e: ChangeEvent<HTMLInputElement>) => {
+        setValue(e.currentTarget.value)
+    }
+
+    const updateStatus = (profileStatus: string) => {
+        dispatch(updateProfileUserStatus({profileStatus}))
+    }
+
 
     return (
         <>

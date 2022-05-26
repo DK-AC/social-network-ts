@@ -10,6 +10,8 @@ import {Nullable} from '../../types/Nullable'
 
 import {getCurrentUserId, getIsAuth} from '../../selectors/authSelectors'
 
+import {getUserProfile} from '../../selectors/profileSelectors'
+
 import {Posts} from './Posts/Posts'
 import {ProfileInfo} from './ProfileInfo/ProfileInfo'
 
@@ -19,7 +21,7 @@ export const Profile: React.FC = () => {
     const params = useParams<'profileUserId'>()
     const navigate = useNavigate()
 
-    const profile = useAppSelector(state => state.profile.profile)
+    const profile = useAppSelector(getUserProfile)
     const id = useAppSelector(getCurrentUserId)
     const isAuth = useAppSelector(getIsAuth)
 

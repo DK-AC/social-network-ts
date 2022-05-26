@@ -13,6 +13,8 @@ import {FormikField} from '../../../reusableComponent/FormikField'
 
 import {getAppError} from '../../../selectors/appSelectors'
 
+import {getProfilePosts} from '../../../selectors/profileSelectors'
+
 import {Post} from './Post/Post'
 import styles from './posts.module.css'
 
@@ -20,7 +22,7 @@ export const Posts: React.FC = React.memo(() => {
 
     const dispatch = useDispatch()
 
-    const posts = useAppSelector(state => state.profile.posts)
+    const posts = useAppSelector(getProfilePosts)
     const error = useAppSelector(getAppError)
 
     const post = posts.map(p => {
