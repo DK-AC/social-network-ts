@@ -6,7 +6,7 @@ import {
     ReadOutlined,
     SettingOutlined,
     TeamOutlined,
-    UsergroupDeleteOutlined,
+    UsergroupDeleteOutlined, WechatOutlined,
 } from '@ant-design/icons'
 import React, {FC} from 'react'
 import {useLocation, useNavigate} from 'react-router-dom'
@@ -35,7 +35,7 @@ export const AppMenu: FC = () => {
         {
             key: Paths.DIALOGS_PAGE,
             label: 'Dialogs',
-            icon: <MessageOutlined/>,
+            icon: <WechatOutlined/>,
             onClick: () => navigate(Paths.DIALOGS_PAGE),
         },
         {
@@ -51,20 +51,26 @@ export const AppMenu: FC = () => {
             onClick: () => navigate(Paths.MUSIC_PAGE),
         },
         {
+            key: Paths.FRIENDS_PAGE,
+            label: 'Friends',
+            icon: <TeamOutlined/>,
+            onClick: () => navigate(Paths.FRIENDS_PAGE),
+        },
+        {
             key: Paths.SETTINGS_PAGE,
             label: 'Settings',
             icon: <SettingOutlined/>,
             onClick: () => navigate(Paths.SETTINGS_PAGE),
         },
         {
-            key: Paths.FRIENDS_PAGE,
-            label: 'Friends',
-            icon: <TeamOutlined/>,
-            onClick: () => navigate(Paths.FRIENDS_PAGE),
+            key: Paths.CHAT_PAGE,
+            label: 'Chat',
+            icon: <MessageOutlined />,
+            onClick: () => navigate(Paths.CHAT_PAGE),
         },
+
     ]
 
     return <Menu theme="dark" mode="inline" selectedKeys={[location.pathname]} items={items}/>
 }
-
 

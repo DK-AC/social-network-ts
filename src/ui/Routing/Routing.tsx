@@ -12,6 +12,7 @@ import {Paths} from '../../enum'
 const Profile = React.lazy(async () => ({default: (await import('../Profile')).Profile}))
 const Users = React.lazy(async () => ({default: (await import('../Users')).Users}))
 const Dialogs = React.lazy(async () => ({default: (await import('../Dialogs/Dialogs')).Dialogs}))
+const Chat = React.lazy(async () => ({default: (await import('../Chat/ChatPage')).ChatPage}))
 
 
 export const Routing: FC = () => {
@@ -29,6 +30,7 @@ export const Routing: FC = () => {
                     <Route path={Paths.SETTINGS_PAGE} element={<Settings/>}/>
                     <Route path={Paths.FRIENDS_PAGE} element={<Friends/>}/>
                     <Route path={Paths.LOGIN_PAGE} element={<Login/>}/>
+                    <Route path={Paths.CHAT_PAGE} element={<Chat/>}/>
                     <Route path={Paths.NOT_FOUND_PAGE} element={<NotFound404/>}/>
                 </Routes>
             </React.Suspense>

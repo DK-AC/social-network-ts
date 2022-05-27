@@ -9,6 +9,7 @@ export enum Paths {
     SETTINGS_PAGE = '/settings',
     FRIENDS_PAGE = '/friends',
     LOGIN_PAGE = '/login',
+    CHAT_PAGE = '/chat',
     NOT_FOUND_PAGE = '/*',
 }
 
