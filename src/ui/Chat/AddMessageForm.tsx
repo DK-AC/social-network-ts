@@ -18,13 +18,7 @@ type EditorProps = {
     value: string;
 }
 
-const CommentList = ({comments}: { comments: CommentItem[] }) => (
-    <List
-        dataSource={comments}
-        itemLayout="horizontal"
-        renderItem={props => <Comment {...props} />}
-    />
-)
+
 
 const Editor = ({onChange, onSubmit, submitting, value}: EditorProps) => (
     <>
@@ -71,7 +65,6 @@ export const AddMessageForm = () => {
 
     return (
         <>
-            {comments.length > 0 && <CommentList comments={comments}/>}
             <Comment
                 avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo"/>}
                 content={

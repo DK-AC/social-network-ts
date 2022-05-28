@@ -2,12 +2,18 @@ import React, {FC} from 'react'
 
 import {Message} from './Message'
 
+type MessageType = {
+    url: string
+    text: string
+    author: string
+}
+
 export const Messages: FC = () => {
 
-    const messages = ['test1', 'test2', 'test3', 'test4', 'test5']
+    const messages = [1, 2, 3, 4]
 
-    const message = messages.map((message, index) => {
-        return <Message key={index} message={message}/>
+    const message = messages.map((message: any) => {
+        return <Message key={message}/>
     })
 
     return (

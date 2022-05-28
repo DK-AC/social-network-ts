@@ -4,18 +4,26 @@ import moment from 'moment'
 
 
 type PropsType = {
-    message: string
+    // url: string
+    // text: string
+    // author: string
 }
 
-export const Message: FC<PropsType> = ({message}) => {
+export const Message: FC<PropsType> = () => {
+
+    const message = {
+        url: 'https://joeschmoe.io/api/v1/random',
+        text: 'Test',
+        author: 'DK',
+    }
 
     return (
         <Comment
-            author={<a>Han Solo</a>}
-            avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo"/>}
+            author={<a>{message.author}</a>}
+            avatar={<Avatar src={message.url} alt="Han Solo"/>}
             content={
                 <p>
-                    {message}
+                    {message.text}
                 </p>
             }
             datetime={
