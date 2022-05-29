@@ -4,7 +4,7 @@ import {Input} from 'antd'
 
 import ava from '../../../assets/img/client-2-512.webp'
 import {PhotosType} from '../../../api/profileAPI'
-import {savePhoto} from '../../../redux/reducers/profileReducer'
+import {savePhoto} from '../../../store/reducers/profileReducer'
 
 import styles from './profileInfo.module.css'
 

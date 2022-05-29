@@ -1,8 +1,8 @@
 import React, {FC, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 
-import {useAppSelector} from '../../redux/store'
-import {getIsAuth} from '../../redux/selectors/authSelectors'
+import {useAppSelector} from '../../store/store'
+import {getIsAuth} from '../../store/selectors/authSelectors'
 import {Paths} from '../../enum'
 
 export const Music: FC = () => {

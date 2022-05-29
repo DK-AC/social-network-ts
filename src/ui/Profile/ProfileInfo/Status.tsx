@@ -1,9 +1,9 @@
 import React, {ChangeEvent, FC, useEffect, useState} from 'react'
 import {useDispatch} from 'react-redux'
 
-import {useAppSelector} from '../../../redux/store'
-import {updateProfileUserStatus} from '../../../redux/reducers/profileReducer'
-import {getProfileStatus} from '../../../redux/selectors/profileSelectors'
+import {useAppSelector} from '../../../store/store'
+import {updateProfileUserStatus} from '../../../store/reducers/profileReducer'
+import {getProfileStatus} from '../../../store/selectors/profileSelectors'
 
 
 export const Status: FC = () => {

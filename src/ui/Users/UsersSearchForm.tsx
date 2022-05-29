@@ -7,11 +7,11 @@ import {SearchOutlined} from '@ant-design/icons'
 import {Button} from 'antd'
 
 import {FormikField} from '../../reusableComponent/FormikField'
-import {useAppSelector} from '../../redux/store'
-import {setUsers} from '../../redux/reducers/usersReducer'
+import {useAppSelector} from '../../store/store'
+import {setUsers} from '../../store/reducers/usersReducer'
 import {ParamsUserPageType} from '../../api/userAPI'
-import {getAppError} from '../../redux/selectors/appSelectors'
-import {getCurrentPage, getFilterFriend, getFilterTerm, getPageSize} from '../../redux/selectors/usersSelectors'
+import {getAppError} from '../../store/selectors/appSelectors'
+import {getCurrentPage, getFilterFriend, getFilterTerm, getPageSize} from '../../store/selectors/usersSelectors'
 
 type PropsType = {
     setSearchParams: (nextInit: URLSearchParamsInit) => void

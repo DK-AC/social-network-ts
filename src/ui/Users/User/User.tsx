@@ -4,10 +4,10 @@ import {NavLink} from 'react-router-dom'
 import {Button} from 'antd'
 import {UserAddOutlined, UserDeleteOutlined} from '@ant-design/icons'
 
-import {followUnfollow} from '../../../redux/reducers/usersReducer'
-import {useAppSelector} from '../../../redux/store'
+import {followUnfollow} from '../../../store/reducers/usersReducer'
+import {useAppSelector} from '../../../store/store'
 import {UserType} from '../../../api'
-import {getFollowingInProgress} from '../../../redux/selectors/usersSelectors'
+import {getFollowingInProgress} from '../../../store/selectors/usersSelectors'
 import {FOLLOW, UNFOLLOW} from '../../../constans/base'
 
 import styles from './user.module.css'

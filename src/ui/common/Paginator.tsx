@@ -2,10 +2,10 @@ import React, {FC} from 'react'
 import {useDispatch} from 'react-redux'
 import {Pagination, PaginationProps} from 'antd'
 
-import {changeCurrentPage, changePageSize} from '../../redux/reducers/usersReducer'
-import {useAppSelector} from '../../redux/store'
+import {changeCurrentPage, changePageSize} from '../../store/reducers/usersReducer'
+import {useAppSelector} from '../../store/store'
 import {UriParamsType} from '../../api/userAPI'
-import {getCurrentPage, getPageSize, getTotalCount} from '../../redux/selectors/usersSelectors'
+import {getCurrentPage, getPageSize, getTotalCount} from '../../store/selectors/usersSelectors'
 
 type PropsType = {
     setSearchParams: (nextInit: UriParamsType) => void

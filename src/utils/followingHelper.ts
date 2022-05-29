@@ -1,4 +1,4 @@
-import {setAppStatus} from '../redux/reducers/appReducer'
+import {setAppStatus} from '../store/reducers/appReducer'
 
 import {ResultCode} from '../enum'
 import {ResponseType} from '../api'

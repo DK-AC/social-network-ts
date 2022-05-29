@@ -7,13 +7,13 @@ import {Button} from 'antd'
 
 import {SendOutlined} from '@ant-design/icons'
 
-import {addPost} from '../../../redux/reducers/profileReducer'
-import {useAppSelector} from '../../../redux/store'
+import {addPost} from '../../../store/reducers/profileReducer'
+import {useAppSelector} from '../../../store/store'
 import {FormikField} from '../../../reusableComponent/FormikField'
 
-import {getAppError} from '../../../redux/selectors/appSelectors'
+import {getAppError} from '../../../store/selectors/appSelectors'
 
-import {getProfilePosts} from '../../../redux/selectors/profileSelectors'
+import {getProfilePosts} from '../../../store/selectors/profileSelectors'
 
 import {Post} from './Post/Post'
 import styles from './posts.module.css'

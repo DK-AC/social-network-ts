@@ -6,9 +6,9 @@ import {Button} from 'antd'
 
 import {ProfileUserType} from '../../../api/profileAPI'
 import {ContactsKeysType, FormikField} from '../../../reusableComponent/FormikField'
-import {useAppSelector} from '../../../redux/store'
-import {saveProfile} from '../../../redux/reducers/profileReducer'
-import {getAppError} from '../../../redux/selectors/appSelectors'
+import {useAppSelector} from '../../../store/store'
+import {saveProfile} from '../../../store/reducers/profileReducer'
+import {getAppError} from '../../../store/selectors/appSelectors'
 
 import styles from './profileInfo.module.css'
 

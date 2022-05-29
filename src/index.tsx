@@ -4,9 +4,9 @@ import React from 'react'
 import {HashRouter} from 'react-router-dom'
 import {Provider} from 'react-redux'
 
-import {App} from './ui/App/App'
+import {App} from './ui'
 import reportWebVitals from './reportWebVitals'
-import {store} from './redux/store'
+import {store} from './store/store'
 
 const container = document.getElementById('root')
 export const root = createRoot(container as Element)

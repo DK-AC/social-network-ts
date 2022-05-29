@@ -2,11 +2,11 @@ import React, {FC, useEffect} from 'react'
 import {useDispatch} from 'react-redux'
 import {useNavigate, useParams} from 'react-router-dom'
 
-import {useAppSelector} from '../../redux/store'
-import {getProfileUserStatus, setProfileUser} from '../../redux/reducers/profileReducer'
+import {useAppSelector} from '../../store/store'
+import {getProfileUserStatus, setProfileUser} from '../../store/reducers/profileReducer'
 import {Nullable} from '../../types'
-import {getCurrentUserId, getIsAuth} from '../../redux/selectors/authSelectors'
-import {getUserProfile} from '../../redux/selectors/profileSelectors'
+import {getCurrentUserId, getIsAuth} from '../../store'
+import {getUserProfile} from '../../store/selectors/profileSelectors'
 
 import {Paths} from '../../enum'
 
