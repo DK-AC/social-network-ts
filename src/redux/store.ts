@@ -25,7 +25,7 @@ export type RootStateType = ReturnType<typeof rootReducer>
 export const store = configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().prepend(thunk),
-    devTools: process.env.NODE_ENV !== 'production',
+    devTools: process.env.NODE_ENV !== 'development',
 
 })
 export const useAppSelector: TypedUseSelectorHook<RootStateType> = useSelector
