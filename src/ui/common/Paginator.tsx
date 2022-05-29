@@ -4,8 +4,8 @@ import {Pagination, PaginationProps} from 'antd'
 
 import {changeCurrentPage, changePageSize} from '../../store/reducers/usersReducer'
 import {useAppSelector} from '../../store/store'
-import {UriParamsType} from '../../api/userAPI'
-import {getCurrentPage, getPageSize, getTotalCount} from '../../store/selectors/usersSelectors'
+import {UriParamsType} from '../../api'
+import {getCurrentPage, getPageSize, getTotalCount} from '../../store'
 
 type PropsType = {
     setSearchParams: (nextInit: UriParamsType) => void

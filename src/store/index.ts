@@ -13,4 +13,11 @@ export {
     getProfileStatus,
     getProfilePosts,
     getUserProfile,
+    getCurrentPage,
+    getPageSize,
+    getFilterFriend,
+    getFilterTerm,
+    getFollowingInProgress,
+    getTotalCount,
+    getUsersSelector,
 } from './selectors'

@@ -7,9 +7,9 @@ import {Preloader} from '../Preloader'
 import {Paginator} from '../common'
 import {changeCurrentPage, changePageSize, setUsers} from '../../store/reducers/usersReducer'
 import {UriParamsType} from '../../api'
-import {getIsAuth} from '../../store/selectors/authSelectors'
-import {getAppStatus} from '../../store/selectors/appSelectors'
-import {getPageSize, getUsersSelector} from '../../store/selectors/usersSelectors'
+import {getIsAuth} from '../../store'
+import {getAppStatus} from '../../store'
+import {getPageSize, getUsersSelector} from '../../store'
 
 import {Paths} from '../../enum'
 

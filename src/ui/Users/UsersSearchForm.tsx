@@ -9,9 +9,9 @@ import {Button} from 'antd'
 import {FormikField} from '../../reusableComponent/FormikField'
 import {useAppSelector} from '../../store/store'
 import {setUsers} from '../../store/reducers/usersReducer'
-import {ParamsUserPageType} from '../../api/userAPI'
-import {getAppError} from '../../store/selectors/appSelectors'
-import {getCurrentPage, getFilterFriend, getFilterTerm, getPageSize} from '../../store/selectors/usersSelectors'
+import {ParamsUserPageType} from '../../api'
+import {getAppError} from '../../store'
+import {getCurrentPage, getFilterFriend, getFilterTerm, getPageSize} from '../../store'
 
 type PropsType = {
     setSearchParams: (nextInit: URLSearchParamsInit) => void

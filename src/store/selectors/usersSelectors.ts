@@ -1,18 +1,20 @@
 import {RootStateType} from '../store'
+import {UserType} from '../../api'
 
-export const getUsersSelector = (state: RootStateType) => state.users.users
+export const getUsersSelector = (state: RootStateType): UserType[] => state.users.users
 
-export const getTotalCount = (state: RootStateType) => state.users.totalCount
+export const getTotalCount = (state: RootStateType): number => state.users.totalCount
 
-export const getPageSize = (state: RootStateType) => state.users.pageSize
+export const getPageSize = (state: RootStateType): number => state.users.pageSize
 
-export const getCurrentPage = (state: RootStateType) => state.users.currentPage
+export const getCurrentPage = (state: RootStateType): number => state.users.currentPage
 
-export const getFollowingInProgress = (state: RootStateType) => state.users.followingInProgress
+export const getFollowingInProgress = (state: RootStateType): number[] => state.users.followingInProgress
 
-export const getFilterFriend = (state: RootStateType) => state.users.filter.friend
+//todo need refactoring string to boolean
+export const getFilterFriend = (state: RootStateType): string | boolean | null => state.users.filter.friend
 
-export const getFilterTerm = (state: RootStateType) => state.users.filter.term
+export const getFilterTerm = (state: RootStateType): string => state.users.filter.term
 
 
 
