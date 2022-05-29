@@ -15,7 +15,7 @@ const initialState = {
         {id: 1, message: '1 post', likesCount: 20},
         {id: 2, message: '2 post', likesCount: 1},
         {id: 3, message: '3 post', likesCount: 55},
-    ],
+    ] as PostsType[],
     profile: null as Nullable<ProfileUserType>,
     profileStatus: '',
 }
@@ -139,4 +139,7 @@ export const saveProfile = createAsyncThunk<{ profile: ProfileUserType }, Profil
 
 
 export type InitialProfileStateType = typeof initialState
+export type PostsType = { id: number, message: string, likesCount: number }
+
+
 

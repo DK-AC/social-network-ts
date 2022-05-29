@@ -6,7 +6,7 @@ import {useAppSelector} from '../../store/store'
 import {getProfileUserStatus, setProfileUser} from '../../store/reducers/profileReducer'
 import {Nullable} from '../../types'
 import {getCurrentUserId, getIsAuth} from '../../store'
-import {getUserProfile} from '../../store/selectors/profileSelectors'
+import {getUserProfile} from '../../store'
 
 import {Paths} from '../../enum'
 

@@ -8,3 +8,4 @@ export {
     getCurrentUserId,
 } from './authSelectors'
 export {getDialogs, getMessages} from './dialogsSelectors'
+export {getUserProfile, getProfilePosts, getProfileStatus} from './profileSelectors'

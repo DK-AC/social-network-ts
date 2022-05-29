@@ -11,11 +11,11 @@ import {addPost} from '../../../store/reducers/profileReducer'
 import {useAppSelector} from '../../../store/store'
 import {FormikField} from '../../../reusableComponent/FormikField'
 
-import {getAppError} from '../../../store/selectors/appSelectors'
+import {getAppError} from '../../../store'
 
-import {getProfilePosts} from '../../../store/selectors/profileSelectors'
+import {getProfilePosts} from '../../../store'
 
-import {Post} from './Post/Post'
+import {Post} from './Post'
 import styles from './posts.module.css'
 
 export const Posts: React.FC = React.memo(() => {

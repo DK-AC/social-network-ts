@@ -3,7 +3,7 @@ import {useDispatch} from 'react-redux'
 
 import {useAppSelector} from '../../../store/store'
 import {updateProfileUserStatus} from '../../../store/reducers/profileReducer'
-import {getProfileStatus} from '../../../store/selectors/profileSelectors'
+import {getProfileStatus} from '../../../store'
 
 
 export const Status: FC = () => {

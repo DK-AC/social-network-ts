@@ -10,4 +10,7 @@ export {
     getCurrentUserId,
     getMessages,
     getDialogs,
+    getProfileStatus,
+    getProfilePosts,
+    getUserProfile,
 } from './selectors'
