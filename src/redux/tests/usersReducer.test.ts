@@ -7,6 +7,7 @@ import {
     setUsers,
     usersReducer,
 } from '../reducers/usersReducer'
+import {FOLLOW, UNFOLLOW} from '../../constans/base'
 
 let fakeState: InitialUsersStateType
 const fakeUsers = [
@@ -16,7 +17,7 @@ const fakeUsers = [
         uniqueUrlName: '',
         photos: {small: '', large: ''},
         status: '',
-        followed: true,
+        followed: FOLLOW,
     },
     {
         id: 2,
@@ -24,7 +25,7 @@ const fakeUsers = [
         uniqueUrlName: '',
         photos: {small: '', large: ''},
         status: '',
-        followed: false,
+        followed: UNFOLLOW,
     }]
 
 beforeEach(() => {
@@ -46,7 +47,7 @@ describe('user', () => {
     test('unfollowed user should be changed on true', () => {
 
         const action = followUnfollow
-            .fulfilled({isFollow: true, userId: 2}, 'requestId', {isFollow: true, userId: 2})
+            .fulfilled({isFollow: true, userId: 2}, 'requestId', {isFollow: FOLLOW, userId: 2})
         const endState = usersReducer(fakeState, action)
 
         expect(fakeState.users[1].followed).toBeFalsy()
@@ -56,7 +57,7 @@ describe('user', () => {
     test('followed user should be changed on false', () => {
 
         const action = followUnfollow
-            .fulfilled({isFollow: false, userId: 1}, 'requestId', {isFollow: false, userId: 1})
+            .fulfilled({isFollow: false, userId: 1}, 'requestId', {isFollow: UNFOLLOW, userId: 1})
         const endState = usersReducer(fakeState, action)
 
         expect(fakeState.users[0].followed).toBeTruthy()
@@ -131,10 +132,10 @@ describe('user', () => {
     test('show following user', () => {
 
         const userId1 = 1
-        const endState = usersReducer(fakeState, setIsFollowingInProgress({isFollow: false, userId: userId1}))
+        const endState = usersReducer(fakeState, setIsFollowingInProgress({isFollow: UNFOLLOW, userId: userId1}))
 
-        expect(fakeState.followingInProgress.some(userId => userId === userId1)).toBe(false)
-        expect(endState.followingInProgress.some(userId => userId === userId1)).toBe(false)
+        expect(fakeState.followingInProgress.some((userId: number) => userId === userId1)).toBe(false)
+        expect(endState.followingInProgress.some((userId: number) => userId === userId1)).toBe(false)
     })
 
     test('show unfollowing user', () => {
@@ -142,8 +143,8 @@ describe('user', () => {
         const userId2 = 2
         const endState = usersReducer(fakeState, setIsFollowingInProgress({isFollow: true, userId: userId2}))
 
-        expect(fakeState.followingInProgress.some(userId => userId === userId2)).toBe(false)
-        expect(endState.followingInProgress.some(userId => userId === userId2)).toBe(true)
+        expect(fakeState.followingInProgress.some((userId: number) => userId === userId2)).toBe(false)
+        expect(endState.followingInProgress.some((userId: number) => userId === userId2)).toBe(true)
     })
 })
 

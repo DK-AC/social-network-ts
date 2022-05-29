@@ -1,4 +1,4 @@
-import {RootStateType} from '../redux/store'
+import {RootStateType} from '../store'
 
 export const getIsAuth = (state: RootStateType) => state.auth.isAuth
 

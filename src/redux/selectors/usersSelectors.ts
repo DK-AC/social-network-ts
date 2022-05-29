@@ -1,4 +1,4 @@
-import {RootStateType} from '../redux/store'
+import {RootStateType} from '../store'
 
 export const getUsersSelector = (state: RootStateType) => state.users.users
 

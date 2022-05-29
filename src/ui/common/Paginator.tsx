@@ -5,7 +5,7 @@ import {Pagination, PaginationProps} from 'antd'
 import {changeCurrentPage, changePageSize} from '../../redux/reducers/usersReducer'
 import {useAppSelector} from '../../redux/store'
 import {UriParamsType} from '../../api/userAPI'
-import {getCurrentPage, getPageSize, getTotalCount} from '../../selectors/usersSelectors'
+import {getCurrentPage, getPageSize, getTotalCount} from '../../redux/selectors/usersSelectors'
 
 type PropsType = {
     setSearchParams: (nextInit: UriParamsType) => void

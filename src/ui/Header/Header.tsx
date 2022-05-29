@@ -5,7 +5,7 @@ import {UserOutlined} from '@ant-design/icons'
 
 import {useAppSelector} from '../../redux/store'
 import {logout} from '../../redux/reducers/authReducer'
-import {getCurrentUserEmail, getCurrentUserPhotos, getIsAuth} from '../../selectors/authSelectors'
+import {getCurrentUserEmail, getCurrentUserPhotos, getIsAuth} from '../../redux/selectors/authSelectors'
 
 import styles from './header.module.css'
 

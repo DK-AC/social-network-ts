@@ -10,8 +10,8 @@ import {Header} from '../Header'
 import {AppMenu} from '../AppMenu'
 import {AppContent} from '../AppContent'
 import {Login} from '../Login'
-import {getIsAuth} from '../../selectors/authSelectors'
-import {getAppIsInitialized} from '../../selectors/appSelectors'
+import {getIsAuth} from '../../redux/selectors/authSelectors'
+import {getAppIsInitialized} from '../../redux/selectors/appSelectors'
 
 import {Paths} from '../../enum'
 

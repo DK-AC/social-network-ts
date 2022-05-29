@@ -5,8 +5,8 @@ import {useNavigate, useParams} from 'react-router-dom'
 import {useAppSelector} from '../../redux/store'
 import {getProfileUserStatus, setProfileUser} from '../../redux/reducers/profileReducer'
 import {Nullable} from '../../types'
-import {getCurrentUserId, getIsAuth} from '../../selectors/authSelectors'
-import {getUserProfile} from '../../selectors/profileSelectors'
+import {getCurrentUserId, getIsAuth} from '../../redux/selectors/authSelectors'
+import {getUserProfile} from '../../redux/selectors/profileSelectors'
 
 import {Paths} from '../../enum'
 

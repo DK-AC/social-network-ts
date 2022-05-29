@@ -11,9 +11,9 @@ import {addPost} from '../../../redux/reducers/profileReducer'
 import {useAppSelector} from '../../../redux/store'
 import {FormikField} from '../../../reusableComponent/FormikField'
 
-import {getAppError} from '../../../selectors/appSelectors'
+import {getAppError} from '../../../redux/selectors/appSelectors'
 
-import {getProfilePosts} from '../../../selectors/profileSelectors'
+import {getProfilePosts} from '../../../redux/selectors/profileSelectors'
 
 import {Post} from './Post/Post'
 import styles from './posts.module.css'

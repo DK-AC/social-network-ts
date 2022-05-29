@@ -10,8 +10,8 @@ import {FormikField} from '../../reusableComponent/FormikField'
 import {useAppSelector} from '../../redux/store'
 import {setUsers} from '../../redux/reducers/usersReducer'
 import {ParamsUserPageType} from '../../api/userAPI'
-import {getAppError} from '../../selectors/appSelectors'
-import {getCurrentPage, getFilterFriend, getFilterTerm, getPageSize} from '../../selectors/usersSelectors'
+import {getAppError} from '../../redux/selectors/appSelectors'
+import {getCurrentPage, getFilterFriend, getFilterTerm, getPageSize} from '../../redux/selectors/usersSelectors'
 
 type PropsType = {
     setSearchParams: (nextInit: URLSearchParamsInit) => void

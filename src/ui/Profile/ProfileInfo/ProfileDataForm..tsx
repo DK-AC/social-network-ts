@@ -8,7 +8,7 @@ import {ProfileUserType} from '../../../api/profileAPI'
 import {ContactsKeysType, FormikField} from '../../../reusableComponent/FormikField'
 import {useAppSelector} from '../../../redux/store'
 import {saveProfile} from '../../../redux/reducers/profileReducer'
-import {getAppError} from '../../../selectors/appSelectors'
+import {getAppError} from '../../../redux/selectors/appSelectors'
 
 import styles from './profileInfo.module.css'
 

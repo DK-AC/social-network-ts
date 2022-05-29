@@ -7,9 +7,9 @@ import {Preloader} from '../Preloader'
 import {Paginator} from '../common'
 import {changeCurrentPage, changePageSize, setUsers} from '../../redux/reducers/usersReducer'
 import {UriParamsType} from '../../api'
-import {getIsAuth} from '../../selectors/authSelectors'
-import {getAppStatus} from '../../selectors/appSelectors'
-import {getPageSize, getUsersSelector} from '../../selectors/usersSelectors'
+import {getIsAuth} from '../../redux/selectors/authSelectors'
+import {getAppStatus} from '../../redux/selectors/appSelectors'
+import {getPageSize, getUsersSelector} from '../../redux/selectors/usersSelectors'
 
 import {Paths} from '../../enum'
 

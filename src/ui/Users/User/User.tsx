@@ -7,7 +7,7 @@ import {UserAddOutlined, UserDeleteOutlined} from '@ant-design/icons'
 import {followUnfollow} from '../../../redux/reducers/usersReducer'
 import {useAppSelector} from '../../../redux/store'
 import {UserType} from '../../../api'
-import {getFollowingInProgress} from '../../../selectors/usersSelectors'
+import {getFollowingInProgress} from '../../../redux/selectors/usersSelectors'
 import {FOLLOW, UNFOLLOW} from '../../../constans/base'
 
 import styles from './user.module.css'
