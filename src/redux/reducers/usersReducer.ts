@@ -5,6 +5,7 @@ import {AxiosResponseType, ParamsUserPageType, userAPI, UserType} from '../../ap
 import {handleAsyncNetworkError, ThunkErrorType} from '../../utils/error-utils'
 import {Nullable} from '../../types'
 import {followingHelper} from '../../utils'
+import {EMPTY_STRING, FOLLOW, UNFOLLOW} from '../../constans/base'
 
 import {setAppStatus} from './appReducer'
 
@@ -16,7 +17,7 @@ const initialState = {
     currentPage: 1,
     followingInProgress: [] as number[],
     filter: {
-        term: '',
+        term: EMPTY_STRING,
         friend: 'null' as boolean | null | string,
     },
 }
@@ -41,7 +42,6 @@ export const userSlices = createSlice({
         builder.addCase(setUsers.fulfilled, (state: InitialUsersStateType, action) => {
             state.users = action.payload.users
             state.totalCount = action.payload.totalCount
-            //todo need fix meta arg
             state.filter.term = action.meta.arg.term
             state.filter.friend = action.meta.arg.friend
         })
@@ -56,42 +56,48 @@ export const usersReducer = userSlices.reducer
 export const {changeCurrentPage, setIsFollowingInProgress, changePageSize} = userSlices.actions
 
 
-export const setUsers = createAsyncThunk<{ users: UserType[], totalCount: number, term: string, friend: Nullable<boolean> }, ParamsUserPageType, ThunkErrorType>
+export const setUsers = createAsyncThunk<PayloadUsersReturnedType, ParamsUserPageType, ThunkErrorType>
 ('user/setUsers',
-    async (params, thunkAPI) => {
-        thunkAPI.dispatch(setAppStatus({status: 'loading'}))
+    async (params, {dispatch, rejectWithValue}) => {
+        dispatch(setAppStatus({status: 'loading'}))
         try {
             const {data} = await userAPI.getUsers(params)
-            thunkAPI.dispatch(setAppStatus({status: 'successful'}))
-            return {users: data.items, totalCount: data.totalCount}
+            const {totalCount, items} = data
+
+            dispatch(setAppStatus({status: 'successful'}))
+            return {users: items, totalCount}
         } catch (err) {
-            return handleAsyncNetworkError(err as AxiosError, thunkAPI)
+            return handleAsyncNetworkError(err as AxiosError, {dispatch, rejectWithValue})
         }
     })
 
 export const followUnfollow = createAsyncThunk<FollowUnFollowPayloadType, FollowUnFollowPayloadType, ThunkErrorType>
 ('user/followingTC',
-    async (payload, thunkAPI) => {
-        thunkAPI.dispatch(setAppStatus({status: 'loading'}))
-        thunkAPI.dispatch(setIsFollowingInProgress({userId: payload.userId, isFollow: true}))
+    async ({userId, isFollow}, {dispatch, rejectWithValue}) => {
+        dispatch(setAppStatus({status: 'loading'}))
+        dispatch(setIsFollowingInProgress({userId, isFollow: FOLLOW}))
         try {
             let data: AxiosResponseType
-            if (!payload.isFollow) {
-                data = await userAPI.unfollowUser(payload.userId)
-                followingHelper(thunkAPI, data.data)
-                return payload
+
+            if (!isFollow) {
+                data = await userAPI.unfollowUser(userId)
+
+                followingHelper({dispatch, rejectWithValue}, data.data)
+                return {userId, isFollow}
             } else {
-                data = await userAPI.followUser(payload.userId)
-                followingHelper(thunkAPI, data.data)
-                return payload
+                data = await userAPI.followUser(userId)
+
+                followingHelper({dispatch, rejectWithValue}, data.data)
+                return {userId, isFollow}
             }
         } catch (err) {
-            return handleAsyncNetworkError(err as AxiosError, thunkAPI)
+            return handleAsyncNetworkError(err as AxiosError, {dispatch, rejectWithValue})
         } finally {
-            thunkAPI.dispatch(setIsFollowingInProgress({userId: payload.userId, isFollow: false}))
+            dispatch(setIsFollowingInProgress({userId, isFollow: UNFOLLOW}))
         }
     })
 
 export type InitialUsersStateType = typeof initialState
 type FollowUnFollowPayloadType = { userId: number, isFollow: boolean }
+type PayloadUsersReturnedType = { users: UserType[], totalCount: number, term: string, friend: Nullable<boolean> }
 

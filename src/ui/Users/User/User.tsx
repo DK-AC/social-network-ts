@@ -6,8 +6,9 @@ import {UserAddOutlined, UserDeleteOutlined} from '@ant-design/icons'
 
 import {followUnfollow} from '../../../redux/reducers/usersReducer'
 import {useAppSelector} from '../../../redux/store'
-import {UserType} from '../../../api/userAPI'
+import {UserType} from '../../../api'
 import {getFollowingInProgress} from '../../../selectors/usersSelectors'
+import {FOLLOW, UNFOLLOW} from '../../../constans/base'
 
 import styles from './user.module.css'
 import avaImg from './../../../assets/img/client-2-512.webp'
@@ -23,8 +24,8 @@ export const User: FC<PropsType> = ({user}) => {
 
     const {id, name, photos, followed, status} = user
 
-    const followUserHandle = () => dispatch(followUnfollow({userId: id, isFollow: true}))
-    const unFollowUserHandle = () => dispatch(followUnfollow({userId: id, isFollow: false}))
+    const followUserHandle = () => dispatch(followUnfollow({userId: id, isFollow: FOLLOW}))
+    const unFollowUserHandle = () => dispatch(followUnfollow({userId: id, isFollow: UNFOLLOW}))
 
 
     return (
