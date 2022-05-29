@@ -8,4 +8,6 @@ export {
     getCurrentUserPhotos,
     getIsAuth,
     getCurrentUserId,
+    getMessages,
+    getDialogs,
 } from './selectors'

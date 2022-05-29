@@ -6,13 +6,13 @@ const initialState = {
         {id: 2, name: 'Sasha'},
         {id: 3, name: 'Dima'},
         {id: 4, name: 'Rita'},
-    ],
+    ] as DialogsType[],
     messages: [
         {id: 1, message: 'Hello'},
         {id: 2, message: 'How are you?'},
         {id: 3, message: 'let\'s go'},
         {id: 4, message: 'Stop'},
-    ],
+    ] as MessagesType[],
 }
 
 export const dialogSlices = createSlice({
@@ -29,4 +29,7 @@ export const dialogsReducer = dialogSlices.reducer
 export const {sendMessage} = dialogSlices.actions
 
 export type initialDialogsStateType = typeof initialState
+
+export type DialogsType = { id: number, name: string }
+export type MessagesType = { id: number, message: string }
 

@@ -7,3 +7,4 @@ export {
     getIsAuth,
     getCurrentUserId,
 } from './authSelectors'
+export {getDialogs, getMessages} from './dialogsSelectors'
