@@ -3,6 +3,7 @@ import * as React from 'react'
 
 import {ContactsUserType, ProfileUserType} from '../api/profileAPI'
 import {LoginUserType} from '../api/authAPI'
+import {Nullable} from '../types'
 
 
 export type ContactsKeysType = keyof ContactsUserType
@@ -14,7 +15,7 @@ type PropsType = {
     type?: string
     isShowError?: boolean
     isShowLabel?: boolean
-    error: string
+    error: Nullable<string>
     placeholder?: string
 }
 
