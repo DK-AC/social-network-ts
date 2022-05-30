@@ -12,13 +12,13 @@ import styles from './header.module.css'
 
 export const Header: FC = () => {
 
+    const {Header} = Layout
+
     const dispatch = useDispatch()
 
     const email = useAppSelector(getCurrentUserEmail)
     const isAuth = useAppSelector(getIsAuth)
     const myPhotos = useAppSelector(getCurrentUserPhotos)
-
-    const {Header} = Layout
 
     const logoutHandle = () => {
         dispatch(logout())

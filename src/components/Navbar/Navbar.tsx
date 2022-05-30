@@ -1,9 +1,9 @@
-import React, {FC} from 'react'
+import {FC} from 'react'
 
 import {NavBarLink} from '../../reusableComponent/NavBarLink'
+import {Paths} from '../../enum'
 
 import styles from './navbar.module.css'
-import {Paths} from '../../enum'
 
 export const Navbar: FC = () => {
 
