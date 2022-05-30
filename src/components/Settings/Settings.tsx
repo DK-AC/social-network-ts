@@ -1,9 +1,9 @@
 import React, {FC, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
+import {Empty} from 'antd'
 
-import {useAppSelector} from '../../store/store'
-import {getIsAuth} from '../../store/selectors/authSelectors'
 import {Paths} from '../../enum'
+import {getIsAuth, useAppSelector} from '../../store'
 
 export const Settings: FC = () => {
 
@@ -18,9 +18,7 @@ export const Settings: FC = () => {
     }, [isAuth, navigate])
 
     return (
-        <div>
-            Settings
-        </div>
+        <Empty />
     )
 }
 

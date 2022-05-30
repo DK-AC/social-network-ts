@@ -1,6 +1,8 @@
 import React, {FC, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 
+import {Empty} from 'antd'
+
 import {Paths} from '../../enum'
 import {getIsAuth, useAppSelector} from '../../store'
 
@@ -17,6 +19,6 @@ export const News: FC = () => {
     }, [isAuth, navigate])
 
     return (
-        <div>News</div>
+        <Empty />
     )
 }
