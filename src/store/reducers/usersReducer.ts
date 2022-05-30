@@ -5,7 +5,7 @@ import {AxiosResponseType, ParamsUserPageType, userAPI, UserType} from '../../ap
 import {handleAsyncNetworkError, ThunkErrorType} from '../../utils/error-utils'
 import {Nullable} from '../../types'
 import {followingHelper} from '../../utils'
-import {EMPTY_STRING, FOLLOW, UNFOLLOW} from '../../constans/base'
+import {EMPTY_STRING, FOLLOW, UNFOLLOW} from '../../constans'
 
 import {setAppStatus} from './appReducer'
 
@@ -59,12 +59,12 @@ export const {changeCurrentPage, setIsFollowingInProgress, changePageSize} = use
 export const setUsers = createAsyncThunk<PayloadUsersReturnedType, ParamsUserPageType, ThunkErrorType>
 ('user/setUsers',
     async (params, {dispatch, rejectWithValue}) => {
-        dispatch(setAppStatus({status: 'loading'}))
+        dispatch(setAppStatus({appStatus: 'loading'}))
         try {
             const {data} = await userAPI.getUsers(params)
             const {totalCount, items} = data
 
-            dispatch(setAppStatus({status: 'successful'}))
+            dispatch(setAppStatus({appStatus: 'successful'}))
             return {users: items, totalCount}
         } catch (err) {
             return handleAsyncNetworkError(err as AxiosError, {dispatch, rejectWithValue})
@@ -74,7 +74,7 @@ export const setUsers = createAsyncThunk<PayloadUsersReturnedType, ParamsUserPag
 export const followUnfollow = createAsyncThunk<FollowUnFollowPayloadType, FollowUnFollowPayloadType, ThunkErrorType>
 ('user/followingTC',
     async ({userId, isFollow}, {dispatch, rejectWithValue}) => {
-        dispatch(setAppStatus({status: 'loading'}))
+        dispatch(setAppStatus({appStatus: 'loading'}))
         dispatch(setIsFollowingInProgress({userId, isFollow: FOLLOW}))
         try {
             let data: AxiosResponseType

@@ -7,9 +7,9 @@ import {handleAsyncServerAppError, ThunkAPIType} from './error-utils'
 
 export const followingHelper = (thunkAPI: ThunkAPIType, response: ResponseType) => {
     if (response.resultCode === ResultCode.Success) {
-        thunkAPI.dispatch(setAppStatus({status: 'successful'}))
+        thunkAPI.dispatch(setAppStatus({appStatus: 'successful'}))
     } else {
-        thunkAPI.dispatch(setAppStatus({status: 'failed'}))
+        thunkAPI.dispatch(setAppStatus({appStatus: 'failed'}))
         return handleAsyncServerAppError(response, thunkAPI)
     }
 }

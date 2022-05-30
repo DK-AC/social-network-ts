@@ -7,7 +7,7 @@ import {SUCCESS_INITIALIZED, FAILED_INITIALIZED} from '../../constans'
 import {authMe} from './authReducer'
 
 const initialState = {
-    status: 'idle' as LoadingType,
+    appStatus: 'idle' as LoadingType,
     error: null as Nullable<string>,
     isInitialized: FAILED_INITIALIZED,
 }
@@ -16,8 +16,8 @@ export const appSlices = createSlice({
     name: 'app',
     initialState,
     reducers: {
-        setAppStatus(state: InitialAppStateType, action: PayloadAction<{ status: LoadingType }>) {
-            state.status = action.payload.status
+        setAppStatus(state: InitialAppStateType, action: PayloadAction<{ appStatus: LoadingType }>) {
+            state.appStatus = action.payload.appStatus
         },
         setAppError(state: InitialAppStateType, action: PayloadAction<{ error: Nullable<string> }>) {
             state.error = action.payload.error

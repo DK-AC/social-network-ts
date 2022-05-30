@@ -1,11 +1,12 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {AxiosError} from 'axios'
 
-import {PhotosType, profileAPI, ProfileUserType} from '../../api'
+import {profileAPI} from '../../api'
 import {handleAsyncNetworkError, handleAsyncServerAppError, ThunkErrorType} from '../../utils/error-utils'
-import {Nullable} from '../../types'
-
+import {Nullable, PhotosType, ProfileUserType} from '../../types'
 import {ResultCode} from '../../enum'
+import {EMPTY_STRING} from '../../constans'
+import {PostType} from '../types/profile'
 
 import {setAppStatus} from './appReducer'
 
@@ -15,9 +16,9 @@ const initialState = {
         {id: 1, message: '1 post', likesCount: 20},
         {id: 2, message: '2 post', likesCount: 1},
         {id: 3, message: '3 post', likesCount: 55},
-    ] as PostsType[],
+    ] as PostType[],
     profile: null as Nullable<ProfileUserType>,
-    profileStatus: '',
+    profileStatus: EMPTY_STRING,
 }
 
 export const profileSlices = createSlice({
@@ -25,8 +26,8 @@ export const profileSlices = createSlice({
     initialState,
     reducers: {
         addPost(state: InitialProfileStateType, action: PayloadAction<{ postText: string }>) {
-            state.posts.unshift(
-                {id: new Date().getTime(), message: action.payload.postText, likesCount: 0})
+            const post: PostType = {id: new Date().getTime(), message: action.payload.postText, likesCount: 0}
+            state.posts.unshift(post)
         },
         deletePost(state: InitialProfileStateType, action: PayloadAction<{ postId: number }>) {
             const index = state.posts.findIndex(post => post.id === action.payload.postId)
@@ -39,10 +40,10 @@ export const profileSlices = createSlice({
                 state.profile = action.payload.profile
             })
             .addCase(updateProfileUserStatus.fulfilled, (state: InitialProfileStateType, action) => {
-                state.profileStatus = action.payload.profileStatus
+                state.profileStatus = action.payload.status
             })
             .addCase(getProfileUserStatus.fulfilled, (state: InitialProfileStateType, action) => {
-                state.profileStatus = action.payload.profileStatus
+                state.profileStatus = action.payload.status
             })
             .addCase(savePhoto.fulfilled, (state: InitialProfileStateType, action) => {
                 state.profile!.photos = action.payload.photos
@@ -59,41 +60,43 @@ export const {addPost, deletePost} = profileSlices.actions
 export const setProfileUser = createAsyncThunk<{ profile: ProfileUserType }, number, ThunkErrorType>
 ('profile/setProfileUser',
     async (userId, {dispatch, rejectWithValue}) => {
-        dispatch(setAppStatus({status: 'loading'}))
+        dispatch(setAppStatus({appStatus: 'loading'}))
         try {
             const {data} = await profileAPI.getProfileUser(userId)
-            dispatch(setAppStatus({status: 'successful'}))
+            dispatch(setAppStatus({appStatus: 'successful'}))
             return {profile: data}
         } catch (err) {
             return handleAsyncNetworkError(err as AxiosError, {dispatch, rejectWithValue})
         }
     })
 
-export const getProfileUserStatus = createAsyncThunk<{ profileStatus: string }, number, ThunkErrorType>
+export const getProfileUserStatus = createAsyncThunk<{ status: string }, number, ThunkErrorType>
 ('profile/getProfileUserStatus',
     async (userId, {dispatch, rejectWithValue}) => {
-        dispatch(setAppStatus({status: 'loading'}))
+        dispatch(setAppStatus({appStatus: 'loading'}))
         try {
             const {data} = await profileAPI.getProfileUserStatus(userId)
-            dispatch(setAppStatus({status: 'successful'}))
-            return {profileStatus: data}
+            dispatch(setAppStatus({appStatus: 'successful'}))
+            return {status: data}
         } catch (err) {
             return handleAsyncNetworkError(err as AxiosError, {dispatch, rejectWithValue})
         }
     })
 
-export const updateProfileUserStatus = createAsyncThunk<{ profileStatus: string }, { profileStatus: string }, ThunkErrorType>
+export const updateProfileUserStatus = createAsyncThunk<{ status: string }, { status: string }, ThunkErrorType>
 ('profile/updateProfileUserStatus',
-    async (profileStatus, {dispatch, rejectWithValue}) => {
-        dispatch(setAppStatus({status: 'loading'}))
+    async (status, {dispatch, rejectWithValue}) => {
+        dispatch(setAppStatus({appStatus: 'loading'}))
         try {
-            const {data} = await profileAPI.updateProfileUserStatus(profileStatus)
-            if (data.resultCode === ResultCode.Success) {
-                dispatch(setAppStatus({status: 'successful'}))
-                return profileStatus
-            } else {
-                return handleAsyncServerAppError(data, {dispatch, rejectWithValue})
+            const {data} = await profileAPI.updateProfileUserStatus(status)
+            const {resultCode} = data
+
+            if (resultCode === ResultCode.Success) {
+                dispatch(setAppStatus({appStatus: 'successful'}))
+                return status
             }
+            return handleAsyncServerAppError(data, {dispatch, rejectWithValue})
+
         } catch (err) {
             return handleAsyncNetworkError(err as AxiosError, {dispatch, rejectWithValue})
         }
@@ -102,15 +105,16 @@ export const updateProfileUserStatus = createAsyncThunk<{ profileStatus: string 
 export const savePhoto = createAsyncThunk<{ photos: PhotosType }, File, ThunkErrorType>
 ('profile/savePhoto',
     async (file, {dispatch, rejectWithValue}) => {
-        dispatch(setAppStatus({status: 'loading'}))
+        dispatch(setAppStatus({appStatus: 'loading'}))
         try {
             const {data} = await profileAPI.savePhoto(file)
-            if (data.resultCode === ResultCode.Success) {
-                dispatch(setAppStatus({status: 'successful'}))
+            const {resultCode} = data
+
+            if (resultCode === ResultCode.Success) {
+                dispatch(setAppStatus({appStatus: 'successful'}))
                 return data.data
-            } else {
-                return handleAsyncServerAppError(data, {dispatch, rejectWithValue})
             }
+            return handleAsyncServerAppError(data, {dispatch, rejectWithValue})
         } catch (err) {
             return handleAsyncNetworkError(err as AxiosError, {dispatch, rejectWithValue})
         }
@@ -119,19 +123,19 @@ export const savePhoto = createAsyncThunk<{ photos: PhotosType }, File, ThunkErr
 export const saveProfile = createAsyncThunk<{ profile: ProfileUserType }, ProfileUserType, ThunkErrorType>
 ('profile/saveProfile',
     async (profile, {dispatch, rejectWithValue}) => {
-        dispatch(setAppStatus({status: 'loading'}))
+        dispatch(setAppStatus({appStatus: 'loading'}))
         try {
             const {data} = await profileAPI.saveProfile(profile)
-            if (data.resultCode === ResultCode.Success) {
+            const {resultCode} = data
+
+            if (resultCode === ResultCode.Success) {
                 if (profile.userId !== null) {
-                    dispatch(setAppStatus({status: 'successful'}))
+                    dispatch(setAppStatus({appStatus: 'successful'}))
                     return data.data
-                } else {
-                    return handleAsyncServerAppError(data, {dispatch, rejectWithValue})
                 }
-            } else {
                 return handleAsyncServerAppError(data, {dispatch, rejectWithValue})
             }
+            return handleAsyncServerAppError(data, {dispatch, rejectWithValue})
         } catch (err) {
             return handleAsyncNetworkError(err as AxiosError, {dispatch, rejectWithValue})
         }
@@ -139,7 +143,6 @@ export const saveProfile = createAsyncThunk<{ profile: ProfileUserType }, Profil
 
 
 export type InitialProfileStateType = typeof initialState
-export type PostsType = { id: number, message: string, likesCount: number }
 
 
 

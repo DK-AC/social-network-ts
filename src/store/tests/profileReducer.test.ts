@@ -1,15 +1,13 @@
 import {
     addPost,
-    deletePost,
-    getProfileUserStatus,
-    InitialProfileStateType,
-    profileReducer,
+    deletePost, getProfileUserStatus,
+    InitialProfileStateType, profileReducer,
     savePhoto,
     saveProfile,
-    setProfileUser,
-    updateProfileUserStatus,
-} from '../reducers/profileReducer'
-import {ProfileUserType} from '../../api/profileAPI'
+    setProfileUser, updateProfileUserStatus,
+} from 'store/reducers/profileReducer'
+
+import {ProfileUserType} from '../../types'
 
 let fakeState: InitialProfileStateType
 let fakeFile: File
@@ -74,7 +72,7 @@ describe('profile', () => {
     test('set user status', () => {
 
         const action = getProfileUserStatus
-            .fulfilled({profileStatus: 'new status'}, 'requestId', 1)
+            .fulfilled({status: 'new status'}, 'requestId', 1)
         const endState = profileReducer(fakeState, action)
 
         expect(fakeState.profileStatus).toBe('')
@@ -84,7 +82,7 @@ describe('profile', () => {
     test('user status should be changed', () => {
 
         const action = updateProfileUserStatus
-            .fulfilled({profileStatus: 'change status'}, 'requestId', {profileStatus: ''})
+            .fulfilled({status: 'change status'}, 'requestId', {status: ''})
         const endState = profileReducer(fakeState, action)
 
         expect(fakeState.profileStatus).toBe('')

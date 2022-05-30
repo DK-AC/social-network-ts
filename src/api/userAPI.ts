@@ -1,6 +1,7 @@
 import {AxiosResponse} from 'axios'
 
-import {PhotosType} from './profileAPI'
+import {PhotosType} from '../types/profile'
+
 import {apiConfig} from './apiConfig'
 import {AxiosResponseType, ResponseUserType} from './types'
 

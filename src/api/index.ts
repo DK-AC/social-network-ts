@@ -5,7 +5,6 @@ export {userAPI} from './userAPI'
 export type {UserType, UriParamsType, ParamsUserPageType} from './userAPI'
 
 export {profileAPI} from './profileAPI'
-export type {PhotosType, ContactsUserType, ProfileUserType} from './profileAPI'
 
 export {securityAPI} from './securityAPI'
 

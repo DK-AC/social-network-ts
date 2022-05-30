@@ -1,7 +1,7 @@
 import React, {FC, useState} from 'react'
 
-import {ProfileUserType} from '../../../api/profileAPI'
 import {Preloader} from '../../Preloader'
+import {Nullable, ProfileUserType} from '../../../types'
 
 import styles from './profileInfo.module.css'
 import {Photo} from './Photo'
@@ -10,7 +10,7 @@ import {ProfileDataForm} from './ProfileDataForm.'
 import {Status} from './Status'
 
 type PropsType = {
-    profile: ProfileUserType | null
+    profile: Nullable<ProfileUserType>
     isOwner: boolean
 }
 

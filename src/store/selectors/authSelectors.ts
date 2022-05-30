@@ -1,6 +1,6 @@
 import {RootStateType} from '../store'
 import {Nullable} from '../../types'
-import {PhotosType} from '../../api'
+import {PhotosType} from '../../types/profile'
 
 export const getIsAuth = (state: RootStateType): boolean => state.auth.isAuth
 

@@ -39,6 +39,15 @@ export {
     dialogsReducer,
     sendMessage,
     dialogSlices,
+    updateProfileUserStatus,
+    getProfileUserStatus,
+    addPost,
+    savePhoto,
+    saveProfile,
+    setProfileUser,
+    profileSlices,
+    deletePost,
+    profileReducer,
 } from './reducers'
 
 export type {LoadingType, MessagesType, DialogsType} from './types'

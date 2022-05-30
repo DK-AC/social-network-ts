@@ -3,10 +3,10 @@ import {useDispatch} from 'react-redux'
 import {Input} from 'antd'
 
 import ava from '../../../assets/img/client-2-512.webp'
-import {PhotosType} from '../../../api/profileAPI'
 import {savePhoto} from '../../../store/reducers/profileReducer'
 
 import styles from './profileInfo.module.css'
+import {PhotosType} from '../../../types/profile'
 
 type PropsType = {
     photo: PhotosType

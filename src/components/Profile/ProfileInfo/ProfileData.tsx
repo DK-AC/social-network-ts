@@ -2,7 +2,7 @@ import React, {FC} from 'react'
 import {EditOutlined} from '@ant-design/icons'
 import {Button} from 'antd'
 
-import {ProfileUserType} from '../../../api/profileAPI'
+import {ProfileUserType} from '../../../types'
 
 import {FullName} from './FullName'
 import {LookingForAJob} from './LookingForAJob'

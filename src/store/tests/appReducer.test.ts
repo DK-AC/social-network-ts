@@ -7,7 +7,7 @@ let startState: InitialAppStateType
 beforeEach(() => {
     startState = {
         isInitialized: FAILED_INITIALIZED,
-        status: 'idle',
+        appStatus: 'idle',
         error: '',
     }
 })
@@ -15,10 +15,10 @@ beforeEach(() => {
 describe('app', () => {
 
     test('loading should be changed', () => {
-        const endState = appReducer(startState, setAppStatus({status: 'successful'}))
+        const endState = appReducer(startState, setAppStatus({appStatus: 'successful'}))
 
-        expect(startState.status).toBe('idle')
-        expect(endState.status).toBe('successful')
+        expect(startState.appStatus).toBe('idle')
+        expect(endState.appStatus).toBe('successful')
     })
 
     test('set app error', () => {

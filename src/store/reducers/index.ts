@@ -18,3 +18,15 @@ export {
 } from './authReducer'
 
 export {dialogsReducer, dialogSlices, sendMessage} from './dialogsReducer'
+
+export {
+    updateProfileUserStatus,
+    getProfileUserStatus,
+    addPost,
+    savePhoto,
+    saveProfile,
+    setProfileUser,
+    profileSlices,
+    deletePost,
+    profileReducer,
+} from './profileReducer'

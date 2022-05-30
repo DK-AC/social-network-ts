@@ -3,7 +3,7 @@ import {useDispatch} from 'react-redux'
 import {useNavigate, useParams} from 'react-router-dom'
 
 import {useAppSelector} from '../../store/store'
-import {getProfileUserStatus, setProfileUser} from '../../store/reducers/profileReducer'
+import {getProfileUserStatus, setProfileUser} from '../../store'
 import {Nullable} from '../../types'
 import {getCurrentUserId, getIsAuth} from '../../store'
 import {getUserProfile} from '../../store'
