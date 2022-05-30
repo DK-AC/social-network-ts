@@ -36,6 +36,9 @@ export {
     authSlices,
     getMyPhoto,
     setMyPhoto,
+    dialogsReducer,
+    sendMessage,
+    dialogSlices,
 } from './reducers'
 
-export type {LoadingType} from './types'
+export type {LoadingType, MessagesType, DialogsType} from './types'

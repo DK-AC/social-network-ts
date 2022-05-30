@@ -16,3 +16,5 @@ export {
     getMyPhoto,
     setMyPhoto,
 } from './authReducer'
+
+export {dialogsReducer, dialogSlices, sendMessage} from './dialogsReducer'

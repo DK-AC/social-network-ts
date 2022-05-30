@@ -1,5 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 
+import {DialogsType, MessagesType} from '../types'
+
 const initialState = {
     dialogs: [
         {id: 1, name: 'Jenya'},
@@ -20,7 +22,8 @@ export const dialogSlices = createSlice({
     initialState,
     reducers: {
         sendMessage(state, action: PayloadAction<{ messageText: string }>) {
-            state.messages.push({id: new Date().getTime(), message: action.payload.messageText})
+            const message: MessagesType = {id: new Date().getTime(), message: action.payload.messageText}
+            state.messages.push(message)
         },
     },
     extraReducers: {},
@@ -29,7 +32,4 @@ export const dialogsReducer = dialogSlices.reducer
 export const {sendMessage} = dialogSlices.actions
 
 export type initialDialogsStateType = typeof initialState
-
-export type DialogsType = { id: number, name: string }
-export type MessagesType = { id: number, message: string }
 

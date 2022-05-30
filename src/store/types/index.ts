@@ -1,1 +1,2 @@
-export type {LoadingType} from './appTypes'
+export type {LoadingType} from './app'
+export type {MessagesType, DialogsType} from './dialogs'

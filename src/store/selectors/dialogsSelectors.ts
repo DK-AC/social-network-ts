@@ -1,5 +1,5 @@
 import {RootStateType} from '../store'
-import {DialogsType, MessagesType} from '../reducers/dialogsReducer'
+import {DialogsType, MessagesType} from '../types'
 
 export const getDialogs = (state: RootStateType): DialogsType[] => state.dialogs.dialogs
 
