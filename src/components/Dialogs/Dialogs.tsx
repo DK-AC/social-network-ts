@@ -5,11 +5,9 @@ import {Form, Formik, FormikHelpers, FormikValues} from 'formik'
 import {SendOutlined} from '@ant-design/icons'
 import {Button} from 'antd'
 
-import {sendMessage} from '../../store'
-import {useAppSelector} from '../../store/store'
 import {FormikField} from '../../reusableComponent/FormikField'
-import {getAppError} from '../../store'
-import {getDialogs, getMessages} from '../../store'
+
+import {getAppError, getDialogs, getMessages, sendMessage, useAppSelector} from '../../store'
 
 import {DialogItem} from './DialogItem'
 import {MessageItem} from './MessageItem'

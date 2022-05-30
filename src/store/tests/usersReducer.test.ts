@@ -1,13 +1,14 @@
+
+import {FOLLOW, UNFOLLOW} from '../../constans'
 import {
     changeCurrentPage,
     changePageSize,
     followUnfollow,
-    InitialUsersStateType,
     setIsFollowingInProgress,
     setUsers,
     usersReducer,
-} from '../reducers/usersReducer'
-import {FOLLOW, UNFOLLOW} from '../../constans/base'
+} from '../reducers'
+import {InitialUsersStateType} from '../reducers/usersReducer'
 
 let fakeState: InitialUsersStateType
 const fakeUsers = [

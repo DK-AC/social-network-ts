@@ -5,10 +5,9 @@ import {CheckOutlined} from '@ant-design/icons'
 import {Button} from 'antd'
 
 import {ContactsKeysType, FormikField} from '../../../reusableComponent/FormikField'
-import {useAppSelector} from '../../../store/store'
-import {saveProfile} from '../../../store'
-import {getAppError} from '../../../store'
 import {ProfileUserType} from '../../../types'
+
+import {getAppError, saveProfile, useAppSelector} from '../../../store'
 
 import styles from './profileInfo.module.css'
 

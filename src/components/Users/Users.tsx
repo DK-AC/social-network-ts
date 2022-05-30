@@ -2,16 +2,20 @@ import React, {FC, useEffect} from 'react'
 import {useDispatch} from 'react-redux'
 import {useNavigate, useSearchParams} from 'react-router-dom'
 
-import {useAppSelector} from '../../store/store'
 import {Preloader} from '../Preloader'
 import {Paginator} from '../common'
-import {changeCurrentPage, changePageSize, setUsers} from '../../store/reducers/usersReducer'
-import {UriParamsType} from '../../api'
-import {getIsAuth} from '../../store'
-import {getAppStatus} from '../../store'
-import {getPageSize, getUsersSelector} from '../../store'
-
 import {Paths} from '../../enum'
+import {UriParamsType} from '../../types'
+
+import {
+    changeCurrentPage,
+    changePageSize,
+    getAppStatus, getIsAuth,
+    getPageSize,
+    getUsersSelector,
+    setUsers,
+    useAppSelector,
+} from '../../store'
 
 import {UsersSearchForm} from './UsersSearchForm'
 import {User} from './User'

@@ -3,9 +3,7 @@ import {useDispatch} from 'react-redux'
 import {Avatar, Button, Col, Layout, Row} from 'antd'
 import {UserOutlined} from '@ant-design/icons'
 
-import {useAppSelector} from '../../store/store'
-import {logout} from '../../store'
-import {getCurrentUserEmail, getCurrentUserPhotos, getIsAuth} from '../../store'
+import {getCurrentUserEmail, getCurrentUserPhotos, getIsAuth, logout, useAppSelector} from '../../store'
 
 import styles from './header.module.css'
 

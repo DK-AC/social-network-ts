@@ -1,10 +1,8 @@
 import React, {FC, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 
-import {useAppSelector} from '../../store/store'
-import {getIsAuth} from '../../store/selectors/authSelectors'
-
 import {Paths} from '../../enum'
+import {getIsAuth, useAppSelector} from '../../store'
 
 import {FriendItem} from './FriendItem'
 import styles from './friends.module.css'

@@ -1,24 +1,17 @@
-import React from 'react'
 import * as Yup from 'yup'
 import {Form, Formik, FormikHelpers, FormikValues} from 'formik'
 import {useDispatch} from 'react-redux'
-
 import {Button} from 'antd'
-
 import {SendOutlined} from '@ant-design/icons'
+import {FC, memo} from 'react'
 
-import {addPost} from '../../../store/reducers/profileReducer'
-import {useAppSelector} from '../../../store/store'
 import {FormikField} from '../../../reusableComponent/FormikField'
-
-import {getAppError} from '../../../store'
-
-import {getProfilePosts} from '../../../store'
+import {addPost, getAppError, getProfilePosts, useAppSelector} from '../../../store'
 
 import {Post} from './Post'
 import styles from './posts.module.css'
 
-export const Posts: React.FC = React.memo(() => {
+export const Posts: FC = memo(() => {
 
     const dispatch = useDispatch()
 

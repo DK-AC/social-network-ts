@@ -1,17 +1,22 @@
-import React, {FC, useEffect} from 'react'
+import {FC, useEffect} from 'react'
 import {useDispatch} from 'react-redux'
 import {useNavigate, useParams} from 'react-router-dom'
 
-import {useAppSelector} from '../../store/store'
-import {getProfileUserStatus, setProfileUser} from '../../store'
 import {Nullable} from '../../types'
-import {getCurrentUserId, getIsAuth} from '../../store'
-import {getUserProfile} from '../../store'
-
 import {Paths} from '../../enum'
+
+import {
+    getCurrentUserId,
+    getIsAuth,
+    getProfileUserStatus,
+    getUserProfile,
+    setProfileUser,
+    useAppSelector,
+} from '../../store'
 
 import {Posts} from './Posts'
 import {ProfileInfo} from './ProfileInfo'
+
 export const Profile: FC = () => {
 
     const dispatch = useDispatch()

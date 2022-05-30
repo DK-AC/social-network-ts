@@ -1,7 +1,6 @@
 import {RootStateType} from '../store'
-import {Nullable} from '../../types'
+import {Nullable, ProfileUserType} from '../../types'
 import {PostType} from '../types/profile'
-import {ProfileUserType} from '../../types/profile'
 
 export const getProfileStatus = (state: RootStateType): string => state.profile.profileStatus
 

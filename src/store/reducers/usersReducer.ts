@@ -1,20 +1,24 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {AxiosError} from 'axios'
 
-import {AxiosResponseType, ParamsUserPageType, userAPI, UserType} from '../../api'
+import {AxiosResponseType, userAPI} from '../../api'
 import {handleAsyncNetworkError, ThunkErrorType} from '../../utils/error-utils'
-import {Nullable} from '../../types'
 import {followingHelper} from '../../utils'
 import {EMPTY_STRING, FOLLOW, UNFOLLOW} from '../../constans'
+import {Page} from '../../enum/page'
+import {FollowUnFollowPayloadType, PayloadUsersReturnedType} from '../types'
+
+import {ParamsUserPageType, UserType} from '../../types'
 
 import {setAppStatus} from './appReducer'
 
+const {INIT_TOTAL_USER_COUNT, INIT_START_PAGE, INIT_PAGE_SIZE} = Page
 
 const initialState = {
     users: [] as UserType[],
-    totalCount: 0,
-    pageSize: 10,
-    currentPage: 1,
+    totalCount: INIT_TOTAL_USER_COUNT,
+    pageSize: INIT_PAGE_SIZE,
+    currentPage: INIT_START_PAGE,
     followingInProgress: [] as number[],
     filter: {
         term: EMPTY_STRING,
@@ -98,6 +102,4 @@ export const followUnfollow = createAsyncThunk<FollowUnFollowPayloadType, Follow
     })
 
 export type InitialUsersStateType = typeof initialState
-type FollowUnFollowPayloadType = { userId: number, isFollow: boolean }
-type PayloadUsersReturnedType = { users: UserType[], totalCount: number, term: string, friend: Nullable<boolean> }
 

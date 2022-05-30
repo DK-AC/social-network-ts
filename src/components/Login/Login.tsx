@@ -1,17 +1,13 @@
 import 'react-app-polyfill/ie11'
-import * as React from 'react'
 import {FC, useEffect} from 'react'
 import {useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 import {UserOutlined} from '@ant-design/icons'
 import {Button, Checkbox, Form, Input, Spin} from 'antd'
 
-import {login} from '../../store'
-import {useAppSelector} from '../../store/store'
 import {LoginUserType} from '../../api'
-import {getCaptchaUrl, getIsAuth} from '../../store'
-import {getAppStatus} from '../../store'
 import {Paths} from '../../enum'
+import {getAppStatus, getCaptchaUrl, getIsAuth, login, useAppSelector} from '../../store'
 
 import logo from './../../assets/img/logoDK.svg'
 import styles from './login.module.css'

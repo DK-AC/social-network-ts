@@ -48,6 +48,17 @@ export {
     profileSlices,
     deletePost,
     profileReducer,
+    changeCurrentPage,
+    changePageSize,
+    usersReducer,
+    setUsers,
+    userSlices,
+    setIsFollowingInProgress,
+    followUnfollow,
+    sideBarReducer,
 } from './reducers'
 
 export type {LoadingType, MessagesType, DialogsType} from './types'
+
+export {store, rootReducer, useAppSelector} from './store'
+export type {RootStateType} from './store'

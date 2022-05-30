@@ -1,14 +1,12 @@
-import React, {FC} from 'react'
+import  {FC} from 'react'
 import {useDispatch} from 'react-redux'
 import {NavLink} from 'react-router-dom'
 import {Button} from 'antd'
 import {UserAddOutlined, UserDeleteOutlined} from '@ant-design/icons'
 
-import {followUnfollow} from '../../../store/reducers/usersReducer'
-import {useAppSelector} from '../../../store/store'
-import {UserType} from '../../../api'
-import {getFollowingInProgress} from '../../../store'
-import {FOLLOW, UNFOLLOW} from '../../../constans/base'
+import {FOLLOW, UNFOLLOW} from '../../../constans'
+import {UserType} from '../../../types'
+import {followUnfollow, getFollowingInProgress, useAppSelector} from '../../../store'
 
 import styles from './user.module.css'
 import avaImg from './../../../assets/img/client-2-512.webp'

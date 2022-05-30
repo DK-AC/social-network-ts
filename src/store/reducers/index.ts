@@ -30,3 +30,15 @@ export {
     deletePost,
     profileReducer,
 } from './profileReducer'
+
+export {
+    changeCurrentPage,
+    changePageSize,
+    usersReducer,
+    setUsers,
+    userSlices,
+    setIsFollowingInProgress,
+    followUnfollow,
+} from './usersReducer'
+
+export {sideBarReducer} from './sideBarReducer'

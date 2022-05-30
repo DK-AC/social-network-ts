@@ -3,17 +3,13 @@ import React, {FC, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {Layout} from 'antd'
 
-import {useAppSelector} from '../../store/store'
-import {authMe} from '../../store'
 import './App.css'
 import {Header} from '../Header'
 import {AppMenu} from '../AppMenu'
 import {AppContent} from '../AppContent'
 import {Login} from '../Login'
-import {getIsAuth} from '../../store'
-import {getAppIsInitialized} from '../../store'
-
 import {Paths} from '../../enum'
+import {authMe, getAppIsInitialized, getIsAuth, useAppSelector} from '../../store'
 
 import styles from './App.module.css'
 

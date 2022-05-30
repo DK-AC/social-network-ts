@@ -1,6 +1,6 @@
 import {AxiosResponse} from 'axios'
 
-import {PhotosType} from '../types/profile'
+import {ParamsUserPageType, UserType} from '../types'
 
 import {apiConfig} from './apiConfig'
 import {AxiosResponseType, ResponseUserType} from './types'
@@ -18,23 +18,6 @@ export const userAPI = {
         return apiConfig.delete<any, AxiosResponseType, ResponseType>(`/follow/${userId}`)
     },
 }
-
-export type UserType = {
-    id: number
-    name: string
-    uniqueUrlName: string
-    photos: PhotosType
-    status: string
-    followed: boolean
-}
-export type ParamsUserPageType = {
-    currentPage: number
-    pageSize: number
-    term: string
-    friend: null | boolean | string
-}
-
-export type UriParamsType = { page: string, count: string, term: string, friend: string }
 
 
 

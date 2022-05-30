@@ -1,5 +1,5 @@
 import {RootStateType} from '../store'
-import {UserType} from '../../api'
+import {UserType} from '../../types'
 
 export const getUsersSelector = (state: RootStateType): UserType[] => state.users.users
 

@@ -3,12 +3,7 @@ import {TypedUseSelectorHook, useSelector} from 'react-redux'
 import thunk from 'redux-thunk'
 import {configureStore} from '@reduxjs/toolkit'
 
-import {profileReducer} from './reducers/profileReducer'
-import {dialogsReducer} from './reducers/dialogsReducer'
-import {sideBarReducer} from './reducers/sideBarReducer'
-import {usersReducer} from './reducers/usersReducer'
-import {appReducer} from './reducers/appReducer'
-import {authReducer} from './reducers/authReducer'
+import {appReducer, authReducer, dialogsReducer, profileReducer, sideBarReducer, usersReducer} from './reducers'
 
 
 export const rootReducer = combineReducers({
