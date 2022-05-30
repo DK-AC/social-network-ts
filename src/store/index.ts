@@ -22,6 +22,20 @@ export {
     getUsersSelector,
 } from './selectors'
 
-export {setAppError, isAppInitialized, setAppStatus, appSlices, appReducer} from './reducers'
+export {
+    setAppError,
+    isAppInitialized,
+    setAppStatus,
+    appSlices,
+    appReducer,
+    getCaptchaURL,
+    logout,
+    login,
+    authMe,
+    authReducer,
+    authSlices,
+    getMyPhoto,
+    setMyPhoto,
+} from './reducers'
 
 export type {LoadingType} from './types'

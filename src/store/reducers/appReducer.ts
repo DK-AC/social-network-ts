@@ -2,14 +2,14 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 
 import {Nullable} from '../../types'
 import {LoadingType} from '../types'
-import {INITIALIZED, NOT_INITIALIZED} from '../../constans'
+import {SUCCESS_INITIALIZED, FAILED_INITIALIZED} from '../../constans'
 
 import {authMe} from './authReducer'
 
 const initialState = {
     status: 'idle' as LoadingType,
     error: null as Nullable<string>,
-    isInitialized: NOT_INITIALIZED,
+    isInitialized: FAILED_INITIALIZED,
 }
 
 export const appSlices = createSlice({
@@ -28,10 +28,10 @@ export const appSlices = createSlice({
     },
     extraReducers: builder => {
         builder.addCase(authMe.fulfilled, (state: InitialAppStateType) => {
-            state.isInitialized = INITIALIZED
+            state.isInitialized = SUCCESS_INITIALIZED
         })
         builder.addCase(authMe.rejected, (state: InitialAppStateType) => {
-            state.isInitialized = INITIALIZED
+            state.isInitialized = SUCCESS_INITIALIZED
             state.error = null
         })
     },

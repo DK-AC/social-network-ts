@@ -1,4 +1,5 @@
 import {authMe, authReducer, getCaptchaURL, InitialAuthStateType, logout} from '../reducers/authReducer'
+import {FAILED_USER_AUTH} from '../../constans'
 
 let fakeState: InitialAuthStateType
 
@@ -7,7 +8,7 @@ beforeEach(() => {
         id: null,
         email: null,
         password: null,
-        isAuth: false,
+        isAuth: FAILED_USER_AUTH,
         login: null,
         captchaURL: null,
         myPhotos: null,

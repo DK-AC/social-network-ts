@@ -6,7 +6,7 @@ import {useNavigate} from 'react-router-dom'
 import {UserOutlined} from '@ant-design/icons'
 import {Button, Checkbox, Form, Input, Spin} from 'antd'
 
-import {login} from '../../store/reducers/authReducer'
+import {login} from '../../store'
 import {useAppSelector} from '../../store/store'
 import {LoginUserType} from '../../api'
 import {getCaptchaUrl, getIsAuth} from '../../store'

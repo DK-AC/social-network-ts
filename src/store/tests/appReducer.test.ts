@@ -1,11 +1,12 @@
 import {appReducer, isAppInitialized, setAppError, setAppStatus} from '../reducers'
 import {InitialAppStateType} from '../reducers/appReducer'
+import {FAILED_INITIALIZED, SUCCESS_INITIALIZED} from '../../constans'
 
 let startState: InitialAppStateType
 
 beforeEach(() => {
     startState = {
-        isInitialized: false,
+        isInitialized: FAILED_INITIALIZED,
         status: 'idle',
         error: '',
     }
@@ -28,7 +29,7 @@ describe('app', () => {
     })
 
     test('set app initialize', () => {
-        const endState = appReducer(startState, isAppInitialized({isInitialized: true}))
+        const endState = appReducer(startState, isAppInitialized({isInitialized: SUCCESS_INITIALIZED}))
 
         expect(startState.isInitialized).toBeFalsy()
         expect(endState.isInitialized).toBeTruthy()

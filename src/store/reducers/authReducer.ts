@@ -5,11 +5,12 @@ import {authAPI, AuthUserType, LoginUserType, PhotosType, profileAPI, securityAP
 import {handleAsyncNetworkError, handleAsyncServerAppError, ThunkErrorType} from '../../utils/error-utils'
 import {Nullable} from '../../types'
 import {ResultCode, ResultCodeRequireCaptcha} from '../../enum'
+import {FAILED_USER_AUTH, SUCCESS_USER_AUTH} from '../../constans'
 
 import {setAppError, setAppStatus} from './appReducer'
 
 const initialState = {
-    isAuth: false,
+    isAuth: FAILED_USER_AUTH,
     id: null as Nullable<number>,
     login: null as Nullable<string>,
     email: null as Nullable<string>,
@@ -31,12 +32,12 @@ export const authSlices = createSlice({
             state.id = action.payload.id
             state.email = action.payload.email
             state.login = action.payload.login
-            state.isAuth = true
+            state.isAuth = SUCCESS_USER_AUTH
         })
         builder.addCase(logout.fulfilled, (state: InitialAuthStateType) => {
             state.email = null
             state.password = null
-            state.isAuth = false
+            state.isAuth = FAILED_USER_AUTH
             state.login = null
             state.captchaURL = null
             state.id = null
@@ -56,7 +57,9 @@ export const authMe = createAsyncThunk<AuthUserType, void, ThunkErrorType>
         dispatch(setAppStatus({status: 'loading'}))
         try {
             const {data} = await authAPI.me()
-            if (data.resultCode === ResultCode.Success) {
+            const {resultCode} = data
+
+            if (resultCode === ResultCode.Success) {
                 dispatch(setAppStatus({status: 'successful'}))
                 dispatch(getMyPhoto(data.data.id))
                 return data.data
@@ -74,7 +77,9 @@ export const login = createAsyncThunk<{ user: LoginUserType }, LoginUserType, Th
         dispatch(setAppStatus({status: 'loading'}))
         try {
             const {data} = await authAPI.login(loginData)
-            if (data.resultCode === ResultCode.Success) {
+            const {resultCode} = data
+
+            if (resultCode === ResultCode.Success) {
                 await dispatch(authMe())
                 dispatch(setAppStatus({status: 'successful'}))
                 dispatch(setAppError({error: null}))
@@ -97,7 +102,9 @@ export const logout = createAsyncThunk<undefined, void, ThunkErrorType>
         dispatch(setAppStatus({status: 'loading'}))
         try {
             const {data} = await authAPI.logout()
-            if (data.resultCode === ResultCode.Success) {
+            const {resultCode} = data
+
+            if (resultCode === ResultCode.Success) {
                 dispatch(setAppStatus({status: 'successful'}))
             } else {
                 return handleAsyncServerAppError(data, {dispatch, rejectWithValue})
@@ -113,8 +120,10 @@ export const getCaptchaURL = createAsyncThunk<{ url: string }, void, ThunkErrorT
         dispatch(setAppStatus({status: 'loading'}))
         try {
             const {data} = await securityAPI.getCaptchaUrl()
+            const {url} = data
+
             dispatch(setAppStatus({status: 'successful'}))
-            return {url: data.url}
+            return {url}
         } catch (err) {
             return handleAsyncNetworkError(err as AxiosError, {dispatch, rejectWithValue})
         }
@@ -124,8 +133,10 @@ export const getMyPhoto = createAsyncThunk<{ userId: number }, number, ThunkErro
     async (userId, {dispatch, rejectWithValue}) => {
         dispatch(setAppStatus({status: 'loading'}))
         try {
-            const res = await profileAPI.getProfileUser(userId)
-            dispatch(setMyPhoto({myPhoto: res.data.photos}))
+            const {data} = await profileAPI.getProfileUser(userId)
+            const {photos} = data
+
+            dispatch(setMyPhoto({myPhoto: photos}))
         } catch (err) {
             return handleAsyncNetworkError(err as AxiosError, {dispatch, rejectWithValue})
         }
