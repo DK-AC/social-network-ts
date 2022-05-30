@@ -1,6 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 
 import {Nullable} from '../../types'
+import {LoadingType} from '../types'
 
 import {authMe} from './authReducer'
 
@@ -39,4 +40,3 @@ export const appReducer = appSlices.reducer
 export const {setAppError, isAppInitialized, setAppStatus} = appSlices.actions
 
 export type InitialAppStateType = typeof initialState
-export type LoadingType = 'idle' | 'loading' | 'failed' | 'successful'

@@ -1,6 +1,6 @@
 import {RootStateType} from '../store'
-import {LoadingType} from '../reducers/appReducer'
 import {Nullable} from '../../types'
+import {LoadingType} from '../types/appTypes'
 
 export const getAppStatus = (state: RootStateType): LoadingType => state.app.status
 
