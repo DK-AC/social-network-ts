@@ -1,0 +1,8 @@
+.errorMessage {
+    position: fixed !important;
+    width: fit-content;
+    bottom: 20px;
+    top: initial;
+    right: initial;
+    left: 20px;
+}

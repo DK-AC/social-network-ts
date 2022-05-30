@@ -76,13 +76,18 @@ export const login = createAsyncThunk<{ user: LoginUserType }, LoginUserType, Th
         dispatch(setAppStatus({appStatus: 'loading'}))
         try {
             const {data} = await authAPI.login(loginData)
-            const {resultCode} = data
+            const {resultCode, messages} = data
 
             if (resultCode === ResultCode.Success) {
                 await dispatch(authMe())
                 dispatch(setAppStatus({appStatus: 'successful'}))
                 dispatch(setAppError({error: null}))
                 return data
+            }
+
+            if (resultCode === ResultCode.Error) {
+                dispatch(setAppStatus({appStatus: 'failed'}))
+                dispatch(setAppError({error: messages[0]}))
             }
 
             if (data.resultCode === ResultCodeRequireCaptcha.Captcha) {
@@ -93,8 +98,6 @@ export const login = createAsyncThunk<{ user: LoginUserType }, LoginUserType, Th
 
         } catch (err) {
             return handleAsyncNetworkError(err as AxiosError, {dispatch, rejectWithValue})
-        } finally {
-            dispatch(setAppStatus({appStatus: 'successful'}))
         }
     })
 

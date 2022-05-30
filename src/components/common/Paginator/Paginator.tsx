@@ -9,8 +9,8 @@ import {
     getPageSize,
     getTotalCount,
     useAppSelector,
-} from '../../store'
-import {UriParamsType} from '../../types'
+} from '../../../store'
+import {UriParamsType} from '../../../types'
 
 type PropsType = {
     setSearchParams: (nextInit: UriParamsType) => void
