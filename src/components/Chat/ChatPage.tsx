@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react'
+import React, {useEffect} from 'react'
 import {useDispatch} from 'react-redux'
 
 import {setChatMessages} from '../../store/reducers/chatReducer'
@@ -13,8 +13,6 @@ export const ChatPage = () => {
 
     const dispatch = useDispatch()
 
-    const bottom = useRef<null | HTMLDivElement>(null)
-
     const webSocketChat = new WebSocket(WebSocketCommonChatURL)
 
     useEffect(() => {
@@ -23,14 +21,9 @@ export const ChatPage = () => {
         })
     }, [dispatch])
 
-    useEffect(() => {
-        bottom.current?.scrollIntoView({behavior: 'auto'})
-    }, [])
-
-
     return (
         <>
-            <div className={styles.container} ref={bottom}>
+            <div className={styles.container}>
                 <Messages/>
             </div>
             <AddMessageForm webSocketChat={webSocketChat}/>
