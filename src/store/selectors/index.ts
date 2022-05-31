@@ -23,3 +23,5 @@ export {
     getUsersSelector,
 } from './usersSelectors'
 
+export {getChatMessages} from './chatSelectors'
+

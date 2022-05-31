@@ -4,6 +4,7 @@ import thunk from 'redux-thunk'
 import {configureStore} from '@reduxjs/toolkit'
 
 import {appReducer, authReducer, dialogsReducer, profileReducer, sideBarReducer, usersReducer} from './reducers'
+import {chatReducer} from './reducers/chatReducer'
 
 
 export const rootReducer = combineReducers({
@@ -13,6 +14,7 @@ export const rootReducer = combineReducers({
     users: usersReducer,
     app: appReducer,
     auth: authReducer,
+    chat: chatReducer,
 })
 
 export type RootStateType = ReturnType<typeof rootReducer>

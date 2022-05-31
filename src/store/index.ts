@@ -20,6 +20,7 @@ export {
     getFollowingInProgress,
     getTotalCount,
     getUsersSelector,
+    getChatMessages,
 } from './selectors'
 
 export {
@@ -56,6 +57,9 @@ export {
     setIsFollowingInProgress,
     followUnfollow,
     sideBarReducer,
+    chatReducer,
+    chatSlices,
+    addChatMessage,
 } from './reducers'
 
 export type {LoadingType, MessagesType, DialogsType} from './types'

@@ -1,4 +1,4 @@
-import React, {FC} from 'react'
+import {FC} from 'react'
 import {useDispatch} from 'react-redux'
 import * as Yup from 'yup'
 import {Form, Formik, FormikHelpers, FormikValues} from 'formik'
@@ -7,7 +7,7 @@ import {Button} from 'antd'
 
 import {FormikField} from '../../reusableComponent/FormikField'
 
-import {getAppError, getDialogs, getMessages, sendMessage, useAppSelector} from '../../store'
+import {getDialogs, getMessages, sendMessage, useAppSelector} from '../../store'
 
 import {DialogItem} from './DialogItem'
 import {MessageItem} from './MessageItem'
@@ -19,7 +19,6 @@ export const Dialogs: FC = () => {
 
     const dialogs = useAppSelector(getDialogs)
     const messages = useAppSelector(getMessages)
-    const error = useAppSelector(getAppError)
 
     const dialog = dialogs.map(d => {
         return <DialogItem key={d.id} id={d.id} name={d.name}/>

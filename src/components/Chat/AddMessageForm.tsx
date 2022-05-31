@@ -1,23 +1,25 @@
-import React, {useState} from 'react'
-import {Avatar, Button, Comment, Form, Input, List} from 'antd'
+import {ChangeEvent, ReactNode, useState} from 'react'
+import {Avatar, Button, Comment, Form, Input} from 'antd'
 import moment from 'moment'
+import {useDispatch} from 'react-redux'
+
+import {addChatMessage} from '../../store'
 
 const {TextArea} = Input
 
 type CommentItem = {
     author: string;
     avatar: string;
-    content: React.ReactNode;
+    content: ReactNode;
     datetime: string;
 }
 
 type EditorProps = {
-    onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+    onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
     onSubmit: () => void;
     submitting: boolean;
     value: string;
 }
-
 
 
 const Editor = ({onChange, onSubmit, submitting, value}: EditorProps) => (
@@ -35,6 +37,8 @@ const Editor = ({onChange, onSubmit, submitting, value}: EditorProps) => (
 
 export const AddMessageForm = () => {
 
+    const dispatch = useDispatch()
+
     const [comments, setComments] = useState<CommentItem[]>([])
     const [submitting, setSubmitting] = useState(false)
     const [value, setValue] = useState('')
@@ -45,6 +49,7 @@ export const AddMessageForm = () => {
         setSubmitting(true)
 
         setTimeout(() => {
+            dispatch(addChatMessage({chatMessage: value}))
             setSubmitting(false)
             setValue('')
             setComments([
@@ -59,7 +64,7 @@ export const AddMessageForm = () => {
         }, 1000)
     }
 
-    const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setValue(e.target.value)
     }
 

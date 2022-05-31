@@ -1,19 +1,16 @@
-import React, {FC} from 'react'
+import {FC} from 'react'
+
+import {getChatMessages, useAppSelector} from '../../../store'
+import {ChatMessageType} from '../../../store/types/chat'
 
 import {Message} from './Message'
 
-type MessageType = {
-    url: string
-    text: string
-    author: string
-}
-
 export const Messages: FC = () => {
 
-    const messages = [1, 2, 3, 4]
+    const messages = useAppSelector(getChatMessages)
 
-    const message = messages.map((message: any) => {
-        return <Message key={message}/>
+    const message = messages.map((message: ChatMessageType) => {
+        return <Message key={message.url} message={message}/>
     })
 
     return (
