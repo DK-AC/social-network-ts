@@ -1,19 +1,13 @@
-import {ChangeEvent, FC, ReactNode, useState} from 'react'
+import {ChangeEvent, FC, useState} from 'react'
 import {Avatar, Button, Comment, Form, Input} from 'antd'
-import moment from 'moment'
 import {useDispatch} from 'react-redux'
 
-import {addChatText, useAppSelector} from '../../store'
-import {ChatMessageType} from '../../store/types/chat'
+import {addChatText, getCurrentUserPhotos, useAppSelector} from '../../store'
+import {ChatMessageType} from '../../store/types'
+import {EMPTY_STRING} from '../../constans'
+import {getChatUserId, getChatUserName} from '../../store/selectors'
 
 const {TextArea} = Input
-
-type CommentItem = {
-    author: string;
-    avatar: string;
-    content: ReactNode;
-    datetime: string;
-}
 
 type EditorProps = {
     onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
@@ -25,7 +19,6 @@ type EditorProps = {
 type PropsType = {
     webSocketChat: WebSocket
 }
-
 
 const Editor = ({onChange, onSubmit, submitting, value}: EditorProps) => (
     <>
@@ -44,35 +37,31 @@ export const AddMessageForm: FC<PropsType> = ({webSocketChat}) => {
 
     const dispatch = useDispatch()
 
-    const userName = useAppSelector(state => state.chat.userName)
-    const photo = useAppSelector(state => state.chat.photo)
-    const userId = useAppSelector(state => state.chat.userId)
+    const userName = useAppSelector(getChatUserName)
+    const photo = useAppSelector(getCurrentUserPhotos)
+    const userId = useAppSelector(getChatUserId)
 
-    const [comments, setComments] = useState<CommentItem[]>([])
     const [submitting, setSubmitting] = useState(false)
-    const [value, setValue] = useState('')
+    const [value, setValue] = useState(EMPTY_STRING)
+
+    if (!photo) return null
 
     const handleSubmit = () => {
         if (!value) return
 
+
         setSubmitting(true)
 
         setTimeout(() => {
-            const payloadAddChatText: ChatMessageType = {message: value, userId, photo, userName}
+
+            const payloadAddChatText: ChatMessageType = {message: value, userId, photo: photo.small, userName}
 
             dispatch(addChatText(payloadAddChatText))
             webSocketChat.send(value)
+
             setSubmitting(false)
-            setValue('')
-            setComments([
-                ...comments,
-                {
-                    author: 'Han Solo',
-                    avatar: 'https://joeschmoe.io/api/v1/random',
-                    content: <p>{value}</p>,
-                    datetime: moment().fromNow(),
-                },
-            ])
+            setValue(EMPTY_STRING)
+
         }, 1000)
     }
 
@@ -84,7 +73,7 @@ export const AddMessageForm: FC<PropsType> = ({webSocketChat}) => {
     return (
         <>
             <Comment
-                avatar={<Avatar src={photo} alt="photo user"/>}
+                avatar={<Avatar src={photo.small} alt="photo user"/>}
                 content={
                     <Editor
                         onChange={handleChange}
