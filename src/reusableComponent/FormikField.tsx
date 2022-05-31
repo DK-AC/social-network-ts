@@ -1,9 +1,8 @@
 import {Field} from 'formik'
-import * as React from 'react'
+import {FC} from 'react'
 
 import {LoginUserType} from '../api'
-import {Nullable} from '../types'
-import {ContactsUserType, ProfileUserType} from '../types'
+import {ContactsUserType, Nullable, ProfileUserType} from '../types'
 
 
 export type ContactsKeysType = keyof ContactsUserType
@@ -15,18 +14,18 @@ type PropsType = {
     type?: string
     isShowError?: boolean
     isShowLabel?: boolean
-    error: Nullable<string>
+    error?: Nullable<string>
     placeholder?: string
 }
 
-export const FormikField: React.FC<PropsType> = ({
-                                                     isShowError,
-                                                     name,
-                                                     type = 'text',
-                                                     isShowLabel,
-                                                     error,
-                                                     placeholder,
-                                                 }) => {
+export const FormikField: FC<PropsType> = ({
+                                               isShowError,
+                                               name,
+                                               type = 'text',
+                                               isShowLabel,
+                                               error,
+                                               placeholder,
+                                           }) => {
     return <>
         {isShowLabel && <label htmlFor={name}>{name}</label>}
         <Field name={name} type={type} placeholder={placeholder}/>

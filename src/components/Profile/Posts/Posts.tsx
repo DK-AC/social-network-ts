@@ -7,6 +7,7 @@ import {FC, memo} from 'react'
 
 import {FormikField} from '../../../reusableComponent/FormikField'
 import {addPost, getAppError, getProfilePosts, useAppSelector} from '../../../store'
+import {ErrorMessage} from '../../common'
 
 import {Post} from './Post'
 import styles from './posts.module.css'
@@ -45,14 +46,16 @@ export const Posts: FC = memo(() => {
                                          type={'text'}
                                          isShowError={true}
                                          isShowLabel={false}
-                                         error={error}
+                                         error={formik.errors.postMessage}
                             />
-                            <Button disabled={!!formik.errors.postMessage}
-                                    htmlType={'submit'}
+                            <Button htmlType={'submit'}
                                     icon={<SendOutlined/>}
-                                    size={'small'}>
+                                    size={'small'}
+                                    disabled={!formik.isValid}
+                            >
                                 Send post
                             </Button>
+                            {error && <ErrorMessage/>}
                         </Form>
                     )}
                 </Formik>

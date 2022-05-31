@@ -55,9 +55,9 @@ export const Dialogs: FC = () => {
                                              type={'text'}
                                              isShowError={true}
                                              isShowLabel={false}
-                                             error={error}
+                                             error={formik.errors.dialogMessage}
                                 />
-                                <Button disabled={!!formik.errors.dialogMessage}
+                                <Button disabled={!formik.isValid}
                                         htmlType={'submit'}
                                         icon={<SendOutlined/>}
                                         size={'small'}>

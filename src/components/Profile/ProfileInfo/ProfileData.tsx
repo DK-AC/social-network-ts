@@ -18,6 +18,7 @@ type PropsType = {
 }
 
 export const ProfileData: FC<PropsType> = ({profile, isOwner, goToEditMode}) => {
+
     const {fullName, lookingForAJobDescription, lookingForAJob, contacts, aboutMe} = profile
 
     const error = useAppSelector(getAppError)
