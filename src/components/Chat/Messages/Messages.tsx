@@ -1,26 +1,26 @@
 import {FC, useEffect, useState} from 'react'
 
 import {ChatMessageType} from '../../../store/types'
+import {Nullable} from '../../../types'
 
 import {Message} from './Message'
 
-const WebSocketCommonChatURL = 'wss://social-network.samuraijs.com/handlers/ChatHandler.ashx'
+type PropsType = {
+    wsChannel: Nullable<WebSocket>
+}
 
-export const Messages: FC = () => {
+export const Messages: FC<PropsType> = ({wsChannel}) => {
 
     const [messages, setMessages] = useState<ChatMessageType[]>([])
 
     useEffect(() => {
-        const webSocketChat = new WebSocket(WebSocketCommonChatURL)
-
-        webSocketChat.addEventListener('message', (event) => {
-
-            const newMessages = JSON.parse(event.data)
-
-            setMessages((prevState) => [...prevState, ...newMessages])
-        })
-    }, [])
-
+        if (wsChannel) {
+            wsChannel.addEventListener('message', (event) => {
+                const newMessages = JSON.parse(event.data)
+                setMessages((prevState) => [...prevState, ...newMessages])
+            })
+        }
+    }, [wsChannel])
 
     const message = messages.map((message: ChatMessageType, index) => {
         return <Message key={index + '' + message.userId} chatMessage={message}/>
