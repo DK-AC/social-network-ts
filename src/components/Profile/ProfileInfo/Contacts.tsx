@@ -1,7 +1,8 @@
-import React, {FC} from 'react'
+import {FC} from 'react'
+
+import {ContactsUserType} from '../../../types'
 
 import {Contact} from './Contact'
-import {ContactsUserType} from '../../../types/profile'
 
 type PropsType = {
     contacts: ContactsUserType
