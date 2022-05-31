@@ -23,5 +23,5 @@ export {
     getUsersSelector,
 } from './usersSelectors'
 
-export {getChatMessages, getChatUserId, getChatUserPhoto, getChatUserName} from './chatSelectors'
+export {getChatMessages} from './chatSelectors'
 

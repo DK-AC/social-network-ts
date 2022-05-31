@@ -1,13 +1,26 @@
-import {FC} from 'react'
+import {FC, useEffect, useState} from 'react'
 
 import {ChatMessageType} from '../../../store/types'
-import {getChatMessages, useAppSelector} from '../../../store'
 
 import {Message} from './Message'
 
+const WebSocketCommonChatURL = 'wss://social-network.samuraijs.com/handlers/ChatHandler.ashx'
+
 export const Messages: FC = () => {
 
-    const messages = useAppSelector(getChatMessages)
+    const [messages, setMessages] = useState<ChatMessageType[]>([])
+
+    useEffect(() => {
+        const webSocketChat = new WebSocket(WebSocketCommonChatURL)
+
+        webSocketChat.addEventListener('message', (event) => {
+
+            const newMessages = JSON.parse(event.data)
+
+            setMessages((prevState) => [...prevState, ...newMessages])
+        })
+    }, [])
+
 
     const message = messages.map((message: ChatMessageType, index) => {
         return <Message key={index + '' + message.userId} chatMessage={message}/>

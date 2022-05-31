@@ -1,11 +1,8 @@
 import {ChangeEvent, FC, useState} from 'react'
 import {Avatar, Button, Comment, Form, Input} from 'antd'
-import {useDispatch} from 'react-redux'
 
-import {addChatText, getCurrentUserPhotos, useAppSelector} from '../../store'
-import {ChatMessageType} from '../../store/types'
+import {getCurrentUserPhotos, useAppSelector} from '../../store'
 import {EMPTY_STRING} from '../../constans'
-import {getChatUserId, getChatUserName} from '../../store/selectors'
 
 const {TextArea} = Input
 
@@ -14,10 +11,6 @@ type EditorProps = {
     onSubmit: () => void;
     submitting: boolean;
     value: string;
-}
-
-type PropsType = {
-    webSocketChat: WebSocket
 }
 
 const Editor = ({onChange, onSubmit, submitting, value}: EditorProps) => (
@@ -33,13 +26,13 @@ const Editor = ({onChange, onSubmit, submitting, value}: EditorProps) => (
     </>
 )
 
-export const AddMessageForm: FC<PropsType> = ({webSocketChat}) => {
+export const AddMessageForm: FC = () => {
 
-    const dispatch = useDispatch()
+    const WebSocketCommonChatURL = 'wss://social-network.samuraijs.com/handlers/ChatHandler.ashx'
 
-    const userName = useAppSelector(getChatUserName)
+    const webSocketChat = new WebSocket(WebSocketCommonChatURL)
+
     const photo = useAppSelector(getCurrentUserPhotos)
-    const userId = useAppSelector(getChatUserId)
 
     const [submitting, setSubmitting] = useState(false)
     const [value, setValue] = useState(EMPTY_STRING)
@@ -49,19 +42,13 @@ export const AddMessageForm: FC<PropsType> = ({webSocketChat}) => {
     const handleSubmit = () => {
         if (!value) return
 
-
         setSubmitting(true)
 
         setTimeout(() => {
-
-            const payloadAddChatText: ChatMessageType = {message: value, userId, photo: photo.small, userName}
-
-            dispatch(addChatText(payloadAddChatText))
             webSocketChat.send(value)
 
             setSubmitting(false)
             setValue(EMPTY_STRING)
-
         }, 1000)
     }
 
