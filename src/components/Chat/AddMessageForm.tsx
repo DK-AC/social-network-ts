@@ -1,9 +1,9 @@
-import {ChangeEvent, ReactNode, useState} from 'react'
+import {ChangeEvent, FC, ReactNode, useState} from 'react'
 import {Avatar, Button, Comment, Form, Input} from 'antd'
 import moment from 'moment'
 import {useDispatch} from 'react-redux'
 
-import {addChatText, getCurrentUserLogin, getCurrentUserPhotos, useAppSelector} from '../../store'
+import {addChatText, useAppSelector} from '../../store'
 import {ChatMessageType} from '../../store/types/chat'
 
 const {TextArea} = Input
@@ -22,6 +22,10 @@ type EditorProps = {
     value: string;
 }
 
+type PropsType = {
+    webSocketChat: WebSocket
+}
+
 
 const Editor = ({onChange, onSubmit, submitting, value}: EditorProps) => (
     <>
@@ -36,25 +40,17 @@ const Editor = ({onChange, onSubmit, submitting, value}: EditorProps) => (
     </>
 )
 
-export const AddMessageForm = () => {
+export const AddMessageForm: FC<PropsType> = ({webSocketChat}) => {
 
     const dispatch = useDispatch()
 
-    const author = useAppSelector(getCurrentUserLogin)
-    const photos = useAppSelector(getCurrentUserPhotos)
+    const userName = useAppSelector(state => state.chat.userName)
+    const photo = useAppSelector(state => state.chat.photo)
+    const userId = useAppSelector(state => state.chat.userId)
 
     const [comments, setComments] = useState<CommentItem[]>([])
     const [submitting, setSubmitting] = useState(false)
     const [value, setValue] = useState('')
-
-    if (!author) {
-        return null
-    }
-
-    if (!photos) {
-        return null
-    }
-
 
     const handleSubmit = () => {
         if (!value) return
@@ -62,9 +58,10 @@ export const AddMessageForm = () => {
         setSubmitting(true)
 
         setTimeout(() => {
-            const payloadAddChatText: ChatMessageType = {text: value, author, url: photos.small}
+            const payloadAddChatText: ChatMessageType = {message: value, userId, photo, userName}
 
             dispatch(addChatText(payloadAddChatText))
+            webSocketChat.send(value)
             setSubmitting(false)
             setValue('')
             setComments([
@@ -87,7 +84,7 @@ export const AddMessageForm = () => {
     return (
         <>
             <Comment
-                avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo"/>}
+                avatar={<Avatar src={photo} alt="photo user"/>}
                 content={
                     <Editor
                         onChange={handleChange}

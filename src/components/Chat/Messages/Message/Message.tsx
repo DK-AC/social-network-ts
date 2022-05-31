@@ -5,20 +5,20 @@ import moment from 'moment'
 import {ChatMessageType} from '../../../../store/types/chat'
 
 type PropsType = {
-    message: ChatMessageType
+    chatMessage: ChatMessageType
 }
 
-export const Message: FC<PropsType> = ({message}) => {
+export const Message: FC<PropsType> = ({chatMessage}) => {
 
-    const {url, author, text} = message
+    const {message, userId, userName, photo} = chatMessage
 
     return (
         <Comment
-            author={<a>{author}</a>}
-            avatar={<Avatar src={url} alt="Han Solo"/>}
+            author={<a>{userName}</a>}
+            avatar={<Avatar src={photo} alt="Han Solo"/>}
             content={
                 <p>
-                    {text}
+                    {message}
                 </p>
             }
             datetime={

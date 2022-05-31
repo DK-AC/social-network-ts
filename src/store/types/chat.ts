@@ -1,7 +1,8 @@
 import {Nullable} from '../../types'
 
 export type ChatMessageType = {
-    url: Nullable<string>
-    text: string
-    author: string
+    userName:  Nullable<string>
+    photo:  Nullable<string>
+    message:  Nullable<string>
+    userId:  Nullable<number>
 }
