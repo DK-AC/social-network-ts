@@ -4,6 +4,8 @@ import {Avatar, Button, Comment, Form, Input} from 'antd'
 import {getCurrentUserPhotos, useAppSelector} from '../../store'
 import {EMPTY_STRING} from '../../constans'
 import {Nullable} from '../../types'
+import {WebSocketEventType, WebSocketStatus} from '../../enum'
+import {WebSocketStatusType} from '../../types/chat'
 
 const {TextArea} = Input
 
@@ -16,10 +18,8 @@ type EditorProps = {
 }
 
 type PropsType = {
-    wsChannel: Nullable<WebSocket>
+    webSocketChannel: Nullable<WebSocket>
 }
-
-type WebSocketStatusType = 'pending' | 'ready'
 
 
 const Editor = ({onChange, onSubmit, submitting, value, readyStatus}: EditorProps) => (
@@ -28,8 +28,9 @@ const Editor = ({onChange, onSubmit, submitting, value, readyStatus}: EditorProp
             <TextArea rows={4} onChange={onChange} value={value}/>
         </Form.Item>
         <Form.Item>
-            <Button disabled={readyStatus !== 'ready'}
-                    htmlType="submit" loading={submitting}
+            <Button disabled={readyStatus !== WebSocketStatus.Ready}
+                    htmlType="submit"
+                    loading={submitting}
                     onClick={onSubmit}
                     type="default"
             >
@@ -39,23 +40,26 @@ const Editor = ({onChange, onSubmit, submitting, value, readyStatus}: EditorProp
     </>
 )
 
-export const AddMessageForm: FC<PropsType> = ({wsChannel}) => {
+export const AddMessageForm: FC<PropsType> = ({webSocketChannel}) => {
 
     const photo = useAppSelector(getCurrentUserPhotos)
 
     const [submitting, setSubmitting] = useState(false)
     const [value, setValue] = useState(EMPTY_STRING)
-    const [readyStatus, setReadyStatus] = useState<WebSocketStatusType>('pending')
+    const [readyStatus, setReadyStatus] = useState<WebSocketStatusType>(WebSocketStatus.Pending)
 
 
     useEffect(() => {
-        if (wsChannel) {
-            wsChannel.addEventListener('open', () => {
-                setReadyStatus('ready')
-            })
 
-        }
-    }, [wsChannel])
+            const openWebSocketEvent = () => {
+                setReadyStatus(WebSocketStatus.Ready)
+            }
+            webSocketChannel?.addEventListener(WebSocketEventType.Open, openWebSocketEvent)
+            return () => {
+                webSocketChannel?.removeEventListener(WebSocketEventType.Open, openWebSocketEvent)
+            }
+        }, [webSocketChannel],
+    )
 
     const handleSubmit = () => {
         if (!value) return
@@ -63,12 +67,10 @@ export const AddMessageForm: FC<PropsType> = ({wsChannel}) => {
         setSubmitting(true)
 
         setTimeout(() => {
-            if (wsChannel) {
-                wsChannel.send(value)
+            webSocketChannel?.send(value)
 
-                setSubmitting(false)
-                setValue(EMPTY_STRING)
-            }
+            setSubmitting(false)
+            setValue(EMPTY_STRING)
 
         }, 1000)
     }

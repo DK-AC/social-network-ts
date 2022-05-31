@@ -1,29 +1,36 @@
 import {FC, useEffect, useState} from 'react'
 
-import {ChatMessageType} from '../../../store/types'
-import {Nullable} from '../../../types'
+import {ChatMessageType, Nullable} from '../../../types'
+import {WebSocketEventType} from '../../../enum'
+
+import {EMPTY_STRING} from '../../../constans'
 
 import {Message} from './Message'
 
 type PropsType = {
-    wsChannel: Nullable<WebSocket>
+    webSocketChannel: Nullable<WebSocket>
 }
 
-export const Messages: FC<PropsType> = ({wsChannel}) => {
+export const Messages: FC<PropsType> = ({webSocketChannel}) => {
 
     const [messages, setMessages] = useState<ChatMessageType[]>([])
 
     useEffect(() => {
-        if (wsChannel) {
-            wsChannel.addEventListener('message', (event) => {
-                const newMessages = JSON.parse(event.data)
-                setMessages((prevState) => [...prevState, ...newMessages])
-            })
+
+        const messageWebSocketEvent = (event: MessageEvent) => {
+            const newMessages = JSON.parse(event.data)
+            setMessages((prevState) => [...prevState, ...newMessages])
         }
-    }, [wsChannel])
+
+        webSocketChannel?.addEventListener(WebSocketEventType.Message, messageWebSocketEvent)
+
+        return () => {
+            webSocketChannel?.removeEventListener(WebSocketEventType.Message, messageWebSocketEvent)
+        }
+    }, [webSocketChannel])
 
     const message = messages.map((message: ChatMessageType, index) => {
-        return <Message key={index + '' + message.userId} chatMessage={message}/>
+        return <Message key={index + EMPTY_STRING + message.userId} chatMessage={message}/>
     })
 
     return (

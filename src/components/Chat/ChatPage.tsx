@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 
 import {Nullable} from '../../types'
+import {WebSocketEventType} from '../../enum'
 
 import {Messages} from './Messages'
 import {AddMessageForm} from './AddMessageForm'
@@ -10,32 +11,42 @@ const WebSocketCommonChatURL = 'wss://social-network.samuraijs.com/handlers/Chat
 
 export const ChatPage = () => {
 
-    const [wsChannel, setWsChannel] = useState<Nullable<WebSocket>>(null)
+    const [webSocketChannel, setWebSocketChannel] = useState<Nullable<WebSocket>>(null)
 
     useEffect(() => {
+
+        let webSocket: WebSocket
+
+        const closeWebSocketEvent = () => {
+            console.log('Close ws')
+            setTimeout(createChannel, 3000)
+        }
+
         function createChannel() {
-            setWsChannel(new WebSocket(WebSocketCommonChatURL))
+
+            webSocket?.removeEventListener(WebSocketEventType.Close, closeWebSocketEvent)
+            webSocket?.close()
+
+            webSocket = new WebSocket(WebSocketCommonChatURL)
+            webSocket.addEventListener(WebSocketEventType.Close, closeWebSocketEvent)
+
+            setWebSocketChannel(webSocket)
         }
 
         createChannel()
-    }, [])
 
-    useEffect(() => {
-
-        if (wsChannel) {
-            wsChannel.addEventListener('close', (event) => {
-                console.log('Close ws')
-            })
+        return () => {
+            webSocket.removeEventListener(WebSocketEventType.Close, closeWebSocketEvent)
+            webSocket.close()
         }
-
-    }, [wsChannel])
+    }, [])
 
     return (
         <>
             <div className={styles.container}>
-                <Messages wsChannel={wsChannel}/>
+                <Messages webSocketChannel={webSocketChannel}/>
             </div>
-            <AddMessageForm wsChannel={wsChannel}/>
+            <AddMessageForm webSocketChannel={webSocketChannel}/>
         </>
     )
 }
