@@ -59,7 +59,7 @@ export {
     sideBarReducer,
     chatReducer,
     chatSlices,
-    addChatMessage,
+    addChatText,
 } from './reducers'
 
 export type {LoadingType, MessagesType, DialogsType} from './types'

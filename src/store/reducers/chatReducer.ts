@@ -1,6 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 
 import {ChatMessageType} from '../types/chat'
+import {Nullable} from '../../types'
 
 const initialState = {
     chatMessages: [
@@ -14,11 +15,11 @@ export const chatSlices = createSlice({
     name: 'chat',
     initialState,
     reducers: {
-        addChatMessage(state, action: PayloadAction<{ chatMessage: string }>) {
+        addChatText(state, action: PayloadAction<{ text: string, url: Nullable<string>, author: string }>) {
             const chatMessage: ChatMessageType = {
-                author: '12',
-                text: action.payload.chatMessage,
-                url: 'https://joeschmoe.io/api/v1/random',
+                author: action.payload.author,
+                text: action.payload.text,
+                url: action.payload.url,
             }
             state.chatMessages.push(chatMessage)
         },
@@ -26,6 +27,6 @@ export const chatSlices = createSlice({
 })
 
 export const chatReducer = chatSlices.reducer
-export const {addChatMessage} = chatSlices.actions
+export const {addChatText} = chatSlices.actions
 
 export type InitialChatStateType = typeof initialState

@@ -3,7 +3,8 @@ import {Avatar, Button, Comment, Form, Input} from 'antd'
 import moment from 'moment'
 import {useDispatch} from 'react-redux'
 
-import {addChatMessage} from '../../store'
+import {addChatText, getCurrentUserLogin, getCurrentUserPhotos, useAppSelector} from '../../store'
+import {ChatMessageType} from '../../store/types/chat'
 
 const {TextArea} = Input
 
@@ -39,9 +40,21 @@ export const AddMessageForm = () => {
 
     const dispatch = useDispatch()
 
+    const author = useAppSelector(getCurrentUserLogin)
+    const photos = useAppSelector(getCurrentUserPhotos)
+
     const [comments, setComments] = useState<CommentItem[]>([])
     const [submitting, setSubmitting] = useState(false)
     const [value, setValue] = useState('')
+
+    if (!author) {
+        return null
+    }
+
+    if (!photos) {
+        return null
+    }
+
 
     const handleSubmit = () => {
         if (!value) return
@@ -49,7 +62,9 @@ export const AddMessageForm = () => {
         setSubmitting(true)
 
         setTimeout(() => {
-            dispatch(addChatMessage({chatMessage: value}))
+            const payloadAddChatText: ChatMessageType = {text: value, author, url: photos.small}
+
+            dispatch(addChatText(payloadAddChatText))
             setSubmitting(false)
             setValue('')
             setComments([
@@ -67,6 +82,7 @@ export const AddMessageForm = () => {
     const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setValue(e.target.value)
     }
+
 
     return (
         <>
