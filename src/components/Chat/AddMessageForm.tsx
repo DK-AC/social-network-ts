@@ -43,6 +43,7 @@ const Editor = ({onChange, onSubmit, submitting, value, readyStatus}: EditorProp
 export const AddMessageForm: FC<PropsType> = ({webSocketChannel}) => {
 
     console.log('')
+    console.log('AddMessageForm')
 
     const photo = useAppSelector(getCurrentUserPhotos)
 
