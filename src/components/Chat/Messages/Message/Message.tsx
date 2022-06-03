@@ -1,4 +1,4 @@
-import {FC, memo, useEffect, useRef} from 'react'
+import React, {FC, memo, useEffect, useRef, useState} from 'react'
 import {Avatar, Comment, Tooltip} from 'antd'
 import moment from 'moment'
 
@@ -10,16 +10,30 @@ type PropsType = {
 
 export const Message: FC<PropsType> = memo(({chatMessage}) => {
 
-    const bottom = useRef<null | HTMLDivElement>(null)
-
     const {message, userName, photo} = chatMessage
 
+    const bottom = useRef<null | HTMLDivElement>(null)
+
+    const [isScrollAuto, setIsScrollAuto] = useState(false)
+
+
+    const onMessageContentAutoScroll = (event: React.UIEvent<HTMLDivElement, UIEvent>) => {
+        const element = event.currentTarget
+        if (Math.abs((element.scrollHeight - element.scrollTop) - element.clientHeight) < 300) {
+            !isScrollAuto && setIsScrollAuto(true)
+        } else {
+            isScrollAuto && setIsScrollAuto(false)
+        }
+    }
+
     useEffect(() => {
-        bottom.current?.scrollIntoView({behavior: 'auto'})
+        if (isScrollAuto) {
+            bottom.current?.scrollIntoView({behavior: 'auto'})
+        }
     }, [chatMessage])
 
     return (
-        <div ref={bottom}>
+        <div style={{overflow: 'auto'}} ref={bottom} onScroll={onMessageContentAutoScroll}>
             <Comment
                 author={<a>{userName}</a>}
                 avatar={<Avatar src={photo} alt="Han Solo"/>}

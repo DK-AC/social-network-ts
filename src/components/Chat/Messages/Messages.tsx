@@ -6,7 +6,6 @@ import {getChatMessages, useAppSelector} from '../../../store'
 
 import {Message} from './Message'
 
-
 export const Messages: FC = () => {
 
     const messages = useAppSelector(getChatMessages)
