@@ -10,3 +10,5 @@ export {securityAPI} from './securityAPI'
 export type {ResponseType, ResponseUserType, AxiosResponseType, FieldErrorType} from './types'
 
 export {apiConfig} from './apiConfig'
+
+export {chatAPI} from './chatAPI'

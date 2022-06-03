@@ -1,11 +1,10 @@
-import {ChangeEvent, FC, useEffect, useState} from 'react'
+import {ChangeEvent, FC, useState} from 'react'
 import {Avatar, Button, Comment, Form, Input} from 'antd'
 import {useDispatch} from 'react-redux'
 
-import {getCurrentUserPhotos, useAppSelector} from '../../store'
+import {getChatStatus, getCurrentUserPhotos, useAppSelector} from '../../store'
 import {EMPTY_STRING} from '../../constans'
-import {WebSocketStatus} from '../../enum'
-import {WebSocketStatusType} from '../../types/chat'
+import {StatusChat} from '../../enum'
 import {sendChatMessage} from '../../store/reducers/chatReducer'
 
 const {TextArea} = Input
@@ -15,26 +14,29 @@ type EditorProps = {
     onSubmit: () => void;
     submitting: boolean;
     value: string;
-    readyStatus: WebSocketStatusType
 }
 
-const Editor = ({onChange, onSubmit, submitting, value, readyStatus}: EditorProps) => (
-    <>
-        <Form.Item>
-            <TextArea rows={4} onChange={onChange} value={value}/>
-        </Form.Item>
-        <Form.Item>
-            <Button disabled={readyStatus !== WebSocketStatus.Ready}
-                    htmlType="submit"
-                    loading={submitting}
-                    onClick={onSubmit}
-                    type="default"
-            >
-                Add Comment
-            </Button>
-        </Form.Item>
-    </>
-)
+const Editor = ({onChange, onSubmit, submitting, value}: EditorProps) => {
+
+    const status = useAppSelector(getChatStatus)
+
+    return (
+        <>
+            <Form.Item>
+                <TextArea rows={4} onChange={onChange} value={value}/>
+            </Form.Item>
+            <Form.Item>
+                <Button disabled={status !== StatusChat.Ready}
+                        htmlType="submit"
+                        loading={submitting}
+                        onClick={onSubmit}
+                        type="default"
+                >
+                    Add Comment
+                </Button>
+            </Form.Item>
+        </>)
+}
 
 export const AddMessageForm: FC = () => {
 
@@ -44,11 +46,7 @@ export const AddMessageForm: FC = () => {
 
     const [submitting, setSubmitting] = useState(false)
     const [value, setValue] = useState(EMPTY_STRING)
-    const [readyStatus, setReadyStatus] = useState<WebSocketStatusType>(WebSocketStatus.Pending)
 
-    useEffect(() => {
-        setReadyStatus(WebSocketStatus.Ready)
-    }, [])
 
     const handleSubmit = () => {
         if (!value) return
@@ -77,7 +75,6 @@ export const AddMessageForm: FC = () => {
                 avatar={<Avatar src={photo.small} alt="photo user"/>}
                 content={
                     <Editor
-                        readyStatus={readyStatus}
                         onChange={handleChange}
                         onSubmit={handleSubmit}
                         submitting={submitting}

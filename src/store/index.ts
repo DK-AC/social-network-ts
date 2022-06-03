@@ -21,6 +21,7 @@ export {
     getTotalCount,
     getUsersSelector,
     getChatMessages,
+    getChatStatus,
 } from './selectors'
 
 export {

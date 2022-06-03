@@ -7,4 +7,4 @@ export type ChatMessageType = {
     message: Nullable<string>
     userId: Nullable<number>
 }
-export type WebSocketStatusType = WebSocketStatus.Pending | WebSocketStatus.Ready
+export type WebSocketStatusType = WebSocketStatus.StatusChanged | WebSocketStatus.MessagesReceived

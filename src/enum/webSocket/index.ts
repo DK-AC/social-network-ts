@@ -1,10 +1,17 @@
 export enum WebSocketEventType {
     Close = 'close',
     Open = 'open',
-    Message = 'message'
+    Message = 'message',
+    Error = 'error',
 }
 
 export enum WebSocketStatus {
+    MessagesReceived = 'messages-received',
+    StatusChanged = 'status-changed'
+}
+
+export enum StatusChat {
     Pending = 'pending',
-    Ready = 'ready'
+    Ready = 'ready',
+    Error = 'error',
 }

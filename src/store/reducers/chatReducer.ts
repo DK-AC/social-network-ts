@@ -3,10 +3,12 @@ import {AxiosError} from 'axios'
 
 import {ChatMessageType} from '../../types'
 import {handleAsyncNetworkError, ThunkErrorType} from '../../utils/error-utils'
-import {chatAPI} from '../../api/chatAPI'
+import {chatAPI} from '../../api'
+import {StatusChat, WebSocketStatus} from '../../enum'
 
 const initialState = {
     messages: [] as ChatMessageType[],
+    chatStatus: StatusChat.Pending as StatusChat,
 }
 
 export const chatSlices = createSlice({
@@ -16,11 +18,14 @@ export const chatSlices = createSlice({
         setChatMessages(state: InitialChatStateType, action: PayloadAction<{ messages: ChatMessageType[] }>) {
             state.messages.push(...action.payload.messages)
         },
+        changeChatStatusAC(state: InitialChatStateType, action: PayloadAction<{ chatStatus: StatusChat }>) {
+            state.chatStatus = action.payload.chatStatus
+        },
     },
 })
 
 export const chatReducer = chatSlices.reducer
-export const {setChatMessages} = chatSlices.actions
+export const {setChatMessages, changeChatStatusAC} = chatSlices.actions
 
 let newMessageHandle: ((messages: ChatMessageType[]) => void) | null = null
 
@@ -33,20 +38,35 @@ const newMessageHandleCreator = (dispatch: Dispatch) => {
     return newMessageHandle
 }
 
+let statusChangedHandle: ((status: StatusChat) => void) | null = null
+
+const statusChangedHandleCreator = (dispatch: Dispatch) => {
+    if (statusChangedHandle === null) {
+        statusChangedHandle = (status) => {
+            dispatch(changeChatStatusAC({chatStatus: status}))
+        }
+    }
+    return statusChangedHandle
+}
+
+
 export const startMessagesListening = createAsyncThunk<{ messages: ChatMessageType[] }, void, ThunkErrorType>('chat/startMessagesListening',
-    async (messages, {dispatch, rejectWithValue}) => {
+    (messages, {dispatch, rejectWithValue}) => {
         try {
             chatAPI.startWebSocketChanel()
-            await chatAPI.subscribeNewMessages(newMessageHandleCreator(dispatch))
+            chatAPI.subscribeNewMessages(WebSocketStatus.MessagesReceived, newMessageHandleCreator(dispatch))
+            chatAPI.subscribeNewMessages(WebSocketStatus.StatusChanged, statusChangedHandleCreator(dispatch))
         } catch (err) {
             return handleAsyncNetworkError(err as AxiosError, {dispatch, rejectWithValue})
         }
     })
 
 export const stopMessagesListening = createAsyncThunk<{ messages: ChatMessageType[] }, void, ThunkErrorType>('chat/stopMessagesListening',
-    async (messages, {dispatch, rejectWithValue}) => {
+    (messages, {dispatch, rejectWithValue}) => {
         try {
-            await chatAPI.unSubscribeNewMessages(newMessageHandleCreator(dispatch))
+            chatAPI.unSubscribeNewMessages(WebSocketStatus.MessagesReceived, newMessageHandleCreator(dispatch))
+            chatAPI.subscribeNewMessages(WebSocketStatus.StatusChanged, statusChangedHandleCreator(dispatch))
+
             chatAPI.startWebSocketChanel()
         } catch (err) {
             return handleAsyncNetworkError(err as AxiosError, {dispatch, rejectWithValue})
@@ -54,9 +74,9 @@ export const stopMessagesListening = createAsyncThunk<{ messages: ChatMessageTyp
     })
 
 export const sendChatMessage = createAsyncThunk<{ message: string }, { message: string }, ThunkErrorType>('chat/sendChatMessage',
-    async ({message}, {dispatch, rejectWithValue}) => {
+    ({message}, {dispatch, rejectWithValue}) => {
         try {
-            await chatAPI.sendMessage(message)
+            chatAPI.sendMessage(message)
         } catch (err) {
             return handleAsyncNetworkError(err as AxiosError, {dispatch, rejectWithValue})
         }
