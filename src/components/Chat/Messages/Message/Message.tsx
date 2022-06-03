@@ -14,7 +14,7 @@ export const Message: FC<PropsType> = memo(({chatMessage}) => {
 
     const bottom = useRef<null | HTMLDivElement>(null)
 
-    const [isScrollAuto, setIsScrollAuto] = useState(false)
+    const [isScrollAuto, setIsScrollAuto] = useState(true)
 
 
     const onMessageContentAutoScroll = (event: React.UIEvent<HTMLDivElement, UIEvent>) => {
