@@ -2,7 +2,7 @@ import {FC, useEffect, useRef} from 'react'
 import {Avatar, Comment, Tooltip} from 'antd'
 import moment from 'moment'
 
-import {ChatMessageType} from '../../../../types/chat'
+import {ChatMessageType} from '../../../../types'
 
 type PropsType = {
     chatMessage: ChatMessageType

@@ -1,33 +1,15 @@
-import {FC, useEffect, useState} from 'react'
+import {FC} from 'react'
 
-import {ChatMessageType, Nullable} from '../../../types'
-import {WebSocketEventType} from '../../../enum'
-
+import {ChatMessageType} from '../../../types'
 import {EMPTY_STRING} from '../../../constans'
+import {getChatMessages, useAppSelector} from '../../../store'
 
 import {Message} from './Message'
 
-type PropsType = {
-    webSocketChannel: Nullable<WebSocket>
-}
 
-export const Messages: FC<PropsType> = ({webSocketChannel}) => {
+export const Messages: FC = () => {
 
-    const [messages, setMessages] = useState<ChatMessageType[]>([])
-
-    useEffect(() => {
-
-        const messageWebSocketEvent = (event: MessageEvent) => {
-            const newMessages = JSON.parse(event.data)
-            setMessages((prevState) => [...prevState, ...newMessages])
-        }
-
-        webSocketChannel?.addEventListener(WebSocketEventType.Message, messageWebSocketEvent)
-
-        return () => {
-            webSocketChannel?.removeEventListener(WebSocketEventType.Message, messageWebSocketEvent)
-        }
-    }, [webSocketChannel])
+    const messages = useAppSelector(getChatMessages)
 
     const message = messages.map((message: ChatMessageType, index) => {
         return <Message key={index + EMPTY_STRING + message.userId} chatMessage={message}/>

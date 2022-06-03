@@ -1,11 +1,11 @@
-import {ChatMessageType} from '../types'
+import {ChatMessageType, Nullable} from '../types'
 import {WebSocketEventType} from '../enum'
 
 const WebSocketCommonChatURL = 'wss://social-network.samuraijs.com/handlers/ChatHandler.ashx'
 
 let subscribers = [] as SubscriberNewMessagesType[]
 
-let webSocket: WebSocket
+let webSocket: Nullable<WebSocket>
 
 const closeWebSocketEvent = () => {
     console.log('Close ws')
@@ -24,15 +24,28 @@ function createChannel() {
 
     webSocket = new WebSocket(WebSocketCommonChatURL)
     webSocket.addEventListener(WebSocketEventType.Close, closeWebSocketEvent)
+    webSocket.addEventListener(WebSocketEventType.Message, messageWebSocketEvent)
 }
 
 
 export const chatAPI = {
+    startWebSocketChanel() {
+        createChannel()
+    },
+    stopWebSocketChanel() {
+        subscribers = []
+        webSocket?.removeEventListener(WebSocketEventType.Close, closeWebSocketEvent)
+        webSocket?.removeEventListener(WebSocketEventType.Message, messageWebSocketEvent)
+        webSocket?.close()
+    },
     subscribeNewMessages(callback: SubscriberNewMessagesType) {
         subscribers.push(callback)
     },
-    unsubscribe(callback: SubscriberNewMessagesType) {
+    unSubscribeNewMessages(callback: SubscriberNewMessagesType) {
         subscribers = subscribers.filter(subscriber => subscriber !== callback)
+    },
+    sendMessage(message: string) {
+        webSocket?.send(message)
     },
 }
 

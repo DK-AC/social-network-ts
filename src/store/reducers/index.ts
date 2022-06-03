@@ -41,6 +41,6 @@ export {
     followUnfollow,
 } from './usersReducer'
 
-export {chatReducer, chatSlices, addChatText} from './chatReducer'
+export {chatReducer, chatSlices} from './chatReducer'
 
 export {sideBarReducer} from './sideBarReducer'

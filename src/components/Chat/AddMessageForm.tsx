@@ -1,11 +1,12 @@
 import {ChangeEvent, FC, useEffect, useState} from 'react'
 import {Avatar, Button, Comment, Form, Input} from 'antd'
+import {useDispatch} from 'react-redux'
 
 import {getCurrentUserPhotos, useAppSelector} from '../../store'
 import {EMPTY_STRING} from '../../constans'
-import {Nullable} from '../../types'
-import {WebSocketEventType, WebSocketStatus} from '../../enum'
+import {WebSocketStatus} from '../../enum'
 import {WebSocketStatusType} from '../../types/chat'
+import {sendChatMessage} from '../../store/reducers/chatReducer'
 
 const {TextArea} = Input
 
@@ -16,11 +17,6 @@ type EditorProps = {
     value: string;
     readyStatus: WebSocketStatusType
 }
-
-type PropsType = {
-    webSocketChannel: Nullable<WebSocket>
-}
-
 
 const Editor = ({onChange, onSubmit, submitting, value, readyStatus}: EditorProps) => (
     <>
@@ -40,7 +36,9 @@ const Editor = ({onChange, onSubmit, submitting, value, readyStatus}: EditorProp
     </>
 )
 
-export const AddMessageForm: FC<PropsType> = ({webSocketChannel}) => {
+export const AddMessageForm: FC = () => {
+
+    const dispatch = useDispatch()
 
     const photo = useAppSelector(getCurrentUserPhotos)
 
@@ -48,26 +46,16 @@ export const AddMessageForm: FC<PropsType> = ({webSocketChannel}) => {
     const [value, setValue] = useState(EMPTY_STRING)
     const [readyStatus, setReadyStatus] = useState<WebSocketStatusType>(WebSocketStatus.Pending)
 
-
     useEffect(() => {
-
-            const openWebSocketEvent = () => {
-                setReadyStatus(WebSocketStatus.Ready)
-            }
-            webSocketChannel?.addEventListener(WebSocketEventType.Open, openWebSocketEvent)
-            return () => {
-                webSocketChannel?.removeEventListener(WebSocketEventType.Open, openWebSocketEvent)
-            }
-        }, [webSocketChannel],
-    )
+        setReadyStatus(WebSocketStatus.Ready)
+    }, [])
 
     const handleSubmit = () => {
         if (!value) return
 
-        setSubmitting(true)
-
         setTimeout(() => {
-            webSocketChannel?.send(value)
+
+            dispatch(sendChatMessage({message: value}))
 
             setSubmitting(false)
             setValue(EMPTY_STRING)
