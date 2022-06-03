@@ -5,7 +5,7 @@ import {useDispatch} from 'react-redux'
 import {getChatStatus, getCurrentUserPhotos, useAppSelector} from '../../store'
 import {EMPTY_STRING} from '../../constans'
 import {StatusChat} from '../../enum'
-import {sendChatMessage} from '../../store/reducers/chatReducer'
+import {sendChatMessage} from '../../store/reducers'
 
 const {TextArea} = Input
 

@@ -1,8 +1,7 @@
 import {useEffect} from 'react'
-
 import {useDispatch} from 'react-redux'
 
-import {startMessagesListening, stopMessagesListening} from '../../store/reducers/chatReducer'
+import {startMessagesListening, stopMessagesListening} from '../../store/reducers'
 
 import {Messages} from './Messages'
 import {AddMessageForm} from './AddMessageForm'
@@ -19,7 +18,7 @@ export const ChatPage = () => {
             dispatch(stopMessagesListening())
         }
 
-    }, [])
+    }, [dispatch])
 
     return (
         <>

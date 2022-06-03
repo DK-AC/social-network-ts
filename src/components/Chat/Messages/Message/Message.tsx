@@ -1,4 +1,4 @@
-import {FC, useEffect, useRef} from 'react'
+import {FC, memo, useEffect, useRef} from 'react'
 import {Avatar, Comment, Tooltip} from 'antd'
 import moment from 'moment'
 
@@ -8,7 +8,7 @@ type PropsType = {
     chatMessage: ChatMessageType
 }
 
-export const Message: FC<PropsType> = ({chatMessage}) => {
+export const Message: FC<PropsType> = memo(({chatMessage}) => {
 
     const bottom = useRef<null | HTMLDivElement>(null)
 
@@ -32,4 +32,4 @@ export const Message: FC<PropsType> = ({chatMessage}) => {
             />
         </div>
     )
-}
+})

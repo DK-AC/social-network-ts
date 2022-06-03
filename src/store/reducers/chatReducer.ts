@@ -17,6 +17,7 @@ export const chatSlices = createSlice({
     reducers: {
         setChatMessages(state: InitialChatStateType, action: PayloadAction<{ messages: ChatMessageType[] }>) {
             state.messages.push(...action.payload.messages)
+
         },
         changeChatStatusAC(state: InitialChatStateType, action: PayloadAction<{ chatStatus: StatusChat }>) {
             state.chatStatus = action.payload.chatStatus
@@ -65,9 +66,9 @@ export const stopMessagesListening = createAsyncThunk<{ messages: ChatMessageTyp
     (messages, {dispatch, rejectWithValue}) => {
         try {
             chatAPI.unSubscribeNewMessages(WebSocketStatus.MessagesReceived, newMessageHandleCreator(dispatch))
-            chatAPI.subscribeNewMessages(WebSocketStatus.StatusChanged, statusChangedHandleCreator(dispatch))
+            chatAPI.unSubscribeNewMessages(WebSocketStatus.StatusChanged, statusChangedHandleCreator(dispatch))
 
-            chatAPI.startWebSocketChanel()
+            chatAPI.stopWebSocketChanel()
         } catch (err) {
             return handleAsyncNetworkError(err as AxiosError, {dispatch, rejectWithValue})
         }
