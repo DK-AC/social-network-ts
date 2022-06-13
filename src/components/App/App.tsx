@@ -8,7 +8,7 @@ import {Header} from '../Header'
 import {AppMenu} from '../AppMenu'
 import {AppContent} from '../AppContent'
 import {Login} from '../Login'
-import {Paths} from '../../enum'
+import {Path} from '../../enum'
 import {authMe, getAppIsInitialized, getIsAuth, useAppSelector} from '../../store'
 
 import styles from './App.module.css'
@@ -31,7 +31,7 @@ export const App: FC = () => {
 
     useEffect(() => {
         if (isInitialized && !isAuth) {
-            navigate(Paths.LOGIN_PAGE)
+            navigate(Path.LOGIN_PAGE)
         }
         return
     }, [isAuth, isInitialized, navigate])

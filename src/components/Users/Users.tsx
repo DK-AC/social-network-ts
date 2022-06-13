@@ -4,7 +4,7 @@ import {useNavigate, useSearchParams} from 'react-router-dom'
 
 import {Preloader} from '../Preloader'
 import {Paginator} from '../common'
-import {Paths} from '../../enum'
+import {Path} from '../../enum'
 import {UriParamsType} from '../../types'
 
 import {
@@ -64,7 +64,7 @@ export const Users: FC = () => {
     }, [dispatch, actualPage, uriParams.page, uriParams.count])
 
     if (!isAuth) {
-        navigate(Paths.LOGIN_PAGE)
+        navigate(Path.LOGIN_PAGE)
     }
 
     return (

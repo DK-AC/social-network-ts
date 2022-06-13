@@ -1,7 +1,7 @@
 import React, {FC, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 
-import {Paths} from '../../enum'
+import {Path} from '../../enum'
 import {getIsAuth, useAppSelector} from '../../store'
 
 import {FriendItem} from './FriendItem'
@@ -21,7 +21,7 @@ export const Friends: FC = () => {
 
     useEffect(() => {
         if (!isAuth) {
-            navigate(Paths.LOGIN_PAGE)
+            navigate(Path.LOGIN_PAGE)
         }
     }, [isAuth, navigate])
 

@@ -5,7 +5,7 @@ import {UserOutlined} from '@ant-design/icons'
 import {Button, Checkbox, Form, Input, Spin} from 'antd'
 
 import {LoginUserType} from '../../api'
-import {Paths} from '../../enum'
+import {Path} from '../../enum'
 import {getAppError, getAppStatus, getCaptchaUrl, getIsAuth, login, useAppSelector} from '../../store'
 import {ErrorMessage} from '../common'
 
@@ -25,7 +25,7 @@ export const Login: FC = () => {
 
     useEffect(() => {
         if (isAuth) {
-            navigate(Paths.PROFILE_PAGE)
+            navigate(Path.PROFILE_PAGE)
         }
         return
     }, [dispatch, isAuth, navigate])

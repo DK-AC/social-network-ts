@@ -1,4 +1,4 @@
-export enum Paths {
+export enum Path {
     START_PAGE = '/',
     PROFILE_PAGE = '/profile',
     PROFILE_USER_PAGE = '/profile/:profileUserId',

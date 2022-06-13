@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom'
 
 import {Empty} from 'antd'
 
-import {Paths} from '../../enum'
+import {Path} from '../../enum'
 import {getIsAuth, useAppSelector} from '../../store'
 
 export const News: FC = () => {
@@ -14,7 +14,7 @@ export const News: FC = () => {
 
     useEffect(() => {
         if (!isAuth) {
-            navigate(Paths.LOGIN_PAGE)
+            navigate(Path.LOGIN_PAGE)
         }
     }, [isAuth, navigate])
 

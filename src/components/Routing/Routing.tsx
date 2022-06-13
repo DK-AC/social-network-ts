@@ -7,7 +7,7 @@ import {News} from '../News'
 import {Login} from '../Login'
 import {NotFound404} from '../NotFound404'
 import {Settings} from '../Settings'
-import {Paths} from '../../enum'
+import {Path} from '../../enum'
 
 const Profile = React.lazy(async () => ({default: (await import('../Profile')).Profile}))
 const Users = React.lazy(async () => ({default: (await import('../Users')).Users}))
@@ -20,18 +20,18 @@ export const Routing: FC = () => {
         <>
             <React.Suspense fallback={<p> Loading...</p>}>
                 <Routes>
-                    <Route path={Paths.START_PAGE} element={<Navigate to={Paths.PROFILE_PAGE}/>}/>
-                    <Route path={Paths.PROFILE_PAGE} element={<Profile/>}/>
-                    <Route path={Paths.PROFILE_USER_PAGE} element={<Profile/>}/>
-                    <Route path={Paths.USERS_PAGE} element={<Users/>}/>
-                    <Route path={Paths.DIALOGS_PAGE} element={<Dialogs/>}/>
-                    <Route path={Paths.NEWS_PAGE} element={<News/>}/>
-                    <Route path={Paths.MUSIC_PAGE} element={<Music/>}/>
-                    <Route path={Paths.SETTINGS_PAGE} element={<Settings/>}/>
-                    <Route path={Paths.FRIENDS_PAGE} element={<Friends/>}/>
-                    <Route path={Paths.LOGIN_PAGE} element={<Login/>}/>
-                    <Route path={Paths.CHAT_PAGE} element={<Chat/>}/>
-                    <Route path={Paths.NOT_FOUND_PAGE} element={<NotFound404/>}/>
+                    <Route path={Path.START_PAGE} element={<Navigate to={Path.PROFILE_PAGE}/>}/>
+                    <Route path={Path.PROFILE_PAGE} element={<Profile/>}/>
+                    <Route path={Path.PROFILE_USER_PAGE} element={<Profile/>}/>
+                    <Route path={Path.USERS_PAGE} element={<Users/>}/>
+                    <Route path={Path.DIALOGS_PAGE} element={<Dialogs/>}/>
+                    <Route path={Path.NEWS_PAGE} element={<News/>}/>
+                    <Route path={Path.MUSIC_PAGE} element={<Music/>}/>
+                    <Route path={Path.SETTINGS_PAGE} element={<Settings/>}/>
+                    <Route path={Path.FRIENDS_PAGE} element={<Friends/>}/>
+                    <Route path={Path.LOGIN_PAGE} element={<Login/>}/>
+                    <Route path={Path.CHAT_PAGE} element={<Chat/>}/>
+                    <Route path={Path.NOT_FOUND_PAGE} element={<NotFound404/>}/>
                 </Routes>
             </React.Suspense>
         </>

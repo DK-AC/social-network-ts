@@ -3,7 +3,7 @@ import {useDispatch} from 'react-redux'
 import {useNavigate, useParams} from 'react-router-dom'
 
 import {Nullable} from '../../types'
-import {Paths} from '../../enum'
+import {Path} from '../../enum'
 
 import {
     getCurrentUserId,
@@ -37,7 +37,7 @@ export const Profile: FC = () => {
 
     useEffect(() => {
         if (!isAuth) {
-            navigate(Paths.LOGIN_PAGE)
+            navigate(Path.LOGIN_PAGE)
         } else {
             dispatch(setProfileUser(profileUserId as number))
             dispatch(getProfileUserStatus(profileUserId as number))
