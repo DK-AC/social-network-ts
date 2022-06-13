@@ -46,7 +46,7 @@ export const App: FC = () => {
                 <Layout className="site-layout" style={{marginLeft: 200}}>
                     <Header/>
                     <AppContent/>
-                    <Footer style={{textAlign: 'center'}}>Ant Design ©2018 Created by Ant UED</Footer>
+                    <Footer style={{textAlign: 'center'}}>Social Network ©2022 Created by Denis Katsai</Footer>
                 </Layout>
             </Layout>
     )

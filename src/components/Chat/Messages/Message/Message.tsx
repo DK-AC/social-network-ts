@@ -10,8 +10,6 @@ type PropsType = {
 
 export const Message: FC<PropsType> = memo(({chatMessage}) => {
 
-    console.log('Message')
-
     const {message, userName, photo} = chatMessage
 
     const bottom = useRef<null | HTMLDivElement>(null)
