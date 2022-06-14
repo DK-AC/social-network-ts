@@ -42,6 +42,7 @@ export const Login: FC = () => {
                 <img src={logo} className="App-logo" alt="logo"/>
 
                 <Spin spinning={status === 'loading'}></Spin>
+
                 <Form.Item name="email"
                            rules={[
                                {
@@ -70,14 +71,15 @@ export const Login: FC = () => {
                     <Checkbox style={{color: '#C6C6C7FF'}}>Remember me?</Checkbox>
                 </Form.Item>
 
-                {captchaURL
-                    ? <>
-                        <img src={captchaURL} alt="captchaURL"/>
-                        <Form.Item name="captcha">
-                            <Input name={'captcha'} placeholder={'Symbols from image'}/>
-                        </Form.Item>
-                    </>
-                    : null
+                {
+                    captchaURL
+                        ? <>
+                            <img src={captchaURL} alt="captchaURL"/>
+                            <Form.Item name="captcha">
+                                <Input name={'captcha'} placeholder={'Symbols from image'}/>
+                            </Form.Item>
+                        </>
+                        : null
                 }
                 <Form.Item>
                     <Button type="default"

@@ -36,19 +36,21 @@ export const App: FC = () => {
         return
     }, [isAuth, isInitialized, navigate])
 
+    if (!isAuth) {
+        return <Login/>
+    }
+
     return (
-        !isAuth
-            ? <Login/>
-            : <Layout hasSider>
-                <Sider className={styles.sider}>
-                    <AppMenu/>
-                </Sider>
-                <Layout className="site-layout" style={{marginLeft: 200}}>
-                    <Header/>
-                    <AppContent/>
-                    <Footer style={{textAlign: 'center'}}>Social Network ©2022 Created by Denis Katsai</Footer>
-                </Layout>
+        <Layout hasSider>
+            <Sider className={styles.sider}>
+                <AppMenu/>
+            </Sider>
+            <Layout style={{marginLeft: 200}}>
+                <Header/>
+                <AppContent/>
+                <Footer style={{textAlign: 'center'}}>Social Network ©2022 Created by Denis Katsai</Footer>
             </Layout>
+        </Layout>
     )
 }
 
