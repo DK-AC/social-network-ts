@@ -11,7 +11,7 @@ import {
 import React, {FC} from 'react'
 import {useLocation, useNavigate} from 'react-router-dom'
 
-import {Path} from '../../enum'
+import {Path} from 'enum'
 
 
 export const AppMenu: FC = () => {

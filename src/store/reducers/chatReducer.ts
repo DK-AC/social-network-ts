@@ -1,15 +1,17 @@
 import {createAsyncThunk, createSlice, Dispatch, PayloadAction} from '@reduxjs/toolkit'
 import {AxiosError} from 'axios'
+import {ChatMessageType} from 'types'
+import {chatAPI} from 'api'
+import {StatusChat, WebSocketStatus} from 'enum'
 
-import {ChatMessageType} from '../../types'
 import {handleAsyncNetworkError, ThunkErrorType} from '../../utils/error-utils'
-import {chatAPI} from '../../api'
-import {StatusChat, WebSocketStatus} from '../../enum'
 
 const initialState = {
     messages: [] as ChatMessageType[],
     chatStatus: StatusChat.Pending as StatusChat,
 }
+
+console.log(initialState)
 
 export const chatSlices = createSlice({
     name: 'chat',
