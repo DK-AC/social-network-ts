@@ -12,6 +12,7 @@ const initialState = {
 }
 
 console.log(initialState)
+console.log(initialState)
 
 export const chatSlices = createSlice({
     name: 'chat',
