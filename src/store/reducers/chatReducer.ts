@@ -13,6 +13,7 @@ const initialState = {
 
 console.log(initialState)
 console.log(initialState)
+console.log('Read react documentation')
 
 export const chatSlices = createSlice({
     name: 'chat',
