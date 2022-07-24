@@ -11,12 +11,6 @@ const initialState = {
     chatStatus: StatusChat.Pending as StatusChat,
 }
 
-console.log('Read react documentation')
-console.log('Read react documentation')
-console.log('Read react documentation')
-console.log('Read react documentation')
-console.log('Read react documentation')
-
 export const chatSlices = createSlice({
     name: 'chat',
     initialState,
