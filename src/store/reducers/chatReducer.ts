@@ -6,6 +6,8 @@ import {StatusChat, WebSocketStatus} from 'enum'
 
 import {handleAsyncNetworkError, ThunkErrorType} from '../../utils/error-utils'
 
+console.log('Read react doc')
+
 const initialState = {
     messages: [] as ChatMessageType[],
     chatStatus: StatusChat.Pending as StatusChat,
