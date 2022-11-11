@@ -5,9 +5,10 @@ import {Form, Formik, FormikHelpers, FormikValues} from 'formik'
 import {SendOutlined} from '@ant-design/icons'
 import {Button} from 'antd'
 
-import {FormikField} from '../../reusableComponent/FormikField'
+import {getDialogs, getMessages, sendMessage, useAppSelector} from 'store'
 
-import {getDialogs, getMessages, sendMessage, useAppSelector} from '../../store'
+import {FormikField} from 'reusableComponent/FormikField'
+
 
 import {DialogItem} from './DialogItem'
 import {MessageItem} from './MessageItem'
@@ -21,12 +22,12 @@ export const Dialogs: FC = () => {
     const messages = useAppSelector(getMessages)
 
     const dialog = dialogs.map(d => {
-        return <DialogItem key={d.id} id={d.id} name={d.name}/>
+        return <DialogItem key={d.id} id={d.id} name={d.name} />
     })
     const message = messages.map(m => {
-        return <MessageItem key={m.id} id={m.id} message={m.message}/>
+        return <MessageItem key={m.id} id={m.id} message={m.message} />
     })
-    const addDialogMessage = (message: FormikValues, action: FormikHelpers<{ dialogMessage: string }>) => {
+    const addDialogMessage = (message: FormikValues, action: FormikHelpers<{dialogMessage: string}>) => {
         dispatch(sendMessage({messageText: String(message.dialogMessage)}))
         action.resetForm({values: {dialogMessage: ''}})
     }
@@ -49,7 +50,7 @@ export const Dialogs: FC = () => {
                         onSubmit={addDialogMessage}
                     >
                         {formik => (
-                            <Form>
+                            <Form className={styles.form}>
                                 <FormikField name={'dialogMessage'}
                                              type={'text'}
                                              isShowError={true}
@@ -58,9 +59,8 @@ export const Dialogs: FC = () => {
                                 />
                                 <Button disabled={!formik.isValid}
                                         htmlType={'submit'}
-                                        icon={<SendOutlined/>}
-                                        size={'small'}>
-                                    Send message
+                                        icon={<SendOutlined />}
+                                >
                                 </Button>
                             </Form>
                         )}

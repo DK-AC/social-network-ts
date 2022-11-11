@@ -3,14 +3,8 @@
     grid-template-columns: 2fr 10fr;
 }
 
-.dialogsItem {
-    padding: 10px;
+.form {
+    display: flex;
 }
 
-.messages {
-    padding: 10px;
-}
-
-.message {
-}
 

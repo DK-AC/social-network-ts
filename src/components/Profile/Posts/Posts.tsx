@@ -20,9 +20,9 @@ export const Posts: FC = memo(() => {
     const error = useAppSelector(getAppError)
 
     const post = posts.map(p => {
-        return <Post key={p.id} postId={p.id} message={p.message} likesCount={p.likesCount}/>
+        return <Post key={p.id} postId={p.id} message={p.message} likesCount={p.likesCount} />
     })
-    const addPostHandle = (message: FormikValues, action: FormikHelpers<{ postMessage: string }>) => {
+    const addPostHandle = (message: FormikValues, action: FormikHelpers<{postMessage: string}>) => {
         dispatch(addPost({postText: String(message.postMessage)}))
         action.resetForm({values: {postMessage: ''}})
     }
@@ -41,7 +41,7 @@ export const Posts: FC = memo(() => {
                     onSubmit={addPostHandle}
                 >
                     {formik => (
-                        <Form>
+                        <Form className={styles.form}>
                             <FormikField name={'postMessage'}
                                          type={'text'}
                                          isShowError={true}
@@ -49,13 +49,12 @@ export const Posts: FC = memo(() => {
                                          error={formik.errors.postMessage}
                             />
                             <Button htmlType={'submit'}
-                                    icon={<SendOutlined/>}
-                                    size={'small'}
+                                    icon={<SendOutlined />}
                                     disabled={!formik.isValid}
+                                    className={styles.btn}
                             >
-                                Send post
                             </Button>
-                            {error && <ErrorMessage/>}
+                            {error && <ErrorMessage />}
                         </Form>
                     )}
                 </Formik>

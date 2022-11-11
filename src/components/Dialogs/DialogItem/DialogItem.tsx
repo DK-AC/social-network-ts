@@ -13,7 +13,7 @@ export const DialogItem: FC<PropsType> = React.memo(({id, name}) => {
         textDecoration: 'none',
     }
     const defaultStyle = {
-        color: 'white',
+        color: '#001529',
         textDecoration: 'none',
     }
 

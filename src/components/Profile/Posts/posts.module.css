@@ -1,3 +1,11 @@
 .posts {
-    padding: 10px;
+    padding-top: 30px;
+}
+
+.form {
+    display: flex;
+}
+
+.btn{
+    margin-left: 5px;
 }

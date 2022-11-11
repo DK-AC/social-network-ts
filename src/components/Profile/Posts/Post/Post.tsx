@@ -5,7 +5,7 @@ import {DeleteOutlined} from '@ant-design/icons'
 
 import {Button} from 'antd'
 
-import {deletePost} from '../../../../store/reducers/profileReducer'
+import {deletePost} from 'store'
 
 import styles from './post.module.css'
 import postPhoto from './../../../../assets/img/postPhoto.jpg'
