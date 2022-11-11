@@ -1,6 +1,6 @@
 import {AxiosResponse} from 'axios'
 
-import {ParamsUserPageType, UserType} from '../types'
+import {ParamsUserPageType, UserType} from 'types'
 
 import {apiConfig} from './apiConfig'
 import {AxiosResponseType, ResponseUserType} from './types'

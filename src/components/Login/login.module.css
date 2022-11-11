@@ -1,5 +1,4 @@
 .loginHeader {
-
     background-color: #282c34;
     min-height: 100vh;
     text-align: center;
@@ -8,5 +7,9 @@
     align-items: center;
     justify-content: center;
     font-size: calc(20px + 3vmin);
+    color: white;
+}
+
+.helpText {
     color: white;
 }

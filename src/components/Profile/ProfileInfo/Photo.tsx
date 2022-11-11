@@ -2,11 +2,14 @@ import React, {ChangeEvent, FC} from 'react'
 import {useDispatch} from 'react-redux'
 import {Input} from 'antd'
 
+import {savePhoto} from 'store'
+
+import {PhotosType} from 'types'
+
 import ava from '../../../assets/img/client-2-512.webp'
-import {savePhoto} from '../../../store/reducers/profileReducer'
 
 import styles from './profileInfo.module.css'
-import {PhotosType} from '../../../types/profile'
+
 
 type PropsType = {
     photo: PhotosType
@@ -25,9 +28,9 @@ export const Photo: FC<PropsType> = ({photo, isOwner}) => {
 
     return (
         <div>
-            <img className={styles.avatar} src={photo.large || ava} alt="avatar"/>
+            <img className={styles.avatar} src={photo.large || ava} alt="avatar" />
             {isOwner
-                ? <Input type={'file'} size={'small'} onChange={savePhotoHandle} bordered={false}/>
+                ? <Input type={'file'} size={'small'} onChange={savePhotoHandle} bordered={false} />
                 : ''}
         </div>)
 }

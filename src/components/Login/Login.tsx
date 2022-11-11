@@ -4,9 +4,10 @@ import {useNavigate} from 'react-router-dom'
 import {UserOutlined} from '@ant-design/icons'
 import {Button, Checkbox, Form, Input, Spin} from 'antd'
 
-import {LoginUserType} from '../../api'
-import {Path} from '../../enum'
-import {getAppError, getAppStatus, getCaptchaUrl, getIsAuth, login, useAppSelector} from '../../store'
+import {LoginUserType} from 'api'
+import {Path} from 'enum'
+import {getAppError, getAppStatus, getCaptchaUrl, getIsAuth, login, useAppSelector} from 'store'
+
 import {ErrorMessage} from '../common'
 
 import logo from './../../assets/img/logoDK.svg'
@@ -39,7 +40,7 @@ export const Login: FC = () => {
         <>
             <Form onFinish={onSubmitLoginUser} className={styles.loginHeader}>
 
-                <img src={logo} className="App-logo" alt="logo"/>
+                <img src={logo} className="App-logo" alt="logo" />
 
                 <Spin spinning={status === 'loading'}></Spin>
 
@@ -50,9 +51,9 @@ export const Login: FC = () => {
                                    message: 'Please input your Username!',
                                },
                            ]}>
-                    <Input prefix={<UserOutlined className="site-form-item-icon"/>}
+                    <Input prefix={<UserOutlined className="site-form-item-icon" />}
                            placeholder="Username" size={'large'}
-                           type={'email'}/>
+                           type={'email'} />
                 </Form.Item>
                 <Form.Item
                     name="password"
@@ -74,9 +75,9 @@ export const Login: FC = () => {
                 {
                     captchaURL
                         ? <>
-                            <img src={captchaURL} alt="captchaURL"/>
+                            <img src={captchaURL} alt="captchaURL" />
                             <Form.Item name="captcha">
-                                <Input name={'captcha'} placeholder={'Symbols from image'}/>
+                                <Input name={'captcha'} placeholder={'Symbols from image'} />
                             </Form.Item>
                         </>
                         : null
@@ -90,10 +91,16 @@ export const Login: FC = () => {
                     </Button>
 
                 </Form.Item>
+                <div className={styles.helpText}>
+                    <p>use common test account credentials:</p>
+                    <p>Email: free@samuraijs.com</p>
+                    Password: free
+                </div>
+
 
             </Form>
 
-            {error && <ErrorMessage/>}
+            {error && <ErrorMessage />}
         </>
     )
 }
