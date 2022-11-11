@@ -6,11 +6,12 @@ import {Layout} from 'antd'
 import './App.css'
 import {authMe, getAppIsInitialized, getIsAuth, useAppSelector} from 'store'
 
+import {Path} from 'enum'
+
 import {Header} from '../Header'
 import {AppMenu} from '../AppMenu'
 import {AppContent} from '../AppContent'
 import {Login} from '../Login'
-import {Path} from '../../enum'
 
 import styles from './App.module.css'
 
@@ -42,21 +43,16 @@ export const App: FC = () => {
     }
 
     return (
-        <Layout hasSider className={styles.slider}>
-            <Sider breakpoint="lg"
-                   collapsedWidth="50"
-                   onBreakpoint={broken => {
-                       console.log(broken)
-                   }}
-                   onCollapse={(collapsed, type) => {
-                       console.log(collapsed, type)
-                   }}>
+        <Layout hasSider>
+            <Sider breakpoint="lg" collapsedWidth="50" className={styles.wrapper}>
                 <AppMenu />
             </Sider>
             <Layout>
                 <Header />
                 <AppContent />
-                <Footer style={{textAlign: 'center'}}>Social Network ©2022 Created by Denis Katsai</Footer>
+                <Footer className={styles.textCenter}>
+                    Social Network ©2022 Created by Denis Katsai
+                </Footer>
             </Layout>
         </Layout>
     )

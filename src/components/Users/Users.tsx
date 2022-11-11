@@ -2,20 +2,22 @@ import React, {FC, useEffect} from 'react'
 import {useDispatch} from 'react-redux'
 import {useNavigate, useSearchParams} from 'react-router-dom'
 
-import {Preloader} from '../Preloader'
-import {Paginator} from '../common'
-import {Path} from '../../enum'
-import {UriParamsType} from '../../types'
+import {Path} from 'enum'
+import {UriParamsType} from 'types'
 
 import {
     changeCurrentPage,
     changePageSize,
-    getAppStatus, getIsAuth,
+    getAppStatus,
+    getIsAuth,
     getPageSize,
     getUsersSelector,
     setUsers,
     useAppSelector,
-} from '../../store'
+} from 'store'
+
+import {Paginator} from '../common'
+import {Preloader} from '../Preloader'
 
 import {UsersSearchForm} from './UsersSearchForm'
 import {User} from './User'
@@ -35,7 +37,7 @@ export const Users: FC = () => {
     const [searchParams, setSearchParams] = useSearchParams()
 
     const user = users.map(u => {
-        return <User key={u.id} user={u}/>
+        return <User key={u.id} user={u} />
     })
 
     const actualPage = searchParams.get('page') || '1'
@@ -68,12 +70,12 @@ export const Users: FC = () => {
     }
 
     return (
-        <div className={styles.userItems}>
-            {status === 'loading' ? <Preloader/>
+        <div>
+            {status === 'loading' ? <Preloader />
                 : <div>
-                    <Paginator setSearchParams={setSearchParams} uriParams={uriParams}/>
-                    <UsersSearchForm setSearchParams={setSearchParams}/>
-                    {user}
+                    <Paginator setSearchParams={setSearchParams} uriParams={uriParams} />
+                    <UsersSearchForm setSearchParams={setSearchParams} />
+                    <div className={styles.usersList}>{user}</div>
                 </div>}
         </div>
     )

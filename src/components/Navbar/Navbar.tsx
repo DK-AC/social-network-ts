@@ -1,7 +1,7 @@
 import {FC} from 'react'
 
-import {NavBarLink} from '../../reusableComponent/NavBarLink'
-import {Path} from '../../enum'
+import {NavBarLink} from 'reusableComponent/NavBarLink'
+import {Path} from 'enum'
 
 import styles from './navbar.module.css'
 

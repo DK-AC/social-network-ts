@@ -3,8 +3,8 @@ import {useNavigate} from 'react-router-dom'
 
 import {Empty} from 'antd'
 
-import {Path} from '../../enum'
-import {getIsAuth, useAppSelector} from '../../store'
+import {Path} from 'enum'
+import {getIsAuth, useAppSelector} from 'store'
 
 export const Music: FC = () => {
 

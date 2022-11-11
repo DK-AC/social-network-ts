@@ -1,30 +1,7 @@
-.appWrapper {
-    display: grid;
-    width: 100%;
-    margin: 0 auto;
-
-    grid-template-areas:
-        'header header'
-        'nav content';
-
-    grid-template-rows: 60px 1fr;
-    grid-template-columns: 2fr 10fr;
+.wrapper {
+    min-height: 100vh;
 }
 
-.appWrapperContent {
-    grid-area: content;
-    background-color: darkgrey;
-}
-
-
-.center {
+.textCenter {
     text-align: center;
-    font-weight: bold;
-    font-size: 40px;
 }
-
-.sider{
-margin-top: 60px;
-}
-
-
