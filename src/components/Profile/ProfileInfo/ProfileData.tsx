@@ -2,8 +2,9 @@ import {FC} from 'react'
 import {EditOutlined} from '@ant-design/icons'
 import {Button} from 'antd'
 
-import {ProfileUserType} from '../../../types'
-import {getAppError, useAppSelector} from '../../../store'
+import {ProfileUserType} from 'types'
+import {getAppError, useAppSelector} from 'store'
+
 import {ErrorMessage} from '../../common'
 
 import {FullName} from './FullName'
@@ -26,14 +27,18 @@ export const ProfileData: FC<PropsType> = ({profile, isOwner, goToEditMode}) => 
     return (
         <>
             {isOwner && <div>
-                <Button onClick={goToEditMode} icon={<EditOutlined/>} size={'small'}> Edit</Button>
+                <Button onClick={goToEditMode}
+                        icon={<EditOutlined />}
+                        size={'small'}>
+                    Edit
+                </Button>
             </div>}
-            <FullName fullName={fullName}/>
+            <FullName fullName={fullName} />
             <LookingForAJob lookingForAJob={lookingForAJob}
                             lookingForAJobDescription={lookingForAJobDescription}
             />
-            <AboutMe aboutMe={aboutMe}/>
-            <Contacts contacts={contacts}/>
-            {error && <ErrorMessage/>}
+            <AboutMe aboutMe={aboutMe} />
+            <Contacts contacts={contacts} />
+            {error && <ErrorMessage />}
         </>)
 }

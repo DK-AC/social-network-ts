@@ -2,8 +2,8 @@ import {FC, useEffect} from 'react'
 import {useDispatch} from 'react-redux'
 import {useNavigate, useParams} from 'react-router-dom'
 
-import {Nullable} from '../../types'
-import {Path} from '../../enum'
+import {Nullable} from 'types'
+import {Path} from 'enum'
 
 import {
     getCurrentUserId,
@@ -12,7 +12,7 @@ import {
     getUserProfile,
     setProfileUser,
     useAppSelector,
-} from '../../store'
+} from 'store'
 
 import {Posts} from './Posts'
 import {ProfileInfo} from './ProfileInfo'

@@ -1,8 +1,10 @@
 import {FC} from 'react'
 
-import {ContactsUserType} from '../../../types'
+import {ContactsUserType} from 'types'
 
 import {Contact} from './Contact'
+
+import styles from './Contacts.module.css'
 
 type PropsType = {
     contacts: ContactsUserType
@@ -10,7 +12,7 @@ type PropsType = {
 
 export const Contacts: FC<PropsType> = ({contacts}) => {
     return (
-        <div>
+        <div className={styles.wrapper}>
             <b>Contacts: </b>{
             Object
                 .keys(contacts)

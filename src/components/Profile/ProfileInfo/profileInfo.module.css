@@ -1,19 +1,19 @@
-.profileDescription {
-    padding: 10px;
-}
-
-.profileImage {
-    padding: 10px;
-}
-
 .avatar {
     width: 250px;
 }
 
-.select {
-    width: 20px;
+.contact {
+    display: flex;
+    padding-left: 13px;
 }
 
-.contact {
-    padding-left: 13px;
+.profileDescription{
+    padding-top: 20px;
+}
+
+
+@media screen and (max-width: 768px){
+    .avatar {
+        max-width: 100%;
+    }
 }

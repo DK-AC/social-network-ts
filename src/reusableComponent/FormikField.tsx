@@ -1,8 +1,8 @@
 import {Field} from 'formik'
 import {FC} from 'react'
 
-import {LoginUserType} from '../api'
-import {ContactsUserType, Nullable, ProfileUserType} from '../types'
+import {LoginUserType} from 'api'
+import {ContactsUserType, Nullable, ProfileUserType} from 'types'
 
 
 export type ContactsKeysType = keyof ContactsUserType

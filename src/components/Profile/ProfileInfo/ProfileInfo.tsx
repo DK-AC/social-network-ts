@@ -1,7 +1,8 @@
 import React, {FC, useState} from 'react'
 
+import {Nullable, ProfileUserType} from 'types'
+
 import {Preloader} from '../../Preloader'
-import {Nullable, ProfileUserType} from '../../../types'
 
 import styles from './profileInfo.module.css'
 import {Photo} from './Photo'
@@ -22,18 +23,19 @@ export const ProfileInfo: FC<PropsType> = React.memo(({profile, isOwner}) => {
     const goToSaveMode = () => setEditMode(false)
 
     if (!profile) {
-        return <Preloader/>
+        return <Preloader />
     }
 
     return (
         <>
-            <div className={styles.profileDescription}>
-                <Photo photo={profile.photos} isOwner={isOwner}/>
-                {editMode
-                    ? <ProfileDataForm profile={profile} goToSaveMode={goToSaveMode}/>
-                    : <ProfileData profile={profile} isOwner={isOwner} goToEditMode={goToEditMode}/>
+            <div >
+                <Photo photo={profile.photos} isOwner={isOwner} />
+                <div className={styles.profileDescription}>{editMode
+                    ? <ProfileDataForm profile={profile} goToSaveMode={goToSaveMode} />
+                    : <ProfileData profile={profile} isOwner={isOwner} goToEditMode={goToEditMode} />
                 }
-                <Status/>
+                </div>
+                <Status />
             </div>
         </>
     )
