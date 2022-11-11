@@ -10,7 +10,7 @@ export const AppContent: FC = () => {
     const {Content} = Layout
 
     return (
-        <Content className={styles.container}>
+        <Content className={styles.container} >
             <div className={`site-layout-background + ${styles.content}`}>
                 <Routing/>
             </div>

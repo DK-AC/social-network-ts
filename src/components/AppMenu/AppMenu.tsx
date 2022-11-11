@@ -6,7 +6,8 @@ import {
     ReadOutlined,
     SettingOutlined,
     TeamOutlined,
-    UsergroupDeleteOutlined, WechatOutlined,
+    UsergroupDeleteOutlined,
+    WechatOutlined,
 } from '@ant-design/icons'
 import React, {FC} from 'react'
 import {useLocation, useNavigate} from 'react-router-dom'
@@ -23,43 +24,43 @@ export const AppMenu: FC = () => {
         {
             key: Path.PROFILE_PAGE,
             label: 'Profile',
-            icon: <ProfileOutlined/>,
+            icon: <ProfileOutlined />,
             onClick: () => navigate(Path.PROFILE_PAGE),
         },
         {
             key: Path.USERS_PAGE,
             label: 'Users',
-            icon: <UsergroupDeleteOutlined/>,
+            icon: <UsergroupDeleteOutlined />,
             onClick: () => navigate(Path.USERS_PAGE),
         },
         {
             key: Path.DIALOGS_PAGE,
             label: 'Dialogs',
-            icon: <WechatOutlined/>,
+            icon: <WechatOutlined />,
             onClick: () => navigate(Path.DIALOGS_PAGE),
         },
         {
             key: Path.NEWS_PAGE,
             label: 'News',
-            icon: <ReadOutlined/>,
+            icon: <ReadOutlined />,
             onClick: () => navigate(Path.NEWS_PAGE),
         },
         {
             key: Path.MUSIC_PAGE,
             label: 'Music',
-            icon: <CustomerServiceOutlined/>,
+            icon: <CustomerServiceOutlined />,
             onClick: () => navigate(Path.MUSIC_PAGE),
         },
         {
             key: Path.FRIENDS_PAGE,
             label: 'Friends',
-            icon: <TeamOutlined/>,
+            icon: <TeamOutlined />,
             onClick: () => navigate(Path.FRIENDS_PAGE),
         },
         {
             key: Path.SETTINGS_PAGE,
             label: 'Settings',
-            icon: <SettingOutlined/>,
+            icon: <SettingOutlined />,
             onClick: () => navigate(Path.SETTINGS_PAGE),
         },
         {
@@ -68,9 +69,15 @@ export const AppMenu: FC = () => {
             icon: <MessageOutlined />,
             onClick: () => navigate(Path.CHAT_PAGE),
         },
-
     ]
 
-    return <Menu  theme="dark" mode="inline" selectedKeys={[location.pathname]} items={items}/>
+    return <Menu
+        theme="dark"
+        mode="inline"
+        defaultSelectedKeys={[Path.PROFILE_PAGE]}
+        selectedKeys={[location.pathname]}
+        items={items}
+        style={{marginTop: '60px'}}
+    />
 }
 
