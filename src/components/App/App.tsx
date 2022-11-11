@@ -37,7 +37,7 @@ export const App: FC = () => {
         if (isInitialized && !isAuth) {
             navigate(Path.LOGIN_PAGE)
         }
-        return
+
     }, [isAuth, isInitialized, navigate])
 
     if (!isAuth) {

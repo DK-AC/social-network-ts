@@ -31,7 +31,7 @@ export const appSlices = createSlice({
             state.isInitialized = SUCCESS_INITIALIZED
         })
         builder.addCase(authMe.rejected, (state: InitialAppStateType) => {
-            state.isInitialized = SUCCESS_INITIALIZED
+            state.isInitialized = FAILED_INITIALIZED
             state.error = null
         })
     },

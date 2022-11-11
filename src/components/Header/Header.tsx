@@ -6,11 +6,13 @@ import {getCurrentUserEmail, getCurrentUserPhotos, getIsAuth, logout, useAppSele
 
 import {Avatar, Button, Col, Row} from 'antd'
 
+import {NavLink} from 'react-router-dom'
+import {Path} from 'enum'
+
 import styles from './header.module.css'
 
 
 export const Header: FC = () => {
-
 
     const dispatch = useDispatch()
 
@@ -25,7 +27,6 @@ export const Header: FC = () => {
     return (
         <div className={`${styles.container}`}>
             <div className={styles.content}>
-
                 {isAuth &&
                     <div>
                         <Row>
@@ -36,9 +37,9 @@ export const Header: FC = () => {
                         <Row className={styles.contentRight}>
                             <Col span={12}>
                                 {myPhotos
-                                    ? <a href={'/'}>
+                                    ? <NavLink to={Path.PROFILE_PAGE}>
                                         <Avatar src={myPhotos.small} size="large" icon={<UserOutlined />} />
-                                    </a>
+                                    </NavLink>
                                     : <Avatar size="large" icon={<UserOutlined />} />
                                 }
                             </Col>
