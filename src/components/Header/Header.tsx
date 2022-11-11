@@ -6,8 +6,6 @@ import {getCurrentUserEmail, getCurrentUserPhotos, getIsAuth, logout, useAppSele
 
 import {Avatar, Button, Col, Row} from 'antd'
 
-import logo from 'assets/img/logoDK.svg'
-
 import styles from './header.module.css'
 
 
@@ -31,12 +29,16 @@ export const Header: FC = () => {
                 {isAuth &&
                     <div>
                         <Row>
-                            <Col span={24}><span className={styles.userEmail}>{email}</span></Col>
+                            <Col span={24}>
+                                <span className={styles.userEmail}>{email}</span>
+                            </Col>
                         </Row>
                         <Row className={styles.contentRight}>
                             <Col span={12}>
                                 {myPhotos
-                                    ? <Avatar src={myPhotos.small} size="large" icon={<UserOutlined />} />
+                                    ? <a href={'/'}>
+                                        <Avatar src={myPhotos.small} size="large" icon={<UserOutlined />} />
+                                    </a>
                                     : <Avatar size="large" icon={<UserOutlined />} />
                                 }
                             </Col>
@@ -44,7 +46,8 @@ export const Header: FC = () => {
                                 <Button className={styles.logOutButton}
                                         size={'small'}
                                         onClick={logoutHandle}
-                                > log out
+                                >
+                                    log out
                                 </Button>
                             </Col>
 
