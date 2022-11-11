@@ -75,6 +75,7 @@ export const AddMessageForm: FC = () => {
                 avatar={<Avatar src={photo.small} alt="photo user"/>}
                 content={
                     <Editor
+
                         onChange={handleChange}
                         onSubmit={handleSubmit}
                         submitting={submitting}
