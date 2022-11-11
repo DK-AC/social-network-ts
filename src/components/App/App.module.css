@@ -5,3 +5,10 @@
 .textCenter {
     text-align: center;
 }
+
+.logo {
+    display: block;
+    margin: 0 auto;
+    width: 60px;
+    height: 60px;
+}

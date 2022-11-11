@@ -8,6 +8,8 @@ import {authMe, getAppIsInitialized, getIsAuth, useAppSelector} from 'store'
 
 import {Path} from 'enum'
 
+import logo from 'assets/img/logoDK.svg'
+
 import {Header} from '../Header'
 import {AppMenu} from '../AppMenu'
 import {AppContent} from '../AppContent'
@@ -44,7 +46,8 @@ export const App: FC = () => {
 
     return (
         <Layout hasSider>
-            <Sider breakpoint="lg" collapsedWidth="50" className={styles.wrapper}>
+            <Sider breakpoint="lg" collapsedWidth="70" className={styles.wrapper}>
+                <img src={logo} className={styles.logo} alt="logo" />
                 <AppMenu />
             </Sider>
             <Layout>

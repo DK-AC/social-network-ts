@@ -77,7 +77,7 @@ export const AppMenu: FC = () => {
         defaultSelectedKeys={[Path.PROFILE_PAGE]}
         selectedKeys={[location.pathname]}
         items={items}
-        style={{marginTop: '60px'}}
+        // style={{marginTop: '60px'}}
     />
 }
 

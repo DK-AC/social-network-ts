@@ -6,6 +6,8 @@ import {getCurrentUserEmail, getCurrentUserPhotos, getIsAuth, logout, useAppSele
 
 import {Avatar, Button, Col, Row} from 'antd'
 
+import logo from 'assets/img/logoDK.svg'
+
 import styles from './header.module.css'
 
 
@@ -25,6 +27,7 @@ export const Header: FC = () => {
     return (
         <div className={`${styles.container}`}>
             <div className={styles.content}>
+
                 {isAuth &&
                     <div>
                         <Row>
