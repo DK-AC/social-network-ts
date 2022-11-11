@@ -60,6 +60,7 @@ export const Dialogs: FC = () => {
                                 <Button disabled={!formik.isValid}
                                         htmlType={'submit'}
                                         icon={<SendOutlined />}
+                                        className={styles.btn}
                                 >
                                 </Button>
                             </Form>
