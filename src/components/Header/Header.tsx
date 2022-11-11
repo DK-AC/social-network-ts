@@ -1,16 +1,16 @@
 import React, {FC} from 'react'
 import {useDispatch} from 'react-redux'
-import {Avatar, Button, Col, Layout, Row} from 'antd'
 import {UserOutlined} from '@ant-design/icons'
 
-import {getCurrentUserEmail, getCurrentUserPhotos, getIsAuth, logout, useAppSelector} from '../../store'
+import {getCurrentUserEmail, getCurrentUserPhotos, getIsAuth, logout, useAppSelector} from 'store'
+
+import {Avatar, Button, Col, Row} from 'antd'
 
 import styles from './header.module.css'
 
 
 export const Header: FC = () => {
 
-    const {Header} = Layout
 
     const dispatch = useDispatch()
 
@@ -23,7 +23,7 @@ export const Header: FC = () => {
     }
 
     return (
-        <Header className={`site-layout-background + ${styles.container}`}>
+        <div className={`${styles.container}`}>
             <div className={styles.content}>
                 {isAuth &&
                     <div>
@@ -33,8 +33,8 @@ export const Header: FC = () => {
                         <Row className={styles.contentRight}>
                             <Col span={12}>
                                 {myPhotos
-                                    ? <Avatar src={myPhotos.small} size="large" icon={<UserOutlined/>}/>
-                                    : <Avatar size="large" icon={<UserOutlined/>}/>
+                                    ? <Avatar src={myPhotos.small} size="large" icon={<UserOutlined />} />
+                                    : <Avatar size="large" icon={<UserOutlined />} />
                                 }
                             </Col>
                             <Col span={12}>
@@ -49,7 +49,7 @@ export const Header: FC = () => {
                     </div>
                 }
             </div>
-        </Header>
+        </div>
     )
 }
 

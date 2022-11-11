@@ -1,7 +1,7 @@
 import {useEffect} from 'react'
 import {useDispatch} from 'react-redux'
 
-import {startMessagesListening, stopMessagesListening} from '../../store/reducers'
+import {startMessagesListening, stopMessagesListening} from 'store/reducers'
 
 import {Messages} from './Messages'
 import {AddMessageForm} from './AddMessageForm'

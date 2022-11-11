@@ -71,6 +71,6 @@ export const AppMenu: FC = () => {
 
     ]
 
-    return <Menu theme="dark" mode="inline" selectedKeys={[location.pathname]} items={items}/>
+    return <Menu  theme="dark" mode="inline" selectedKeys={[location.pathname]} items={items}/>
 }
 

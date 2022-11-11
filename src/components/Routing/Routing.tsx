@@ -1,13 +1,14 @@
 import {Navigate, Route, Routes} from 'react-router-dom'
 import React, {FC} from 'react'
 
+import {Path} from 'enum'
+
 import {Music} from '../Music'
 import {Friends} from '../Friends'
 import {News} from '../News'
 import {Login} from '../Login'
 import {NotFound404} from '../NotFound404'
 import {Settings} from '../Settings'
-import {Path} from '../../enum'
 
 const Profile = React.lazy(async () => ({default: (await import('../Profile')).Profile}))
 const Users = React.lazy(async () => ({default: (await import('../Users')).Users}))
